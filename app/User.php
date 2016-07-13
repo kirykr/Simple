@@ -23,4 +23,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * User belongs to Role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role()
+    {
+        // belongsTo(RelatedModel, foreignKey = role_id, keyOnRelatedModel = id)
+        return $this->belongsTo('App\Role');
+    }
 }
