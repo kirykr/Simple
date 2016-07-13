@@ -40,7 +40,7 @@
 
                <div class="form-group">
                      {!! Form::label('photo_id', 'Image:') !!}
-                     {!! Form::file('file', null, ['class'=>'']) !!}
+                     {!! Form::file('photo_id', null, ['class'=>'']) !!}
                </div>
    				<div class="form-group">
                   	{!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}

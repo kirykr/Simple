@@ -288,7 +288,7 @@
                             <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{url('/admin/users/create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
+                                    <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
                                 </li>
                                 <li>
                                     <a href="morris.html">Edit Users</a>
