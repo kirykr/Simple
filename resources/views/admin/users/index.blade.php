@@ -17,6 +17,8 @@
 				</tr>
 			</thead>
 			<tbody>
+			@if($users)
+			{{-- {{dd($users)}} --}}
 			@foreach ($users as $user) 
 				<tr>
 					<td>{{$user->id}}</td>
@@ -28,6 +30,7 @@
 					<td>{{$user->updated_at->diffForHumans()}}</td>
 				</tr>
 			@endforeach
+			@endif
 			</tbody>
 		</table>
 	</div>

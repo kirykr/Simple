@@ -30,7 +30,7 @@
 
 					<div class="form-group">
                      {!! Form::label('role_id', 'Roles:') !!}
-                     {!! Form::select('role_id',[''=>'Choose Options'] + $roles, 0,['class'=>'form-control']) !!}
+                     {!! Form::select('role_id',[''=>'Choose Options'] + $roles, null,['class'=>'form-control']) !!}
 					</div>	
 
 					<div class="form-group">
@@ -39,8 +39,8 @@
 					</div>
 
                <div class="form-group">
-                     {!! Form::label('image', 'Image:') !!}
-                     {!! Form::file('file', ['class'=>'']) !!}
+                     {!! Form::label('photo_id', 'Image:') !!}
+                     {!! Form::file('file', null, ['class'=>'']) !!}
                </div>
    				<div class="form-group">
                   	{!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}

@@ -20,6 +20,7 @@ class AdminUserController extends Controller
     {
         //
         $users = User::all();
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -33,7 +34,7 @@ class AdminUserController extends Controller
         //
         // $users = User::all();
         $roles = Role::lists('name','id')->all();
-
+        // dd($roles);
         return view('admin.users.create', compact('roles'));
     }
 
@@ -47,7 +48,10 @@ class AdminUserController extends Controller
     {
         //
 
-        return $request->all();
+        User::create($request->all());
+
+        return redirect('/admin/users');
+        // return $request->all();
     }
 
     /**
