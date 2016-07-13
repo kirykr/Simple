@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-	
+	@include('errors.formError')
+
 	 <div class="panel panel-info">
    	<div class="panel-heading">
    		<h1 class="panel-title"><i class="fa fa-cogs fa-2x"></i> Create Users</h1>
@@ -15,34 +16,42 @@
    					<div class="form-group">
                      {!! Form::label('name', 'User Name:') !!}
                      {!! Form::text('name', null,['class'=>'form-control','placeholder'=>'Input user name']) !!}
-                     {!! Form::label('password', 'Content:') !!}
-                     {!! Form::text('password', null,['class'=>'form-control','placeholder'=>'Input user password']) !!}
-					 
-                     {!! Form::label('email', 'Email:') !!}
-                     {!! Form::text('email', null,['class'=>'form-control','placeholder'=>'Input user email']) !!}
+					</div>
 
+					<div class="form-group">
+                     {!! Form::label('email', 'Email:') !!}
+                     {!! Form::email('email', null,['class'=>'form-control','placeholder'=>'Input user email']) !!}
+					</div>
+
+					<div class="form-group">
+                     {!! Form::label('password', 'Password:') !!}
+                     {!! Form::password('password',['class'=>'form-control','placeholder'=>'Input user password']) !!}
+					</div>
+
+					<div class="form-group">
+                     {!! Form::label('role_id', 'Roles:') !!}
+                     {!! Form::select('role_id',[''=>'Choose Options'] + $roles, 0,['class'=>'form-control']) !!}
+					</div>	
+
+					<div class="form-group">
+					 {!! Form::label('is_active', 'Status:') !!}
+                     {!! Form::select('is_active',array(1=>'Active', 0=>'Not Active'),0,['class'=>'form-control']) !!}
+					</div>
+
+               <div class="form-group">
                      {!! Form::label('image', 'Image:') !!}
-                     {!! Form::file('file', ['class'=>'form-control ', 'style'=>'padding-top: -15px !important','placeholder'=>'Input user email']) !!}
-                     
-   					</div>
-                  {!! Form::submit('Create Post', ['class'=>'btn btn-primary']) !!}
+                     {!! Form::file('file', ['class'=>'']) !!}
+               </div>
+   				<div class="form-group">
+                  	{!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+					</div>
 
          {!! Form::close() !!}
 
 
    	</div>
    </div>
-    @if(count($errors)>0)
-         
-            <div class="alert alert-danger">
-               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-               <strong>Error!</strong>
-               <hr> 
-               @foreach ($errors->all() as $error)
-                  {{$error}} <br>
-               @endforeach
-            </div>
-         @endif
+    
 @endsection
 
 @section('footer')
