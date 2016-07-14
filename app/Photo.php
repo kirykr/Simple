@@ -12,5 +12,14 @@ class Photo extends Model
      *
      * @var array
      */
+    protected $fillPath = "/images/";
     protected $fillable = ['path',];
+
+
+    public function getPathAttribute($photo){
+
+
+    	return $this->fillPath . $photo;
+
+    }
 }

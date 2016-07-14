@@ -288,11 +288,12 @@
                             <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
+                                    <a href="{{route('admin.users.index')}}">All Users</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Edit Users</a>
+                                    <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
                                 </li>
+                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
