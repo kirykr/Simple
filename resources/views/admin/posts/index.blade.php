@@ -20,7 +20,7 @@
                     <th>ID</th>
                     <th>PHOTO</th>
                     <th>USER</th>
-                    {{-- <th>CATEGORY_ID</th> --}}
+                    <th>CATEGORY</th>
                     <th>TITLE</th>
                     <th>BODY</th>
                     <th class="text-right">OPTIONS</th>
@@ -33,7 +33,7 @@
                     <td>{{$post->id}}</td>
                     <td><img width="50" src="{{$post->photo ? $post->photo->path : 'http://placeholder.it/400x400'}}" alt=""> </td>
                     <td>{{$post->user->name}}</td>
-                    {{-- <td>{{$post->category_id}}</td> --}}
+                    <td>{{$post->category ? $post->category->name : 'Uncategoried' }}</td>
                     <td>{{$post->title}}</td>
                     <td>{{$post->body}}</td>
                     <td class="text-right" style="width: 180px">

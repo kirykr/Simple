@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Category;
 use App\Http\Controllers\Controller;
 
 use Auth;
@@ -30,7 +31,8 @@ class PostController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.posts.create');
+		$categories = Category::lists('name','id');
+		return view('admin.posts.create', compact('categories'));
 	}
 
 	/**

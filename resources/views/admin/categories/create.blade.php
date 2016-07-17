@@ -15,7 +15,6 @@
             {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}   
 
                 <div class="form-group @if($errors->has('name')) has-error @endif">
-                       <label for="name-field">Name</label>
                         {!! Form::label('name', 'Name', []) !!}
                         {!! Form::text('name', null, ['class'=>'form-control']) !!}
                        @if($errors->has("name"))
