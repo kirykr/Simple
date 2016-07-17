@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        Alert::success('Success Message', 'Welcome to Home page!');
         return view('home');
     }
 }

@@ -46,6 +46,8 @@
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -55,8 +57,11 @@
                 </button>
                 <a class="navbar-brand" href="index.html"><i class="fa fa-home text-primary" ></i> eCommerce</a>
             </div>
+        </div> 
             <!-- /.navbar-header -->
-            
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="row">
+           
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -250,7 +255,12 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    
+                            <img width="30" src="{{Auth::user()->photo? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
+                        
+                            hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
+                       
+                     
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -258,7 +268,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -266,6 +276,9 @@
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
+        </div>
+     </div> <!-- /.col-collapse -->
+    </div> <!-- /.row-collapse -->
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -301,10 +314,10 @@
                             <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="morris.html"><i class="fa fa-cog"></i> Create Post</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -397,10 +410,17 @@
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
+           
             <!-- /.navbar-static-side -->
         </nav>
+
+{{-- ==================end nav ================================= --}}
+
         <div id="page-wrapper">
             <!-- / Titile backend page -->
+
+
+
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Administrator</h1>
@@ -408,7 +428,11 @@
                 <!-- /.col-lg-12 -->
             </div>
            {{-- Yielding============================ --}}
+           @include('flash::message');
             @yield('content')
+
+            
+
         </div>
         <!-- /#page-wrapper -->   
     </div>
@@ -417,9 +441,25 @@
     <!-- jQuery -->
     
 
-    @yield('footer')
+@yield('footer')
 
-    <script src="{{asset('js/libs.js')}}"></script>
+<script src="{{asset('js/libs.js')}}"></script>
+
+     @if(Session::has('delete_user'))
+        <script>
+            // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
+            $('#flash-overlay-modal-danger').modal();    
+        </script>
+    @elseif(Session::has('create_user'))
+        <script>
+            $('#flash-overlay-modal').modal();    
+        </script>
+    @endif
+
+
+@yield('scripts')
+  
+ 
+  
  </body>
-
 </html>

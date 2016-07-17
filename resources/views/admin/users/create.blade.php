@@ -2,14 +2,14 @@
 
 @section('content')
 	@include('errors.formError')
-
+   
 	 <div class="panel panel-info">
    	<div class="panel-heading">
    		<h1 class="panel-title"><i class="fa fa-cogs fa-2x"></i> Create Users</h1>
    	</div>
    	<div class="panel-body">
    		{{-- <form action="{{ url('/posts') }}" method="POST"> --}}
-      <!-- {{ csrf_field() }} -->
+      
          {!! Form::open(['action' => 'AdminUserController@store', 'method' => 'POST', 'files'=>true]) !!}
    					<legend>New User</legend>
    				
@@ -43,17 +43,22 @@
                      {!! Form::file('photo_id', ['class'=>'']) !!}
                </div>
    				<div class="form-group">
-                  	{!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+                  	{!! Form::submit('Create User', ['class'=>'btn btn-primary', 'data-dismiss'=>'modal']) !!}
 					</div>
                
          {!! Form::close() !!}
 
-
    	</div>
    </div>
-    
 @endsection
 
 @section('footer')
-
+    
 @stop;
+@section('scripts')
+ {{--  // <script src="{{asset('js/libs.js')}}"></script> --}}
+  
+  <script>
+   
+  </script>
+@endsection

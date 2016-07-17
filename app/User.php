@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Hash;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role_id','is_active','photo_id',
+        'name', 'email','password','role_id','is_active','photo_id',
     ];
 
     /**
@@ -44,5 +45,30 @@ class User extends Authenticatable
     {
         // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
         return $this->belongsTo('App\Photo');
+    }
+
+    /**
+     * User has many Posts.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function posts()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = user_id, localKey = id)
+        return $this->hasMany('App\Post');
+    }
+
+    public function isAdmin(){
+
+        if($this->role->name == 'administrator' && $this->is_active === 1){
+            return true;
+        }
+
+        return false;
+    }
+
+    // Mutator
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
     }
 }

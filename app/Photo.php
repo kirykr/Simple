@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Post;
 
 class Photo extends Model
 {
@@ -21,5 +22,16 @@ class Photo extends Model
 
     	return $this->fillPath . $photo;
 
+    }
+
+    /**
+     * Photo has one Post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function post()
+    {
+        // hasOne(RelatedModel, foreignKeyOnRelatedModel = photo_id, localKey = id)
+        return $this->hasOne('App\Post');
     }
 }

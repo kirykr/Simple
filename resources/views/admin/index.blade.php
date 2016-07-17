@@ -540,4 +540,13 @@
 
 @section('footer')
 
-@stop
+
+@stop 
+{{-- end footer section --}}
+
+@section('scripts')
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
+  <script>
+    
+  </script>
+@endsection

@@ -17,10 +17,11 @@
 					<th>Date Created</th>
 					<th>Date Updated</th>
 					<th>Edit User</th>
+					<th>Delete User</th>
 				</tr>
 			</thead>
 			<tbody>
-			@if($users)
+			@if($users->count())
 			{{-- {{dd($users)}} --}}
 			@foreach ($users as $user) 
 				<tr>
@@ -34,15 +35,34 @@
 					<td>{{$user->photo_id}}</td>
 					<td>{{$user->created_at->diffForHumans()}}</td>
 					<td>{{$user->updated_at->diffForHumans()}}</td>
-					<td><a href="{{route('admin.users.edit', $user->id)}}"><i class="fa fa-edit"></i></a> </td>
+					<td><a href="{{route('admin.users.edit', $user->id)}}"><i class="fa fa-edit btn btn-primary"></i></a> </td>
+					<td>
+
+					{!! Form::open(['method'=>'DELETE', 'action'=>['AdminUserController@destroy', $user->id]]) !!}
+					{!! Form::button('<i class="fa fa-trash-o "></i>', ['type' => 'submit', 'class'=>'btn btn-danger']) !!}
+					{!! Form::close() !!}
+					</td>
 				</tr>
 			@endforeach
-			@endif
+			{!! $users->render() !!}
+			@else
+                <h3 class="text-center alert alert-info">Empty!</h3>
+            @endif
 			</tbody>
 		</table>
 	</div>
 @endsection
-
+ 
 @section('footer')
-
+	
 @stop;
+
+@section('scripts')
+
+ {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+
+  <script>
+   
+  </script>
+@endsection
+

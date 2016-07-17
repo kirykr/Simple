@@ -22,6 +22,7 @@ elixir(function(mix) {
     	'libs/jquery-ui.min.css',
     	'libs/metisMenu.css',
     	'libs/sb-admin-2.css',
+        'libs/sweetalert.css',
     	'libs/style.css'
 
 
@@ -32,6 +33,7 @@ elixir(function(mix) {
     	'libs/bootstrap.js',
     	'libs/metisMenu.js',
     	'libs/sb-admin-2.js',
+        'libs/sweetalert.min.js',
     	'libs/script.js'
     ], './public/js/libs.js')
 

@@ -24,5 +24,11 @@ Route::get('/admin', function(){
 
 	return view('admin.index');
 });
+// created Admin middleware and put all admin work inside
+Route::group(['middleware'=>'admin'], function(){
 
-Route::resource('/admin/users', 'AdminUserController');
+	Route::resource('/admin/users', 'AdminUserController');
+	Route::resource('/admin/posts','PostController');
+});
+
+Route::resource('/tweets','TweetController');

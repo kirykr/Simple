@@ -15,6 +15,7 @@
          </div>
          <div class="col-md-10">
             {!! Form::model($user,['action' => ['AdminUserController@update', $user->id], 'method' => 'PATCH', 'files'=>true]) !!}
+             {{-- {!! csrf_field() !!} --}}
                   <legend>{{ucfirst($user->name)}}</legend>
                
                   <div class="form-group">
@@ -27,10 +28,10 @@
                      {!! Form::email('email', null,['class'=>'form-control','placeholder'=>'Input user email']) !!}
                </div>
 
-              {{--  <div class="form-group">
+               <div class="form-group">
                      {!! Form::label('password', 'Password:') !!}
                      {!! Form::password('password',['class'=>'form-control','placeholder'=>'Input user password']) !!}
-               </div> --}}
+               </div>
 
                <div class="form-group">
                      {!! Form::label('role_id', 'Roles:') !!}
@@ -61,3 +62,11 @@
 @section('footer')
 
 @stop;
+
+@section('scripts')
+  <script src="{{asset('js/libs.js')}}"></script>
+  
+  <script>
+   
+  </script>
+@endsection
