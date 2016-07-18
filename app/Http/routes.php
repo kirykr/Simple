@@ -30,6 +30,6 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/users', 'AdminUserController');
 	Route::resource('/admin/posts','PostController');
 	Route::resource('/admin/categories', 'CategoryController');
+	Route::resource('/admin/computers','ComputerController');
 });
 
-Route::resource('/tweets','TweetController');

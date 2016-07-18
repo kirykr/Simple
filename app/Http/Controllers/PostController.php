@@ -31,7 +31,7 @@ class PostController extends Controller {
 	 */
 	public function create()
 	{
-		$categories = Category::lists('name','id');
+		$categories = Category::lists('name','id')->all();
 		return view('admin.posts.create', compact('categories'));
 	}
 

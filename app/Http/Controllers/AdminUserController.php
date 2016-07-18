@@ -59,7 +59,6 @@ class AdminUserController extends Controller
             $input = $request->all();
         }
         
-
         if($file = $request->file('photo_id'))
         {
             $name = time() . $file->getClientOriginalName();

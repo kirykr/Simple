@@ -311,13 +311,25 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-laptop"></i> Computers<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.computers.index') }}"><i class="fa fa-heartbeat"></i> All Computers</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.computers.create') }}"><i class="fa fa-cog"></i> Create Computer</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html"><i class="fa fa-cog"></i> Create Post</a>
+                                    <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -326,10 +338,10 @@
                             <a href="#"><i class="fa fa-folder-open"></i> Categories<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Categories</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Category</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

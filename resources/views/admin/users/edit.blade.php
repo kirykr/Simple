@@ -9,7 +9,7 @@
    	</div>
    	<div class="panel-body">
    		{{-- <form action="{{ url('/posts') }}" method="POST"> --}}
-      <!-- {{ csrf_field() }} -->
+       {{-- {{ csrf_field() }}  --}}
          <div class="col-md-2">
             <img src="{{$user->photo?$user->photo->path:'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="Image">
          </div>

@@ -8,32 +8,42 @@
  
 
   @include('error')
+  <div class="row">
+  <div class="col-md-12">
 
   {!! Form::open(['action'=>"PostController@store", 'method'=>"POST",'files'=>true]) !!}
-  <div class="form-group">
-    {!! Form::label('title', 'Title') !!}
-    {!! Form::text('title', null, ['class'=>'form-control']) !!}
-  </div>
+   
   <div class="row">
-  <div class="col-md-4 col-sm-4">
-   <div class="form-group">
-    {!! Form::label('category_id', 'Categories') !!}
-    {!! Form::select('category_id', [''=>'Choose Category'] + $categories,null, ['class'=>'form-control']) !!}
+  <div class="col-md-8 col-sm-8"> 
+    {!! Form::label('title', 'Title') !!}
+        <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
+        {!! Form::text('title',null,['class'=>'form-control','placeholder'=>'Title']) !!}
+        {!! $errors->first('title','<span class="help-block">:message</span>') !!}
+     </div>
   </div>
+  <div class="col-md-4 col-sm-4">
+   {!! Form::label('category_id', 'Categories') !!}
+      <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
+        {!! Form::select('category_id',[''=>'Choose Options'] + $categories,0,['class'=>'form-control']) !!}
+        {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
+      </div>
   </div>
   <div class="col-md-4 col-sm-4">
-    <div class="form-group">
-      {!! Form::label('photo_id', 'Photo') !!}
-      {!! Form::file('photo_id',null) !!}
-    </div>
+     {!! Form::label('photo_id', 'Photo') !!}
+      <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }}">
+        {!! Form::file('photo_id',null,['class'=>'','placeholder'=>'Photo']) !!}
+        {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!}
+      </div>
   </div>
   </div>
   
+  
 
-  <div class="form-group">
-    {!! Form::label('body', 'Body') !!}
-    {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
-  </div>
+  {!! Form::label('body', 'Body') !!}
+        <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
+        {!! Form::textarea('body',null,['class'=>'form-control','placeholder'=>'']) !!}
+        {!! $errors->first('body','<span class="help-block">:message</span>') !!}
+     </div>
   
   <div class="well well-sm">
     {!! Form::submit('Create Post', ['class'=>'btn btn-primary', 'data-dismiss'=>'modal']) !!}
@@ -44,8 +54,9 @@
   </div>
   </div>
   @endsection
+
   @section('scripts')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
   <script>
     $('.date-picker').datepicker({
     });
