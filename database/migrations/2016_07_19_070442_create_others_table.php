@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComputersTable extends Migration {
+class CreateOthersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,17 +12,16 @@ class CreateComputersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('computers', function(Blueprint $table) {
+		Schema::create('others', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('comcode')->unique();
-            $table->string('name');
-            $table->integer('qtyinstock');
-            $table->float('sellprice');
+            $table->string('name')->unique();
+            $table->integer('qtyinstock')->default(0);
+            $table->float('sellprice')->default(0);
             $table->integer('photo_id')->default(0);
             $table->integer('type_id')->default(0);
-            $table->integer('category_id')->default(0);
-            $table->integer('brand_id')->default(0);
-            $table->integer('model_id')->default(0);
+            $table->integer('category_id');
+            $table->integer('brand_id');
+            $table->integer('model_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,7 +34,7 @@ class CreateComputersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('computers');
+		Schema::drop('others');
 	}
 
 }

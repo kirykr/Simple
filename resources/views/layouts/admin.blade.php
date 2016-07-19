@@ -311,13 +311,19 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-laptop"></i> Computers<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-dropbox fa-fw"></i> Products<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ route('admin.computers.index') }}"><i class="fa fa-heartbeat"></i> All Computers</a>
+                                    <a href="{{ route('admin.computers.index') }}"><i class="fa fa-desktop"></i> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.computers.create') }}"><i class="fa fa-cog"></i> Create Computer</a>
+                                    <a href="#"><i class="fa fa-headphones fa-fw"></i> Accessories</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Spare Parts</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-microphone fa-fw"></i> Peripheral Devices</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
