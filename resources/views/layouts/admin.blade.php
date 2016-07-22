@@ -55,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><i class="fa fa-home text-primary" ></i> eCommerce</a>
+                <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-home text-primary" ></i> eCommerce</a>
             </div>
         </div> 
             <!-- /.navbar-header -->

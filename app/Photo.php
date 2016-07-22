@@ -34,4 +34,15 @@ class Photo extends Model
         // hasOne(RelatedModel, foreignKeyOnRelatedModel = photo_id, localKey = id)
         return $this->hasOne('App\Post');
     }
+
+    /**
+     * Photo has one Computer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function computer()
+    {
+        // hasOne(RelatedModel, foreignKeyOnRelatedModel = photo_id, localKey = id)
+        return $this->hasOne('App\Computer');
+    }
 }

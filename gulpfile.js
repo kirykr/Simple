@@ -17,11 +17,11 @@ elixir(function(mix) {
     .styles([
     	'libs/bootstrap.css',
     	'libs/bootstrap-theme.css',
-    	'libs/font-awesome.css',
-    	'libs/font-awesome.min.css',
     	'libs/jquery-ui.min.css',
     	'libs/metisMenu.css',
     	'libs/sb-admin-2.css',
+        'libs/font-awesome.min.css',
+        'libs/font-awesome-ie7.min.css',
         'libs/sweetalert.css',
     	'libs/style.css'
 

@@ -1,1 +1,22 @@
 /*   custom style sheet */
+.tales {
+  width: 100%;
+}
+.carousel-inner{
+  width:100%;
+  max-height: 342px !important;
+}
+
+.carousel-caption {
+width: 550px;
+left: 15%;
+top: 50% !important;
+transform: translateY(-50%);
+text-align: left;
+bottom: initial;
+}
+hr {
+	margin-top: 0px !important; 
+	margin-bottom: 0px !important; 
+}
+

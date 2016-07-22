@@ -11,7 +11,7 @@
    		{{-- <form action="{{ url('/posts') }}" method="POST"> --}}
        {{-- {{ csrf_field() }}  --}}
          <div class="col-md-2">
-            <img src="{{$user->photo?$user->photo->path:'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="Image">
+            <img src="{{$user->photo?$user->photo->path:'/images/default.jgp'}}" class="img-responsive img-circle" alt="Image">
          </div>
          <div class="col-md-10">
             {!! Form::model($user,['action' => ['AdminUserController@update', $user->id], 'method' => 'PATCH', 'files'=>true]) !!}

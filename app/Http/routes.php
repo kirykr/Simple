@@ -10,15 +10,23 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Computer;
 
 Route::get('/', function () {
-	
-    return view('welcome');
+	$computers = Computer::orderBy('id', 'desc')->paginate(10);
+		// return $computers->all();
+	return view('welcome', compact('computers'));
+    // return view('welcome');
 });
+// Route::get('/product/{id}', function ($id) {
+// 	$computer = Computer::findOrFail($id);
+// 		// return $computer->all();
+// 	return view('product', compact('computer'));
+//     // return view('welcome');
+// });
+
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
 
 Route::get('/admin', function(){
 
@@ -36,5 +44,9 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/types','TypeController');
 	Route::resource('/admin/brands','BrandController');
 	Route::resource('/admin/modells','ModellController');
+
+	Route::resource('/admin/roles','RoleController');
 });
 
+Route::resource('products', 'ProductsController');
+Route::resource('/home', 'HomeController@index');

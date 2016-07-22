@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ComputerRequest;
 use App\Photo;
 use App\Computer;
+use App\Type;
 use Illuminate\Http\Request;
 
 class ComputerController extends Controller {
@@ -18,7 +19,7 @@ class ComputerController extends Controller {
 	public function index()
 	{
 		$computers = Computer::orderBy('id', 'desc')->paginate(10);
-
+		// return $computers->all();
 		return view('admin.computers.index', compact('computers'));
 	}
 
@@ -29,7 +30,10 @@ class ComputerController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.computers.create');
+
+		$types = Type::lists('name','id')->all();
+
+		return view('admin.computers.create', compact('types'));
 	}
 
 	/**
@@ -42,10 +46,11 @@ class ComputerController extends Controller {
 	{
 		
 		$input = $request->all();
+
 		 if($file = $request->file('photo_id'))
         {
             $name = time() . $file->getClientOriginalName();
-            $file->move('images/computer', $name);
+            $file->move('images', $name);
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
@@ -83,8 +88,9 @@ class ComputerController extends Controller {
 	public function edit($id)
 	{
 		$computer = Computer::findOrFail($id);
+		$types = Type::lists('name','id')->all();
 
-		return view('admin.computers.edit', compact('computer'));
+		return view('admin.computers.edit', compact('computer', 'types'));
 	}
 
 	/**
@@ -97,20 +103,22 @@ class ComputerController extends Controller {
 	public function update(Request $request, $id)
 	{
 		$computer = Computer::findOrFail($id);
+		$input = $request->all();
 
-		$computer->comcode = $request->input("comcode");
-        $computer->name = $request->input("name");
-        $computer->qtyinstock = $request->input("qtyinstock");
-        $computer->sellprice = $request->input("sellprice");
-        $computer->photo_id = $request->input("photo_id");
-        $computer->type_id = $request->input("type_id");
-        $computer->cat_id = $request->input("cat_id");
-        $computer->brand_id = $request->input("brand_id");
-        $computer->model_id = $request->input("model_id");
+        // $computer->photo_id = $request->input("photo_id");
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo = Photo::create(['path'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        // $input['cat_id'] = $request->input(0);
+        // $input['brand_id'] = $request->input(0);
+        // $input['model_id'] = $request->input(0);
 
-		$computer->save();
+		$computer->update($input);
 
-		return redirect()->route('computers.index')->with('message', 'Item updated successfully.');
+		return redirect()->route('admin.computers.index')->with('message', 'Item updated successfully.');
 	}
 
 	/**
@@ -127,4 +135,5 @@ class ComputerController extends Controller {
 		return redirect()->route('computers.index')->with('message', 'Item deleted successfully.');
 	}
 
+	
 }

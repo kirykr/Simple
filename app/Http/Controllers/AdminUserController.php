@@ -62,15 +62,11 @@ class AdminUserController extends Controller
         if($file = $request->file('photo_id'))
         {
             $name = time() . $file->getClientOriginalName();
-
             $file->move('images', $name);
-
             $photo = Photo::create(['path'=>$name]);
-
             $input['photo_id'] = $photo->id;
-
         }
-        $input['password'] = bcrypt(trim('$request->password'));
+        $input['password'] = bcrypt($request->password);
 
         User::create($input);
 
@@ -139,7 +135,7 @@ class AdminUserController extends Controller
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
-        $input['password'] = bcrypt($user->setPasswordAttribute(trim('$request->password')));
+        $input['password'] = bcrypt($request->password);
         $user->update($input);
 
         Alert::success('Success Message', 'User is updated successfully!');
@@ -155,11 +151,10 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
-        
-
         $user = User::findOrFail($id);
         $name = $user->name;
-        unlink(public_path() . $user->photo->path);
+        if($user->photo->path !== '')
+            unlink(public_path() . $user->photo->path);
         $user->delete();
 
         Session::flash('delete_user','The user has been deleted!');

@@ -29,10 +29,10 @@ class ComputerRequest extends Request
            'name'=>'required',
            'qtyinstock'=>'required',
            'sellprice'=>'required',
-           'type_id'=>'required',
-           'category_id'=>'required',
-           'brand_id'=>'required',
-           'model_id'=>'required',
+           // 'type_id'=>'required',
+           // 'category_id'=>'required',
+           // 'brand_id'=>'required',
+           // 'model_id'=>'required',
         ];
     }
 }

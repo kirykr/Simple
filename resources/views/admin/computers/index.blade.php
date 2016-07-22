@@ -14,12 +14,12 @@
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>COMCODE</th>
+                        <th>ID</th>
+                        <th>COMCODE</th>
+                        <th>PHOTO</th>
                         <th>NAME</th>
                         <th>QTYINSTOCK</th>
                         <th>SELLPRICE</th>
-                        <th>PHOTO_ID</th>
                         <th>TYPE_ID</th>
                         <th>CAT_ID</th>
                         <th>BRAND_ID</th>
@@ -33,14 +33,14 @@
                             <tr>
                                 <td>{{$computer->id}}</td>
                                 <td>{{$computer->comcode}}</td>
-                    <td>{{$computer->name}}</td>
-                    <td>{{$computer->qtyinstock}}</td>
-                    <td>{{$computer->sellprice}}</td>
-                    <td>{{$computer->photo_id}}</td>
-                    <td>{{$computer->type_id}}</td>
-                    <td>{{$computer->cat_id}}</td>
-                    <td>{{$computer->brand_id}}</td>
-                    <td>{{$computer->model_id}}</td>
+                                <td><img width="70" src=" {{ $computer->photo ? $computer->photo->path : '' }} " alt=""></td>
+                                <td>{{$computer->name}}</td>
+                                <td>{{$computer->qtyinstock}}</td>
+                                <td>{{$computer->sellprice}}</td>
+                                <td>{{$computer->type_id}}</td>
+                                <td>{{$computer->cat_id}}</td>
+                                <td>{{$computer->brand_id}}</td>
+                                <td>{{$computer->model_id}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>

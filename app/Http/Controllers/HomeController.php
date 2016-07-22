@@ -6,6 +6,7 @@ use Alert;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+use App\Computer;
 class HomeController extends Controller
 {
     /**
@@ -25,7 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Alert::success('Success Message', 'Welcome to Home page!');
-        return view('home');
+        $computers = Computer::orderBy('id', 'desc')->paginate(10);
+        // return $computers->all();
+        return view('welcome', compact('computers'));
+        // return view('home');
+    }
+
+     public function show()
+    {
+       
+        return view('/');
     }
 }

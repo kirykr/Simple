@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Type;
 
 class Computer extends Model
 {
@@ -25,13 +26,24 @@ class Computer extends Model
     ];
 
     /**
-    	 * Computer has one Photo.
-    	 *
-    	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
-    	 */
-    	public function photo()
-    	{
-    		// hasOne(RelatedModel, foreignKeyOnRelatedModel = computer_id, localKey = id)
-    		return $this->hasOne('App\Photo');
-    	}	
+     * Computer belongs to Photo.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function photo()
+    {
+        // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
+        return $this->belongsTo('App\Photo');
+    }
+
+        /**
+             * Computer belongs to .
+             *
+             * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+             */
+            public function type()
+            {
+                // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
+                return $this->belongsTo('App\Type');
+            }	
 }
