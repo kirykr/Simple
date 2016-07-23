@@ -10,7 +10,8 @@
         "twbs/bootstrap": "^3.3",
         "laravelcollective/html": "^5.2",
         "uxweb/sweet-alert": "~1.1",
-        "laracasts/flash": "^2.0"
+        "laracasts/flash": "^2.0",
+        "gloudemans/shoppingcart": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,8 +49,10 @@
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
         ]
+        
     },
     "config": {
         "preferred-install": "dist"
     }
+    
 }

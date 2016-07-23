@@ -12,6 +12,7 @@
 */
 use App\Computer;
 
+
 Route::get('/', function () {
 	$computers = Computer::orderBy('id', 'desc')->paginate(10);
 		// return $computers->all();
@@ -46,7 +47,16 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/modells','ModellController');
 
 	Route::resource('/admin/roles','RoleController');
+	Route::group(array('prefix' => 'admin'), function(){
+		Route::group(array('prefix' => 'api'), function(){
+			Route::group(array('prefix' => 'v1'), function(){
+				Route::resource('types.categories', 'api\v1\CategoriesController', ['only' => ['index']]);
+			});
+		});
+	});	
 });
 
 Route::resource('products', 'ProductsController');
 Route::resource('/home', 'HomeController@index');
+Route::resource('/carts', 'CartController');
+

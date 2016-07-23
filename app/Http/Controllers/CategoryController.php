@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Type;
 
 class CategoryController extends Controller {
 
@@ -27,7 +28,8 @@ class CategoryController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.categories.create');
+		$types = Type::lists('name','id')->all();
+		return view('admin.categories.create', compact('types'));
 	}
 
 	/**
@@ -38,12 +40,9 @@ class CategoryController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$category = new Category();
+		$input = $request->all();
 
-		$category->name = $request->input("name");
-
-		$category->save();
-
+		Category::create($input);
 		return redirect()->route('admin.categories.index')->with('message', 'Item created successfully.');
 	}
 
@@ -69,8 +68,9 @@ class CategoryController extends Controller {
 	public function edit($id)
 	{
 		$category = Category::findOrFail($id);
+		$types = Type::lists('name','id')->all();
 
-		return view('admin.categories.edit', compact('category'));
+		return view('admin.categories.edit', compact('category','types'));
 	}
 
 	/**
@@ -82,12 +82,11 @@ class CategoryController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
+		$input = $request->all();
 		$category = Category::findOrFail($id);
 
-		$category->name = $request->input("name");
-
-		$category->save();
-
+		$category->update($input);
+		// return $request->all();
 		return redirect()->route('admin.categories.index')->with('message', 'Item updated successfully.');
 	}
 

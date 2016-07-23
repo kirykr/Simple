@@ -9,6 +9,7 @@
      <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/libs.css')}}">
+    <script src="{{asset('js/libs.js')}}"></script>
     <!-- Bootstrap Core CSS -->
     <style>
         html {
@@ -367,8 +368,8 @@
       </div>
     </div>
     <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style=" margin-top: 5px; font-weight: 700; font-size: 20px; border-left: dotted 1px #333;">
-        <a href="#"><i class="fa fa-shopping-cart fa-fw"></i>
-        <span class="label label-pill badge-notify label-danger">3</span> $550.00</a>
+        <a href="{{ route('carts.index') }}"><i class="fa fa-shopping-cart fa-fw"></i>
+        <span class="label label-pill badge-notify label-danger">{{ Cart::content()->count() }}</span> $ {{ Cart::subtotal() }}</a>
     </div>
     </div>
 </div>
@@ -475,10 +476,10 @@
 
 
 
-<script src="{{asset('js/libs.js')}}"></script>
+{{-- <script src="{{asset('js/libs.js')}}"></script> --}}
     <!-- JavaScripts -->
-   {{--  // <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    // <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
+   {{--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 {{-- @include('sweet::alert') --}}
 <script>

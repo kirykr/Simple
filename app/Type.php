@@ -25,4 +25,14 @@ class Type extends Model
     	// hasMany(RelatedModel, foreignKeyOnRelatedModel = type_id, localKey = id)
     	return $this->hasMany('App\Computer');
     }
+    /**
+     * Type has many Categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = type_id, localKey = id)
+        return $this->hasMany('App\Category');
+    }
 }

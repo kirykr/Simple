@@ -16,13 +16,24 @@
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
             --}}
-                <div class="form-group @if($errors->has('name')) has-error @endif">
-                       <label for="name-field">Name</label>
-                    <input type="text" id="name-field" name="name" class="form-control" value="{{ is_null(old("name")) ? $category->name : old("name") }}"/>
+                 <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group @if($errors->has('name')) has-error @endif">
+                        {!! Form::label('name', 'Name', []) !!}
+                        {!! Form::text('name', null, ['class'=>'form-control']) !!}
                        @if($errors->has("name"))
                         <span class="help-block">{{ $errors->first("name") }}</span>
                        @endif
+                </div>
                     </div>
+                    <div class="col-md-5">
+                         {!! Form::label('type_id', 'Computer Type') !!}
+                  <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
+                    {!! Form::select('type_id', $types, null, ['class'=>'form-control']) !!}
+                    {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
+                    </div>
+                    </div>
+                </div>
                 <div class="well well-sm">
                     {{--  <button type="submit" class="btn btn-primary">Save</button> --}}
                     {!! Form::submit('Save', ['class'=>'btn btn-primary']) !!}

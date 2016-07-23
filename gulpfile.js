@@ -30,6 +30,7 @@ elixir(function(mix) {
 
     .scripts([
     	'libs/jquery.min.js',
+        'libs/jquery-ui.min.js',
     	'libs/bootstrap.js',
     	'libs/metisMenu.js',
     	'libs/sb-admin-2.js',

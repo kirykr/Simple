@@ -84,10 +84,21 @@
                 </p>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <div class="input-group">
-                        <div class="input-group-addon text-center addToCart">${{$computer->sellprice}}</div>
-                        <button type="button" class="btn btn-primary form-control addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
-                    </div>
+                            {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
+                                {!! Form::hidden('id', $computer->id, []) !!}
+                                {!! Form::hidden('name', $computer->name, []) !!}
+                                {!! Form::hidden('qty', 1, []) !!}
+                                {!! Form::hidden('price', $computer->sellprice, []) !!}
+                                {!! Form::hidden('options',null, []) !!}
+                                {{-- {!! Form::hidden('customer_id', Auth::user()->id, []) !!} --}}
+                            
+                                <div class="input-group">
+                                    <div class="input-group-addon text-center addToCart">${{$computer->sellprice}}
+                                    </div>
+                                    <button type="summit" class="btn btn-primary form-control addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
+                                </div>
+                            {!! Form::close() !!}
+                        
                     </div>
                 </div>
                     

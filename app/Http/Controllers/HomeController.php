@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $computers = Computer::orderBy('id', 'desc')->paginate(10);
+        // $items = Cart::content();
         // return $computers->all();
         return view('welcome', compact('computers'));
         // return view('home');
