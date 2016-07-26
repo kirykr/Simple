@@ -37,10 +37,9 @@
 					<td>{{$user->updated_at->diffForHumans()}}</td>
 					<td><a href="{{route('admin.users.edit', $user->id)}}"><i class="fa fa-edit btn btn-primary"></i></a> </td>
 					<td>
-
-					{!! Form::open(['method'=>'DELETE', 'action'=>['AdminUserController@destroy', $user->id]]) !!}
-					{!! Form::button('<i class="fa fa-trash-o "></i>', ['type' => 'submit', 'class'=>'btn btn-danger']) !!}
-					{!! Form::close() !!}
+						{!! Form::open(['method'=>'DELETE', 'action'=>['AdminUserController@destroy', $user->id]]) !!}
+						{!! Form::button('<i class="fa fa-trash-o "></i>', ['type' => 'submit', 'class'=>'btn btn-danger']) !!}
+						{!! Form::close() !!}
 					</td>
 				</tr>
 			@endforeach

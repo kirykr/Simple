@@ -21,8 +21,8 @@ class CartController extends Controller
         if(!Auth::check()){
             return redirect('/login');
         }
-        // Cart::destroy();
-        $content = Cart::content();
+
+        $content = Cart::instance(Auth::user()->id)->content();
 
         return view('shoppingCart', compact('content'));
     }
@@ -51,9 +51,13 @@ class CartController extends Controller
         $items = $request->all();
         $computer = Computer::findOrFail($items['id']);
         $qty = $items['qty'];
-        $options = $items['options'];
-        Cart::add(['id' => $computer->id, 'name' =>  $computer->name, 'qty' => $qty, 'price' => $computer->sellprice, ['options' =>  $computer->photo->path]]);
+        $image = $request['image'];
+        // $options = $items['options'];
+        $options = [0 => 'Gold', 1 => 'Gray'];
         
+        Cart::instance(Auth::user()->id)->add(['id' => $computer->id, 'image' =>  $image, 'name' => $computer->name, 'qty' => $qty, 'price' => $computer->sellprice, 'options' => $options ]);
+       // $carts = Cart::content(); 
+       // dd($carts);
         return redirect('/home');
     }
 
@@ -86,9 +90,12 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $rowId)
     {
-        //
+        
+        $qty = $request['qty'];
+        Cart::instance(Auth::user()->id)->update($rowId, $qty);
+        return redirect('/carts');
     }
 
     /**
@@ -100,7 +107,7 @@ class CartController extends Controller
     public function destroy($rowId)
     {
         
-        Cart::remove($rowId);
+        Cart::instance(Auth::user()->id)->remove($rowId);
         return redirect('carts');
     }
 }

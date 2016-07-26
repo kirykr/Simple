@@ -24,6 +24,7 @@ class AdminUserController extends Controller
     {
         //
         $users = User::orderBy('id', 'asc')->paginate(5);
+        // dd($users);
 
         return view('admin.users.index', compact('users'));
     }

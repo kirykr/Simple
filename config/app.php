@@ -151,6 +151,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,7 +211,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'flash' => Laracasts\flash\flash::class,
-        'Cart'            => \Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Cart'  => \Gloudemans\Shoppingcart\Facades\Cart::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

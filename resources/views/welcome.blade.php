@@ -86,10 +86,10 @@
                     <div class="col-md-8 col-md-offset-2">
                             {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
                                 {!! Form::hidden('id', $computer->id, []) !!}
-                                {!! Form::hidden('name', $computer->name, []) !!}
+                                {!! Form::hidden('image', $computer->photo->path, []) !!}
                                 {!! Form::hidden('qty', 1, []) !!}
                                 {!! Form::hidden('price', $computer->sellprice, []) !!}
-                                {!! Form::hidden('options',null, []) !!}
+                                {{-- {!! Form::hidden('options', array('color' => 'Silver','Gold' ) , []) !!} --}}
                                 {{-- {!! Form::hidden('customer_id', Auth::user()->id, []) !!} --}}
                             
                                 <div class="input-group">

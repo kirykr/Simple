@@ -369,7 +369,7 @@
     </div>
     <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style=" margin-top: 5px; font-weight: 700; font-size: 20px; border-left: dotted 1px #333;">
         <a href="{{ route('carts.index') }}"><i class="fa fa-shopping-cart fa-fw"></i>
-        <span class="label label-pill badge-notify label-danger">{{ Cart::content()->count() }}</span> $ {{ Cart::subtotal() }}</a>
+        <span class="label label-pill badge-notify label-danger">{{ Auth::check() ? Cart::instance(Auth::user()->id)->content()->count() :  Cart::content()->count()}}</span> $ {{ Auth::check() ?  Cart::instance(Auth::user()->id)->subtotal() : Cart::subtotal()  }}</a>
     </div>
     </div>
 </div>
