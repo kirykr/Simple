@@ -31,9 +31,11 @@ Route::auth();
 
 Route::get('/admin', function(){
 
+
 	return view('admin.index');
 });
 // created Admin middleware and put all admin work inside
+//Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
 Route::group(['middleware'=>'admin'], function(){
 
 	Route::resource('/admin/users', 'AdminUserController');

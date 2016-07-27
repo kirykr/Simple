@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Entrust;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
@@ -24,7 +25,8 @@ class AdminUserController extends Controller
     {
         //
         $users = User::orderBy('id', 'asc')->paginate(5);
-        // dd($users);
+//        $users = ['Dara','nimol','chada'];
+//         dd($users);
 
         return view('admin.users.index', compact('users'));
     }

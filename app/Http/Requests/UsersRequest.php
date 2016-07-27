@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\UsersRequest;
 
 
 class UsersRequest extends Request

@@ -1,10 +1,10 @@
 <?php
 
 namespace App;
-
+use Zizaco\Entrust\EntrustRole;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Role extends EntrustRole
 {
     //
     /**
@@ -12,5 +12,18 @@ class Role extends Model
      *
      * @var array
      */
-    protected $fillable = ['name',];
+    protected $fillable = [
+       'name',
+       'display_name',
+       'description'
+   ];
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Permission');
+    }
+    public function users()
+    {
+        return $this->belongsToMany('App\user','role_user');
+    }
 }

@@ -1,42 +1,57 @@
-<?php
-
+<?php 
 namespace App;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Hash;
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-class User extends Authenticatable
-{
+    use Authenticatable, CanResetPassword, EntrustUserTrait;
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email','password','role_id','is_active','photo_id',
-    ];
+    protected $fillable = ['name', 'email', 'password',];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * User belongs to Role.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function role()
+    public function posts()
     {
-        // belongsTo(RelatedModel, foreignKey = role_id, keyOnRelatedModel = id)
-        return $this->belongsTo('App\Role');
+        return $this->hasMany('App\Post');
     }
 
-    /**
+    
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+/**
+     * Many-to-Many relations with Role.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Config::get('entrust.role'), Config::get('entrust.role_user_table'), 'user_id', 'role_id');
+    // }
+     /**
      * User belongs to Photo.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -47,28 +62,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
-    /**
-     * User has many Posts.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function posts()
-    {
-        // hasMany(RelatedModel, foreignKeyOnRelatedModel = user_id, localKey = id)
-        return $this->hasMany('App\Post');
-    }
+    // public function isAdmin(){
 
-    public function isAdmin(){
-
-        if($this->role->name == 'administrator' && $this->is_active === 1){
-            return true;
-        }
-
-        return false;
-    }
-
-    // Mutator
-    public function setPasswordAttribute($password){
-        $this->attributes['password'] = Hash::needsRehash($password) ? Hash::make($password) : $password;
-    }
+    //     if($this->roles->name == 'admin' && $this->is_active === 1){
+    //         return true;
+    //     }
+    // }
 }
