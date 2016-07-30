@@ -94,17 +94,17 @@
 		</tbody>
 		<tfoot>
         <tr>
-            <td colspan="6">&nbsp;</td>
+            <td colspan="7">&nbsp;</td>
             <td class="text-right"><p><strong>Subtotal:</strong></p></td>
             <td class="addToCart">{{ Cart::subtotal() }}</td>
         </tr>
         <tr>
-            <td colspan="6">&nbsp;</td>
+            <td colspan="7">&nbsp;</td>
             <td class="text-right"><p><strong>Tax:</strong></p></td>
             <td class="addToCart">{{ Cart::tax() }}</td>
         </tr>
         <tr>
-            <td colspan="6">&nbsp;</td>
+            <td colspan="7">&nbsp;</td>
             <td class="text-right"><p><strong>TOTAL:</strong></p></td>
             <td class="addToCart">{{ Cart::total() }}</td>
         </tr>

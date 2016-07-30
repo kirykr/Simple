@@ -4,7 +4,7 @@
 {{-- @section('header') --}}
     <div class="page-header clearfix">
         <h1>
-            <i class="fa fa-align-justify"></i> Roles
+            <i class="fa fa-align-justify"></i> Roles & Permissions
             <a class="btn btn-success pull-right" href="{{ route('admin.roles.create') }}"><i class="fa fa-plus"></i> Create</a>
         </h1>
 
@@ -19,6 +19,11 @@
                         <tr>
                             <th>ID</th>
                             <th>NAME</th>
+                            <th>View</th>
+                            <th>Create</th>
+                            <th>Edit/Update</th>
+                            <th>Delete</th>
+                            <th>Create Product</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -28,6 +33,16 @@
                             <tr>
                                 <td>{{$role->id}}</td>
                                 <td>{{$role->name}}</td>
+                                {{-- for check boxes --}}
+                                 @foreach ($permissions as $permission)
+                                  {{-- <div class="col-md-2"> --}}
+                                    {{-- <input type="checkbox" name="permission[]" value="{{$permission->id}}"> --}}
+                                    <td>
+                                         {!! Form::checkbox('permission_id[]', $permission->id,  $role->hasPermission($permission->name), ['class'=>'form-control', 'disabled'=>'disabled']) !!}
+                                    </td>
+                                   
+                                  {{-- </div> --}}
+                                @endforeach
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.roles.show', $role->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.roles.edit', $role->id) }}"><i class="fa fa-edit"></i> Edit</a>
@@ -45,7 +60,7 @@
             @else
                 <h3 class="text-center alert alert-info">Empty!</h3>
             @endif
-
+    
         </div>
     </div>
 

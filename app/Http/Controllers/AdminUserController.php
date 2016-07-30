@@ -25,6 +25,7 @@ class AdminUserController extends Controller
     {
         //
         $users = User::orderBy('id', 'asc')->paginate(5);
+        // $users = User::with('roles')->orderBy('id','asc')->paginate(5);
 //        $users = ['Dara','nimol','chada'];
 //         dd($users);
 
@@ -55,7 +56,10 @@ class AdminUserController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        // check if the password is empty
+        // check if the password is empt
+
+        // $role = Role::where('id','=',$request->role_id)->first();
+
         if(trim($request->password) == ''){
             $input = $request->except('password');
         }else{
@@ -69,10 +73,12 @@ class AdminUserController extends Controller
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+
         $input['password'] = bcrypt($request->password);
-
-        User::create($input);
-
+        // dd($input);
+        $userId = User::create($input)->id;
+        $user = User::findOrFail($userId);
+        $user->roles()->attach($request->role_id);
         
         Session::flash('create_user','The user has been created!');
         flash()->overlay('User has been created successfully','CREATE USER');
@@ -125,7 +131,11 @@ class AdminUserController extends Controller
 
         // return $request->all();
         // check if the password is empty
+        // $role = Role::where('id','=',$request->role_id)->first();
         $user = User::findOrFail($id);
+        //testing
+        // dd($request->input('role_id'));
+
         if(trim($request->password) == ''){
             $input = $request->except('password');
         }else{
@@ -138,8 +148,11 @@ class AdminUserController extends Controller
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
+        $input['role_id'] = $request->input('role_id');
         $input['password'] = bcrypt($request->password);
+
         $user->update($input);
+        $user->roles()->sync([$request->input('role_id')]);
 
         Alert::success('Success Message', 'User is updated successfully!');
         return redirect('/admin/users');
@@ -154,11 +167,17 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         //
+
         $user = User::findOrFail($id);
+        $roleId = $user->roles->first()->id;
+        // dd($roleId);
         $name = $user->name;
         if($user->photo->path !== '')
             unlink(public_path() . $user->photo->path);
+        
+        // $user->roles()->sync([$roleId]);
         $user->delete();
+        $user->roles()->sync([]);
 
         Session::flash('delete_user','The user has been deleted!');
         flash()->overlay('User '. $name . ' has been successfully deleted!','DELETE');

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -307,7 +305,12 @@
                                 <li>
                                     <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
                                 </li>
-                                
+                                <li>
+                                    <a href="{{route('admin.roles.index')}}"><i  class="fa fa-cogs"></i> User Roles</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('admin.permissions.index')}}"><i  class="fa fa-cogs"></i> Permissions</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -443,11 +446,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Administrator</h1>
+                    @role('admin')
+                        <p>This is visible to users with the admin role. Gets translated to 
+                        \Entrust::role('admin')</p>
+                    @endrole
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
            {{-- Yielding============================ --}}
-           @include('flash::message');
+           @include('flash::message')
             @yield('content')
 
             

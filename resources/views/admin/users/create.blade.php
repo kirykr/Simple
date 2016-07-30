@@ -1,5 +1,4 @@
 @extends('layouts.admin')
-
 @section('content')
 	@include('errors.formError')
    
@@ -65,7 +64,7 @@
 
 @section('footer')
     
-@stop;
+@stop
 @section('scripts')
  {{--  // <script src="{{asset('js/libs.js')}}"></script> --}}
   

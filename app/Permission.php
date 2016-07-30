@@ -14,7 +14,7 @@ class Permission extends EntrustPermission
      *
      * @var array
      */
-    protected $fillable = ['name','display_name','discription'];
+    protected $fillable = ['name','display_name','description'];
 
 
      public function roles()

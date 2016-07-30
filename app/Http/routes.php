@@ -47,6 +47,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/types','TypeController');
 	Route::resource('/admin/brands','BrandController');
 	Route::resource('/admin/modells','ModellController');
+	Route::resource('/admin/permissions','PermissionController'); 
 
 	Route::resource('/admin/roles','RoleController');
 	Route::group(array('prefix' => 'admin'), function(){

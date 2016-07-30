@@ -19,11 +19,19 @@ class Photo extends Model
 
     public function getPathAttribute($photo){
 
-
     	return $this->fillPath . $photo;
-
     }
 
+   /**
+    * Photo has one User.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+   public function user()
+   {
+       // hasOne(RelatedModel, foreignKeyOnRelatedModel = photo_id, localKey = id)
+       return $this->hasOne('App\User');
+   }
     /**
      * Photo has one Post.
      *

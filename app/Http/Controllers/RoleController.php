@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Role;
+use App\Permission;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller {
@@ -16,8 +17,9 @@ class RoleController extends Controller {
 	public function index()
 	{
 		$roles = Role::orderBy('id', 'desc')->paginate(10);
+		$permissions = Permission::all();
 
-		return view('admin.roles.index', compact('roles'));
+		return view('admin.roles.index', compact('roles','permissions'));
 	}
 
 	/**
@@ -26,8 +28,10 @@ class RoleController extends Controller {
 	 * @return Response
 	 */
 	public function create()
-	{
-		return view('admin.roles.create');
+	{	
+		$permissions = Permission::all();
+
+		return view('admin.roles.create', compact('permissions'));
 	}
 
 	/**
@@ -38,11 +42,14 @@ class RoleController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$role = new Role();
+		// testing
+		// dd($request->input('permissions'));
+		$input['name'] = $request->input("name");
+		$input['display_name'] = $request->input("display_name");
+		$input['description'] = $request->input("description");
 
-		$role->name = $request->input("name");
-
-		$role->save();
+		$role = Role::create($input)->id;
+		$role->attachPermission([$request->input('permissions')]);
 
 		return redirect()->route('admin.roles.index')->with('message', 'Item created successfully.');
 	}
@@ -69,8 +76,9 @@ class RoleController extends Controller {
 	public function edit($id)
 	{
 		$role = Role::findOrFail($id);
+		$permissions = Permission::all();
 
-		return view('admin.roles.edit', compact('role'));
+		return view('admin.roles.edit', compact('role','permissions'));
 	}
 
 	/**
@@ -82,11 +90,16 @@ class RoleController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
+		$input = $request->all();
+
 		$role = Role::findOrFail($id);
 
-		$role->name = $request->input("name");
+		$input['name'] = $request->input("name");
+		$input['display_name'] = $request->input("display_name");
+		$input['description'] = $request->input("description");
 
-		$role->save();
+		$role->update($input);
+        $role->permissions()->sync($request->input('permission_id'));
 
 		return redirect()->route('admin.roles.index')->with('message', 'Item updated successfully.');
 	}
@@ -101,6 +114,7 @@ class RoleController extends Controller {
 	{
 		$role = Role::findOrFail($id);
 		$role->delete();
+		$role->perms()->sync([]);
 
 		return redirect()->route('admin.roles.index')->with('message', 'Item deleted successfully.');
 	}
