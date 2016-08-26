@@ -54,7 +54,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-home text-primary" ></i> eCommerce</a>
+                 <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;text-shadow: 0px 0px 5px rgba(150, 150, 150, 1); font-weight: 700">
+                    <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
+                </a>
             </div>
         </div> 
             <!-- /.navbar-header -->
@@ -466,10 +468,21 @@
 
     <!-- jQuery -->
     
- {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
-@yield('footer')
 
+
+
+  {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
+{{-- =================================== Script =============================== --}}
+ <script>
+       
+      // // run bootlint
+      // javascript:(function(){var s=document.createElement("script");s.onload=function(){bootlint.showLintReportForCurrentDocument([], {problemFree: false});};s.src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";document.body.appendChild(s)})();
+    </script>
+@yield('footer')
+    
 
      @if(Session::has('delete_user'))
         <script>
@@ -481,8 +494,7 @@
             $('#flash-overlay-modal').modal();    
         </script>
     @endif
-
-
+   
 @yield('scripts')
   
  

@@ -16,13 +16,13 @@ elixir(function(mix) {
 
     .styles([
     	'libs/bootstrap.css',
-    	'libs/bootstrap-theme.css',
     	'libs/jquery-ui.min.css',
     	'libs/metisMenu.css',
     	'libs/sb-admin-2.css',
         'libs/font-awesome.min.css',
         'libs/font-awesome-ie7.min.css',
         'libs/sweetalert.css',
+        'libs/dropzone.css',
     	'libs/style.css'
 
 
@@ -30,12 +30,15 @@ elixir(function(mix) {
 
     .scripts([
     	'libs/jquery.min.js',
+        // 'libs/material.min.js',
+        'libs/ripples.min.js',
         'libs/jquery-ui.min.js',
     	'libs/bootstrap.js',
     	'libs/metisMenu.js',
     	'libs/sb-admin-2.js',
         'libs/sweetalert.min.js',
-    	'libs/script.js'
+    	'libs/script.js',
+        'libs/dropzone.js'
     ], './public/js/libs.js')
 
 });
