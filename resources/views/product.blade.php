@@ -47,7 +47,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<p><span style="font-weight: bold;">Available:</span> Instock</p>
-							<p><span style="font-weight: bold;">Product Code:</span> {{$computer->comcode}}</p>
+							<p><span style="font-weight: bold;">Product Code:</span> </p>
 						</div>
 					</div>
 				</div>
@@ -57,14 +57,19 @@
 			<div class="row">
 					<div class="col-md-2">
 						<div class="form-group">
+						{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
+							{!! Form::hidden('id', $computer->id, []) !!}
+							{!! Form::hidden('image', $computer->photo->path, []) !!}
+							{!! Form::label('', 'Colors:', []) !!}
+                    		{!! Form::select('color',[''=>'Choose Options', ''=>'Gold', ''=>'Silver', ''=>'Black'],0,['class'=>'form-control']) !!}
+							{!! Form::hidden('price', $computer->sellprice, []) !!}
 							{!! Form::label('', 'QTY:', []) !!}
 							{{-- {!! Form::selectRange('number', 1, 110) !!} --}}
-							{!! Form::number('', 1,['class'=>'form-control']) !!}
+							{!! Form::number('qty', 1,['class'=>'form-control']) !!}
 						</div>
-						<div class="form-group">
-							<button type="button" class="btn btn-info addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
-						</div>
+						
 					</div>
+					
 			</div>
 			<div class="row">
 				<div class="col-md-12">
@@ -72,6 +77,17 @@
 					<p><a href="#"><i class="fa fa-envelope-o"></i> Message to Friends</a></p>
 				</div>
 			</div>
+			{{-- <div class="form-group"> --}}
+						<div class="row">
+							<div class="coll-md-6 pull-left">
+							  <button type="summit" class="btn btn-primary form-control addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
+							</div>
+							<div class="coll-md-6 pull-left">
+							   <button type="summit" class="btn btn-warning form-control addToCart"><i class="fa fa-money"></i> Buy Now</button>
+							</div>
+						</div>
+					{{-- </div> --}}
+						{!! Form::close() !!}  
 		</div>
 	</div>
 	<hr>

@@ -16,15 +16,15 @@
                 <input type="hidden" name="_method" value="PUT">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 --}}     
-                {!! Form::label('comcode', 'Computer Code') !!}
+               {{--  {!! Form::label('comcode', 'Computer Code') !!}
                 <div class="form-group {{ $errors->has('comcode') ? 'has-error' :'' }}">
                   {!! Form::text('comcode',null,['class'=>'form-control','placeholder'=>'Computer Code']) !!}
                   {!! $errors->first('comcode','<span class="help-block">:message</span>') !!}
-                </div>
+                </div> --}}
                 <div class="row">
                   <div class="col-md-6">
                    {{-- for Computer Name --}}
-                   {!! Form::label('comcode', 'Computer Code') !!}
+                   {!! Form::label('name', 'Computer Name') !!}
                    <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
                     {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Computer Name']) !!}
                     {!! $errors->first('name','<span class="help-block">:message</span>') !!}

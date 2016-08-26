@@ -15,11 +15,11 @@
       {{-- , 'class' => 'dropzone', 'id' => 'book-image' --}}
       {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}   
       {{-- error for Computer Code --}}
-      {!! Form::label('comcode', 'Computer Code') !!}
+     {{--  {!! Form::label('comcode', 'Computer Code') !!}
       <div class="form-group {{ $errors->has('comcode') ? 'has-error' :'' }}">
         {!! Form::text('comcode',null,['class'=>'form-control','placeholder'=>'Computer Code']) !!}
         {!! $errors->first('comcode','<span class="help-block">:message</span>') !!}
-      </div>
+      </div> --}}
       <div class="row">
         <div class="col-md-6">
          {{-- for Computer Name --}}

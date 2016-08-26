@@ -84,20 +84,21 @@
                 </p>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                            {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
-                                {!! Form::hidden('id', $computer->id, []) !!}
-                                {!! Form::hidden('image', $computer->photo->path, []) !!}
-                                {!! Form::hidden('qty', 1, []) !!}
-                                {!! Form::hidden('price', $computer->sellprice, []) !!}
+                            {{-- {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!} --}}
+                                {{-- {!! Form::hidden('id', $computer->id, []) !!} --}}
+                                {{-- {!! Form::hidden('image', $computer->photo->path, []) !!} --}}
+                                {{-- {!! Form::hidden('qty', 1, []) !!} --}}
+                                {{-- {!! Form::hidden('price', $computer->sellprice, []) !!} --}}
                                 {{-- {!! Form::hidden('options', array('color' => 'Silver','Gold' ) , []) !!} --}}
                                 {{-- {!! Form::hidden('customer_id', Auth::user()->id, []) !!} --}}
                             
                                 <div class="input-group">
                                     <div class="input-group-addon text-center addToCart">${{$computer->sellprice}}
                                     </div>
-                                    <button type="summit" class="btn btn-primary form-control addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
+                                    {{-- <button type="summit" class="btn btn-success form-control addToCart"><i class="fa fa-eye"></i> VIEW DETAILS</button> --}}
+                                    <a href="{{ route('products.show', $computer->id) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
                                 </div>
-                            {!! Form::close() !!}
+                            {{-- {!! Form::close() !!} --}}
                         
                     </div>
                 </div>

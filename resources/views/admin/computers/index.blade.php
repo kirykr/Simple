@@ -15,7 +15,6 @@
                     <thead>
                         <tr>
                         <th>ID</th>
-                        <th>COMCODE</th>
                         <th>PHOTO</th>
                         <th>NAME</th>
                         <th>QTYINSTOCK</th>
@@ -32,7 +31,6 @@
                         @foreach($computers as $computer)
                             <tr>
                                 <td>{{$computer->id}}</td>
-                                <td>{{$computer->comcode}}</td>
                                 <td><img width="70" src=" {{ $computer->photo ? $computer->photo->path : '' }} " alt=""></td>
                                 <td>{{$computer->name}}</td>
                                 <td>{{$computer->qtyinstock}}</td>

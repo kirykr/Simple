@@ -28,9 +28,8 @@
 			<tr>
 				<th>#</th>
 				<th>Picture</th>
-				<th>Name</th>
+				<th>Description</th>
 				<th>Qty</th>
-				<th>Options</th>
 				<th>Price</th>
 				<th>Discount</th>
 				<th>Amount</th>
@@ -68,15 +67,7 @@
 					{!! Form::close() !!}
                 </div>
                 </td>
-				 <td>
-				 	{!! Form::select('options', $row->options, null, ['class' => 'form-control']) !!}
-				 	{{-- <select name="options" id="inputOptions" class="form-control form-control-inline">
-				 		<option class="form-control form-control-inline" value="0">Choose Options</option>
-				 		@foreach($row->options as $option)
-				 			<option class="form-control form-control-inline" value="1">{{$option}}</option>
-				 		@endforeach
-				 	</select> --}}
-                </td>
+				
                 <td>${{ $row->price }}</td>
                 <td>${{ '0.00' }}</td>
                 <td>${{ $row->price * $row->qty }}</td>
@@ -120,7 +111,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<button type="button" class="btn btn-success addToCart"><i class="fa fa-arrow-left fa-fw"></i>CONTINUE SHOPPING</button>
+				<a href="{{ url('/') }}" class="btn btn-success addToCart"><i class="fa fa-arrow-left fa-fw"></i>CONTINUE SHOPPING</a>
 			</div>
 			<div class="col-md-6">
 				<button type="button" class="btn btn-success addToCart pull-right">PROCEED TO CHECK OUT <i class="fa fa-arrow-right fa-fw"></i></button>
