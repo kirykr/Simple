@@ -16,6 +16,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+        // If the user is not logged in
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+    }
     public function index()
     {
         if(!Auth::check()){
