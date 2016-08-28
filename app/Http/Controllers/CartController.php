@@ -16,11 +16,14 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        if(!Auth::check()){
-            return redirect('/login');
-        }
 
         $content = Cart::instance(Auth::user()->id)->content();
 
