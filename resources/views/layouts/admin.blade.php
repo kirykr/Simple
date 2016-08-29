@@ -327,31 +327,25 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-dropbox fa-fw"></i> Products<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-building fa-fw"></i> Suppliers<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ route('admin.computers.index') }}"><i class="fa fa-desktop"></i> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
+                                    <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-truck"></i> All Supplers</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-headphones fa-fw"></i> Accessories</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Spare Parts</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-microphone fa-fw"></i> Peripheral Devices</a>
+                                    <a href="{{ route('admin.suppliers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Supplier</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
+                         <li>
+                            <a href="#"><i class="fa fa-sort-alpha-asc"></i> Product Tyeps<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
+                                    <a href="{{ route('admin.types.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Types</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
+                                    <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Types</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -364,6 +358,66 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Category</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-share-alt"></i> Product Brands<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.brands.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Brands</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Brands</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-apple"></i> Product Models<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.modells.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Models</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.modells.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Models</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-dropbox fa-fw"></i> Manage Computers<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.computers.index') }}"><i class="fa fa-desktop"></i> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                         <li>
+                            <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Manage Other Products<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.others.index') }}"><i class="fa fa-keyboard-o"></i> All Other Products</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.others.create') }}"><i class="fa fa-hdd-o fa-fw"></i> Create Other Products</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
