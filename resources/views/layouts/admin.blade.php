@@ -11,7 +11,17 @@
     
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/libs.css')}}">
+    <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
+
+    {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
     <script src="{{asset('js/libs.js')}}"></script>
+    <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
+    <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
+    <script src="{{asset('js/plugins/purify.min.js')}}"></script>
+    <script src="{{asset('js/fileinput.min.js')}}"></script>
+    <script src="{{asset('js/themes/fa/theme.js')}}"></script>
+    <script src="{{asset('js/locales/LANG.js')}}"></script>
+    {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
     <!-- Bootstrap Core CSS -->
     <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 

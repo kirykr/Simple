@@ -22,7 +22,6 @@ elixir(function(mix) {
         'libs/font-awesome.min.css',
         'libs/font-awesome-ie7.min.css',
         'libs/sweetalert.css',
-        'libs/dropzone.css',
     	'libs/style.css'
 
 
@@ -30,7 +29,6 @@ elixir(function(mix) {
 
     .scripts([
     	'libs/jquery.min.js',
-        // 'libs/material.min.js',
         'libs/ripples.min.js',
         'libs/jquery-ui.min.js',
     	'libs/bootstrap.js',
@@ -38,7 +36,6 @@ elixir(function(mix) {
     	'libs/sb-admin-2.js',
         'libs/sweetalert.min.js',
     	'libs/script.js',
-        'libs/dropzone.js'
     ], './public/js/libs.js')
 
 });

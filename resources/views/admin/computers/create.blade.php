@@ -11,15 +11,8 @@
     <div class="col-md-12">
 
       {{-- <form action="{{ route('admin.computersController.store') }}" method="POST"> --}}    
-      {!! Form::open(['action'=>"ComputerController@store", 'files' => true, 'enctype' => 'multipart/form-data', 'class' => 'dropzone', 'id' => 'book-image' ]) !!}
-      {{-- , 'class' => 'dropzone', 'id' => 'book-image' --}}
-      {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}   
-      {{-- error for Computer Code --}}
-     {{--  {!! Form::label('comcode', 'Computer Code') !!}
-      <div class="form-group {{ $errors->has('comcode') ? 'has-error' :'' }}">
-        {!! Form::text('comcode',null,['class'=>'form-control','placeholder'=>'Computer Code']) !!}
-        {!! $errors->first('comcode','<span class="help-block">:message</span>') !!}
-      </div> --}}
+      {!! Form::open(['action'=>"ComputerController@store", 'files' => true, 'enctype' => 'multipart/form-data' ]) !!}
+
       <div class="row">
         <div class="col-md-6">
          {{-- for Computer Name --}}
@@ -45,59 +38,63 @@
         </div>
       </div>
     </div>
-    {!! Form::label('photo_id', 'Computer Picture') !!}
-   {{--  <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }} ">
-      {!! Form::file('photo_id',null,['class'=>'','placeholder'=>'Computer photo_id']) !!}
-      {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!}
+
+   {{--  {!! Form::label('photo_id', 'Computer Picture') !!}
+    <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }} ">
+    {!! Form::file('photo_id',null,['class'=>'file', 'id'=>'input-id', 'data-preview-file-type'=>'text']) !!}
+      {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!} 
     </div> --}}
-    <div class="dropzone" id="book-image">
-      <div class="dz-message">
-        <h4 style="text-align: center;color:#428bca;">Drop images in this area  <span class="glyphicon glyphicon-hand-down"></span></h4>
-      </div>
-
-      <div class="fallback">
-          {{-- <input name="file" type="file" multiple /> --}}
-      </div>
-
-      <div class="dropzone-previews" id="dropzonePreview"></div>
+    <div class="form-group">
+      {!! Form::label('photo_id', 'Computer Picture') !!}
+      <input id="input-pd" name="photo_id[]" type="file" multiple class="file-loading">
     </div>
-     
+    {{-- @include('dropzoner::dropzone') --}}
+    {{-- <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          {!! Form::file('photo_id',null,['class'=>'']) !!}
+          <div class="dropzone" id="dropzoneFileUpload">
+          </div>
+        </div>
+      </div>
+    </div> --}}
+
     <div class="row">
-    <div class="col-md-3">
-      {!! Form::label('type_id', 'Computer Type') !!}
-      <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
-        {!! Form::select('type_id',[''=>'Choose Options'] + $types,3,['class'=>'form-control','id'=>'computer_type']) !!}
-        {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
+      <div class="col-md-3">
+        {!! Form::label('type_id', 'Computer Type') !!}
+        <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
+          {!! Form::select('type_id',[''=>'Choose Options'] + $types,3,['class'=>'form-control','id'=>'computer_type']) !!}
+          {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
+        </div>
+      </div>
+      <div class="col-md-3">
+        {!! Form::label('category_id', 'Computer Categories') !!}
+        <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
+          {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+          {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
+        </div>
+      </div>
+      <div class="col-md-3">
+        {!! Form::label('brand_id', 'Computer Brand') !!}
+        <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
+          {!! Form::select('brand_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+          {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
+        </div>
+      </div>
+      <div class="col-md-3">
+        {!! Form::label('model_id', 'Computer Model') !!}
+        <div class="form-group {{ $errors->has('model_id') ? 'has-error' :'' }}">
+          {!! Form::select('model_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+          {!! $errors->first('model_id','<span class="help-block">:message</span>') !!}
+        </div>
       </div>
     </div>
-    <div class="col-md-3">
-      {!! Form::label('category_id', 'Computer Categories') !!}
-      <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
-        {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
-        {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
-      </div>
+    <div class="well well-sm">
+      <button type="submit" class="btn btn-primary">Create</button>
+      <a class="btn btn-link pull-right" href="{{ route('admin.computers.index') }}"><i class="fa fa-backward"></i> Back</a>
     </div>
-    <div class="col-md-3">
-      {!! Form::label('brand_id', 'Computer Brand') !!}
-      <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-        {!! Form::select('brand_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
-        {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
-      </div>
-    </div>
-    <div class="col-md-3">
-      {!! Form::label('model_id', 'Computer Model') !!}
-      <div class="form-group {{ $errors->has('model_id') ? 'has-error' :'' }}">
-        {!! Form::select('model_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
-        {!! $errors->first('model_id','<span class="help-block">:message</span>') !!}
-      </div>
-    </div>
-  </div>
-  <div class="well well-sm">
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-link pull-right" href="{{ route('admin.computers.index') }}"><i class="fa fa-backward"></i> Back</a>
-  </div>
-  {!! Form::close() !!}
-  {{-- </form> --}}
+    {!! Form::close() !!}
+    {{-- </form> --}}
   </div>
 </div>
 
@@ -105,12 +102,38 @@
 @section('scripts')
 {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
 
-<script type="scripts/text">
+<script type="text/javascript">
 
   $(document).ready(function() {
+    // image loader
+      $("#input-pd").fileinput({
+    uploadUrl: "/file-upload-batch/1",
+    uploadAsync: false,
+    minFileCount: 2,
+    maxFileCount: 5,
+    overwriteInitial: false,
+    initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+    initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+    // initialPreviewConfig: [
+    //     {caption: "Desert.jpg", size: 827000, width: "120px", url: "/file-upload-batch/2", key: 1},
+    //     {caption: "Lighthouse.jpg", size: 549000, width: "120px", url: "/file-upload-batch/2", key: 2}, 
+    //     {type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 3}, 
+    //     {type: "pdf", size: 8000, caption: "About.pdf", url: "/file-upload-batch/2", key: 4},
+    //     {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/file-upload-batch/2", key: 5}, 
+    //     {type: "html", size: 3550, caption: "LoremIpsum.html", url: "/file-upload-batch/2", key: 6}
+    // ],
+    purifyHtml: true, // this by default purifies HTML data for preview
+    uploadExtraData: {
+        img_key: "1000",
+        img_keywords: "happy, places",
+    }
+}).on('filesorted', function(e, params) {
+    console.log('File sorted params', params);
+}).on('fileuploaded', function(e, params) {
+    console.log('File uploaded params', params);
+});
 
-    // $('.date-picker').datepicker({
-    // });
+    // =====================================================================
     $('#computer_type').on('change', function(e) {
       var type = $(this).val();
       if(type) 
@@ -135,59 +158,26 @@
       })
     }
 
-    // Dropzone.options.myUploadForm = {
-    //     success: function(event, response) {
-    //         $('.myForm').append("<input type='hidden' name='image_ids[]' value='"+response.photo_id+"' />");
-    //     }
-    // };
-
-    (function() {
-    Dropzone.options.bookImage = {
-        paramName           :       "image", // The name that will be used to transfer the file
-        maxFilesize         :       2, // MB
-        dictDefaultMessage  :       "Drop File here or Click to upload Image",
-        thumbnailWidth      :       "300",
-        thumbnailHeight     :       "300",
-        accept              :       function(file, done) { done() },
-        success             :       uploadSuccess,
-        complete            :       uploadCompleted
-    };
-
-    function uploadSuccess(data, file) {
-        var messageContainer    =   $('.dz-success-mark'),
-            message             =   $('<p></p>', {
-                'text' : 'Image Uploaded Successfully! Image Path is: '
-            }),
-            imagePath           =   $('<a></a>', {
-                'href'  :   JSON.parse(file).original_path,
-                'text'  :   JSON.parse(file).original_path,
-                'target':   '_blank'
-            })
-
-        imagePath.appendTo(message);
-        message.appendTo(messageContainer);
-        messageContainer.addClass('show');
-    }
-
-    function uploadCompleted(data) {
-        if(data.status != "success")
-        {
-            var error_message   =   $('.dz-error-mark'),
-                message         =   $('<p></p>', {
-                    'text' : 'Image Upload Failed'
-                });
-
-            message.appendTo(error_message);
-            error_message.addClass('show');
-            return;
-        }
-    }
-  })();
-
-})
-
-
     // dropzone ============================================
-   
-    </script>
-    @endsection
+
+    var baseUrl = "{{ url('/') }}";
+    var token = "{{ Session::getToken() }}";
+    Dropzone.autoDiscover = false;
+    var myDropzone = new Dropzone("div#dropzoneFileUpload", {
+      url: baseUrl + "/dropzone/uploadFiles",
+      params: {
+        _token: token
+      }
+    });
+    Dropzone.options.myAwesomeDropzone = {
+            paramName: "photo_id", // The name that will be used to transfer the file
+            maxFilesize: 2, // MB
+            addRemoveLinks: true,
+            accept: function(file, done) {
+
+            },
+          };
+        })
+
+      </script>
+      @endsection

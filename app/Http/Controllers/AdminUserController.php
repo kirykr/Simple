@@ -21,6 +21,12 @@ class AdminUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         //

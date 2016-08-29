@@ -18,13 +18,12 @@ class Admin
     public function handle($request, Closure $next)
     {
 
-//        if(Entrust::check()){
-//            if(Entrust::user()->hasRole('Admin')  && Entrust::user()->can(['edit-user', 'create-user'])){
-//                return $next($request);
-//            }
-//        }
-//
-//        return redirect('/');
+
+       if(Entrust::hasRole('admin')  && Entrust::user()->can(['edit-user', 'create-user'])){
+           return $next($request);
+       }
+
+       return redirect('/');
 
         // Check if a user is logged in.
         if (!$user = $request->user())

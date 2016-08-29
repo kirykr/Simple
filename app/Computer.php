@@ -13,7 +13,7 @@ class Computer extends Model
      *
      * @var array
      */
-    protected $fillable = ['comcode',
+    protected $fillable = [
     					   'name',
     					   'qtyinstock',
     					   'sellprice',

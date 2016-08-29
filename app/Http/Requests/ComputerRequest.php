@@ -25,7 +25,7 @@ class ComputerRequest extends Request
     {
         return [
             //
-            'comcode'=>'required',
+          
            'name'=>'required',
            'qtyinstock'=>'required',
            'sellprice'=>'required',

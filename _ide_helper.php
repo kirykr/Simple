@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.41 on 2016-08-06.
+ * Generated for Laravel 5.2.45 on 2016-08-28.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -3856,7 +3856,7 @@ namespace {
         /**
          * Get the underlying query builder instance.
          *
-         * @return \Illuminate\Database\Query\Builder|static 
+         * @return \Illuminate\Database\Query\Builder 
          * @static 
          */
         public static function getQuery(){
@@ -4442,6 +4442,33 @@ namespace {
         }
         
         /**
+         * Add a "where time" statement to the query.
+         *
+         * @param string $column
+         * @param string $operator
+         * @param int $value
+         * @param string $boolean
+         * @return \Illuminate\Database\Query\Builder|static 
+         * @static 
+         */
+        public static function whereTime($column, $operator, $value, $boolean = 'and'){
+            return \Illuminate\Database\Query\Builder::whereTime($column, $operator, $value, $boolean);
+        }
+        
+        /**
+         * Add an "or where time" statement to the query.
+         *
+         * @param string $column
+         * @param string $operator
+         * @param int $value
+         * @return \Illuminate\Database\Query\Builder|static 
+         * @static 
+         */
+        public static function orWhereTime($column, $operator, $value){
+            return \Illuminate\Database\Query\Builder::orWhereTime($column, $operator, $value);
+        }
+        
+        /**
          * Add a "where day" statement to the query.
          *
          * @param string $column
@@ -4796,7 +4823,7 @@ namespace {
          * Retrieve the minimum value of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function min($column){
@@ -4807,7 +4834,7 @@ namespace {
          * Retrieve the maximum value of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function max($column){
@@ -4818,7 +4845,7 @@ namespace {
          * Retrieve the sum of the values of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function sum($column){
@@ -4829,7 +4856,7 @@ namespace {
          * Retrieve the average of the values of a given column.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function avg($column){
@@ -4840,7 +4867,7 @@ namespace {
          * Alias for the "avg" method.
          *
          * @param string $column
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function average($column){
@@ -4852,11 +4879,23 @@ namespace {
          *
          * @param string $function
          * @param array $columns
-         * @return float|int 
+         * @return mixed 
          * @static 
          */
         public static function aggregate($function, $columns = array()){
             return \Illuminate\Database\Query\Builder::aggregate($function, $columns);
+        }
+        
+        /**
+         * Execute a numeric aggregate function on the database.
+         *
+         * @param string $function
+         * @param array $columns
+         * @return float|int 
+         * @static 
+         */
+        public static function numericAggregate($function, $columns = array()){
+            return \Illuminate\Database\Query\Builder::numericAggregate($function, $columns);
         }
         
         /**
@@ -5727,7 +5766,7 @@ namespace {
         }
         
         /**
-         * Get a guard instance for the given user.
+         * Get a gate instance for the given user.
          *
          * @param \Illuminate\Contracts\Auth\Authenticatable|mixed $user
          * @return static 
@@ -7152,7 +7191,7 @@ namespace {
         }
         
         /**
-         * Get a subset of the items from the input data.
+         * Get a subset containing the provided keys with values from the input data.
          *
          * @param array|mixed $keys
          * @return array 
@@ -7234,7 +7273,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return \Symfony\Component\HttpFoundation\File\UploadedFile|array|null 
+         * @return \Illuminate\Http\UploadedFile|array|null 
          * @static 
          */
         public static function file($key = null, $default = null){
@@ -12288,7 +12327,7 @@ namespace {
          * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
          * @static 
          */
-        public static function autoclose($milliseconds = 1800){
+        public static function autoclose($milliseconds = null){
             return \UxWeb\SweetAlert\SweetAlertNotifier::autoclose($milliseconds);
         }
         
@@ -12323,6 +12362,26 @@ namespace {
          */
         public static function html(){
             return \UxWeb\SweetAlert\SweetAlertNotifier::html();
+        }
+        
+        /**
+         * Return the current alert configuration.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getConfig(){
+            return \UxWeb\SweetAlert\SweetAlertNotifier::getConfig();
+        }
+        
+        /**
+         * Return the current alert configuration as Json.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function getJsonConfig(){
+            return \UxWeb\SweetAlert\SweetAlertNotifier::getJsonConfig();
         }
         
     }
@@ -12832,6 +12891,7 @@ namespace {
          *
          * @param string $name
          * @return \DebugBar\DataCollectorInterface 
+         * @throws DebugBarException
          * @static 
          */
         public static function getCollector($name){
@@ -12854,6 +12914,7 @@ namespace {
          * Sets the request id generator
          *
          * @param \DebugBar\RequestIdGeneratorInterface $generator
+         * @return $this 
          * @static 
          */
         public static function setRequestIdGenerator($generator){
@@ -12887,6 +12948,7 @@ namespace {
          * Sets the storage backend to use to store the collected data
          *
          * @param \DebugBar\StorageInterface $storage
+         * @return $this 
          * @static 
          */
         public static function setStorage($storage = null){
@@ -12920,6 +12982,7 @@ namespace {
          * Sets the HTTP driver
          *
          * @param \DebugBar\HttpDriverInterface $driver
+         * @return $this 
          * @static 
          */
         public static function setHttpDriver($driver){
@@ -12972,6 +13035,7 @@ namespace {
          * @param bool $useOpenHandler
          * @param string $headerName
          * @param integer $maxHeaderLength
+         * @return $this 
          * @static 
          */
         public static function sendDataInHeaders($useOpenHandler = null, $headerName = 'phpdebugbar', $maxHeaderLength = 4096){
@@ -13016,6 +13080,7 @@ namespace {
          * Sets the key to use in the $_SESSION array
          *
          * @param string $ns
+         * @return $this 
          * @static 
          */
         public static function setStackDataSessionNamespace($ns){
@@ -13039,6 +13104,7 @@ namespace {
          * if a storage is enabled
          *
          * @param boolean $enabled
+         * @return $this 
          * @static 
          */
         public static function setStackAlwaysUseSessionStorage($enabled = true){

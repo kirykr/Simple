@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<hr>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -14,7 +15,7 @@
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}">
+                                <input id="name" type="text" class="form-control" name="name" autofocus="true" value="{{ old('name') }}">
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">

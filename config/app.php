@@ -163,7 +163,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         "Laralib\L5scaffold\GeneratorsServiceProvider",
         Intervention\Image\ImageServiceProvider::class,
-
     ],
 
     /*

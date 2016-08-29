@@ -30,9 +30,10 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/admin', function(){
-	if(!Auth::check()){
-	  return redirect('/login');
-  }
+	
+	if(!Entrust::hasRole(['admin','owner','HR'])){
+		return redirect('/');
+	}
 
 	return view('admin.index');
 });

@@ -46,6 +46,7 @@ class ComputerController extends Controller {
 	{
 		
 		$input = $request->all();
+		dd($request->file('photo_id'));
 
 		 if($file = $request->file('photo_id'))
         {
