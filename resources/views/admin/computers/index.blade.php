@@ -31,7 +31,8 @@
                         @foreach($computers as $computer)
                             <tr>
                                 <td>{{$computer->id}}</td>
-                                <td><img width="70" src=" {{ $computer->photo ? $computer->photo->path : '' }} " alt=""></td>
+                                {{-- {{ dd( $computer->photos->first()->path ) }} --}}
+                                <td><img width="70" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt=""></td>
                                 <td>{{$computer->name}}</td>
                                 <td>{{$computer->qtyinstock}}</td>
                                 <td>{{$computer->sellprice}}</td>

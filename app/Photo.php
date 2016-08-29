@@ -13,7 +13,7 @@ class Photo extends Model
      *
      * @var array
      */
-    protected $fillPath = "/images/";
+    protected $fillPath = "/images/computers/";
     protected $fillable = ['path',];
 
 
@@ -44,13 +44,13 @@ class Photo extends Model
     }
 
     /**
-     * Photo has one Computer.
+     * Photo belongs to Computer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function computer()
+    public function computers()
     {
-        // hasOne(RelatedModel, foreignKeyOnRelatedModel = photo_id, localKey = id)
-        return $this->hasOne('App\Computer');
+        // belongsTo(RelatedModel, foreignKey = computer_id, keyOnRelatedModel = id)
+        return $this->belongsToMany(Computer::class);
     }
 }

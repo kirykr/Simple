@@ -39,24 +39,15 @@
       </div>
     </div>
 
-   {{--  {!! Form::label('photo_id', 'Computer Picture') !!}
+    {!! Form::label('photo_id', 'Computer Picture') !!}
     <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }} ">
-    {!! Form::file('photo_id',null,['class'=>'file', 'id'=>'input-id', 'data-preview-file-type'=>'text']) !!}
+    {{-- {!! Form::file('photo_id',null,['class'=>'file', 'id'=>'input-id', 'data-preview-file-type'=>'text']) !!} --}}
+    {!! Form::file('photo_id[]', ['multiple'=>'true', 'class'=>'file-loading', 'id'=>'input-pd']) !!}
       {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!} 
-    </div> --}}
-    <div class="form-group">
+    </div>
+    {{-- <div class="form-group">
       {!! Form::label('photo_id', 'Computer Picture') !!}
       <input id="input-pd" name="photo_id[]" type="file" multiple class="file-loading">
-    </div>
-    {{-- @include('dropzoner::dropzone') --}}
-    {{-- <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          {!! Form::file('photo_id',null,['class'=>'']) !!}
-          <div class="dropzone" id="dropzoneFileUpload">
-          </div>
-        </div>
-      </div>
     </div> --}}
 
     <div class="row">

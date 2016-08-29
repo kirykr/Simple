@@ -8,6 +8,7 @@ use App\Photo;
 use App\Computer;
 use App\Type;
 use Illuminate\Http\Request;
+use Image;
 
 class ComputerController extends Controller {
 
@@ -44,19 +45,36 @@ class ComputerController extends Controller {
 	 */
 	public function store(ComputerRequest $request)
 	{
-		
-		$input = $request->all();
-		dd($request->file('photo_id'));
-
-		 if($file = $request->file('photo_id'))
+		// $input = $request->all();
+		$input['id'] = uniqid('c', false);
+		$input['name'] = $request->input("name");
+		$input['qtyinstock'] = $request->input("qtyinstock");
+		$input['sellprice'] = $request->input("sellprice");
+		$input['type_id'] = $request->input("type_id");
+		$input['category_id'] = $request->input("category_id");
+		$input['brand_id'] = $request->input("brand_id");
+		$input['model_id'] = $request->input("model_id");
+		// dd($input);
+		$computer = Computer::create($input);
+		// dd($computer);
+		 if($files = $request->file('photo_id'))
         {
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images', $name);
-            $photo = Photo::create(['path'=>$name]);
-            $input['photo_id'] = $photo->id;
+          foreach($files as $file) {
+            $photo = new Photo;
+            $extension = $file->getClientOriginalExtension();
+             //Creating sha1 version of the filename in case of conflicts
+            $sha1 = sha1($file->getClientOriginalName());
+            $filename = date('Y-m-d-h-i-s').".".$sha1.".".$extension;
+            $path = public_path('images/computers/' . $filename);
+            // Using Intervention/image package here to resize the photos
+            Image::make($file->getRealPath())->resize(870, null)->save($path);
+            $photo->path = $filename;
+            $photo->save();
+            $computer->photos()->attach($photo->id);
+            }
         }
 
-        Computer::create($input);
+        // Computer::create($input);
 
         
         // Session::flash('create_user','The user has been created!');
@@ -113,10 +131,7 @@ class ComputerController extends Controller {
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
-        // $input['cat_id'] = $request->input(0);
-        // $input['brand_id'] = $request->input(0);
-        // $input['model_id'] = $request->input(0);
-
+        
 		$computer->update($input);
 
 		return redirect()->route('admin.computers.index')->with('message', 'Item updated successfully.');
@@ -133,7 +148,7 @@ class ComputerController extends Controller {
 		$computer = Computer::findOrFail($id);
 		$computer->delete();
 
-		return redirect()->route('computers.index')->with('message', 'Item deleted successfully.');
+		return redirect()->route('admin.computers.index')->with('message', 'Item deleted successfully.');
 	}
 
 	

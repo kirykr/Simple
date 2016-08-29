@@ -13,12 +13,10 @@ class CreateComputersTable extends Migration {
 	public function up()
 	{
 		Schema::create('computers', function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('comcode')->unique();
+            $table->string('id');
             $table->string('name');
             $table->integer('qtyinstock');
             $table->float('sellprice');
-            $table->integer('photo_id')->default(0);
             $table->integer('type_id')->default(0);
             $table->integer('category_id')->default(0);
             $table->integer('brand_id')->default(0);

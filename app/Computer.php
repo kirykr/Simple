@@ -13,37 +13,39 @@ class Computer extends Model
      *
      * @var array
      */
+
+    public $incrementing = false;
     protected $fillable = [
-    					   'name',
-    					   'qtyinstock',
-    					   'sellprice',
-    					   'photo_id',
-    					   'type_id',
-    					   'category_id',
-    					   'brand_id',
-    					   'model_id',
+    'id',
+    'name',
+    'qtyinstock',
+    'sellprice',
+    'photo_id',
+    'type_id',
+    'category_id',
+    'brand_id',
+    'model_id',
 
     ];
 
+   /**
+    * Computer belongs to Photo.
+    *
+    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    */
+   public function photos()
+   {
+     // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
+     return $this->belongsToMany(Photo::class);
+   }
     /**
-     * Computer belongs to Photo.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function photo()
+         * Computer belongs to .
+         *
+         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+         */
+    public function type()
     {
-        // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
-        return $this->belongsTo('App\Photo');
-    }
-
-        /**
-             * Computer belongs to .
-             *
-             * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-             */
-            public function type()
-            {
-                // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
-                return $this->belongsTo('App\Type');
-            }	
-}
+            // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
+      return $this->belongsTo('App\Type');
+    }	
+  }

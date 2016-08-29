@@ -13,7 +13,7 @@ class CreateOthersTable extends Migration {
 	public function up()
 	{
 		Schema::create('others', function(Blueprint $table) {
-            $table->increments('id');
+            $table->string('id');
             $table->string('name')->unique();
             $table->integer('qtyinstock')->default(0);
             $table->float('sellprice')->default(0);
