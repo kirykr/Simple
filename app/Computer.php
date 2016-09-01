@@ -44,5 +44,14 @@ class Computer extends Model
     {
             // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
       return $this->belongsTo('App\Type');
+    }
+
+     /**
+     * The roles that belong to the user.
+     */
+    public function specs()
+    {
+        return $this->belongsToMany('App\Spec')->withPivot('description');
     }	
+
   }

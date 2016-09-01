@@ -79,6 +79,7 @@
                 
                 {{-- @include('includes/star_rating_with_javascript') --}}
                 @include('includes/star_rating')
+                
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                             {{-- {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!} --}}

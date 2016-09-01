@@ -7,6 +7,7 @@ use App\Http\Requests\ComputerRequest;
 use App\Photo;
 use App\Computer;
 use App\Brand;
+use App\Spec;
 // use Illuminate\Http\Request;
 use Image;
 
@@ -33,8 +34,9 @@ class ComputerController extends Controller {
 	{
 
 		$brands = Brand::lists('name','id')->all();
+		$specs = Spec::all();
 
-		return view('admin.computers.create', compact('brands'));
+		return view('admin.computers.create', compact('brands', 'specs'));
 	}
 
 	/**
@@ -47,8 +49,26 @@ class ComputerController extends Controller {
 	{
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
+		
 		// dd($input);
 		$computer = Computer::create($input);
+		$specs = Spec::all();
+		$arr = [];
+		foreach ($specs as $spec) {
+			$arr[] = $spec->name;
+		}
+		$spec_desc = array_combine($arr, $request->input('description'));
+		// dd($spec_desc);
+		// dd($input);
+		if (is_array($request->input('description'))) {
+			foreach ($spec_desc as $key => $desc) {
+				if(!empty($desc)){
+					$spec = Spec::where('name','=',$key)->first();
+					// dd($spec);
+					$computer->specs()->save($spec, ['description'=> $desc]); 
+				}
+			}
+		}
 		// dd($request->all());
 		 if($files = $request->file('photo_id'))
         {

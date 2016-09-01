@@ -13,7 +13,9 @@ class CreateComputerSpecMiddleTable extends Migration
     public function up()
     {
         Schema::create('computer_spec', function (Blueprint $table) {
-            $table->increments('id');
+            $table->string('computer_id');
+            $table->integer('spec_id')->unsigned();
+            $table->text('description');
             $table->timestamps();
         });
     }
