@@ -93,7 +93,7 @@
             @foreach($specs as $spec)
             <li class="list-group-item">
               {{ $spec->name }} 
-              {!! Form::text('description[]', null,['class'=>'form-control','placeholder'=>'Computer Spec ']) !!}
+              {!! Form::text('description[]', null,['class'=>'form-control','placeholder'=>'Computer Spec']) !!}
              {{--  <input type="text" name="description[]" id="input" class="form-control" value="" pattern="" title="" required> --}}
             </li>
             @endforeach

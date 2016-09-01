@@ -19,7 +19,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-5">
-			<img width="100%" src="{{$computer->photo ? $computer->photo->path : ''}}" alt="No Image">
+			<img class="img img-responsive" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt="">
 		</div>
 		<div class="col-md-7">
 			<div class="row">
@@ -59,7 +59,7 @@
 						<div class="form-group">
 						{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
 							{!! Form::hidden('id', $computer->id, []) !!}
-							{!! Form::hidden('image', $computer->photo->path, []) !!}
+							{!! Form::hidden('image', $computer->photos->first()->path, []) !!}
 							{!! Form::label('', 'Colors:', []) !!}
                     		{!! Form::select('color',[''=>'Choose Options', ''=>'Gold', ''=>'Silver', ''=>'Black'],0,['class'=>'form-control']) !!}
 							{!! Form::hidden('price', $computer->sellprice, []) !!}

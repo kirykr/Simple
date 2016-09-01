@@ -52,8 +52,8 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/modells','ModellController');
 	Route::resource('/admin/permissions','PermissionController'); 
 	Route::resource("/admin/suppliers","SupplierController");
-
 	Route::resource('/admin/roles','RoleController');
+	Route::resource("/admin/cimports","CimportController");
 	
 	Route::group(array('prefix' => 'admin'), function(){
 		Route::group(array('prefix' => 'api'), function(){
