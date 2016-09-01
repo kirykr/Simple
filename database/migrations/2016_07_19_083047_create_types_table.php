@@ -16,6 +16,7 @@ class CreateTypesTable extends Migration {
             $table->increments('id');
             $table->string('name')->unique();
             $table->longText('description');
+            $table->integer('brand_id')->unsigned();
             $table->timestamps();
         });
 	}

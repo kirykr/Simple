@@ -25,11 +25,11 @@
                </div>
                </div>
                <div class="col-md-4">
-                 {{--  {!! Form::label('category_id', 'Type Categories') !!}
-                <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
-                  {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
-                  {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
-                </div> --}}
+                  {!! Form::label('brand_id', 'Brand Name) !!}
+                <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
+                  {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control']) !!}
+                  {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
+                </div>
                </div>
              </div> 
               

@@ -31,30 +31,31 @@
      </div>
      </div>
      <div class="col-md-3">
-      {!! Form::label('qtyinstock', 'Quantiy Instock') !!}
+      {{-- {!! Form::label('qtyinstock', 'Quantiy Instock') !!} --}}
       <div class="form-group {{ $errors->has('qtyinstock') ? 'has-error' :'' }}">
-        {!! Form::number('qtyinstock',null,['class'=>'form-control','placeholder'=>'Other product qtyinstock']) !!}
+        {{-- {!! Form::number('qtyinstock',null,['class'=>'form-control','placeholder'=>'Other product qtyinstock']) !!} --}}
         {!! $errors->first('qtyinstock','<span class="help-block">:message</span>') !!}
      </div>
      </div>
      <div class="col-md-3">
-      {!! Form::label('sellprice', 'Sell Price') !!}
+      {{-- {!! Form::label('sellprice', 'Sell Price') !!} --}}
       <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-        {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Other product sellprice']) !!}
+        {{-- {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Other product sellprice']) !!} --}}
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
       </div>
    </div>
   </div>
   {!! Form::label('photo_id', 'Other product Picture') !!}
       <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }}">
-        {!! Form::file('photo_id',null,['class'=>'','placeholder'=>'Other product photo_id']) !!}
+        {{-- {!! Form::file('photo_id',null,['class'=>'','placeholder'=>'Other product photo_id']) !!} --}}
+        {!! Form::file('photo_id[]', ['multiple'=>'true', 'class'=>'file-loading', 'id'=>'input-pd']) !!}
         {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!}
       </div>
   <div class="row">
     <div class="col-md-3">
     {!! Form::label('type_id', 'Other product Type') !!}
       <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
-        {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+        {!! Form::select('type_id',[''=>'Choose Options'] + $types,0,['class'=>'form-control', 'id'=>'computer_type']) !!}
         {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
       </div>
     </div>
@@ -93,7 +94,7 @@
 @section('scripts')
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
   <script>
-    $('.date-picker').datepicker({
-    });
+    // $('.date-picker').datepicker({
+    // });
   </script>
 @endsection

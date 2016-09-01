@@ -29,7 +29,7 @@
                <div class="col-md-4">
                   {!! Form::label('category_id', 'Brand Categories') !!}
                 <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
-                  {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+                  {!! Form::select('category_id',[''=>'Choose Options'] + $categories,0,['class'=>'form-control']) !!}
                   {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
                 </div>
                </div>

@@ -14,10 +14,9 @@ class CreateOthersTable extends Migration {
 	{
 		Schema::create('others', function(Blueprint $table) {
             $table->string('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('qtyinstock')->default(0);
             $table->float('sellprice')->default(0);
-            $table->integer('photo_id')->default(0);
             $table->integer('type_id')->default(0);
             $table->integer('category_id');
             $table->integer('brand_id');

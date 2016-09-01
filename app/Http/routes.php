@@ -54,11 +54,18 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/suppliers","SupplierController");
 
 	Route::resource('/admin/roles','RoleController');
+	
 	Route::group(array('prefix' => 'admin'), function(){
 		Route::group(array('prefix' => 'api'), function(){
 			Route::group(array('prefix' => 'v1'), function(){
+				
+				Route::resource('brands.types', 'api\v1\TypesController', ['only' => ['index']]);
+
 				Route::resource('types.categories', 'api\v1\CategoriesController', ['only' => ['index']]);
-			});
+
+				Route::resource('categories.modells', 'api\v1\ModellsController', ['only' => ['index']]);
+
+				});
 		});
 	});	
 });

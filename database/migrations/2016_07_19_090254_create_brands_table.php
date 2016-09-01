@@ -16,7 +16,6 @@ class CreateBrandsTable extends Migration {
             $table->increments('id');
             $table->string('name')->unique();
             $table->longText('description');
-            $table->integer('category_id')->nullable();
             $table->timestamps();
         });
 	}

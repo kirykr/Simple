@@ -20,7 +20,7 @@
                             <th>ID</th>
                             <th>NAME</th>
                         <th>DESCRIPTION</th>
-                        <th>BRAND_ID</th>
+                        <th>Category Name</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -31,7 +31,7 @@
                                 <td>{{$modell->id}}</td>
                                 <td>{{$modell->name}}</td>
                     <td>{{$modell->description}}</td>
-                    <td>{{$modell->brand_id}}</td>
+                    <td>{{$modell->category ? $modell->category->name : ''}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.modells.show', $modell->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.modells.edit', $modell->id) }}"><i class="fa fa-edit"></i> Edit</a>

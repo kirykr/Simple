@@ -24,4 +24,15 @@ class Category extends Model
     	// belongsTo(RelatedModel, foreignKey = type_id, keyOnRelatedModel = id)
     	return $this->belongsTo('App\Type');
     }
+
+    /**
+     * Category has many Modells.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function modells()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = category_id, localKey = id)
+        return $this->hasMany(Modell::class);
+    }
 }

@@ -56,7 +56,8 @@
                 <div class="col-md-3">
                   {!! Form::label('type_id', 'Computer Type') !!}
                   <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
-                    {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+                    {!! Form::select('type_id',[''=>'Choose Options'] + $types,0,['class'=>'form-control', 'id'=>'computer_type']) !!}
+                    
                     {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>

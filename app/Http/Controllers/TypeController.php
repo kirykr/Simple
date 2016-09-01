@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Type;
+use App\Brand;
 use Illuminate\Http\Request;
 
 class TypeController extends Controller {
@@ -27,7 +28,9 @@ class TypeController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.types.create');
+		$brands = Brand::lists('name','id')->all();
+
+		return view('admin.types.create', compact('brands'));
 	}
 
 	/**
@@ -42,6 +45,7 @@ class TypeController extends Controller {
 
 		$type->name = $request->input("name");
         $type->description = $request->input("description");
+        $type->brand_id = $request->input("brand_id");
 
 		$type->save();
 
@@ -70,8 +74,9 @@ class TypeController extends Controller {
 	public function edit($id)
 	{
 		$type = Type::findOrFail($id);
+		$brands = Brand::lists('name','id')->all();
 
-		return view('admin.types.edit', compact('type'));
+		return view('admin.types.edit', compact('type','brands'));
 	}
 
 	/**
@@ -87,6 +92,7 @@ class TypeController extends Controller {
 
 		$type->name = $request->input("name");
         $type->description = $request->input("description");
+        $type->brand_id = $request->input("brand_id");
 
 		$type->save();
 

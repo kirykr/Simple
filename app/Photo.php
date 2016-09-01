@@ -51,6 +51,17 @@ class Photo extends Model
     public function computers()
     {
         // belongsTo(RelatedModel, foreignKey = computer_id, keyOnRelatedModel = id)
-        return $this->belongsToMany(Computer::class);
+        return $this->belongsToMany('App\Computer');
+    }
+
+    /**
+     * Photo belongs to Others.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function others()
+    {
+        // belongsTo(RelatedModel, foreignKey = others_id, keyOnRelatedModel = id)
+        return $this->belongsToMany(Other::class);
     }
 }

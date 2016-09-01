@@ -14,7 +14,7 @@ class AddTypeIdToCategoryTable extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             //
-            $table->integer('type_id')->nullable();
+            $table->integer('type_id')->unsigned()->nullable();
         });
     }
 

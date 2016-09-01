@@ -16,7 +16,7 @@ class CreateModellsTable extends Migration {
             $table->increments('id');
             $table->string('name')->unique();
             $table->longText('description');
-            $table->integer('brand_id')->nullable();
+            $table->integer('category_id')unsigned()->nullable();
             $table->timestamps();
         });
 	}

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ComputerRequest;
 use App\Photo;
 use App\Computer;
-use App\Type;
-use Illuminate\Http\Request;
+use App\Brand;
+// use Illuminate\Http\Request;
 use Image;
 
 class ComputerController extends Controller {
@@ -32,9 +32,9 @@ class ComputerController extends Controller {
 	public function create()
 	{
 
-		$types = Type::lists('name','id')->all();
+		$brands = Brand::lists('name','id')->all();
 
-		return view('admin.computers.create', compact('types'));
+		return view('admin.computers.create', compact('brands'));
 	}
 
 	/**
@@ -45,18 +45,11 @@ class ComputerController extends Controller {
 	 */
 	public function store(ComputerRequest $request)
 	{
-		// $input = $request->all();
+		$input = $request->all();
 		$input['id'] = uniqid('c', false);
-		$input['name'] = $request->input("name");
-		$input['qtyinstock'] = $request->input("qtyinstock");
-		$input['sellprice'] = $request->input("sellprice");
-		$input['type_id'] = $request->input("type_id");
-		$input['category_id'] = $request->input("category_id");
-		$input['brand_id'] = $request->input("brand_id");
-		$input['model_id'] = $request->input("model_id");
 		// dd($input);
 		$computer = Computer::create($input);
-		// dd($computer);
+		// dd($request->all());
 		 if($files = $request->file('photo_id'))
         {
           foreach($files as $file) {
@@ -67,16 +60,19 @@ class ComputerController extends Controller {
             $filename = date('Y-m-d-h-i-s').".".$sha1.".".$extension;
             $path = public_path('images/computers/' . $filename);
             // Using Intervention/image package here to resize the photos
-            Image::make($file->getRealPath())->resize(870, null)->save($path);
+            $img = Image::make($file->getRealPath())->resize(600, 319, 
+            		function ($c) {
+					    $c->aspectRatio();
+					    $c->upsize();
+					}
+            	)->resizeCanvas(600, 319, 'center', false, array(255, 255, 255, 0))->save($path);
+            $img->destroy();	
             $photo->path = $filename;
             $photo->save();
             $computer->photos()->attach($photo->id);
             }
         }
-
         // Computer::create($input);
-
-        
         // Session::flash('create_user','The user has been created!');
         flash()->overlay('User has been created successfully','CREATE USER');
 
@@ -107,9 +103,9 @@ class ComputerController extends Controller {
 	public function edit($id)
 	{
 		$computer = Computer::findOrFail($id);
-		$types = Type::lists('name','id')->all();
+		$brands = Brand::lists('name','id')->all();
 
-		return view('admin.computers.edit', compact('computer', 'types'));
+		return view('admin.computers.edit', compact('computer', 'brands'));
 	}
 
 	/**
@@ -125,12 +121,12 @@ class ComputerController extends Controller {
 		$input = $request->all();
 
         // $computer->photo_id = $request->input("photo_id");
-        if($file = $request->file('photo_id')){
-            $name = time() . $file->getClientOriginalName();
-            $file->move('images',$name);
-            $photo = Photo::create(['path'=>$name]);
-            $input['photo_id'] = $photo->id;
-        }
+        // if($file = $request->file('photo_id')){
+        //     $name = time() . $file->getClientOriginalName();
+        //     $file->move('images',$name);
+        //     $photo = Photo::create(['path'=>$name]);
+        //     $input['photo_id'] = $photo->id;
+        // }
         
 		$computer->update($input);
 
@@ -146,8 +142,19 @@ class ComputerController extends Controller {
 	public function destroy($id)
 	{
 		$computer = Computer::findOrFail($id);
+		// $computer->delete();
+			foreach ($computer->photos as $filename) {
+      	unlink(public_path() . $filename->path);
+    	  $filename->delete();
+			// }
+			}
+			// dd($arr);
+		// );
+		$computer->photos()->detach();
 		$computer->delete();
-
+		$computer->photos()->sync([]);
+		// $relatedIds = $this->photos()->lists('table.id');
+		// Related::whereIn($relatedIds)->delete();
 		return redirect()->route('admin.computers.index')->with('message', 'Item deleted successfully.');
 	}
 

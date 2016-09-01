@@ -9,6 +9,9 @@
      <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/libs.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/style.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('css/rating.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/my_star_rating.css')}}">
     <script src="{{asset('js/libs.js')}}"></script>
     <!-- Bootstrap Core CSS -->
     <style>
@@ -501,6 +504,7 @@
     })
 
 </script>
+<script src="{{asset('js/rating.min.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

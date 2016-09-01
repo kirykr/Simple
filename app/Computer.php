@@ -16,17 +16,14 @@ class Computer extends Model
 
     public $incrementing = false;
     protected $fillable = [
-    'id',
-    'name',
-    'qtyinstock',
-    'sellprice',
-    'photo_id',
-    'type_id',
-    'category_id',
-    'brand_id',
-    'model_id',
+                            'id',
+                            'name',
+                            'type_id',
+                            'category_id',
+                            'brand_id',
+                            'model_id',
 
-    ];
+                        ];
 
    /**
     * Computer belongs to Photo.
@@ -36,7 +33,7 @@ class Computer extends Model
    public function photos()
    {
      // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
-     return $this->belongsToMany(Photo::class);
+     return $this->belongsToMany('App\Photo');
    }
     /**
          * Computer belongs to .

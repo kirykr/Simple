@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+\@extends('layouts.admin')
 @section('content')
 {{-- @section('header') --}}
     <div class="page-header clearfix">
@@ -19,6 +19,7 @@
                             <th>ID</th>
                             <th>NAME</th>
                         <th>DESCRIPTION</th>
+                        <th>BRAND NAME</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -29,6 +30,7 @@
                                 <td>{{$type->id}}</td>
                                 <td>{{$type->name}}</td>
                     <td>{{$type->description}}</td>
+                    <td>{{$type->brand ? $type->brand->name: ''}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.types.show', $type->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.types.edit', $type->id) }}"><i class="fa fa-edit"></i> Edit</a>

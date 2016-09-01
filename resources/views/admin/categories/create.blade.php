@@ -32,6 +32,11 @@
                     </div>
                 </div>
                 
+                 {!! Form::label('description', 'Category Description') !!}
+              <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
+                {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Category desc']) !!}
+                {!! $errors->first('description','<span class="help-block">:message</span>') !!}
+             </div>
                
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>

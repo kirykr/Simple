@@ -13,7 +13,7 @@ class Type extends Model
      *
      * @var array
      */
-    protected $fillable = ['name',];
+    protected $fillable = ['name','description','brand_id'];
 
     /**
      * Type has many Computers.
@@ -25,14 +25,15 @@ class Type extends Model
     	// hasMany(RelatedModel, foreignKeyOnRelatedModel = type_id, localKey = id)
     	return $this->hasMany('App\Computer');
     }
+    
     /**
-     * Type has many Categories.
+     * Type belongs to Brand.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function categories()
+    public function brand()
     {
-        // hasMany(RelatedModel, foreignKeyOnRelatedModel = type_id, localKey = id)
-        return $this->hasMany('App\Category');
+        // belongsTo(RelatedModel, foreignKey = brand_id, keyOnRelatedModel = id)
+        return $this->belongsTo(Brand::class);
     }
 }

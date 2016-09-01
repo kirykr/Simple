@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Modell;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ModellController extends Controller {
@@ -27,7 +28,8 @@ class ModellController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.modells.create');
+		$categories = Category::lists('name','id')->all();
+		return view('admin.modells.create',compact('categories'));
 	}
 
 	/**
@@ -42,7 +44,7 @@ class ModellController extends Controller {
 
 		$modell->name = $request->input("name");
         $modell->description = $request->input("description");
-        $modell->brand_id = $request->input("brand_id");
+        $modell->category_id = $request->input("category_id");
 
 		$modell->save();
 
@@ -71,8 +73,9 @@ class ModellController extends Controller {
 	public function edit($id)
 	{
 		$modell = Modell::findOrFail($id);
+		$categories = Category::lists('name','id')->all();
 
-		return view('admin.modells.edit', compact('modell'));
+		return view('admin.modells.edit', compact('modell','categories'));
 	}
 
 	/**
@@ -88,7 +91,7 @@ class ModellController extends Controller {
 
 		$modell->name = $request->input("name");
         $modell->description = $request->input("description");
-        $modell->brand_id = $request->input("brand_id");
+        $modell->category_id = $request->input("category_id");
 
 		$modell->save();
 

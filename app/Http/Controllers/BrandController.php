@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Brand;
+use App\Category;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller {
@@ -27,6 +28,7 @@ class BrandController extends Controller {
 	 */
 	public function create()
 	{
+
 		return view('admin.brands.create');
 	}
 

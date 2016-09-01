@@ -17,12 +17,12 @@
                         <th>ID</th>
                         <th>PHOTO</th>
                         <th>NAME</th>
-                        <th>QTYINSTOCK</th>
-                        <th>SELLPRICE</th>
-                        <th>TYPE_ID</th>
-                        <th>CAT_ID</th>
-                        <th>BRAND_ID</th>
-                        <th>MODEL_ID</th>
+                        <th>QTY</th>
+                        <th>PRICE</th>
+                        <th>TYPE</th>
+                        <th>CAT</th>
+                        <th>BRAND</th>
+                        <th>MODEL</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -37,7 +37,7 @@
                                 <td>{{$computer->qtyinstock}}</td>
                                 <td>{{$computer->sellprice}}</td>
                                 <td>{{$computer->type_id}}</td>
-                                <td>{{$computer->cat_id}}</td>
+                                <td>{{$computer->category_id}}</td>
                                 <td>{{$computer->brand_id}}</td>
                                 <td>{{$computer->model_id}}</td>
                                 <td class="text-right">

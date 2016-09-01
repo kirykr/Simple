@@ -72,16 +72,13 @@
     <div class="row">
         @foreach($computers as $computer)
             <div class="col-md-3 text-center">
-                <img class="img img-responsive" src="{{ $computer->photo ? $computer->photo->path : '' }}" alt="Product Image">
+                <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
                 <a href="{{ route('products.show', $computer->id) }}"><h4>{{ $computer->name }}</h4></a>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 <p>Availability: </p>
-                <p>Rating:  <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
-                </p>
+                
+                {{-- @include('includes/star_rating_with_javascript') --}}
+                @include('includes/star_rating')
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                             {{-- {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!} --}}
@@ -107,13 +104,89 @@
             </div>
 
         @endforeach
-        
+       <div id="shop"></div>
     </div>
 </div>
 </div>
 @endsection
 @section('footer');
 
-
-
 @stop
+@section('scripts');
+<script type="text/javascript">
+    // // target element
+    var el = document.querySelector('#el');
+
+    // current rating, or initial rating
+    var currentRating = 0;
+
+    // max rating, i.e. number of stars you want
+    var maxRating= 5;
+
+    // callback to run after setting the rating
+    var callback = function(rating) { console.log(rating); };
+
+    // rating instance
+    var myRating = rating(el, currentRating, maxRating, callback);
+
+    // sets rating and runs callback
+    // myRating.setRating(3);
+
+    // sets rating and runs callback
+    // myRating.setRating(3, true);
+
+    // sets rating and doesn't run callback
+    // myRating.setRating(3, false);
+
+    // gets the rating
+    // myRating.getRating();
+</script>
+<script>
+  /**
+   * Demo in action!
+   */
+    'use strict';
+
+    // SHOP ELEMENT
+    var shop = document.querySelector('.shop');
+
+    // DUMMY DATA
+    var data = [
+      {
+        rating: 3
+      }
+    ];
+
+    // INITIALIZE
+    (function init() {
+      for (var i = 0; i < data.length; i++) {
+        addRatingWidget(buildShopItem(data[i]), data[i]);
+      }
+    })();
+
+    // BUILD SHOP ITEM
+    function buildShopItem(data) {
+      var shopItem = document.createElement('div');
+
+      var html = 
+          '<ul class="c-rating"></ul>';
+
+      shopItem.classList.add('c-shop-item');
+      shopItem.innerHTML = html;
+      shop.appendChild(shopItem);
+
+      return shopItem;
+    }
+
+    // ADD RATING WIDGET
+    function addRatingWidget(shopItem, data) {
+      var ratingElement = shopItem.querySelector('.c-rating');
+      var currentRating = data.rating;
+      var maxRating = 5;
+      var callback = function(rating) { console.log(rating); };
+      var r = rating(ratingElement, currentRating, maxRating, callback);
+    }
+
+</script>
+@stop
+
