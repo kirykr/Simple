@@ -395,6 +395,9 @@
                       <li>
                         <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
                       </li>
+                      <li>
+                        <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
+                      </li>
                     </ul>
                     <!-- /.nav-second-level -->
                   </li>
@@ -562,7 +565,7 @@
 @yield('scripts')
 
 <script type="text/javascript">
-
+  $(document).ready(function() {
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",
@@ -592,7 +595,7 @@
             });
      
       //======================== API ====================================
-      $(document).ready(function() {
+
         $('#computer_brand').on('change', function(e) {
           var id = $(this).val();
           if(id) 
@@ -622,12 +625,16 @@
             method: 'GET',
             url: endpoint,
             success: function(response) {
-              element.empty();
-              response.map(function(item) {
-
-                var option = "<option value="+item.id+">"+ item.name +"</option>";
+              if(Array.isArray(response)) {
+                element.empty();
+                var option = "<option value=''>Choose Options</option>";
                 element.append(option);
-              });
+                response.map(function(item) {
+
+                  var option = "<option value="+item.id+">"+ item.name +"</option>";
+                  element.append(option);
+                });
+              }
             },
             error: function(error) {
               console.log(error)
@@ -638,7 +645,5 @@
       });
 
     </script>
-
-
   </body>
   </html>

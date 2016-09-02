@@ -36,4 +36,15 @@ class Type extends Model
         // belongsTo(RelatedModel, foreignKey = brand_id, keyOnRelatedModel = id)
         return $this->belongsTo(Brand::class);
     }
+
+    /**
+     * Type has many Categories.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function categories()
+    {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = type_id, localKey = id)
+        return $this->hasMany('App\Category');
+    }
 }

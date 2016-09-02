@@ -18,10 +18,11 @@ class Computer extends Model
     protected $fillable = [
                             'id',
                             'name',
+                            'sellprice',
                             'type_id',
-                            'category_id',
-                            'brand_id',
-                            'model_id',
+                            'ppprice',
+                            'provprice',
+                            'status',
 
                         ];
 

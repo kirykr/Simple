@@ -22,6 +22,6 @@ class Brand extends Model
    public function types()
    {
        // hasMany(RelatedModel, foreignKeyOnRelatedModel = brand_id, localKey = id)
-       return $this->hasMany(Type::class);
+       return $this->hasMany('App\Type');
    }
 }

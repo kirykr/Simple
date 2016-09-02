@@ -50,7 +50,7 @@ class ComputerController extends Controller {
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
 		
-		// dd($input);
+		dd($input);
 		$computer = Computer::create($input);
 		$specs = Spec::all();
 		$arr = [];

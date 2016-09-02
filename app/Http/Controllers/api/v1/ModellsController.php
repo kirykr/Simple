@@ -4,7 +4,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Brand;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Modell;
 
@@ -17,8 +17,8 @@ class ModellsController extends Controller {
 	 */
 	public function index($id)
 	{
-		$brand = Brand::findOrFail($id);
-		$modells = $brand->modells;
+		$category = Category::findOrFail($id);
+		$modells = $category->modells;
 		return response()->json($modells);
 
 		// return view('admin.categories.index', compact('categories'));

@@ -12,6 +12,11 @@ class Cimport extends Model
      *
      * @var array
      */
+    public function getCreatedAtAttribute($date)
+    {
+        $date = new \Carbon\Carbon($date);
+        // Now modify and return the date
+    }
     protected $fillable = [
     												'importdate',
     												'importindate',

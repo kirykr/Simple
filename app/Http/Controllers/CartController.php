@@ -61,7 +61,7 @@ class CartController extends Controller
         Cart::instance(Auth::user()->id)->add(['id' => $computer->id, 'image' =>  $image, 'name' => $computer->name, 'qty' => $qty, 'price' => $computer->sellprice, 'options' => $options ]);
        // $carts = Cart::content(); 
        // dd($carts);
-        return redirect('/home');
+        return redirect()->back();
     }
 
     /**

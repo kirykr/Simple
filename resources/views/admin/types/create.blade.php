@@ -25,9 +25,9 @@
                </div>
                </div>
                <div class="col-md-4">
-                  {!! Form::label('brand_id', 'Brand Name) !!}
+                  {!! Form::label('brand_id', 'Computer Brand') !!}
                 <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-                  {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control']) !!}
+                  {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control','id'=>'computer_brand']) !!}
                   {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
                 </div>
                </div>
