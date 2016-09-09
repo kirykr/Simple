@@ -33,28 +33,28 @@
                <div class="col-md-2">
         {!! Form::label('sellprice', 'Sell Price') !!}
         <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-          {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+          {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
           {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
         </div>
       </div>
        <div class="col-md-2">
         {!! Form::label('ppprice', 'PP Price') !!}
         <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
-          {!! Form::number('ppprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
+          {!! Form::number('ppprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
           {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
         </div>
       </div>
        <div class="col-md-2">
         {!! Form::label('provprice', 'Province Price') !!}
         <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
-          {!! Form::number('provprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
+          {!! Form::number('provprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
           {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
         </div>
       </div>
        <div class="col-md-2">
         {!! Form::label('status', 'Status') !!}
         <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
-          {!! Form::number('status',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
+          {!! Form::number('status',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
           {!! $errors->first('status','<span class="help-block">:message</span>') !!}
         </div>
       </div>
@@ -74,7 +74,7 @@
               <div class="col-md-3">
                   {!! Form::label('brand_id', 'Computer Brand') !!}
                   <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-                    {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control']) !!}
+                    {!! Form::select('brand_id', $brands,null,['class'=>'form-control']) !!}
                     {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>

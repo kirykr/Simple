@@ -10,7 +10,6 @@
 
     </div>
 {{-- @endsection --}}
-    p
     <div class="row">
         <div class="col-md-12">
             @if($suppliers->count())
@@ -33,7 +32,7 @@
                                 <td>{{$supplier->name}}</td>
                     <td>{{$supplier->contactperson}}</td>
                     <td>{{$supplier->tel}}</td>
-                    <td>{{$supplier->address}}</td>
+                    <td>{{ str_limit($supplier->address, $limit = 30, $end = '...')}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.suppliers.show', $supplier->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.suppliers.edit', $supplier->id) }}"><i class="fa fa-edit"></i> Edit</a>

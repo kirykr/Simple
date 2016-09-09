@@ -4,7 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Cimport;
+use App\Supplier;
+use App\Computer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CimportController extends Controller {
 
@@ -27,7 +30,9 @@ class CimportController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.cimports.create');
+		$suppliers = Supplier::lists('name','id')->all();
+		$computers = Computer::lists('name','id')->all();
+		return view('admin.cimports.create', compact('suppliers','computers'));
 	}
 
 	/**
@@ -38,18 +43,20 @@ class CimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$cimport = new Cimport();
+		$cimport = null;
+		if (Input::get('newsubmit')){
+			$input = $request->all();
+			$cimport = Cimport::create($input);
+		}
+		if (Input::get('addsubmit')){
+			$input = $request->except(['photo_id']);
+			
+		}
 
-		$cimport->impdate = $request->input("impdate");
-        $cimport->impindate = $request->input("impindate");
-        $cimport->invoicenum = $request->input("invoicenum");
-        $cimport->totalamount = $request->input("totalamount");
-        $cimport->user_id = $request->input("user_id");
-        $cimport->supplier_id = $request->input("supplier_id");
+		dd($input);
+		
 
-		$cimport->save();
-
-		return redirect()->route('admin.cimports.index')->with('message', 'Item created successfully.');
+		return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');
 	}
 
 	/**

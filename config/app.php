@@ -163,6 +163,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         "Laralib\L5scaffold\GeneratorsServiceProvider",
         Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -216,6 +217,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 

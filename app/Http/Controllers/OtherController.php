@@ -4,7 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Other;
-use App\Type;
+use App\Brand;
 use Image;
 use App\Photo;
 
@@ -31,9 +31,9 @@ class OtherController extends Controller {
 	 */
 	public function create()
 	{
-		$types = Type::lists('name','id')->all();
+		$brands = Brand::lists('name','id')->all();
 
-		return view('admin.others.create', compact('types'));
+		return view('admin.others.create', compact('brands'));
 	}
 
 	/**

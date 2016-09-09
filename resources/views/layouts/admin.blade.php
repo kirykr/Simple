@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
   <script src="{{asset('js/libs.js')}}"></script>
@@ -21,6 +22,8 @@
   <script src="{{asset('js/fileinput.min.js')}}"></script>
   <script src="{{asset('js/themes/fa/theme.js')}}"></script>
   <script src="{{asset('js/locales/LANG.js')}}"></script>
+  <script src="{{asset('js/select2.full.min.js')}}"></script>
+  <script src="{{asset('js/i18n/en.js')}}"></script>
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
   <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -543,14 +546,8 @@
   {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
   {{-- =================================== Script =============================== --}}
-  <script>
-
-      // // run bootlint
-      // javascript:(function(){var s=document.createElement("script");s.onload=function(){bootlint.showLintReportForCurrentDocument([], {problemFree: false});};s.src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";document.body.appendChild(s)})();
-    </script>
     @yield('footer')
     
-
     @if(Session::has('delete_user'))
     <script>
             // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
@@ -566,6 +563,8 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+    // Select2
+    
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",
@@ -593,57 +592,11 @@
             }).on('fileuploaded', function(e, params) {
               console.log('File uploaded params', params);
             });
-     
+     });
       //======================== API ====================================
 
-        $('#computer_brand').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#type_id');
-          var endpoint = '/admin/api/v1/brands/'+ id + '/types'
-          getComputerCategories(element, endpoint);
-        });
-
-        $('#type_id').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#category_id');
-          var endpoint = '/admin/api/v1/types/'+ id + '/categories'
-          getComputerCategories(element, endpoint);
-        });
-
-        $('#category_id').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#model_id');
-          var endpoint = '/admin/api/v1/categories/'+ id + '/modells'
-          getComputerCategories(element, endpoint);
-        });
-
-        function getComputerCategories(element, endpoint) {
-          $.ajax({
-            method: 'GET',
-            url: endpoint,
-            success: function(response) {
-              if(Array.isArray(response)) {
-                element.empty();
-                var option = "<option value=''>Choose Options</option>";
-                element.append(option);
-                response.map(function(item) {
-
-                  var option = "<option value="+item.id+">"+ item.name +"</option>";
-                  element.append(option);
-                });
-              }
-            },
-            error: function(error) {
-              console.log(error)
-            }
-          })
-        }
-
-      });
-
+       
     </script>
+    @include('includes/brand_type_model')
   </body>
   </html>

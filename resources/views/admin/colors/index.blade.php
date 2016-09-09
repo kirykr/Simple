@@ -17,7 +17,7 @@
                         <tr>
                             <th>ID</th>
                             <th>NAME</th>
-                        <th>STRING</th>
+                        <th>Description</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@
                             <tr>
                                 <td>{{$color->id}}</td>
                                 <td>{{$color->name}}</td>
-                    <td>{{$color->string}}</td>
+                    <td>{{$color->description}}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.colors.show', $color->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.colors.edit', $color->id) }}"><i class="fa fa-edit"></i> Edit</a>

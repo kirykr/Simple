@@ -12,24 +12,22 @@
         {{-- <form action="{{ route('admin.colorsController.store') }}" method="POST"> --}}    
             {!! Form::open(['action'=>"ColorController@store", 'method'=>"POST",'files'=>true]) !!}
             {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}   
+  {{-- for Computer Name --}}
+                 {!! Form::label('name', 'Computer Name') !!}
+                 <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
+                  {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Computer Code']) !!}
+                  {!! $errors->first('name','<span class="help-block">:message</span>') !!}
+                </div>
 
-                <div class="form-group @if($errors->has('name')) has-error @endif">
-                       <label for="name-field">Name</label>
-                    <input type="text" id="name-field" name="name" class="form-control" value="{{ old("name") }}"/>
-                       @if($errors->has("name"))
-                        <span class="help-block">{{ $errors->first("name") }}</span>
-                       @endif
-                    </div>
-                    <div class="form-group @if($errors->has('string')) has-error @endif">
-                       <label for="string-field">String</label>
-                    <input type="text" id="string-field" name="string" class="form-control" value="{{ old("string") }}"/>
-                       @if($errors->has("string"))
-                        <span class="help-block">{{ $errors->first("string") }}</span>
-                       @endif
-                    </div>
+                  
+              {!! Form::label('description', 'Color Description') !!}
+              <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
+                {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Brand desc']) !!}
+                {!! $errors->first('description','<span class="help-block">:message</span>') !!}
+             </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('colors.index') }}"><i class="fa fa-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('admin.colors.index') }}"><i class="fa fa-backward"></i> Back</a>
                 </div>
             {!! Form::close() !!}
             {{-- </form> --}}

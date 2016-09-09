@@ -19,7 +19,7 @@ class Computer extends Model
                             'id',
                             'name',
                             'sellprice',
-                            'type_id',
+                            'brand_id',
                             'ppprice',
                             'provprice',
                             'status',
@@ -55,4 +55,14 @@ class Computer extends Model
         return $this->belongsToMany('App\Spec')->withPivot('description');
     }	
 
+    /**
+     * Computer belongs to Imports.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function imports()
+    {
+        // belongsTo(RelatedModel, foreignKey = imports_id, keyOnRelatedModel = id)
+        return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');
+    }
   }

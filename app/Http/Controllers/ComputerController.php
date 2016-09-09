@@ -50,7 +50,7 @@ class ComputerController extends Controller {
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
 		
-		dd($input);
+		// dd($input);
 		$computer = Computer::create($input);
 		$specs = Spec::all();
 		$arr = [];
@@ -135,11 +135,11 @@ class ComputerController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function update(Request $request, $id)
+	public function update(ComputerRequest $request, $id)
 	{
 		$computer = Computer::findOrFail($id);
-		$input = $request->all();
-
+		$input = $request->except(['photo_id']);
+		// dd($input);
         // $computer->photo_id = $request->input("photo_id");
         // if($file = $request->file('photo_id')){
         //     $name = time() . $file->getClientOriginalName();

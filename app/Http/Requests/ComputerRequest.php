@@ -26,7 +26,6 @@ class ComputerRequest extends Request
         return [
             //
            'name'=>'required',
-           'qtyinstock'=>'required',
            'sellprice'=>'required',
            'brand_id'=>'required',
            'ppprice'=>'required',

@@ -20,7 +20,8 @@
 @if(sizeof(Cart::instance(Auth::user()->id)->content()) > 0)
 	<div class="alert alert-info">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<strong>Cart info!</strong> <p>Wow You have {{Cart::content()->count()}} {{Cart::content()->count() > 1? 'items' : 'item'}} in your cart</p>
+		{{-- <strong>Cart info!</strong> <p>Wow You have {{Cart::content()->count()}} {{Cart::content()->count() > 1? 'items' : 'item'}} in your cart</p> --}}
+		<strong>Cart info!</strong> <p>Wow You have {{ Cart::content()->count() }} {{str_plural('item', Cart::content()->count()) }} in your cart</p>
 	</div>
 	
 	<table class="table table-striped table-hover">
