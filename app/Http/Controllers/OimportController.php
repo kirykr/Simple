@@ -4,7 +4,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Oimport;
+use App\Other;
+use App\Color;
+use App\Supplier;
+use App\Tempcomputerstock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class OimportController extends Controller {
 
@@ -27,7 +32,11 @@ class OimportController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.oimports.create');
+		$others = Other::lists('name','id')->all();
+		$suppliers = Supplier::lists('name','id')->all();
+		$colors = Color::lists('name','id')->all();
+		$tempcomputers = Tempcomputerstock::all();
+		return view('admin.oimports.create', compact('others','suppliers','colors','tempcomputers'));
 	}
 
 	/**
@@ -38,17 +47,46 @@ class OimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$oimport = new Oimport();
+		$input = $request->all();
+		
+		$oimport = null;
+		if (Input::get('newsubmit')){
+			$input = $request->all();
+			// $oimport = Oimport::create($input);
+		}
+		if (Input::get('addsubmit')){
+			 $this->validate($request, [
+			        'supplier_id' => 'required|max:22',
+			        'other_id' => 'required|max:22',
+			        'qtyinstock' => 'required|numeric|min:1',
+			        'color_id' => 'required|numeric|min:1',
+			        'sellprice' => 'required|numeric|min:1',
+			        'cost' => 'required|numeric|min:1',
+			    ]);
+			 // dd($input);
+			$input = $request->except(['photo_id']);
+			
+			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
+			$input['other_name'] =  DB::table('others')->where('id', $request->input('other_id'))->value('name');
+			$input['qty'] = $request->input('qtyinstock');
 
-		$oimport->impdate = $request->input("impdate");
-        $oimport->impindate = $request->input("impindate");
-        $oimport->invoicenumber = $request->input("invoicenumber");
-        $oimport->user_id = $request->input("user_id");
-        $oimport->supplier_id = $request->input("supplier_id");
-        $oimport->totalamount = $request->input("totalamount");
-
-		$oimport->save();
-
+			$tempother= Tempcomputerstock::create($input);
+			return redirect()->back();
+		}
+		// Import others
+		if (Input::get('savesubmit')){
+			 $this->validate($request, [
+			        'invoicenum' => 'required|max:22',
+			    ]);
+			$input = $request->except(['photo_id']);
+			$oimport = Oimport::create($input);
+			$tempothers = Tempcomputerstock::all();
+			$oimport->others()->saveMany($tempothers);
+			// $tempothers->delete();
+			Tempcomputerstock::truncate();
+			return redirect()->back();
+		}
+		dd($input);
 		return redirect()->route('admin.oimports.index')->with('message', 'Item created successfully.');
 	}
 
@@ -87,16 +125,7 @@ class OimportController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
-		$oimport = Oimport::findOrFail($id);
-
-		$oimport->impdate = $request->input("impdate");
-        $oimport->impindate = $request->input("impindate");
-        $oimport->invoicenumber = $request->input("invoicenumber");
-        $oimport->user_id = $request->input("user_id");
-        $oimport->supplier_id = $request->input("supplier_id");
-        $oimport->totalamount = $request->input("totalamount");
-
-		$oimport->save();
+		
 
 		return redirect()->route('admin.oimports.index')->with('message', 'Item updated successfully.');
 	}

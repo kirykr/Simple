@@ -109,12 +109,6 @@
   {{-- </form> --}}
 </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 {{--  Model Start --}}
 <div class="modal fade" id="modal-id">
   <div class="modal-dialog">
@@ -153,6 +147,8 @@
 </div>
 </div>
 {{-- Model end --}}
+@section('footer')
+@stop
 @endsection
 @section('scripts')
 {{-- <script src="{{asset('js/libs.js')}}"></script> --}}

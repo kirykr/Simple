@@ -8,6 +8,7 @@ use App\Photo;
 use App\Computer;
 use App\Brand;
 use App\Spec;
+use Illuminate\Support\Facades\Input;
 // use Illuminate\Http\Request;
 use Image;
 
@@ -50,7 +51,6 @@ class ComputerController extends Controller {
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
 		
-		// dd($input);
 		$computer = Computer::create($input);
 		$specs = Spec::all();
 		$arr = [];

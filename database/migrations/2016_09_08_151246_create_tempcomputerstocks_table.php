@@ -15,7 +15,9 @@ class CreateTempcomputerstocksTable extends Migration
         Schema::create('tempcomputerstocks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('computer_id');
-            $table->string('color');
+            $table->string('computer_name');
+            $table->string('color_id');
+            $table->string('color_name');
             $table->string('qty');
             $table->string('cost');
             $table->string('sellprice');

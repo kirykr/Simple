@@ -56,6 +56,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/cimports","CimportController");
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
+	Route::resource("/admin/tempcomputersotck","TempcomputersotckController", ['only' => ['edit','store','update','destroy']]);
 	
 	Route::group(array('prefix' => 'admin'), function(){
 		Route::group(array('prefix' => 'api'), function(){

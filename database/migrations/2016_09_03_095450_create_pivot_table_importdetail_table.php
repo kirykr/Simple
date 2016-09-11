@@ -12,7 +12,7 @@ class CreatePivotTableImportdetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('computer_cimport', function (Blueprint $table) {
+        Schema::create('cimport_computer', function (Blueprint $table) {
             $table->string('computer_id');
             $table->integer('cimport_id')->unsigned();
             $table->integer('color_id');
@@ -30,6 +30,6 @@ class CreatePivotTableImportdetailTable extends Migration
      */
     public function down()
     {
-        Schema::drop('computer_cimport');
+        Schema::drop('cimport_computer');
     }
 }

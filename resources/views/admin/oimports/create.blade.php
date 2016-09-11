@@ -35,7 +35,6 @@
        </div>     
      </div>
      <div class="col-md-3">
-
       <div class="form-group @if($errors->has('invoicenumber')) has-error @endif">
        <label for="invoicenumber-field">Invoicenumber</label>
        <input type="text" id="invoicenumber-field" name="invoicenumber" class="form-control" value="{{ old("invoicenumber") }}"/>
@@ -54,42 +53,150 @@
    </div>
  </div>
  <div class="col-md-3">
-  <div class="form-group @if($errors->has('user_id')) has-error @endif">
-   <label for="user_id-field">User_id</label>
-   <input type="text" id="user_id-field" name="user_id" class="form-control" value="{{ old("user_id") }}"/>
-   @if($errors->has("user_id"))
-   <span class="help-block">{{ $errors->first("user_id") }}</span>
-   @endif
- </div>
+     <div class="form-group @if($errors->has('user_id')) has-error @endif">
+       <label for="user_id-field">User</label>
+       <input type="text" id="user_id-field" name="user_id" readonly="readonly" class="form-control" value="{{ Auth::user()->name }}"/> 
+       {{-- //old("user_id") --}}
+       @if($errors->has("user_id"))
+       <span class="help-block">{{ $errors->first("user_id") }}</span>
+       @endif
+     </div>
+   </div>
+   <div class="col-md-3">
+     {!! Form::label('supplier_id', 'Company Name') !!}
+     <div class="form-group input-group {{ $errors->has('supplier_id') ? 'has-error' :'' }}">
+      {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,0,['class'=>'form-control']) !!}
+      {!! $errors->first('supplier_id','<span class="help-block">:message</span>') !!}
+       <span class="input-group-btn">
+          <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+        </span>
+    </div>
+  </div>
 </div>
-<div class="col-md-3">
- <div class="form-group @if($errors->has('supplier_id')) has-error @endif">
-   <label for="supplier_id-field">Supplier_id</label>
-   <input type="text" id="supplier_id-field" name="supplier_id" class="form-control" value="{{ old("supplier_id") }}"/>
-   @if($errors->has("supplier_id"))
-   <span class="help-block">{{ $errors->first("supplier_id") }}</span>
-   @endif
- </div>
-</div>
-</div>
-
-
-
-
+<div class="row  well">
+  <div class="col-md-4">
+     <div class="col-md-12">
+       {!! Form::label('other_id', 'Other Name') !!}
+       <div class="form-group input-group {{ $errors->has('other_id') ? 'has-error' :'' }}">
+        {!! Form::select('other_id',[''=>'Choose other'] + $others,0,['class'=>'form-control']) !!}
+        {!! $errors->first('other_id','<span class="help-block">:message</span>') !!}
+           <span class="input-group-btn">
+              <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+            </span>
+      </div>
+    </div>
+     <div class="col-md-12">
+     {!! Form::label('color_id', 'Color') !!}
+     <div class="form-group input-group {{ $errors->has('color_id') ? 'has-error' :'' }}">
+      {!! Form::select('color_id',[''=>'Choose Color'] + $colors,0,['class'=>'form-control']) !!}
+      {!! $errors->first('color_id','<span class="help-block">:message</span>') !!}
+        <span class="input-group-btn">
+        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+      </span>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-4">
+     <div class="col-md-7">
+       {!! Form::label('qtyinstock', 'Other Qty') !!}
+       <div class="form-group {{ $errors->has('qtyinstock') ? 'has-error' :'' }}">
+        {!! Form::number('qtyinstock',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other qtyinstock']) !!}
+        {!! $errors->first('qtyinstock','<span class="help-block">:message</span>') !!}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+     <div class="col-md-7">
+       {!! Form::label('sellprice', 'Other Price') !!}
+       <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other sellprice']) !!}
+        {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
+      </div>
+    </div>
+  </div>
+   <div class="col-md-4">
+     <div class="col-md-7">
+       {!! Form::label('cost', 'Other Cost') !!}
+       <div class="form-group {{ $errors->has('cost') ? 'has-error' :'' }}">
+        {!! Form::number('cost',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other Cost']) !!}
+        {!! $errors->first('cost','<span class="help-block">:message</span>') !!}
+      </div>
+    </div>
+  </div>
+</div> 
 <div class="well well-sm">
-  <button type="submit" class="btn btn-primary">Create</button>
-  <a class="btn btn-link pull-right" href="{{ route('admin.oimports.index') }}"><i class="fa fa-backward"></i> Back</a>
+ <button type="submit" value="newsubmit" name="newsubmit" class="btn btn-success"><i class="fa fa-asterisk"></i> New Import</button>
+  <button type="submit" value="addsubmit" name="addsubmit" class="btn btn-warning"><i class="fa fa-download"></i> Add Other</button>
+  <a class="btn btn-link pull-right" href="{{ route('admin.cimports.index') }}"><i class="fa fa-backward"></i> Back</a>
+  <button type="submit" value="addsubmit" name="savesubmit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Save Import</button>
 </div>
 {!! Form::close() !!}
 {{-- </form> --}}
-
 </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Computer Name</th>
+          <th>Color</th>
+          <th>Qty</th>
+          <th>Cost</th>
+          <th>sell Price</th>
+          <th>Amount</th>
+          <th class="text-right">Option</th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php $i = 1; ?>
+      @foreach ($tempcomputers as $tmpcomputerstock)
+        <tr>
+          <td>{{ $i }}</td>
+          <td>{{ $tmpcomputerstock->computer_name }}</td>
+          <td>{{ $tmpcomputerstock->color_name }}</td>
+          <td class="qty">{{ $tmpcomputerstock->qty }}</td>
+          <td>{{ $tmpcomputerstock->cost }}</td>
+          <td>{{ $tmpcomputerstock->sellprice }}</td>
+          <td>{{ $tmpcomputerstock->cost * $tmpcomputerstock->cost }}</td>
+          <td class="text-right">
+             {{-- <a class="btn btn-xs btn-primary" href="{{ route('admin.tempcomputerstock.show', $category->id) }}"><i class="fa fa-eye"></i> View</a> --}}
+            <a class="btn btn-xs btn-warning" href="{{ route('admin.tempcomputersotck.edit', $tmpcomputerstock->id) }}"><i class="fa fa-edit"></i> Edit</a>
+            <form action="{{ route('admin.tempcomputersotck.destroy', $tmpcomputerstock->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+            </form>
+              {{-- <a class="btn btn-xs btn-info getQty" data-toggle="modal" href='#modal-id'><i class="fa fa-arrow-circle-o-down"></i> Add Serial</a> --}}
+          </td>
+        </tr>
+        <?php $i++; ?>
+      @endforeach
+      </tbody>
+    </table>
+  </div>
 </div>
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-<script>
+<script type="text/javascript">
   $('.date-picker').datepicker({
   });
+
+
+  // Select2 Auto complete and search 
+  $("#other_id").select2({
+    placeholder: "Select a Other",
+     maximumSelectionSize: 2
+  }); 
+  $("#color_id").select2({
+    placeholder: "Select a Color",
+     maximumSelectionSize: 2
+  });
+  $("#supplier_id").select2({
+    placeholder: "Select a Color",
+     maximumSelectionSize: 2
+  }); 
 </script>
 @endsection

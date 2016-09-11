@@ -65,4 +65,15 @@ class Computer extends Model
         // belongsTo(RelatedModel, foreignKey = imports_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');
     }
+
+    /**
+     * Computer belongs to Colors.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function colors()
+    {
+        // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
+        return $this->belongsToMany(Colors::class)->withPivot('serialnumber','qty','cost');
+    }
   }

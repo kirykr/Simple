@@ -13,4 +13,15 @@ class Color extends Model
      * @var array
      */
     protected $fillable = ['name','description'];
+
+    /**
+     * Color belongs to Computers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function computers()
+    {
+    	// belongsTo(RelatedModel, foreignKey = computers_id, keyOnRelatedModel = id)
+    	return $this->belongsToMany(Computers::class)->withPivot('serialnumber','qty','cost');
+    }
 }

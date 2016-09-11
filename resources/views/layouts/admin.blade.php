@@ -24,6 +24,7 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
+ 
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
   <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -413,6 +414,9 @@
                       <li>
                         <a href="{{ route('admin.others.create') }}"><i class="fa fa-hdd-o fa-fw"></i> Create Other Products</a>
                       </li>
+                      <li>
+                        <a href="{{ route('admin.oimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Others</a>
+                      </li>
                     </ul>
                     <!-- /.nav-second-level -->
                   </li>
@@ -547,7 +551,8 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
   {{-- =================================== Script =============================== --}}
     @yield('footer')
-    
+     <script src="{{asset('js/validator.min.js')}}"></script>
+    <p style="with:auto; height: 100px;"></p>
     @if(Session::has('delete_user'))
     <script>
             // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
