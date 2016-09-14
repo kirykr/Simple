@@ -3,11 +3,12 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 use App\Oimport;
 use App\Other;
 use App\Color;
 use App\Supplier;
-use App\Tempcomputerstock;
+use App\Tempother;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -35,8 +36,8 @@ class OimportController extends Controller {
 		$others = Other::lists('name','id')->all();
 		$suppliers = Supplier::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
-		$tempcomputers = Tempcomputerstock::all();
-		return view('admin.oimports.create', compact('others','suppliers','colors','tempcomputers'));
+		$tempothers = Tempother::all();
+		return view('admin.oimports.create', compact('others','suppliers','colors','tempothers'));
 	}
 
 	/**
@@ -56,27 +57,26 @@ class OimportController extends Controller {
 		}
 		if (Input::get('addsubmit')){
 			 $this->validate($request, [
-			        'supplier_id' => 'required|max:22',
 			        'other_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
-			        'color_id' => 'required|numeric|min:1',
+			        // 'color_id' => 'required|numeric|min:1',
 			        'sellprice' => 'required|numeric|min:1',
 			        'cost' => 'required|numeric|min:1',
 			    ]);
 			 // dd($input);
-			$input = $request->except(['photo_id']);
 			
 			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
 			$input['other_name'] =  DB::table('others')->where('id', $request->input('other_id'))->value('name');
 			$input['qty'] = $request->input('qtyinstock');
 
-			$tempother= Tempcomputerstock::create($input);
+			$tempother= Tempother::create($input);
 			return redirect()->back();
 		}
 		// Import others
 		if (Input::get('savesubmit')){
 			 $this->validate($request, [
-			        'invoicenum' => 'required|max:22',
+			        'supplier_id' => 'required|max:22',
+			        'supplier_id' => 'required|max:22',
 			    ]);
 			$input = $request->except(['photo_id']);
 			$oimport = Oimport::create($input);

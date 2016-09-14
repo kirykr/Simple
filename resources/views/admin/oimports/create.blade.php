@@ -108,7 +108,7 @@
   <div class="col-md-4">
      <div class="col-md-7">
        {!! Form::label('sellprice', 'Other Price') !!}
-       <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+       <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
         {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other sellprice']) !!}
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
       </div>
@@ -151,19 +151,19 @@
       </thead>
       <tbody>
       <?php $i = 1; ?>
-      @foreach ($tempcomputers as $tmpcomputerstock)
+      @foreach ($tempothers as $tempother)
         <tr>
           <td>{{ $i }}</td>
-          <td>{{ $tmpcomputerstock->computer_name }}</td>
-          <td>{{ $tmpcomputerstock->color_name }}</td>
-          <td class="qty">{{ $tmpcomputerstock->qty }}</td>
-          <td>{{ $tmpcomputerstock->cost }}</td>
-          <td>{{ $tmpcomputerstock->sellprice }}</td>
-          <td>{{ $tmpcomputerstock->cost * $tmpcomputerstock->cost }}</td>
+          <td>{{ $tempother->other_name }}</td>
+          <td>{{ $tempother->color_name }}</td>
+          <td class="qty">{{ $tempother->qty }}</td>
+          <td>{{ $tempother->cost }}</td>
+          <td>{{ $tempother->sellprice }}</td>
+          <td>{{ $tempother->qty * $tempother->cost }}</td>
           <td class="text-right">
-             {{-- <a class="btn btn-xs btn-primary" href="{{ route('admin.tempcomputerstock.show', $category->id) }}"><i class="fa fa-eye"></i> View</a> --}}
-            <a class="btn btn-xs btn-warning" href="{{ route('admin.tempcomputersotck.edit', $tmpcomputerstock->id) }}"><i class="fa fa-edit"></i> Edit</a>
-            <form action="{{ route('admin.tempcomputersotck.destroy', $tmpcomputerstock->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+             {{-- <a class="btn btn-xs btn-primary" href="{{ route('admin.tempother.show', $category->id) }}"><i class="fa fa-eye"></i> View</a> --}}
+            <a class="btn btn-xs btn-warning" href="{{ route('admin.tempother.edit', $tempother->id) }}"><i class="fa fa-edit"></i> Edit</a>
+            <form action="{{ route('admin.tempother.destroy', $tempother->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
@@ -189,7 +189,28 @@
   $("#other_id").select2({
     placeholder: "Select a Other",
      maximumSelectionSize: 2
+  }).on('change', function(e){
+    var value = e.target.value;
+    getOther(value);
   }); 
+  function getOther(id){
+   $.ajax({
+           method: 'GET',
+           url: '/admin/api/v1/others/' + id,
+           success: function(response) {
+             console.log(response);
+             $('#sellprice').val(response.sellprice);
+             $('.editsellprice').attr('data-json', JSON.stringify(response));
+             $('.editsellprice').removeAttr('disabled')
+           },
+           error: function(error) {
+             console.log(error);
+           }
+         });
+  }
+   $('.editsellprice').on('click', function(e) {
+      
+    });
   $("#color_id").select2({
     placeholder: "Select a Color",
      maximumSelectionSize: 2

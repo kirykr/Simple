@@ -30,4 +30,15 @@ class Comstock extends Model
         // belongsTo(RelatedModel, foreignKey = importdetail_id, keyOnRelatedModel = id)
         return $this->belongsTo('App\Tempcomputerstock');
     }
+
+    /**
+     * Comstock belongs to Cimport.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cimport()
+    {
+        // belongsTo(RelatedModel, foreignKey = cimport_id, keyOnRelatedModel = id)
+        return $this->belongsTo('App\Cimport');
+    }
 }

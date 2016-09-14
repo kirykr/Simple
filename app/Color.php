@@ -24,4 +24,15 @@ class Color extends Model
     	// belongsTo(RelatedModel, foreignKey = computers_id, keyOnRelatedModel = id)
     	return $this->belongsToMany(Computers::class)->withPivot('serialnumber','qty','cost');
     }
+
+    /**
+     * Color belongs to Others.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function others()
+    {
+        // belongsTo(RelatedModel, foreignKey = others_id, keyOnRelatedModel = id)
+        return $this->belongsToMany(Others::class);
+    }
 }

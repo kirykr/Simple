@@ -110,9 +110,11 @@
   <div class="col-md-4">
      <div class="col-md-7">
        {!! Form::label('sellprice', 'Computer Price') !!}
-       <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+       <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly"]) !!}
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
+         <span class="input-group-btn">
+        <button class="btn btn-success editsellprice" type="button"><i class="fa fa-edit"></i></button>
       </div>
     </div>
   </div>
@@ -210,14 +212,6 @@
              {{-- {!! Form::close() !!} --}}
              </form>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{{-- =================================== --}}
-
 
 @endsection
 @section('footer')
@@ -249,7 +243,34 @@
     $("#computer_id").select2({
       placeholder: "Select a Computer",
        maximumSelectionSize: 2
+    }).on('change', function(e){
+      var value = e.target.value;
+      getComputers(value);
     }); 
+    function getComputers(id){
+      $.ajax({
+        method: 'GET',
+        url: '/admin/api/v1/computers/' + id,
+        success: function(response) {
+          console.log(response);
+          $('#sellprice').val(response.sellprice);
+          $('.editsellprice').attr('data-json', response);
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+    }
+    // edit sellprice
+    $('.editsellprice').on('click', function(e) {
+      var data = $(this).data('json');
+      var price = $('#sellprice').val();
+      if(price != data.sellprice) {
+        
+      }
+      $('#sellprice').removeAttr('readonly'); 
+
+    });
     $("#color_id").select2({
       placeholder: "Select a Color",
        maximumSelectionSize: 2
@@ -268,38 +289,39 @@
           // everything looks good!
         }
       });
-   //  $("input[unique='serial']").change( function() {
-   //     // check input ($(this).val()) for validity here
-   //     var valueOfChangedInput = $(this).val();
-   //     var timeRepeated = 0;
-   //     $("input[unique='serial']").each(function () {
-   //         //Inside each() check the 'valueOfChangedInput' with all other existing input
-   //         if ($(this).val() == valueOfChangedInput ) {
-   //             timeRepeated++; //this will be executed at least 1 time because of the input, which is changed just now
-   //         }
-   //     });
+    $("input[unique='serial']").change( function() {
+       // check input ($(this).val()) for validity here
+       var valueOfChangedInput = $
+       (this).val();
+       var timeRepeated = 0;
+       $("input[unique='serial']").each(function () {
+           //Inside each() check the 'valueOfChangedInput' with all other existing input
+           if ($(this).val() == valueOfChangedInput ) {
+               timeRepeated++; //this will be executed at least 1 time because of the input, which is changed just now
+           }
+       });
 
-   //     if(timeRepeated > 1) {
-   //         alert("Duplicate value found !");
-   //         // $('#serialForm').submit( function(ev){
-   //         //          ev.preventDefault();
-   //         //          //later you decide you want to submit
-   //         //   });
-   //     }
-   //     else {
+       if(timeRepeated > 1) {
+           alert("Duplicate value found !");
+           // $('#serialForm').submit( function(ev){
+           //          ev.preventDefault();
+           //          //later you decide you want to submit
+           //   });
+       }
+       else {
           
-   //      // $("#serialForm").submit( function(ev){
-   //       if(timeRepeated > 1) {
-   //           alert("Duplicate value found !");
-   //            ev.preventDefault();
-   //         }else{
-   //            $("#serialForm").get(0).allowDefault = true;
-   //         }
-   //     // });
-   //           // $("#form1").get(0).allowDefault = true;
-   //     }
+        // $("#serialForm").submit( function(ev){
+         if(timeRepeated > 1) {
+             alert("Duplicate value found !");
+              ev.preventDefault();
+           }else{
+              $("#serialForm").get(0).allowDefault = true;
+           }
+       // });
+             // $("#form1").get(0).allowDefault = true;
+       }
 
-   // });
+   });
   
 });
   // Unique validation

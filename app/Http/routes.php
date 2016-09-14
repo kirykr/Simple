@@ -57,6 +57,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
 	Route::resource("/admin/tempcomputersotck","TempcomputersotckController", ['only' => ['edit','store','update','destroy']]);
+	Route::resource("/admin/tempother","TempotherController", ['only' => ['edit','store','update','destroy']]);
 	
 	Route::group(array('prefix' => 'admin'), function(){
 		Route::group(array('prefix' => 'api'), function(){
@@ -68,6 +69,8 @@ Route::group(['middleware'=>'admin'], function(){
 
 				Route::resource('categories.modells', 'api\v1\ModellsController', ['only' => ['index']]);
 
+				Route::resource('computers', 'api\v1\ComputerController',['only' => ['show', 'update']]);
+				Route::resource('others', 'api\v1\OtherController',['only' => ['show', 'update']]);
 				});
 		});
 	});	

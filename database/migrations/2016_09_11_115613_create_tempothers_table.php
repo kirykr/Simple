@@ -16,11 +16,11 @@ class CreateTempothersTable extends Migration
             $table->increments('id');
             $table->string('other_id');
             $table->string('other_name');
-            $table->string('color_id');
-            $table->string('color_name');
-            $table->string('qty');
-            $table->string('cost');
-            $table->string('sellprice');
+            $table->integer('color_id')->unsigned()nullable();
+            $table->string('color_name')->nullable();
+            $table->float('qty');
+            $table->float('cost');
+            $table->float('sellprice');
             $table->timestamps();
         });
     }

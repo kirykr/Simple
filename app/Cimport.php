@@ -36,5 +36,16 @@ class Cimport extends Model
       {
         // belongsTo(RelatedModel, foreignKey = _id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Computer')->withPivot('color_id','qty','cost','amount');
-      }                            		
+      }                 
+
+      /**
+                     * Cimport has many .
+                     *
+                     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+                     */
+                    public function comstocks()
+                    {
+                      // hasMany(RelatedModel, foreignKeyOnRelatedModel = cimport_id, localKey = id)
+                      return $this->hasMany('App\Comstock');
+                    }           		
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePivotTableImportdetailTable extends Migration
+class CreatePivotTableComputerStock extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePivotTableImportdetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('cimport_computer', function (Blueprint $table) {
+        Schema::create('computer_stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('computer_id');
             $table->integer('cimport_id')->unsigned();
@@ -31,6 +31,6 @@ class CreatePivotTableImportdetailTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cimport_computer');
+        Schema::drop('computer_stocks');
     }
 }

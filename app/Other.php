@@ -29,8 +29,18 @@ class Other extends Model
 	public function photos()
 	{
 		// belongsTo(RelatedModel, foreignKey = photos_id, keyOnRelatedModel = id)
-		return $this->belongsToMany(Photo::class);
+		return $this->belongsToMany('App\Photo');
 	}
 
+    /**
+     * Other belongs to Colors.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function colors()
+    {
+        // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
+        return $this->belongsToMany('App\Color');
+    }
 	
 }

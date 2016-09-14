@@ -7,6 +7,7 @@ use App\Other;
 use App\Brand;
 use Image;
 use App\Photo;
+use App\Type;
 
 use Illuminate\Http\Request;
 

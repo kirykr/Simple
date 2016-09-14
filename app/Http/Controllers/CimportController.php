@@ -58,7 +58,6 @@ class CimportController extends Controller {
 		}
 		if (Input::get('addsubmit')){
 			 $this->validate($request, [
-			        'supplier_id' => 'required|max:22',
 			        'computer_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
 			        'color_id' => 'required|numeric|min:1',
@@ -78,9 +77,9 @@ class CimportController extends Controller {
 		// Import Computers
 		if (Input::get('savesubmit')){
 			 $this->validate($request, [
+			        'supplier_id' => 'required|max:22',
 			        'invoicenum' => 'required|max:22',
 			    ]);
-			$input = $request->except(['photo_id']);
 			$cimport = Cimport::create($input);
 			$tempcomputers = Tempcomputerstock::all();
 			$cimport->computers()->saveMany($tempcomputers);
