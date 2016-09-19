@@ -18,8 +18,11 @@ class Spec extends Model
     /**
      * The roles that belong to the user.
      */
-    public function computers()
-    {
-        return $this->belongsToMany('App\Computer')->withPivot('description');
+    // public function computers()
+    // {
+    //     return $this->belongsToMany('App\Computer')->withPivot('description');
+    // }
+    public function computers(){
+        return $this->belongsToMany('App\Computer');
     }
 }

@@ -386,6 +386,18 @@
                     </ul>
                     <!-- /.nav-second-level -->
                   </li>
+                  <li class="">
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Invoice<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse" >
+                      <li>
+                        <a href="{{ route('admin.invoices.index') }}"><i class="fa fa-list-alt fa-fw"></i> View Invoice</a>
+                      </li>
+                      <li>
+                        <a href="{{ route('admin.invoices.create') }}"><i class="fa fa-cog fa-fw"></i> New Invoice</a>
+                      </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                  </li>
                   <li>
                     <a href="#"><i class="fa fa-desktop"></i></i> Manage Computers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

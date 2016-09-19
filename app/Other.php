@@ -32,5 +32,23 @@ class Other extends Model
 		return $this->belongsToMany(Photo::class);
 	}
 
-	
+	public function bcinvoicedetails(){
+        return $this->morphMany('App\Bcinvoicedetail','pro');
+    }
+    public function tmpdetails(){
+        return $this->morphMany('App\Tmpdetail','pro');
+    }
+    //  public function bcinvoicedetails(){
+    //     return $this->hasMany('App\Bcinvoicedetail');
+    // }
+    /**
+     * Other belongs to Colors.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function colors()
+    {
+        // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
+        return $this->belongsToMany('App\Color');
+    }
 }

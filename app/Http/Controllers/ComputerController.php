@@ -21,6 +21,7 @@ class ComputerController extends Controller {
 	public function index()
 	{
 		$computers = Computer::orderBy('id', 'desc')->paginate(10);
+
 		// return $computers->all();
 		return view('admin.computers.index', compact('computers'));
 	}
