@@ -9,8 +9,10 @@ use App\Supplier;
 use App\Computer;
 use App\Tempcomputerstock;
 use App\Color;
+use App\Comstock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+// use Eloquent::insert();
 
 class CimportController extends Controller {
 
@@ -50,45 +52,65 @@ class CimportController extends Controller {
 	public function store(Request $request)
 	{
 		$input = $request->all();
-		
-		$cimport = null;
-		if (Input::get('newsubmit')){
-			$input = $request->all();
-			// $cimport = Cimport::create($input);
-		}
-		if (Input::get('addsubmit')){
-			 $this->validate($request, [
-			        'computer_id' => 'required|max:22',
-			        'qtyinstock' => 'required|numeric|min:1',
-			        'color_id' => 'required|numeric|min:1',
-			        'sellprice' => 'required|numeric|min:1',
-			        'cost' => 'required|numeric|min:1',
-			    ]);
-			 // dd($input);
-			$input = $request->except(['photo_id']);
-			
-			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
-			$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
-			$input['qty'] = $request->input('qtyinstock');
+		$this->validate($request, [
+      'supplier_id' => 'required|max:22',
+      'invoicenum' => 'required|max:22'
+    ]);
+    $cimport = new Cimport($input);
+    try {
+    	$cimport->save();
+			foreach ($input['computer'] as $key => $value) {
+				$computer_stock = Comstock::create($value);
+				$cimport->comstocks()->save($computer_stock);
+	    }
 
-			$tempcomputer= Tempcomputerstock::create($input);
-			return redirect()->back();
-		}
-		// Import Computers
-		if (Input::get('savesubmit')){
-			 $this->validate($request, [
-			        'supplier_id' => 'required|max:22',
-			        'invoicenum' => 'required|max:22',
-			    ]);
-			$cimport = Cimport::create($input);
-			$tempcomputers = Tempcomputerstock::all();
-			$cimport->computers()->saveMany($tempcomputers);
-			// $tempcomputers->delete();
-			Tempcomputerstock::truncate();
-			return redirect()->back();
-		}
-		dd($input);
-		
+    } catch (Exception $e) {
+
+    }
+
+    // $ComputerStock = Comstock::insert($input['computer']);
+    // dd($ComputerStock);
+
+		// $cimport->computers()->saveMany($input['computer']);
+
+		// $cimport = null;
+		// if (Input::get('newsubmit')){
+		// 	$input = $request->all();
+		// 	// $cimport = Cimport::create($input);
+		// }
+		// if (Input::get('addsubmit')){
+		// 	 $this->validate($request, [
+		// 	        'computer_id' => 'required|max:22',
+		// 	        'qtyinstock' => 'required|numeric|min:1',
+		// 	        'color_id' => 'required|numeric|min:1',
+		// 	        'sellprice' => 'required|numeric|min:1',
+		// 	        'cost' => 'required|numeric|min:1',
+		// 	    ]);
+		// 	 // dd($input);
+		// 	$input = $request->except(['photo_id']);
+
+		// 	$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
+		// 	$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
+		// 	$input['qty'] = $request->input('qtyinstock');
+
+		// 	$tempcomputer= Tempcomputerstock::create($input);
+		// 	return redirect()->back();
+		// }
+		// // Import Computers
+		// if (Input::get('savesubmit')){
+		// 	 $this->validate($request, [
+		// 	        'supplier_id' => 'required|max:22',
+		// 	        'invoicenum' => 'required|max:22',
+		// 	    ]);
+		// 	$cimport = Cimport::create($input);
+		// 	$tempcomputers = Tempcomputerstock::all();
+		// 	$cimport->computers()->saveMany($tempcomputers);
+		// 	// $tempcomputers->delete();
+		// 	Tempcomputerstock::truncate();
+		// 	return redirect()->back();
+		// }
+		// dd($input);
+
 
 		return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');
 	}

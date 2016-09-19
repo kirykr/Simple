@@ -38,7 +38,7 @@ class TempcomputersotckController extends Controller
     {
         $input = $request->all();
         dd($input);
-        
+
     }
 
     /**

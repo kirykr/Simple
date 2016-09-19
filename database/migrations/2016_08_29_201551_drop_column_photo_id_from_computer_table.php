@@ -14,7 +14,7 @@ class DropColumnPhotoIdFromComputerTable extends Migration
     {
         Schema::table('computers', function (Blueprint $table) {
             //
-            $table->dropColumn('photo_id');
+            // $table->dropColumn('photo_id');
         });
     }
 
