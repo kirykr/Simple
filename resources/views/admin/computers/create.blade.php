@@ -21,41 +21,43 @@
           {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Computer Code']) !!}
           {!! $errors->first('name','<span class="help-block">:message</span>') !!}
         </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('sellprice', 'Sell Price') !!}
+        <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+          {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+          {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('sellprice', 'Sell Price') !!}
-          <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-            {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
-            {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('ppprice', 'PP Price') !!}
+        <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
+          {!! Form::number('ppprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
+          {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('ppprice', 'PP Price') !!}
-          <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
-            {!! Form::number('ppprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
-            {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('provprice', 'Province Price') !!}
+        <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
+          {!! Form::number('provprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
+          {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('provprice', 'Province Price') !!}
-          <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
-            {!! Form::number('provprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
-            {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('status', 'Status') !!}
+        <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
+          {!! Form::number('status',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
+          {!! $errors->first('status','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('status', 'Status') !!}
-          <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
-            {!! Form::number('status',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
-            {!! $errors->first('status','<span class="help-block">:message</span>') !!}
-          </div>
-        </div>
+      </div>
+        {{-- 
         <div class="col-md-4">
           {!! Form::label('name', 'Computer Specs') !!}
           <div class="form-group">
             <a class="btn btn-block btn-success" data-toggle="modal" href='#modal-id'>Add Specs</a>
           </div>
         </div>
+        --}}
       </div>
 
       {!! Form::label('photo_id', 'Computer Picture') !!}
@@ -69,7 +71,7 @@
       <input id="input-pd" name="photo_id[]" type="file" multiple class="file-loading">
     </div> --}}
 
-  <div class="row">
+    <div class="row">
       <div class="col-md-3">
         {!! Form::label('brand_id', 'Computer Brand') !!}
         <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
@@ -99,16 +101,71 @@
           {!! $errors->first('model_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
-  </div>
+    </div>
 
-  <div class="well well-sm">
-    <button type="submit" class="btn btn-primary">Create</button>
-    <a class="btn btn-link pull-right" href="{{ route('admin.computers.index') }}"><i class="fa fa-backward"></i> Back</a>
+    <div class="well well-sm">
+      <button type="submit" class="btn btn-primary">Create</button>
+      <a class="btn btn-link pull-right" href="{{ route('admin.computers.index') }}"><i class="fa fa-backward"></i> Back</a>
+    </div>
+    {!! Form::close() !!}
+    {{-- </form> --}}
   </div>
-  {!! Form::close() !!}
-  {{-- </form> --}}
 </div>
+{{-- Table Import --}}
+
+<div class="row">
+  <div class="col-md-12">
+    @if($computers->count())
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>PHOTO</th>
+          <th>NAME</th>
+          <th>QTY</th>
+          <th>PRICE</th>
+          <th>BRAND</th>
+          <th>PP PRICE</th>
+          <th>PRO PRICE</th>
+          <th>STATUS</th>
+          <th class="text-right">OPTIONS</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @foreach($computers as $computer)
+        <tr>
+          <td>{{$computer->id}}</td>
+          {{-- {{ dd( $computer->photos->first()->path ) }} --}}
+          <td><img width="70" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt=""></td>
+          <td>{{$computer->name}}</td>
+          <td>{{$computer->qtyinstock}}</td>
+          <td>{{$computer->sellprice}}</td>
+          <td>{{$computer->brand_id}}</td>
+          <td>{{$computer->ppprice}}</td>
+          <td>{{$computer->provprice}}</td>
+          <td>{{$computer->status}}</td>
+          <td class="text-right">
+            <a class="btn btn-xs btn-primary" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View</a>
+            <a class="btn btn-xs btn-warning" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
+            <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
+            </form>
+          </td>
+        </tr>
+        @endforeach
+      </tbody>
+    </table>
+    {!! $computers->render() !!}
+    @else
+    <h3 class="text-center alert alert-info">Empty!</h3>
+    @endif
+
+  </div>
 </div>
+
 {{--  Model Start --}}
 <div class="modal fade" id="modal-id">
   <div class="modal-dialog">

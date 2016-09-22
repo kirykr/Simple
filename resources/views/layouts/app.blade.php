@@ -468,7 +468,6 @@
     <div class="col-md-4 ">
         <h5>SUPPORT PAYMENT METHOD</h5>
         <img src="/images/payment-methods.gif" alt="">
-        <img src="/images/fb.gif" alt="">
     </div>
 </div>
 </div>

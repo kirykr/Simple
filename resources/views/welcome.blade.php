@@ -57,7 +57,7 @@
               <a href="#"><i class="fa fa-th-list"></i></a> 
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12 pull-right text-right">
-        <ul class="pagination" style="margin-bottom: 0px !important; padding-bottom: 0px !important">
+        {{-- <ul class="pagination" style="margin-bottom: 0px !important; padding-bottom: 0px !important">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
@@ -65,7 +65,9 @@
             <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
-        </ul></div>
+        </ul> --}}
+         {!! $computers->render() !!}
+        </div>
     </div>
 <hr>
 <div class="container">
@@ -108,6 +110,7 @@
        <div id="shop"></div>
     </div>
 </div>
+  {!! $computers->render() !!}
 </div>
 @endsection
 @section('footer');

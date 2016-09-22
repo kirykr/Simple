@@ -74,6 +74,6 @@ class Computer extends Model
     public function colors()
     {
         // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
-        return $this->belongsToMany(Colors::class)->withPivot('serialnumber','qty','cost');
+        return $this->belongsToMany('App\Color')->withPivot('serialnumber','qty','cost');
     }
   }

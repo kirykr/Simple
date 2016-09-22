@@ -33,11 +33,11 @@ class ComputerController extends Controller {
 	 */
 	public function create()
 	{
-
+    $computers = Computer::orderBy('id', 'desc')->paginate(10);
 		$brands = Brand::lists('name','id')->all();
 		$specs = Spec::all();
 
-		return view('admin.computers.create', compact('brands', 'specs'));
+		return view('admin.computers.create', compact('computers','brands', 'specs'));
 	}
 
 	/**
@@ -52,23 +52,23 @@ class ComputerController extends Controller {
 		$input['id'] = uniqid('c', false);
 		
 		$computer = Computer::create($input);
-		$specs = Spec::all();
-		$arr = [];
-		foreach ($specs as $spec) {
-			$arr[] = $spec->name;
-		}
-		$spec_desc = array_combine($arr, $request->input('description'));
+		// $specs = Spec::all();
+		// $arr = [];
+		// foreach ($specs as $spec) {
+		// 	$arr[] = $spec->name;
+		// }
+		// $spec_desc = array_combine($arr, $request->input('description'));
 		// dd($spec_desc);
 		// dd($input);
-		if (is_array($request->input('description'))) {
-			foreach ($spec_desc as $key => $desc) {
-				if(!empty($desc)){
-					$spec = Spec::where('name','=',$key)->first();
-					// dd($spec);
-					$computer->specs()->save($spec, ['description'=> $desc]); 
-				}
-			}
-		}
+		// if (is_array($request->input('description'))) {
+		// 	foreach ($spec_desc as $key => $desc) {
+		// 		if(!empty($desc)){
+		// 			$spec = Spec::where('name','=',$key)->first();
+		// 			// dd($spec);
+		// 			$computer->specs()->save($spec, ['description'=> $desc]); 
+		// 		}
+		// 	}
+		// }
 		// dd($request->all());
 		 if($files = $request->file('photo_id'))
         {
@@ -94,9 +94,9 @@ class ComputerController extends Controller {
         }
         // Computer::create($input);
         // Session::flash('create_user','The user has been created!');
-        flash()->overlay('User has been created successfully','CREATE USER');
+        flash()->overlay('Computer has been created successfully','CREATE USER');
 
-        return redirect('/admin/computers');
+        return redirect()->back();
 
 		// return redirect()->route('computers.index')->with('message', 'Item created successfully.');
 	}

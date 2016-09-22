@@ -14,7 +14,7 @@ use App\Computer;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(10);
+	$computers = Computer::orderBy('id', 'desc')->paginate(4);
 		// return $computers->all();
 	return view('welcome', compact('computers'));
     // return view('welcome');

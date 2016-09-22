@@ -152,7 +152,6 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Application Service Providers...
@@ -215,7 +214,6 @@ return [
         'flash' => Laracasts\flash\flash::class,
         'Cart'  => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Input' => Illuminate\Support\Facades\Input::class,
 

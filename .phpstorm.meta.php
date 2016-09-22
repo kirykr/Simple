@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2016-09-01.
+    * Generated on 2016-09-20.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -44,8 +44,6 @@ namespace PHPSTORM_META {
             'cart' instanceof \Gloudemans\Shoppingcart\Cart,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
-            'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
-            'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
@@ -166,8 +164,6 @@ namespace PHPSTORM_META {
             'cart' instanceof \Gloudemans\Shoppingcart\Cart,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
-            'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
-            'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
@@ -288,8 +284,6 @@ namespace PHPSTORM_META {
             'cart' instanceof \Gloudemans\Shoppingcart\Cart,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
-            'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
-            'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
@@ -410,8 +404,6 @@ namespace PHPSTORM_META {
             'cart' instanceof \Gloudemans\Shoppingcart\Cart,
             'entrust' instanceof \Zizaco\Entrust\Entrust,
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
-            'debugbar' instanceof \Barryvdh\Debugbar\LaravelDebugbar,
-            'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
