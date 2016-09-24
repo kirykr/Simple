@@ -16,7 +16,7 @@ class CreateTempothersTable extends Migration
             $table->increments('id');
             $table->string('other_id');
             $table->string('other_name');
-            $table->integer('color_id')->unsigned()nullable();
+            $table->integer('color_id')->unsigned()->nullable();
             $table->string('color_name')->nullable();
             $table->float('qty');
             $table->float('cost');

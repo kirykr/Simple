@@ -14,9 +14,9 @@ class DropColTypeIdCatIdModelId extends Migration
     {
         Schema::table('computers', function (Blueprint $table) {
             //
-            $table->dropColumn('type_id');
-            $table->dropColumn('category_id');
-            $table->dropColumn('model_id');
+            // $table->dropColumn('type_id');
+            // $table->dropColumn('category_id');
+            // $table->dropColumn('model_id');
         });
     }
 
