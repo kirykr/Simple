@@ -43,8 +43,7 @@ class BrandController extends Controller {
 		$brand = new Brand();
 
 		$brand->name = $request->input("name");
-        $brand->description = $request->input("description");
-        $brand->category_id = $request->input("category_id");
+    $brand->description = $request->input("description");
 
 		$brand->save();
 
@@ -89,8 +88,7 @@ class BrandController extends Controller {
 		$brand = Brand::findOrFail($id);
 
 		$brand->name = $request->input("name");
-        $brand->description = $request->input("description");
-        $brand->category_id = $request->input("category_id");
+    $brand->description = $request->input("description");
 
 		$brand->save();
 

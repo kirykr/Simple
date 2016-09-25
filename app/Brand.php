@@ -12,7 +12,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description','type_id'];
+    protected $fillable = ['name','description'];
 
    /**
     * Brand has many Types.
