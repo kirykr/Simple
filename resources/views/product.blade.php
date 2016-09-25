@@ -21,15 +21,15 @@
 		<div class="col-md-5">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<img id="zoom_03" class="img img-responsive" src="{{ $computer->photos->first() ? $computer->photos->first()->path : '' }}" alt="" data-zoom-image="{{ $computer->photos->first() ? $computer->photos->first()->path : '' }}">
+					<img id="zoom_03" class="img img-responsive" src="{{$computer->photos->first() ? $computer->photos->first()->path : '' }}" alt="" data-zoom-image="{{ $computer->photos->first() ? $computer->photos->first()->path : '' }}">
 				</div>
 			</div>
 			<hr>
 			<div class="row" id="gal1">
 			@foreach ($computer->photos as $photo)
 				<div class="col-md-3 col-sm-3 col-xs-hidden">
-				<a href="#" data-image="{{$photo->path}}" data-zoom-image="{{$photo->path}}">
-					<img id="zoom_03" class="img img-responsive" src="{{ $photo->path }}" >
+				<a class="fancybox-thumbs" data-fancybox-group="thumb" href="{{$photo->path}}">
+					<img class="img img-responsive" src="{{ $photo->path }}" >
 				</a>
 				</div>
 			@endforeach
