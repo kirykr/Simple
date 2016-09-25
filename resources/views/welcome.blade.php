@@ -71,8 +71,8 @@
     </div>
 <hr>
 <div class="container">
-    <div class="row">
         @foreach($computers as $computer)
+        <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
                 <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
                 <a href="{{ route('products.show', $computer->id) }}"><h4>{{ $computer->name }}</h4></a>

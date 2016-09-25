@@ -145,7 +145,7 @@
           <td>{{$computer->ppprice}}</td>
           <td>{{$computer->provprice}}</td>
           <td>{{$computer->status}}</td>
-          <td class="text-right">
+          <td class="text-right text-nowrap">
           @if($computer->specs->count() > 0)
             <a class="btn btn-xs btn-default" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-plus"></i> Add Specs</a>
           @else
