@@ -71,10 +71,10 @@
     </div>
 <hr>
 <div class="container">
-        <?php $i = 0; ?>
+        <?php $i = 1; ?>
     <div class="row">
         @foreach($computers as $computer)
-        @if($i % 4 == 0)
+        @if($i % 4 === 0)
         <div class="row">
         @endif
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
@@ -111,7 +111,7 @@
             </div>
 
        {{-- <div id="shop"></div> --}}
-    @if($i % 4 == 0)
+    @if($i % 4 === 0)
     </div>
     @endif
     <?php $i++; ?>
