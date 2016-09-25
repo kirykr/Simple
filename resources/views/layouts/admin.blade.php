@@ -24,6 +24,7 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
+  <script src="{{asset('js/jquery.elevatezoom.js')}}"></script>
  
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
