@@ -71,8 +71,11 @@
     </div>
 <hr>
 <div class="container">
+        <?php $i = 0; ?>
         @foreach($computers as $computer)
+        @if($i == 0 || $i % 4 == 0)
         <div class="row">
+        @endif
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
                 <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
                 <a href="{{ route('products.show', $computer->id) }}"><h4>{{ $computer->name }}</h4></a>
@@ -106,9 +109,12 @@
                 
             </div>
 
-        @endforeach
-       <div id="shop"></div>
+       {{-- <div id="shop"></div> --}}
+    @if($i == 0 || $i % 4 == 0)
     </div>
+    @endif
+    <?php $i++; ?>
+    @endforeach
 </div>
   {!! $computers->render() !!}
 </div>
