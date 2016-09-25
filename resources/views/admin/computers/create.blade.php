@@ -146,7 +146,11 @@
           <td>{{$computer->provprice}}</td>
           <td>{{$computer->status}}</td>
           <td class="text-right">
-            <a class="btn btn-xs btn-primary" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View</a>
+          @if($computer->specs->count() > 0)
+            <a class="btn btn-xs btn-default" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-plus"></i> Add Specs</a>
+          @else
+             <a class="btn btn-xs btn-success" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View Specs</a>
+          @endif
             <a class="btn btn-xs btn-warning" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
             <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
               <input type="hidden" name="_method" value="DELETE">

@@ -1,63 +1,87 @@
 @extends('layouts.admin')
 @section('content')
 <div class="page-header">
-        <h1>Computers / Show #{{$computer->id}}</h1>
-        <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-
-            <form action="#">
-                <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static"></p>
-                </div>
-                    <div class="form-group">
-                     <label for="name">NAME</label>
-                     <p class="form-control-static">{{$computer->name}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="qtyinstock">QTYINSTOCK</label>
-                     <p class="form-control-static">{{$computer->qtyinstock}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="sellprice">SELLPRICE</label>
-                     <p class="form-control-static">{{$computer->sellprice}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="photo_id">PHOTO_ID</label>
-                     <p class="form-control-static">{{$computer->photo_id}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="type_id">TYPE_ID</label>
-                     <p class="form-control-static">{{$computer->type_id}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="cat_id">CAT_ID</label>
-                     <p class="form-control-static">{{$computer->cat_id}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="brand_id">BRAND_ID</label>
-                     <p class="form-control-static">{{$computer->brand_id}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="model_id">MODEL_ID</label>
-                     <p class="form-control-static">{{$computer->model_id}}</p>
-                </div>
-            </form>
-
-            <a class="btn btn-link" href="{{ route('admin.computers.index') }}"><i class="fa fa-backward"></i>  Back</a>
-
+    <h1>Computers / Show #{{$computer->id}}</h1>
+    <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="btn-group pull-right" role="group" aria-label="...">
+            <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
+            <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
         </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-4" style="border-right: 1px solid #999">
+            <div class="form-group">
+                <label for="nome">ID</label>
+                <p class="form-control-static">{{$computer->id}}</p>
+            </div>
+            <div class="form-group">
+               <label for="name">NAME</label>
+               <p class="form-control-static">{{$computer->name}}</p>
+           </div>
+           <div class="form-group">
+               <label for="photo_id">PHOTO_ID</label>
+               <p class="form-control-static"><img width="220" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt=""></p>
+           </div>
     </div>
+    <div class="col-md-8">
+    {!! Form::open(array('class' => 'form-horizontal', 'method' => 'POST', 'action' => array('ComputerSpecsController@store', $computer->id))) !!}
+        <div class="col-md-6">
+          {!! Form::label('spec_id', 'Computer Model') !!}
+          <div class="form-group {{ $errors->has('spec_id') ? 'has-error' :'' }}">
+            {!! Form::select('spec_id',[''=>'Choose Options'] + $specs,0,['class'=>'form-control']) !!}
+            {!! $errors->first('spec_id','<span class="help-block">:message</span>') !!}
+          </div>
+        </div>
+        <div class="col-md-6">
+           {!! Form::label('spec', 'Add More Specs') !!}
+          <div class="form-group">
+           <a href="{{ route('admin.specs.create') }}"  class="btn btn-success"><i class="fa fa-plus fa-fw"></i> Add New Specs</a>
+           </div>
+        </div>
+        <div class="col-md-12">
+           {!! Form::label('description', 'Computer Name') !!}
+           <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
+            {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Add Spec description here', 'rows' => 3]) !!}
+            {!! $errors->first('description','<span class="help-block">:message</span>') !!}
+          </div>
+        </div>
+        <div class="col-md-12 well well-sm">
+          <button type="submit" value="addspec" name="addspec" class="btn btn-primary">Add Spec</button>
+        </div>
+      {!! Form::close() !!}
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Spec Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+            <?php $i = 0;  ?>
+            @foreach ($computer->specs as $spec)
+              <tr>
+                <td>{{ $computer->specs[$i]->name }}</td>
+                <td>{{ $spec->pivot->description }}</td>
+              </tr>
+             <?php $i++; ?>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+    <a class="btn btn-link" href="{{ route('admin.computers.create') }}"><i class="fa fa-backward"></i>  Back</a>
+  </div>
+</div>
 
 @endsection

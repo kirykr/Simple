@@ -110,8 +110,9 @@ class ComputerController extends Controller {
 	public function show($id)
 	{
 		$computer = Computer::findOrFail($id);
+    $specs = Spec::lists('name','id')->all();
 
-		return view('admin.computers.show', compact('computer'));
+		return view('admin.computers.show', compact('computer','specs'));
 	}
 
 	/**

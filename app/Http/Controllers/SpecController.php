@@ -27,7 +27,8 @@ class SpecController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.specs.create');
+		$specs = Spec::orderBy('id', 'desc')->paginate(10);
+		return view('admin.specs.create', compact('specs'));
 	}
 
 	/**

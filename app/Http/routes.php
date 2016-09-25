@@ -14,7 +14,7 @@ use App\Computer;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(4);
+	$computers = Computer::orderBy('id', 'desc')->paginate(12);
 		// return $computers->all();
 	return view('welcome', compact('computers'));
     // return view('welcome');
@@ -56,6 +56,9 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/cimports","CimportController");
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
+	// Route::resource("/admin/computerspecs", "ComputerSpecsController");
+	Route::post('/admin/computerspecs/{id}', array('as' => 'admin.computerspecs.store', 'uses' => 'ComputerSpecsController@store'));
+
 	Route::resource("/admin/tempcomputersotck","TempcomputersotckController", ['only' => ['edit','store','update','destroy']]);
 	Route::resource("/admin/tempother","TempotherController", ['only' => ['edit','store','update','destroy']]);
 	

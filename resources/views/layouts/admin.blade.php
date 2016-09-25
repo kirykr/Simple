@@ -405,6 +405,9 @@
                         <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
                       </li>
                       <li>
+                        <a href="{{ route('admin.specs.create') }}"><i class="fa fa-gear fa-fw"></i> Add Specs</a>
+                      </li>
+                      <li>
                         <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
                       </li>
                     </ul>
