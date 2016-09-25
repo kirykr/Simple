@@ -15,7 +15,19 @@
   <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
-  <script src="{{asset('js/libs.js')}}"></script>
+ {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> --}}
+  {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
+  {{-- <script src="{{asset('js/jqueryElevateZoom.js')}}"></script> --}}
+  <script src="{{asset('js/ripples.min.js')}}"></script>
+  <script src="{{asset('js/metisMenu.js')}}"></script>
+  <script src="{{asset('js/sb-admin-2.js')}}"></script>
+  <script src="{{asset('js/sweetalert.min.js')}}"></script>
+  <script src="{{asset('js/script.js')}}"></script>
+  
   <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
   <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
   <script src="{{asset('js/plugins/purify.min.js')}}"></script>
@@ -24,7 +36,6 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
-  <script src="{{asset('js/jquery.elevatezoom.js')}}"></script>
  
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
@@ -550,10 +561,10 @@
           <!-- /#wrapper -->
 
           <!-- jQuery -->
-
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
-
+{{-- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ --}}
 
 
   {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
@@ -578,7 +589,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     // Select2
-    
+   
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",

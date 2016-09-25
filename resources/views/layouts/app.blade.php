@@ -12,7 +12,12 @@
     {{-- <link rel="stylesheet" href="{{asset('css/style.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('css/rating.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/my_star_rating.css')}}">
-    <script src="{{asset('js/libs.js')}}"></script>
+    {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
     <!-- Bootstrap Core CSS -->
     <style>
         html {
@@ -499,5 +504,13 @@
 </script>
 <script src="{{asset('js/rating.min.js')}}"></script>
 @yield('scripts')
+<script type="text/javascript">
+   $('#zoom_03').elevateZoom({
+    gallery:'gallery_01', 
+    cursor: 'pointer', 
+    galleryActiveClass: 'active', 
+    imageCrossfade: true, 
+    });
+</script>
 </body>
 </html>

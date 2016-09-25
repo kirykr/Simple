@@ -30,40 +30,34 @@
                     {!! $errors->first('name','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>
-               <div class="col-md-2">
-        {!! Form::label('sellprice', 'Sell Price') !!}
-        <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-          {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
-          {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
-        </div>
-      </div>
-       <div class="col-md-2">
-        {!! Form::label('ppprice', 'PP Price') !!}
-        <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
-          {!! Form::number('ppprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
-          {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
-        </div>
-      </div>
-       <div class="col-md-2">
-        {!! Form::label('provprice', 'Province Price') !!}
-        <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
-          {!! Form::number('provprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
-          {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
-        </div>
-      </div>
-       <div class="col-md-2">
-        {!! Form::label('status', 'Status') !!}
-        <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
-          {!! Form::number('status',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
-          {!! $errors->first('status','<span class="help-block">:message</span>') !!}
-        </div>
-      </div>
-      <div class="col-md-4">
-        {!! Form::label('name', 'Computer Specs') !!}
-        <div class="form-group">
-          <a class="btn btn-block btn-success" data-toggle="modal" href='#modal-id'>Add Specs</a>
-        </div>
-      </div>
+                <div class="col-md-2">
+                  {!! Form::label('sellprice', 'Sell Price') !!}
+                  <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+                    {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+                    {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('ppprice', 'PP Price') !!}
+                  <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
+                    {!! Form::number('ppprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
+                    {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('provprice', 'Province Price') !!}
+                  <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
+                    {!! Form::number('provprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
+                    {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('status', 'Status') !!}
+                  <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
+                    {!! Form::number('status',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
+                    {!! $errors->first('status','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
               </div>
               {!! Form::label('photo_id', 'Computer Picture') !!}
               <div class="form-group {{ $errors->has('photo_id') ? 'has-error' :'' }}">
@@ -71,7 +65,7 @@
                 {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!}
               </div>
               <div class="row">
-              <div class="col-md-3">
+                <div class="col-md-3">
                   {!! Form::label('brand_id', 'Computer Brand') !!}
                   <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
                     {!! Form::select('brand_id', $brands,null,['class'=>'form-control']) !!}
@@ -116,6 +110,6 @@
         <script>
           $('.date-picker').datepicker({
           });
-         
-</script>
-@endsection
+          
+        </script>
+        @endsection

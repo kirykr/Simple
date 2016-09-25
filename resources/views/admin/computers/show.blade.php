@@ -2,14 +2,7 @@
 @section('content')
 <div class="page-header">
     <h1>Computers / Show #{{$computer->id}}</h1>
-    <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="btn-group pull-right" role="group" aria-label="...">
-            <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
-            <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-        </div>
-    </form>
+   
 </div>
 
 <div class="row">
@@ -30,7 +23,7 @@
     <div class="col-md-8">
     {!! Form::open(array('class' => 'form-horizontal', 'method' => 'POST', 'action' => array('ComputerSpecsController@store', $computer->id))) !!}
         <div class="col-md-6">
-          {!! Form::label('spec_id', 'Computer Model') !!}
+          {!! Form::label('spec_id', 'Spec Name (Ex: CPU, HDD)') !!}
           <div class="form-group {{ $errors->has('spec_id') ? 'has-error' :'' }}">
             {!! Form::select('spec_id',[''=>'Choose Options'] + $specs,0,['class'=>'form-control']) !!}
             {!! $errors->first('spec_id','<span class="help-block">:message</span>') !!}
@@ -43,7 +36,7 @@
            </div>
         </div>
         <div class="col-md-12">
-           {!! Form::label('description', 'Computer Name') !!}
+           {!! Form::label('description', 'Description (Ex: CPU: Core i5)') !!}
            <div class="form-group {{ $errors->has('description') ? 'has-error' :'' }}">
             {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Add Spec description here', 'rows' => 3]) !!}
             {!! $errors->first('description','<span class="help-block">:message</span>') !!}
