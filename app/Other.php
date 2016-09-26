@@ -16,10 +16,10 @@ class Other extends Model
     protected $fillable = [
     						'id',
     						'name',
-    						'type_id',
-    						'category_id',
-    						'brand_id',
-    						'model_id'
+    						'sellprice',
+    						'ppprice',
+    						'provprice',
+    						'brand_id'
 						];
 	/**
 	 * Other belongs to Photos.

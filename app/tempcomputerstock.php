@@ -27,9 +27,9 @@ class Tempcomputerstock extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comstocks()
+    public function serialtemps()
     {
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = tempcomputerstock_id, localKey = id)
-        return $this->hasMany('App\Comstock');
+        return $this->hasMany('App\SerialTemp');
     }                            
 }

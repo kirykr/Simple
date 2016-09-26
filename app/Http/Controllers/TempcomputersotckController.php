@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Tempcomputerstock;
 
 class TempcomputersotckController extends Controller
 {
@@ -50,6 +51,9 @@ class TempcomputersotckController extends Controller
     public function show($id)
     {
         //
+        $tempcomputer = Tempcomputerstock::findOrFail($id);
+
+        return view('admin.tempcomputersotck.show', compact('tempcomputer'));
     }
 
     /**
@@ -61,6 +65,7 @@ class TempcomputersotckController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**

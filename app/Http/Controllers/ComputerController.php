@@ -48,6 +48,7 @@ class ComputerController extends Controller {
 	 */
 	public function store(ComputerRequest $request)
 	{
+  
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
 		

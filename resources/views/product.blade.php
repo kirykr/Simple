@@ -108,8 +108,25 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>PRODUCT DESCRIPTION</h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php $k = 0;  ?>
+				@foreach ($computer->specs as $spec)
+					<tr>
+						<td>{{$computer->specs[$k]->name}} :</td>
+						<td>{{$spec->pivot->description}}</td>
+					</tr>
+					 <?php $k++ ?>
+				@endforeach
+				</tbody>
+			</table>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum expedita tempore minus tenetur fugit excepturi modi placeat in odit corrupti totam nemo dolore, quisquam voluptates quae perspiciatis, asperiores, nisi sed!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis ipsam iusto, animi voluptas quos delectus totam, error quasi laudantium magni porro nemo in similique est. Assumenda deleniti atque, praesentium eligendi!</p>
 		</div>
 		<div class="col-md-6">
 			<h3><span class="label label-pill label-danger">3</span> CUSTOMER REVIEWS</h3>

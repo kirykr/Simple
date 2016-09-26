@@ -174,7 +174,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
             </form>
-              <a class="btn btn-xs btn-info getQty" data-toggle="modal" href='#modal-id'><i class="fa fa-arrow-circle-o-down"></i> Add Serial</a>
+              <a class="btn btn-xs btn-info getQty" data-toggle="modal" href="{{ route('admin.tempcomputersotck.show', $tmpcomputerstock->id) }}"><i class="fa fa-arrow-circle-o-down"></i> Add Serial</a>
           </td>
         </tr>
         <?php $i++; ?>

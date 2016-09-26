@@ -74,13 +74,23 @@
         <?php $i = 1; ?>
         <div class="row">
           @foreach($computers as $computer)
+          <?php $k = 0;  ?>
           @if($i % 4 === 0)
           <div class="row">
             @endif
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
+              <a href="{{ route('products.show', $computer->id) }}">
               <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
-              <a href="{{ route('products.show', $computer->id) }}"><h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
+             @foreach ($computer->specs as $spec)
+              <p>{{$computer->specs[$k]->name}}: {{$spec->pivot->description}}</p>
+              <?php 
+                if($k === 3)
+                  break;
+                else
+                  $k++
+              ?>
+              @endforeach
               <p>Availability: </p>
 
               {{-- @include('includes/star_rating_with_javascript') --}}
