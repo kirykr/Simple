@@ -15,8 +15,8 @@ use App\Other;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(4);
-	$others = Other::orderBy('id', 'desc')->paginate(4);
+	$computers = Computer::orderBy('id', 'desc')->paginate(12);
+	$others = Other::orderBy('id', 'desc')->paginate(12);
 	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
 		// return $computers->all();
 	return view('welcome', compact('computers', 'others'));
