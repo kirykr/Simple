@@ -37,6 +37,7 @@ class TmpinvoiceController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**

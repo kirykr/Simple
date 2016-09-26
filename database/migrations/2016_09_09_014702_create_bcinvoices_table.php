@@ -16,7 +16,7 @@ class CreateBcinvoicesTable extends Migration
             $table->increments('id');
             $table->datetime('indate');
             $table->float('tamount');
-            $table->float('dicount');
+            $table->float('discount');
             $table->float('subtotal');
             $table->integer('user_id');   
             $table->timestamps();

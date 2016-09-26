@@ -16,7 +16,9 @@ class Computer extends Model
 
     public $incrementing = false;
     protected $fillable = [
+                            'id',
                             'computer_id',
+                            'color_id',
                             'name',
                             'type_id',
                             'category_id',
@@ -73,6 +75,6 @@ class Computer extends Model
     public function colors()
     {
         // belongsTo(RelatedModel, foreignKey = color_id, keyOnRelatedModel = id)
-        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost');
+        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
     }
   }

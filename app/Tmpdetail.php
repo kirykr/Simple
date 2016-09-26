@@ -8,16 +8,16 @@ class Tmpdetail extends Model
 {
     //
     protected $fillable = [
-    						'tmpinvoice_id',
+    						'bcinvoice_id',
     						'pro_id',
     						'description',
     						'qty',
     						'price',
     						'amount'
     ];		
-    public function bcinvoice(){
-    	return $this->belongsTo('App\Tmpinvoice','bcinvoice_id');
-    }
+    // public function bcinvoice(){
+    // 	return $this->belongsTo('App\Tmpinvoice','bcinvoice_id');
+    // }
     public function pro(){
     	return $this->morphTo();
     }

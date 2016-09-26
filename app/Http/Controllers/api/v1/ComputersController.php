@@ -19,7 +19,7 @@ class ComputersController extends Controller {
 	public function index($id)
 	{
 		$computer = Computer::findOrFail($id);
-		$colors = $computer->colors;
+		$colors = $computer->colors()->groupby('color_id')->distinct()->get();
 		return response()->json($colors);
 
 		// return view('admin.categories.index', compact('categories'));

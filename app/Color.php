@@ -12,7 +12,7 @@ class Color extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description'];
+    protected $fillable = ['id','name','description'];
 
     /**
      * Color belongs to Computers.
@@ -22,7 +22,7 @@ class Color extends Model
     public function computers()
     {
     	// belongsTo(RelatedModel, foreignKey = computers_id, keyOnRelatedModel = id)
-    	return $this->belongsToMany('App\Computer','color_computer')->withPivot('serialnumber','quantity', 'cost');
+    	return $this->belongsToMany('App\Computer','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
     }
 
     /**

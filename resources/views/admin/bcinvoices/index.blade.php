@@ -29,9 +29,9 @@
                             <tr>
                                 <td>{{ $bcinvoice->id }}</td>
                                 <td>{{ $bcinvoice->indate }}</td>
-                                <td>{{ $bcinvoice->tamount }}</td>
+                                <td><?php echo '$' ?>{{ $bcinvoice->tamount }}</td>
                                 <td>{{ $bcinvoice->discount*100 ."%" }}</td>
-                                <td>{{ $bcinvoice->subtotal }}</td>
+                                <td><?php echo '$' ?>{{ $bcinvoice->subtotal }}</td>
                                 <td>{{ $bcinvoice->user->name }}</td>
                                 <td class="text-right">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.invoices.show', $bcinvoice->id) }}"><i class="glyphicon glyphicon-eye-open"></i> View</a>

@@ -19,7 +19,7 @@ class OthersController extends Controller {
 	public function index($id)
 	{
 		$other = Other::findOrFail($id);
-		$colors = $other->colors;
+		$colors = $other->colors()->groupby('color_id')->distinct()->get();
 		return response()->json($colors);
 
 		// return view('admin.categories.index', compact('categories'));

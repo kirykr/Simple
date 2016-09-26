@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use App\Tmpdetail;
+use Illuminate\Support\Facades\DB;
+use App\Bcinvoice;
 class TmpdetailController extends Controller
 {
     /**
@@ -82,5 +84,6 @@ class TmpdetailController extends Controller
     public function destroy($id)
     {
         //
+           
     }
 }

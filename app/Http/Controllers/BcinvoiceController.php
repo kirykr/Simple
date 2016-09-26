@@ -11,6 +11,11 @@ use App\Other;
 use App\Tmpdetail;
 use App\Tmpinvoice;
 use App\Color;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use Auth;
+use Redirect;
+
 class BcinvoiceController extends Controller {
 
 	/**
@@ -18,6 +23,7 @@ class BcinvoiceController extends Controller {
 	 *
 	 * @return Response
 	 */
+
 	public function index()
 	{
 		$bcinvoices = Bcinvoice::orderBy('id', 'desc')->paginate(10);
@@ -31,12 +37,12 @@ class BcinvoiceController extends Controller {
 	 * @return Response
 	 */
 	public function create()
-	{
+	{	
 		$computers=Computer::lists('name','id')->all();
 		$others = Other::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
-		$tmpinvoices=Tmpinvoice::find(1);
-		return view('admin.bcinvoices.create',compact('computers','others','tmpinvoices','colors'));
+		$tmpdetails=Tmpdetail::all();
+		return view('admin.bcinvoices.create',compact('computers','others','tmpdetails','colors'));
 	}
 
 	/**
@@ -47,20 +53,138 @@ class BcinvoiceController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		// dd(Input::all());
+		if (Input::get('btn_adddetail'))
+		{	
+			$chars = $request->input("serial_id");
+			$char = str_split($chars);
+			$tp = Tmpdetail::all();
+			 $this->validate($request, [
+			        'qty' => 'required',
+			        'color_id' => 'required',
+			        'description'=>'required',
+			    ]);
+			$tmpdetail = new Tmpdetail();
+			if($request->input("pro_type")=="App\\Computer"){
+
+				$this->validate($request,['computer_id' => 'required','serialnumber'=>'required']);
+				foreach($tp as $id){
+					if($id->pro_id==$request->input("computer_id")&& $id->color_id==$request->input("color_id")){
+						$oqty=$id->qty;
+						$desc = (string)$id->description;
+						$amount = $id->amount;
+						$serialid=(string)$chars;
+						$oqty+=$request->input("qty");
+						$desc= $desc.(string)$request->input("serialupdate");
+						$amount +=$request->input("amount");
+						$id->qty=$oqty;
+						$id->description=$desc;
+						$id->amount=$amount;
+						$id->serial_id.=(string)$serialid;
+						$id->save();
+						for($i=0;$i<count($char);$i++)
+						{
+							DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'unavailable']);
+						}
+						return redirect()->route('admin.invoices.create')->with('message', 'Item Update successfully.');
+					}
+				}
+				$tmpdetail->pro_id= $request->input("computer_id");
+				
+
+			}else{
+				$this->validate($request,['other_id'=>'required']);
+				foreach($tp as $id){
+					if($id->pro_id==$request->input("other_id") && $id->color_id==$request->input("color_id")){
+						$oqty=$id->qty;
+						$oqty+=$request->input("qty");
+						$amount = $id->amount;
+						$amount +=$request->input("amount");
+						$id->qty=$oqty;
+						$id->amount=$amount;
+						$id->save();
+						return redirect()->route('admin.invoices.create')->with('message', 'Item Update successfully.');
+					}
+				}
+				$tmpdetail->pro_id= $request->input("other_id");
+			}
+			
+			$tmpdetail->description= $request->input("description");
+			$tmpdetail->qty= $request->input("qty");
+			$tmpdetail->price= $request->input("sellPrice");
+			$tmpdetail->amount=$request->input("amount");
+			$tmpdetail->pro_type=$request->input("pro_type"); 
+			$tmpdetail->color_id=$request->input("color_id");
+			$tmpdetail->serial_id=$request->input("serial_id");
+			$tmpdetail->save();
+			for($i=0;$i<count($char);$i++)
+			{	
+				DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'unavailable']);
+			}
+			return redirect()->route('admin.invoices.create')->with('message', 'Item Add successfully.');
+		}else if(Input::get('btn_pay')){
+
+			$bcinvoice = new Bcinvoice();
+			$bcinvoice->indate = $request->input("indate");
+	        $bcinvoice->tamount = $request->input("total");
+	        $bcinvoice->discount = $request->input("discount")/100;
+	        $bcinvoice->subtotal = $request->input("subtotal");
+	        $bcinvoice->user_id = Auth::user()->id;
+			$bcinvoice->save();
+			$bcinvoice->indate=$bcinvoice->created_at;
+			$bcinvoice->save();
+			$tmpinvs = Tmpdetail::all();
+			foreach($tmpinvs as $tmpinv){
+				$bcinvdetail = new Bcinvoicedetail();
+				if($tmpinv->pro_type=="App\\Computer"){
+					$computer = Computer::find($tmpinv->pro_id);
+					$serialnumbers = $computer->colors()->where([['color_id','=',$tmpinv->color_id],['status','=','unavailable']])->get();
+					$serialnumber = $serialnumbers[0]->pivot->serialnumber;
+					DB::table('color_computer')->where('serialnumber','=',$serialnumber)->delete();
+					$computer = Computer::find($tmpinv->pro_id);
+					$newqty = $computer->qtyinstock-$tmpinv->qty;
+					$computer->qtyinstock=$newqty;
+					$computer->save();
+				}else{
+					$other = Other::find($tmpinv->pro_id);
+					$newqty = $other->qtyinstock-$tmpinv->qty;
+					$other->qtyinstock=$newqty;
+					$other->save();
+				}
+				$bcinvdetail->bcinvoice_id=$bcinvoice->id;
+				$bcinvdetail->pro_id=$tmpinv->pro_id;
+				$bcinvdetail->description= $tmpinv->description;
+				$bcinvdetail->qty=$tmpinv->qty;
+				$bcinvdetail->price=$tmpinv->price;
+				$bcinvdetail->amount=$tmpinv->amount;
+				$bcinvdetail->pro_type=$tmpinv->pro_type;
+				$bcinvdetail->color_id=$tmpinv->color_id;
+				$bcinvdetail->save();
+			}
+			Tmpdetail::truncate();
+			return Redirect::to('/admin/printinvoice/'.$bcinvoice->id);
+		}else{
+			
+			if($request->input("radio")!=""){
+				$tmp = Tmpdetail::find($request->input("radio"));
+	            $chars=(string)$tmp->serial_id;
+	            $char=str_split($chars);
+	            for($i=0;$i<count($char);$i++)
+	            {
+	                DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'available']);
+	            }
+	            $tmp->delete();
+	            return redirect()->route('admin.invoices.create')->with('message', 'Item deleted successfully.');
+			}else{
+				return redirect()->route('admin.invoices.create')->with('message', 'Please select row before delete.');
+			}
+			
+		}
+
+			
+			
+
 		
-		$bcinvoice = new Bcinvoice();
-		$bcinvoice->indate = $request->input("indate");
-        $bcinvoice->tamount = $request->input("tamount");
-        $bcinvoice->discount = $request->input("discount");
-        $bcinvoice->subtotal = $request->input("subtotal");
-        $bcinvoice->user_id = $request->input("user_id");
-		$bcinvoice->save();
-
-		$bcinv = Bcinvoicedetail::all();
-
-		$bcinvoice->bcinvs()->saveMany($bcinv);
-
-		return redirect()->route('admin.bcinvoices.index')->with('message', 'Item created successfully.');
 	}
 
 	/**
@@ -120,10 +244,9 @@ class BcinvoiceController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$bcinvoice = Bcinvoice::findOrFail($id);
-		$bcinvoice->delete();
-
-		return redirect()->route('admin.bcinvoices.index')->with('message', 'Item deleted successfully.');
+			$bcinvoice = Bcinvoice::findOrFail($id);
+			$bcinvoice->delete();
+			return redirect()->route('admin.invoices.index')->with('message', 'Item deleted successfully.');
 	}
 
 }

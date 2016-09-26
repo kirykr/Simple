@@ -14,7 +14,6 @@ class CreateTmpdetailsTable extends Migration
     {
         Schema::create('tmpdetails', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('bcinvoice_id');
             $table->string('pro_id',20);
             $table->string('description',100);
             $table->integer('qty');

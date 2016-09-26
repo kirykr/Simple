@@ -18,10 +18,11 @@ class Bcinvoicedetail extends Model
     						'description',
     						'qty',
     						'price',
-    						'amount'
+    						'amount',
+                            'created_at'
     ];		
     public function bcinvoice(){
-    	return $this->belongsTo('App\Bcinvoice','bcinvoice_id');
+    	return $this->belongsTo('App\Bcinvoice');
     }
     public function pro(){
     	return $this->morphTo();

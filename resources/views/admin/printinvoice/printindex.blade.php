@@ -1,21 +1,13 @@
 @extends('layouts.admin')
-@section('header')
-<div class="page-header">
-        <h1>Bcinvoices / Show #{{$bcinvoice->id}}</h1>
-        {{-- <form action="{{ route('admin.invoices.destroy', $bcinvoice->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.invoices.edit', $bcinvoice->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
-            </div>
-        </form> --}}
-    </div>
-@endsection
-
 @section('content')
+
+<div class="print">
+    <div class="page-header">
+        <h1>Invoices #{{$bcinvoice->id}}</h1>
+    </div>
     <div class="row">
         <div class="col-md-12">
+  
             <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
@@ -55,35 +47,6 @@
                       </tbody>
                     </table>
             </div>
-            {{-- <form action="#">
-                <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static"></p>
-                </div>
-                <div class="form-group">
-                     <label for="indate">INDATE</label>
-                     <p class="form-control-static">{{$bcinvoice->indate}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="tamount">TAMOUNT</label>
-                     <p class="form-control-static">{{$bcinvoice->tamount}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="discount">DISCOUNT</label>
-                     <p class="form-control-static">{{$bcinvoice->discount}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="subtotal">SUBTOTAL</label>
-                     <p class="form-control-static">{{$bcinvoice->subtotal}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="user_id">USER_ID</label>
-                     <p class="form-control-static">{{$bcinvoice->user_id}}</p>
-                </div>
-            </form>
- --}}
-            
-
         </div>
     </div>
 
@@ -122,7 +85,9 @@
                     {!! Form::close()!!}
                 </div>
             </div>
+        
         </div>
+    </div>
     </div>
     <br/>
     <div class="container-fluid">
@@ -133,3 +98,15 @@
     </div>
     </div>
 @endsection
+@section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/js/jquery.printarea.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(e){
+    var mode = 'iframe';
+    var close= mode=="popup";
+    var options = { mode:mode,popClose : close };
+    $('div.print').printArea(options);
+  });
+ </script>
+@stop
