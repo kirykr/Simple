@@ -26,7 +26,7 @@
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-media.js')}}"></script>
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-thumbs.js')}}"></script>
 
-  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>helpers/
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
   <!-- Bootstrap Core CSS -->
   <style>
     html {
