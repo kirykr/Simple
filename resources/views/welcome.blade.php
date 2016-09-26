@@ -2,6 +2,7 @@
 <style>
 .borderless td, .borderless th {
     border: none !important;
+    font-size: 14px;
 }
 </style>
 @section('content')
@@ -85,7 +86,7 @@
               <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
               <hr>
-              <table  class='table borderless'>
+              <table  class='table table-condensed borderless'>
                 <thead>
                   <tr>
                     <th></th>
@@ -95,7 +96,7 @@
                 <tbody>
                  @foreach ($computer->specs as $spec)
                   <tr>
-                    <td class="text-right">{{$computer->specs[$k]->name}}:</td>
+                    <td class="text-right">{{str_limit($computer->specs[$k]->name, $limit = 9, $end = '')}}:</td>
                     <td>{{str_limit($spec->pivot->description, $limit = 15, $end = '...')}}</td>
                   </tr>
                   <?php 
