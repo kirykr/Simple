@@ -17,6 +17,8 @@ class Computer extends Model
     public $incrementing = false;
     protected $fillable = [
                             'id',
+                            'computer_id',
+                            'color_id',
                             'name',
                             'sellprice',
                             'brand_id',
@@ -67,13 +69,24 @@ class Computer extends Model
     }
 
     /**
-     * Computer belongs to Colors.
+     * The computer or other belong to invoicedetail.
+     */
+    public function bcinvoicedetails(){
+        return $this->morphMany('App\Bcinvoicedetail','pro');
+    }
+    public function tmpdetails(){
+        return $this->morphMany('App\Tmpdetail','pro');
+    }
+    // public function bcinvoicedetails(){
+    //     return $this->hasMany('App\Bcinvoicedetail');
+    // }
+    /**
+     * Computer belongs to Color.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function colors()
     {
-        // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
-        return $this->belongsToMany('App\Color')->withPivot('serialnumber','qty','cost');
+        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
     }
   }
