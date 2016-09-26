@@ -52,11 +52,11 @@ class CimportController extends Controller {
 		$input = $request->all();
 		
 		$cimport = null;
-		if (Input::get('newsubmit')){
-			$input = $request->all();
-			// $cimport = Cimport::create($input);
-		}
-		if (Input::get('addsubmit')){
+		// if (Input::get('newsubmit') == 'newsubmit'){
+		// 	$input = $request->all();
+		// 	// $cimport = Cimport::create($input);
+		// }
+		if (Input::get('addsubmit') == 'addsubmit'){
 			 $this->validate($request, [
 			        'computer_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
@@ -75,19 +75,19 @@ class CimportController extends Controller {
 			return redirect()->back();
 		}
 		// Import Computers
-		if (Input::get('savesubmit')){
+		if (Input::get('savesubmit') == 'savesubmit'){
 			 $this->validate($request, [
 			        'supplier_id' => 'required|max:22',
 			        'invoicenum' => 'required|max:22',
 			    ]);
 			$cimport = Cimport::create($input);
 			$tempcomputers = Tempcomputerstock::all();
-			$cimport->computers()->saveMany($tempcomputers);
+			$cimport->computerdetails()->saveMany($tempcomputers);
 			// $tempcomputers->delete();
 			Tempcomputerstock::truncate();
 			return redirect()->back();
 		}
-		dd($input);
+		// dd($input);
 		
 
 		return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');

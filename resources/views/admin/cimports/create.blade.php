@@ -69,9 +69,6 @@
      <div class="form-group input-group {{ $errors->has('supplier_id') ? 'has-error' :'' }}">
       {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,0,['class'=>'form-control']) !!}
       {!! $errors->first('supplier_id','<span class="help-block">:message</span>') !!}
-       <span class="input-group-btn">
-          <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
-        </span>
     </div>
   </div>
 </div>
@@ -82,9 +79,6 @@
        <div class="form-group input-group {{ $errors->has('computer_id') ? 'has-error' :'' }}">
         {!! Form::select('computer_id',[''=>'Choose Computer'] + $computers,0,['class'=>'form-control']) !!}
         {!! $errors->first('computer_id','<span class="help-block">:message</span>') !!}
-           <span class="input-group-btn">
-              <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
-            </span>
       </div>
     </div>
      <div class="col-md-12">
@@ -92,9 +86,6 @@
      <div class="form-group input-group {{ $errors->has('color_id') ? 'has-error' :'' }}">
       {!! Form::select('color_id',[''=>'Choose Color'] + $colors,0,['class'=>'form-control']) !!}
       {!! $errors->first('color_id','<span class="help-block">:message</span>') !!}
-        <span class="input-group-btn">
-        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
-      </span>
     </div>
   </div>
   </div>
@@ -113,8 +104,6 @@
        <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
         {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly"]) !!}
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
-         <span class="input-group-btn">
-        <button class="btn btn-success editsellprice" type="button"><i class="fa fa-edit"></i></button>
       </div>
     </div>
   </div>
@@ -174,7 +163,11 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button>
             </form>
-              <a class="btn btn-xs btn-info getQty" data-toggle="modal" href="{{ route('admin.tempcomputersotck.show', $tmpcomputerstock->id) }}"><i class="fa fa-arrow-circle-o-down"></i> Add Serial</a>
+            @if ($tmpcomputerstock->serialtemps->count() > 0)
+              <a class="btn btn-xs btn-info getQty" data-toggle="modal" href="#"><i class="fa fa-check fa-fw"></i> Add done</a>
+            @else
+               <a class="btn btn-xs btn-info getQty" data-toggle="modal" href="{{ route('admin.tempcomputersotck.show', $tmpcomputerstock->id) }}"><i class="fa fa-arrow-circle-o-down"></i> Add Serial</a>
+            @endif
           </td>
         </tr>
         <?php $i++; ?>
@@ -289,39 +282,7 @@
           // everything looks good!
         }
       });
-    $("input[unique='serial']").change( function() {
-       // check input ($(this).val()) for validity here
-       var valueOfChangedInput = $
-       (this).val();
-       var timeRepeated = 0;
-       $("input[unique='serial']").each(function () {
-           //Inside each() check the 'valueOfChangedInput' with all other existing input
-           if ($(this).val() == valueOfChangedInput ) {
-               timeRepeated++; //this will be executed at least 1 time because of the input, which is changed just now
-           }
-       });
-
-       if(timeRepeated > 1) {
-           alert("Duplicate value found !");
-           // $('#serialForm').submit( function(ev){
-           //          ev.preventDefault();
-           //          //later you decide you want to submit
-           //   });
-       }
-       else {
-          
-        // $("#serialForm").submit( function(ev){
-         if(timeRepeated > 1) {
-             alert("Duplicate value found !");
-              ev.preventDefault();
-           }else{
-              $("#serialForm").get(0).allowDefault = true;
-           }
-       // });
-             // $("#form1").get(0).allowDefault = true;
-       }
-
-   });
+  
   
 });
   // Unique validation

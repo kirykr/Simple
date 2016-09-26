@@ -7,7 +7,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    {!! Form::open(['action'=>"TempcomputersotckController@store", 'method'=>"POST",'files'=>true, 'id' => 'serailvalidate', 'data-toggle'=>"validator"]) !!}
+    {!! Form::model($tempcomputer,['action' => ['TempcomputersotckController@update', $tempcomputer->id], 'method' => 'PATCH', 'files'=>true]) !!}
     {{-- for Computer Name --}}
     {!! Form::hidden('tempcomputer_id', $tempcomputer->id, []) !!}
     <div class="row">
@@ -30,22 +30,22 @@
     <div class="col-md-3">
      {!! Form::label('qty', 'Computer QTYs') !!}
      <div class="form-group {{ $errors->has('qty') ? 'has-error' :'' }}">
-      {!! Form::text('qty',$tempcomputer->qty,['class'=>'form-control', 'readonly'=> true]) !!}
+      {!! Form::text('qty',$tempcomputer->qty,['class'=>'form-control']) !!}
       {!! $errors->first('qty','<span class="help-block">:message</span>') !!}
     </div>
   </div>
 </div>
 <div class="row">
-  @for($i = 0; $i < $tempcomputer->qty; $i++)
+  @foreach($tempcomputer->serialtemps as $serial)
   <div class="col-md-3">
-   {!! Form::label('qty', 'Serial number ' . ($i+1)) !!}
+   {!! Form::label('qty', 'Serial number ') !!}
    <div class="form-group {{ $errors->has('qty') ? 'has-error' :'' }}">
-    {!! Form::text('serialnumber[]',null,['class'=>'form-control unique  required', 'required'=>"required", 'data-minlength' => "7", 'data-unique' => "unique", 'onclick' => "checkTextBoxes()", 'placeholder' => 'Add Serialnumber here']) !!}
+    {!! Form::text('serialnumber[]',$serial->serialnumber,['class'=>'form-control unique  required', 'required'=>"required", 'data-minlength' => "7", 'data-unique' => "unique", 'onclick' => "checkTextBoxes()", 'placeholder' => 'Add Serialnumber here']) !!}
     <div class="help-block with-errors"></div>
     {!! $errors->first('qty','<span class="help-block">:message</span>') !!}
   </div>
 </div>
-@endfor
+@endforeach
 </div>
 
 <div class="well well-sm">

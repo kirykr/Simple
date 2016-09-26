@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Tempcomputerstock;
+use App\SerialTemp;
+use Illuminate\Support\Facades\Input;
 
 class TempcomputersotckController extends Controller
 {
@@ -37,9 +39,18 @@ class TempcomputersotckController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        dd($input);
-        
+      $input = $request->all();
+          // dd($input);
+      // dd($request->input('serialnumber')[0]);
+      if (Input::get('saveserail') == 'saveserail'){
+        $tempcomputer = Tempcomputerstock::findOrFail($request->input('tempcomputer_id'));
+
+        for($i = 0; $i < count($request->input('serialnumber')); $i++) {
+          $tempcomputer->serialtemps()->save(new SerialTemp(['computer_id' => $request->input('computer_id'),'color_id' => $request->input('color_id'),'serialnumber' => $request->input('serialnumber')[$i]]));
+        }
+      }
+
+      return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');
     }
 
     /**
@@ -51,9 +62,9 @@ class TempcomputersotckController extends Controller
     public function show($id)
     {
         //
-        $tempcomputer = Tempcomputerstock::findOrFail($id);
+      $tempcomputer = Tempcomputerstock::findOrFail($id);
 
-        return view('admin.tempcomputersotck.show', compact('tempcomputer'));
+      return view('admin.tempcomputersotck.show', compact('tempcomputer'));
     }
 
     /**
@@ -65,7 +76,9 @@ class TempcomputersotckController extends Controller
     public function edit($id)
     {
         //
+       $tempcomputer = Tempcomputerstock::findOrFail($id);
 
+       return view('admin.tempcomputersotck.edit', compact('tempcomputer'));
     }
 
     /**
@@ -89,5 +102,9 @@ class TempcomputersotckController extends Controller
     public function destroy($id)
     {
         //
+      $tempcomputer = Tempcomputerstock::findOrFail($id);
+      $tempcomputer->delete();
+      
+      return redirect()->route('admin.cimports.create')->with('message', 'Item deleted successfully.');
     }
-}
+  }

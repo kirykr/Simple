@@ -12,7 +12,7 @@ class SerialTemp extends Model
      *
      * @var array
      */
-    protected $fillable = ['serialnumber'];
+    protected $fillable = ['serialnumber', 'color_id', 'computer_id'];
 
     /**
      * SerialTemp belongs to Tempcomputer.

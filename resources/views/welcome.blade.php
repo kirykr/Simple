@@ -1,6 +1,8 @@
 @extends('layouts.app')
 <style>
-
+.borderless td, .borderless th {
+    border: none !important;
+}
 </style>
 @section('content')
 <div id="carousel-id" class="carousel slide hidden-xs" data-ride="carousel">
@@ -82,16 +84,31 @@
               <a href="{{ route('products.show', $computer->id) }}">
               <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
-             @foreach ($computer->specs as $spec)
-              <p>{{$computer->specs[$k]->name}}: {{$spec->pivot->description}}</p>
-              <?php 
-                if($k === 3)
-                  break;
-                else
-                  $k++
-              ?>
-              @endforeach
-              <p>Availability: </p>
+              <hr>
+              <table  class='table borderless'>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                 @foreach ($computer->specs as $spec)
+                  <tr>
+                    <td class="text-right">{{$computer->specs[$k]->name}}:</td>
+                    <td>{{str_limit($spec->pivot->description, $limit = 15, $end = '...')}}</td>
+                  </tr>
+                  <?php 
+                    if($k === 2)
+                      break;
+                    else
+                      $k++
+                  ?>
+                  @endforeach
+                </tbody>
+              </table>
+            
+              <p class="text-center">Availability: </p>
 
               {{-- @include('includes/star_rating_with_javascript') --}}
               @include('includes/star_rating')
