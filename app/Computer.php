@@ -69,11 +69,14 @@ class Computer extends Model
     }
 
     /**
+     * Computer belongs to Colors.
+    /**
      * The computer or other belong to invoicedetail.
      */
     public function bcinvoicedetails(){
         return $this->morphMany('App\Bcinvoicedetail','pro');
     }
+    
     public function tmpdetails(){
         return $this->morphMany('App\Tmpdetail','pro');
     }

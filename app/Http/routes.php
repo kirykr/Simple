@@ -163,8 +163,9 @@ Route::group(['middleware'=>'admin'], function(){
 				Route::resource('categories.modells', 'api\v1\ModellsController', ['only' => ['index']]);
 
 				Route::resource('computers', 'api\v1\ComputerController',['only' => ['show', 'update']]);
+
 				Route::resource('others', 'api\v1\OtherController',['only' => ['show', 'update']]);
-				});
+			
 				Route::resource('computers.colors', 'api\v1\ComputersController', ['only' => ['index']]);
 
 				Route::resource('colors.computers', 'api\v1\ColorsController', ['only' => ['index']]);
