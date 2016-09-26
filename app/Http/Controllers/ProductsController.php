@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Computer;
+use App\Other;
 
 class ProductsController extends Controller
 {
@@ -48,9 +49,12 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+      if(substr($id, 0, 1) == 'c')
         $computer = Computer::findOrFail($id);
+      else
+        $computer = Other::findOrFail($id);
         // return $computer->all();
-        return view('product', compact('computer'));
+      return view('product', compact('computer'));
     }
 
     /**
@@ -86,4 +90,4 @@ class ProductsController extends Controller
     {
         //
     }
-}
+  }

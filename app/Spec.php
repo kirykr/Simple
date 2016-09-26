@@ -22,4 +22,11 @@ class Spec extends Model
     {
         return $this->belongsToMany('App\Computer')->withPivot('description');
     }
+     /**
+     * The roles that belong to the user.
+     */
+    public function others()
+    {
+        return $this->belongsToMany('App\Other')->withPivot('description');
+    }
 }

@@ -42,5 +42,11 @@ class Other extends Model
         // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Color');
     }
-	
+      /**
+     * The roles that belong to the user.
+     */
+    public function specs()
+    {
+        return $this->belongsToMany('App\Spec')->withPivot('description');
+    }   
 }

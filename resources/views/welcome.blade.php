@@ -60,15 +60,6 @@
       <a href="#"><i class="fa fa-th-list"></i></a> 
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12 pull-right text-right">
-        {{-- <ul class="pagination" style="margin-bottom: 0px !important; padding-bottom: 0px !important">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-          </ul> --}}
           {!! $computers->render() !!}
         </div>
       </div>
@@ -76,7 +67,7 @@
       <div class="container">
         <?php $i = 1; ?>
         <div class="row">
-          @foreach($computers as $computer)
+        @foreach($computers as $computer)
           <?php $k = 0;  ?>
           @if($i % 4 === 0)
           <div class="row">
@@ -116,37 +107,50 @@
 
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                  {{-- {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!} --}}
-                  {{-- {!! Form::hidden('id', $computer->id, []) !!} --}}
-                  {{-- {!! Form::hidden('image', $computer->photo->path, []) !!} --}}
-                  {{-- {!! Form::hidden('qty', 1, []) !!} --}}
-                  {{-- {!! Form::hidden('price', $computer->sellprice, []) !!} --}}
-                  {{-- {!! Form::hidden('options', array('color' => 'Silver','Gold' ) , []) !!} --}}
-                  {{-- {!! Form::hidden('customer_id', Auth::user()->id, []) !!} --}}
-
                   <div class="input-group">
                     <div class="input-group-addon text-center addToCart">${{$computer->sellprice}}
                     </div>
-                    {{-- <button type="summit" class="btn btn-success form-control addToCart"><i class="fa fa-eye"></i> VIEW DETAILS</button> --}}
                     <a href="{{ route('products.show', $computer->id) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
                   </div>
                   {{-- {!! Form::close() !!} --}}
-
                 </div>
               </div>
-
-
             </div>
-
             {{-- <div id="shop"></div> --}}
             @if($i % 4 === 0)
           </div>
           @endif
           <?php $i++; ?>
           @endforeach
+          <p></p>
+          @foreach($others as $other)
+            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
+              <a href="{{ route('products.show', $other->id) }}">
+              <img class="img img-responsive" src="{{ $other->photos ? $other->photos->first()->path : '' }}" alt="Product Image">
+              <h4>{{ str_limit($other->name, $limit = 25, $end = '...')}}</h4></a>
+              <hr>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p class="text-center">Availability: </p>
+
+              {{-- @include('includes/star_rating_with_javascript') --}}
+              @include('includes/star_rating')
+
+              <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="input-group">
+                    <div class="input-group-addon text-center addToCart">${{$other->sellprice}}
+                    </div>
+                    <a href="{{ route('products.show', $other->id) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
+                  </div>
+                  {{-- {!! Form::close() !!} --}}
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
       </div>
-      {!! $computers->render() !!}
+      {!! $computers->render() !!} {!! $others->render() !!}
     </div>
     @endsection
     @section('footer');

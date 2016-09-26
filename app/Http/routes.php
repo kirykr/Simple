@@ -11,12 +11,16 @@
 |
 */
 use App\Computer;
+use App\Other;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(12);
+	$computers = Computer::orderBy('id', 'desc')->paginate(4);
+	$others = Other::orderBy('id', 'desc')->paginate(4);
+	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
 		// return $computers->all();
-	return view('welcome', compact('computers'));
+	return view('welcome', compact('computers', 'others'));
+	// return view('welcome')->with('computers', Computer::orderBy('id', 'desc')->paginate(12))->with('others', Other::orderBy('id', 'desc')->paginate(12));
     // return view('welcome');
 });
 // Route::get('/product/{id}', function ($id) {

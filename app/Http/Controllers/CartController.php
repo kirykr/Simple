@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use \Cart as Cart;
 use App\Computer;
+use App\Other;
 use Auth;
 
 class CartController extends Controller
@@ -52,7 +53,12 @@ class CartController extends Controller
         //
         // return $request->all();
         $items = $request->all();
-        $computer = Computer::findOrFail($items['id']);
+        // dd(substr($request->input('id'), 0, 1));
+        if(substr($items['id'], 0, 1) == 'c')
+          $computer = Computer::findOrFail($items['id']);
+        else
+          $computer = Other::findOrFail($items['id']);
+
         $qty = $items['qty'];
         $image = $request['image'];
         // $options = $items['options'];
