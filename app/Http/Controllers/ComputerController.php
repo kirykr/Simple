@@ -47,7 +47,7 @@ class ComputerController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function store(ComputerRequest $request)
+	public function  (ComputerRequest $request)
 	{
   
 		$input = $request->all();

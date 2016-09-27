@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tempcomputerstock;
 use App\SerialTemp;
+use Validator;
+
 use Illuminate\Support\Facades\Input;
 
 class TempcomputersotckController extends Controller
@@ -43,6 +45,15 @@ class TempcomputersotckController extends Controller
           // dd($input);
       // dd($request->input('serialnumber')[0]);
       if (Input::get('saveserail') == 'saveserail'){
+
+        $validator = Validator::make($request->all(), [
+             'serialnumber' => 'required|unique:color_computer|max:15'
+         ]);
+
+        if ($validator->fails()) {
+             return redirect()->back()->withErrors($validator)->withInput();
+         }
+
         $tempcomputer = Tempcomputerstock::findOrFail($request->input('tempcomputer_id'));
 
         for($i = 0; $i < count($request->input('serialnumber')); $i++) {

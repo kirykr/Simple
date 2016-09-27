@@ -40,7 +40,10 @@ class ComputerSpecsController extends Controller
      */
     public function store(Request $request, $computerId)
     {
-        //
+        $this->validate($request, [
+                    'description' => 'required|max:25',
+                    'spec_id' => 'required',
+                ]);
         // dd($request->all());
         // dd($computerId);
         $computer = Computer::find($computerId);

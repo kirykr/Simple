@@ -17,7 +17,7 @@
            </div>
            <div class="form-group">
                <label for="photo_id">PHOTO_ID</label>
-               <p class="form-control-static"><img width="220" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt=""></p>
+               <p class="form-control-static"><img width="220" src=" {{ $computer->photos ? $computer->photos->first()->path : '' }} " alt=""></p>
            </div>
     </div>
     <div class="col-md-8">
@@ -32,7 +32,7 @@
         <div class="col-md-6">
            {!! Form::label('spec', 'Add More Specs') !!}
           <div class="form-group">
-           <a href="{{ route('admin.specs.create') }}"  class="btn btn-success"><i class="fa fa-plus fa-fw"></i> Add New Specs</a>
+           <a href="{{ route('admin.specs.create') }}"  class="btn btn-default"><i class="fa fa-plus fa-fw"></i> Add New Specs</a>
            </div>
         </div>
         <div class="col-md-12">
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="col-md-12 well well-sm">
-          <button type="submit" value="addspec" name="addspec" class="btn btn-primary">Add Spec</button>
+          <button type="submit" value="addspec" name="addspec" class="btn btn-primary">Save Spec</button>
         </div>
       {!! Form::close() !!}
       <div class="row">

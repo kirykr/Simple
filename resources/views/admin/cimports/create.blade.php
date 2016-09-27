@@ -46,7 +46,14 @@
    <div class="col-md-3">
      <div class="form-group @if($errors->has('totalamount')) has-error @endif">
        <label for="totalamount-field">Total Amount</label>
-       <input type="text" id="totalamount-field" name="totalamount" readonly="readonly" class="form-control" value="{{ old("totalamount") }}"/>
+       <input type="text" id="totalamount-field" name="totalamount" readonly="readonly" class="form-control" value="<?php
+        $total = 0.0;
+        foreach($tempcomputers as $tempcom){
+          $total = $total + ($tempcom->cost * $tempcom->qty);
+       }
+       ?>
+       {{ $total }}
+      "/>
        @if($errors->has("totalamount"))
        <span class="help-block">{{ $errors->first("totalamount") }}</span>
        @endif
@@ -118,11 +125,18 @@
   </div>
 </div> 
 <hr>
+@foreach($tempcomputers as $tempcom )
+  @if(count($tempcom->serialtemps) <= 0)
+    {!! Form::hidden('serialtemp', null, []) !!}
+  @else
+    {!! Form::hidden('serialtemp', 'asdfasdfasdfasdfasdfasdf', []) !!}
+  @endif
+@endforeach
 <div class="well well-sm">
   <button type="submit" value="newsubmit" name="newsubmit" class="btn btn-success"><i class="fa fa-asterisk"></i> New Import</button>
   <button type="submit" value="addsubmit" name="addsubmit" class="btn btn-warning"><i class="fa fa-download"></i> Add Computer</button>
   <a class="btn btn-link pull-right" href="{{ route('admin.cimports.index') }}"><i class="fa fa-backward"></i> Back</a>
-  <button type="submit" value="addsubmit" name="savesubmit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Save Import</button>
+  <button type="submit" value="savesubmit" name="savesubmit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Save Import</button>
 </div>
 {!! Form::close() !!}
 {{-- </form> --}}
@@ -139,7 +153,6 @@
           <th>Color</th>
           <th>Qty</th>
           <th>Cost</th>
-          <th>sell Price</th>
           <th>Amount</th>
           <th class="text-right">Option</th>
         </tr>
@@ -153,8 +166,7 @@
           <td>{{ $tmpcomputerstock->color_name }}</td>
           <td class="qty">{{ $tmpcomputerstock->qty }}</td>
           <td>{{ $tmpcomputerstock->cost }}</td>
-          <td>{{ $tmpcomputerstock->sellprice }}</td>
-          <td>{{ $tmpcomputerstock->cost * $tmpcomputerstock->cost }}</td>
+          <td>{{ $tmpcomputerstock->amount }}</td>
           <td class="text-right">
              {{-- <a class="btn btn-xs btn-primary" href="{{ route('admin.tempcomputerstock.show', $category->id) }}"><i class="fa fa-eye"></i> View</a> --}}
             <a class="btn btn-xs btn-warning" href="{{ route('admin.tempcomputersotck.edit', $tmpcomputerstock->id) }}"><i class="fa fa-edit"></i> Edit</a>
