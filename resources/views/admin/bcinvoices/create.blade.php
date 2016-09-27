@@ -171,7 +171,9 @@
                 @if($tmpdetail->description!=null)
                 {!! Form::submit('Pay Bill',['name'=>'btn_pay','class'=>'btn btn-primary pull-right']) !!}
                 @endif
-                @endforeach
+                
+<?php break; ?>
+@endforeach
                 {{-- <button type="submit" class="btn btn-primary">Add</button> --}}
                 {{-- <button type="submit" class="btn btn-primary pull-right">Save</button> --}}
 
@@ -195,8 +197,12 @@
                   <th>Amount</th>
                   @foreach($tmpdetails as $tmpdetail)
                   @if($tmpdetail->description!=null)
+
                   <th class="text-right"><button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></th>
-                  @endif
+                  
+			@endif
+
+		<?php break; ?>
                   @endforeach
                 </tr>
               </thead>
