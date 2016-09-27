@@ -62,7 +62,7 @@ class Computer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function imports()
+    public function cimports()
     {
         // belongsTo(RelatedModel, foreignKey = imports_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');

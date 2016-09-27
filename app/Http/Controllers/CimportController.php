@@ -49,6 +49,8 @@ class CimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
+		// dd($request->all());
 		$input = $request->all();
 		
 		$cimport = null;
@@ -64,27 +66,46 @@ class CimportController extends Controller {
 			        'sellprice' => 'required|numeric|min:1',
 			        'cost' => 'required|numeric|min:1',
 			    ]);
-			 // dd($input);
+
 			$input = $request->except(['photo_id']);
-			
 			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
 			$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
 			$input['qty'] = $request->input('qtyinstock');
-
+			$input['amount'] = $request->input('qtyinstock') * $request->input('cost');
 			$tempcomputer= Tempcomputerstock::create($input);
 			return redirect()->back();
 		}
+
 		// Import Computers
 		if (Input::get('savesubmit') == 'savesubmit'){
 			 $this->validate($request, [
 			        'supplier_id' => 'required|max:22',
 			        'invoicenum' => 'required|max:22',
+			        'serialtemp' => 'required|min:7'
 			    ]);
 			$cimport = Cimport::create($input);
-			$tempcomputers = Tempcomputerstock::all();
-			$cimport->computerdetails()->saveMany($tempcomputers);
-			// $tempcomputers->delete();
+
+			// $tempcomputers =  DB::table('tempcomputerstocks')->select('color_id', 'qty', 'cost', 'amount')->get();
+
+			$comptemps = Tempcomputerstock::all();
+			foreach($comptemps as $comptemp){
+				
+				$color = Color::find($comptemp->color_id);
+				
+				$computer = Computer::find($comptemp->computer_id);
+				$cimport->computerdetails()->save($computer,['color_id' => $comptemp->color_id, 'qty' => $comptemp->qty, 'cost' => $comptemp->cost, 'amount' => $comptemp->qty * $comptemp->cost]);
+				
+				foreach($comptemp->serialtemps as $serial){
+						$computer->colors()->save($color, ['serialnumber' => $serial->serialnumber, 'quantity' => 1, 'cost' => $comptemp->cost, 'status' => 'available']);
+				}
+
+			}
+
+			
+			DB::statement("SET foreign_key_checks=0");
+			DB::table('serial_temps')->truncate();
 			Tempcomputerstock::truncate();
+			DB::statement("SET foreign_key_checks=1");
 			return redirect()->back();
 		}
 		// dd($input);

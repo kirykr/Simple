@@ -39,13 +39,13 @@ class Cimport extends Model
       }                 
 
       /**
-                     * Cimport has many .
-                     *
-                     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-                     */
-                    public function comstocks()
-                    {
-                      // hasMany(RelatedModel, foreignKeyOnRelatedModel = cimport_id, localKey = id)
-                      return $this->hasMany('App\Comstock');
-                    }           		
+       * Cimport has many .
+       *
+       * @return \Illuminate\Database\Eloquent\Relations\HasMany
+       */
+      public function comstocks()
+      {
+        // hasMany(RelatedModel, foreignKeyOnRelatedModel = cimport_id, localKey = id)
+        return $this->hasMany('App\Comstock');
+      }           		
 }

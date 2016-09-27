@@ -15,7 +15,7 @@
             {!! Form::open(['action'=>'BcinvoiceController@store','method'=>'POST','files'=>true]) !!}
             <div class="row">
               <div class="col-md-2">
-                <div class="row ">
+                <div class="row ">C
                   <div class="col-md-12">
                     <div class="form-group @if($errors->has('indate')) has-error @endif">
                      {!! Form::label('indate', 'Indate', []) !!}
@@ -171,6 +171,7 @@
                 @if($tmpdetail->description!=null)
                 {!! Form::submit('Pay Bill',['name'=>'btn_pay','class'=>'btn btn-primary pull-right']) !!}
                 @endif
+                <?php break; ?>
                 @endforeach
                 {{-- <button type="submit" class="btn btn-primary">Add</button> --}}
                 {{-- <button type="submit" class="btn btn-primary pull-right">Save</button> --}}
@@ -194,8 +195,10 @@
                   <th>Price</th>
                   <th>Amount</th>
                   @foreach($tmpdetails as $tmpdetail)
-                  @if($tmpdetail->description!=null)
+                  @if($tmpdetail->description!=null) 
+                  
                   <th class="text-right"><button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></th>
+<?php break; ?>
                   @endif
                   @endforeach
                 </tr>
