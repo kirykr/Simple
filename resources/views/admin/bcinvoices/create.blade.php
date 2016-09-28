@@ -195,6 +195,8 @@
                   <th>Price</th>
                   <th>Amount</th>
                   @foreach($tmpdetails as $tmpdetail)
+
+                  
                   @if($tmpdetail->description!=null) 
                   
                   <th class="text-right"><button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></th>
