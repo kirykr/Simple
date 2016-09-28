@@ -153,6 +153,7 @@ return [
         \Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        'Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider',
         /*
          * Application Service Providers...
          */

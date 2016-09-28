@@ -59,7 +59,7 @@ class OimportController extends Controller {
 			 $this->validate($request, [
 			        'other_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
-			        // 'color_id' => 'required|numeric|min:1',
+			        'color_id' => 'required|numeric|min:1',
 			        'sellprice' => 'required|numeric|min:1',
 			        'cost' => 'required|numeric|min:1',
 			    ]);
@@ -76,7 +76,7 @@ class OimportController extends Controller {
 		if (Input::get('savesubmit')){
 			 $this->validate($request, [
 			        'supplier_id' => 'required|max:22',
-			        'supplier_id' => 'required|max:22',
+			        'invoicenumber' => 'required|max:22',
 			    ]);
 			$input = $request->except(['photo_id']);
 			$oimport = Oimport::create($input);
