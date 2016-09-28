@@ -127,7 +127,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
               <a href="{{ route('products.show', $other->id) }}">
               <img class="img img-responsive" src="{{ $other->photos ? $other->photos->first()->path : '' }}" alt="Product Image">
-              <h4>{{ str_limit($other->name, $limit = 25, $end = '...')}}</h4></a>
+              <h4>{{$other->name ? str_limit($other->name, $limit = 25, $end = '...') : ''}}</h4></a>
               <hr>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.</p>
