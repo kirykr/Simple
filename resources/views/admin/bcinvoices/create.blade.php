@@ -200,7 +200,7 @@
                   @if($tmpdetail->description!=null) 
                   
                   <th class="text-right"><button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> Delete</button></th>
-<?php break; ?>
+                  <?php break; ?>
                   @endif
                   @endforeach
                 </tr>

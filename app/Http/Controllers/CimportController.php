@@ -106,6 +106,7 @@ class CimportController extends Controller {
 			DB::table('serial_temps')->truncate();
 			Tempcomputerstock::truncate();
 			DB::statement("SET foreign_key_checks=1");
+			
 			return redirect()->back();
 		}
 		// dd($input);

@@ -73,8 +73,13 @@
    </div>
    <div class="col-md-3">
      {!! Form::label('supplier_id', 'Company Name') !!}
-     <div class="form-group input-group {{ $errors->has('supplier_id') ? 'has-error' :'' }}">
-      {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,0,['class'=>'form-control']) !!}
+     <div class="form-group {{ $errors->has('supplier_id') ? 'has-error' :'' }}">
+     <div class="input-group col-md-12">
+        {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,0,['class'=>'form-control']) !!}
+        <span class="input-group-btn">
+        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+        </span>
+     </div>
       {!! $errors->first('supplier_id','<span class="help-block">:message</span>') !!}
     </div>
   </div>
@@ -83,15 +88,25 @@
   <div class="col-md-4">
      <div class="col-md-12">
        {!! Form::label('computer_id', 'Computer Name') !!}
-       <div class="form-group input-group {{ $errors->has('computer_id') ? 'has-error' :'' }}">
+       <div class="form-group {{ $errors->has('computer_id') ? 'has-error' :'' }}">
+        <div class="input-group col-md-12">
         {!! Form::select('computer_id',[''=>'Choose Computer'] + $computers,0,['class'=>'form-control']) !!}
+        <span class="input-group-btn">
+        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+        </span>
+        </div>
         {!! $errors->first('computer_id','<span class="help-block">:message</span>') !!}
       </div>
     </div>
      <div class="col-md-12">
      {!! Form::label('color_id', 'Color') !!}
-     <div class="form-group input-group {{ $errors->has('color_id') ? 'has-error' :'' }}">
+     <div class="form-group {{ $errors->has('color_id') ? 'has-error' :'' }}">
+     <div class="input-group col-md-12">
       {!! Form::select('color_id',[''=>'Choose Color'] + $colors,0,['class'=>'form-control']) !!}
+      <span class="input-group-btn">
+      <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+      </span>
+      </div>
       {!! $errors->first('color_id','<span class="help-block">:message</span>') !!}
     </div>
   </div>

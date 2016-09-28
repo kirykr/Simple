@@ -122,35 +122,9 @@
           @endif
           <?php $i++; ?>
           @endforeach
-          <p></p>
-          @foreach($others as $other)
-            <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-              <a href="{{ route('products.show', $other->id) }}">
-              <img class="img img-responsive" src="{{ $other->photos ? $other->photos->first()->path : '' }}" alt="Product Image">
-              <h4>{{$other->name ? str_limit($other->name, $limit = 25, $end = '...') : ''}}</h4></a>
-              <hr>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
-              <p class="text-center">Availability: </p>
-
-              {{-- @include('includes/star_rating_with_javascript') --}}
-              @include('includes/star_rating')
-
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <div class="input-group">
-                    <div class="input-group-addon text-center addToCart">${{$other->sellprice}}
-                    </div>
-                    <a href="{{ route('products.show', $other->id) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
-                  </div>
-                  {{-- {!! Form::close() !!} --}}
-                </div>
-              </div>
-            </div>
-          @endforeach
         </div>
       </div>
-      {!! $computers->render() !!} {!! $others->render() !!}
+      {{-- {!! $computers->render() !!} {!! $others->render() !!} --}}
     </div>
     @endsection
     @section('footer');

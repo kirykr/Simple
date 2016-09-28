@@ -46,9 +46,16 @@ class TempcomputersotckController extends Controller
       // dd($request->input('serialnumber')[0]);
       if (Input::get('saveserail') == 'saveserail'){
 
-        $validator = Validator::make($request->all(), [
-             'serialnumber' => 'required|unique:color_computer|max:15'
-         ]);
+        $rules = array(
+                'serialnumber' => 'required|unique_with:color_computer'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails())
+        {
+            return Redirect::back()->withErrors($validator);
+        }
 
         if ($validator->fails()) {
              return redirect()->back()->withErrors($validator)->withInput();
