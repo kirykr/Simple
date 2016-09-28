@@ -137,7 +137,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/tmpinvoices/detail','TmpdetailController');
 	Route::get('/admin/printinvoice/{id}',function($id){
 		$bcinvoice = Bcinvoice::find($id);
-		return view('admin/printinvoice/printindex',compact('bcinvoice'));
+		return view('admin/printinvoice/invoiceprint',compact('bcinvoice'));
 	});
 	
 	//Route::resource("/admin/shipping","ShippingController");

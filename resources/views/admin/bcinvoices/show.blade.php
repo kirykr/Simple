@@ -51,43 +51,38 @@
                              ?>
                          </tr>
                         @endforeach
-                     
+                        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>TAmount</td>
+                            <td class="text-right">{{'$'.$bcinvoice->tamount}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Discount</td>
+                            <td class="text-right">{{(100*$bcinvoice->discount).'%'}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Subtotal</td>
+                            <td class="text-right">{{ '$'.$bcinvoice->subtotal }}</td>
+                        </tr>
                       </tbody>
                     </table>
-            </div>
-            {{-- <form action="#">
-                <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static"></p>
-                </div>
-                <div class="form-group">
-                     <label for="indate">INDATE</label>
-                     <p class="form-control-static">{{$bcinvoice->indate}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="tamount">TAMOUNT</label>
-                     <p class="form-control-static">{{$bcinvoice->tamount}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="discount">DISCOUNT</label>
-                     <p class="form-control-static">{{$bcinvoice->discount}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="subtotal">SUBTOTAL</label>
-                     <p class="form-control-static">{{$bcinvoice->subtotal}}</p>
-                </div>
-                    <div class="form-group">
-                     <label for="user_id">USER_ID</label>
-                     <p class="form-control-static">{{$bcinvoice->user_id}}</p>
-                </div>
-            </form>
- --}}
-            
-
-        </div>
+            </div>         
+       </div>
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-8"></div>
@@ -123,7 +118,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <br/>
     <div class="container-fluid">
     <div class="row">

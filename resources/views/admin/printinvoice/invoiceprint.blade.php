@@ -1,13 +1,31 @@
-@extends('layouts.admin')
-@section('content')
-
-<div class="print">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Print_Inovice</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.printarea.js"></script>
+    <script type="text/javascript">
+     $(document).ready(function(e){
+        var mode = 'iframe';
+        var close= mode=="popup";
+        var options = { mode:mode,popClose : close };
+        $('div.print').printArea(options);
+      });
+ </script>
+ <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="print">
     <div class="page-header">
+        <h1>SL5 Computer Shop</h1>
         <h1>Invoices #{{$bcinvoice->id}}</h1>
     </div>
     <div class="row">
         <div class="col-md-12">
-  
             <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
@@ -43,14 +61,50 @@
                              ?>
                          </tr>
                         @endforeach
-                     
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>TAmount</td>
+                            <td class="text-right">{{'$'.$bcinvoice->tamount}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Discount</td>
+                            <td class="text-right">{{(100*$bcinvoice->discount).'%'}}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Subtotal</td>
+                            <td class="text-right">{{ '$'.$bcinvoice->subtotal }}</td>
+                        </tr>
                       </tbody>
                     </table>
             </div>
         </div>
     </div>
-
+</div>
+    <br/>
+    
     <div class="row">
+        <div class="col-md-12 well well-sm">
+            <a class="btn btn-link" href="{{ route('admin.invoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
+
+
+
+{{--     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-8"></div>
@@ -87,26 +141,5 @@
             </div>
         
         </div>
-    </div>
-    </div>
-    <br/>
-    <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 well well-sm">
-            <a class="btn btn-link" href="{{ route('admin.invoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
-        </div>
-    </div>
-    </div>
-@endsection
-@section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="/js/jquery.printarea.js"></script>
-<script type="text/javascript">
- $(document).ready(function(e){
-    var mode = 'iframe';
-    var close= mode=="popup";
-    var options = { mode:mode,popClose : close };
-    $('div.print').printArea(options);
-  });
- </script>
-@stop
+    </div> --}}
+    

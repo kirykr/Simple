@@ -228,6 +228,7 @@
                
                 </tr>
                 @endforeach
+                
              </tbody>
            </table>
            {{-- {!! Form::open(['action'=>'BcinvoiceController@store','method'=>'POST','files'=>true]) !!} --}}
