@@ -7,6 +7,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Computer;
+use App\Other;
+
 class HomeController extends Controller
 {
     /**
@@ -26,9 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $computers = Computer::orderBy('id', 'desc')->paginate(10);
-        // $items = Cart::content();
-        // return $computers->all();
+       $computers = Computer::orderBy('id', 'desc')->paginate(12);
+        // $others = Other::orderBy('id', 'desc')->paginate(12);
+        // $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
+            // return $computers->all();
         return view('welcome', compact('computers'));
         // return view('home');
     }

@@ -12,15 +12,34 @@
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
-  <script src="{{asset('js/libs.js')}}"></script>
+ {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> --}}
+  {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
+  {{-- <script src="{{asset('js/jqueryElevateZoom.js')}}"></script> --}}
+  <script src="{{asset('js/ripples.min.js')}}"></script>
+  <script src="{{asset('js/metisMenu.js')}}"></script>
+  <script src="{{asset('js/sb-admin-2.js')}}"></script>
+  <script src="{{asset('js/sweetalert.min.js')}}"></script>
+  <script src="{{asset('js/script.js')}}"></script>
+  
   <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
   <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
   <script src="{{asset('js/plugins/purify.min.js')}}"></script>
   <script src="{{asset('js/fileinput.min.js')}}"></script>
   <script src="{{asset('js/themes/fa/theme.js')}}"></script>
   <script src="{{asset('js/locales/LANG.js')}}"></script>
+  <script src="{{asset('js/select2.full.min.js')}}"></script>
+  <script src="{{asset('js/i18n/en.js')}}"></script>
+  <script src="{{asset('js/validator.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.16.1/lodash.min.js"></script>
+  
+ 
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
   <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -46,7 +65,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+      <style type="text/css">
+      a {
+        color: #333;
+        font-size: 15px;
+      }
+      </style>
       </head>
 
       <body>
@@ -407,6 +431,18 @@
                       <li>
                         <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
                       </li>
+                      <li>
+                        <a href="{{ route('admin.specs.create') }}"><i class="fa fa-gear fa-fw"></i> Add Specs</a>
+                      </li>
+                      <li>
+                        <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
+                      </li>
+                      <li>
+                        <a href="{{ route('admin.cimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
+                      </li>
+                       <li>
+                        <a href="{{ route('admin.cimports.index') }}"><i class="fa fa-th-list fa-fw"></i>Import Details</a>
+                      </li>
                     </ul>
                     <!-- /.nav-second-level -->
                   </li>
@@ -418,6 +454,9 @@
                       </li>
                       <li>
                         <a href="{{ route('admin.others.create') }}"><i class="fa fa-hdd-o fa-fw"></i> Create Other Products</a>
+                      </li>
+                      <li>
+                        <a href="{{ route('admin.oimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Others</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -543,23 +582,18 @@
           <!-- /#wrapper -->
 
           <!-- jQuery -->
-
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
-
+{{-- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ --}}
 
 
   {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
   {{-- =================================== Script =============================== --}}
-  <script>
-
-      // // run bootlint
-      // javascript:(function(){var s=document.createElement("script");s.onload=function(){bootlint.showLintReportForCurrentDocument([], {problemFree: false});};s.src="https://maxcdn.bootstrapcdn.com/bootlint/latest/bootlint.min.js";document.body.appendChild(s)})();
-    </script>
     @yield('footer')
-    
-
+     <script src="{{asset('js/validator.min.js')}}"></script>
+    <p style="with:auto; height: 100px;"></p>
     @if(Session::has('delete_user'))
     <script>
             // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
@@ -574,7 +608,9 @@
 @yield('scripts')
 
 <script type="text/javascript">
-
+  $(document).ready(function() {
+    // Select2
+   
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",
@@ -602,55 +638,11 @@
             }).on('fileuploaded', function(e, params) {
               console.log('File uploaded params', params);
             });
-     
+     });
       //======================== API ====================================
-      $(document).ready(function() {
-        $('#computer_brand').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#type_id');
-          var endpoint = '/admin/api/v1/brands/'+ id + '/types'
-          getComputerCategories(element, endpoint);
-        });
 
-        $('#type_id').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#category_id');
-          var endpoint = '/admin/api/v1/types/'+ id + '/categories'
-          getComputerCategories(element, endpoint);
-        });
-
-        $('#category_id').on('change', function(e) {
-          var id = $(this).val();
-          if(id) 
-            var element = $('#model_id');
-          var endpoint = '/admin/api/v1/categories/'+ id + '/modells'
-          getComputerCategories(element, endpoint);
-        });
-
-        function getComputerCategories(element, endpoint) {
-          $.ajax({
-            method: 'GET',
-            url: endpoint,
-            success: function(response) {
-              element.empty();
-              response.map(function(item) {
-
-                var option = "<option value="+item.id+">"+ item.name +"</option>";
-                element.append(option);
-              });
-            },
-            error: function(error) {
-              console.log(error)
-            }
-          })
-        }
-
-      });
-
+       
     </script>
-
-
+    @include('includes/brand_type_model')
   </body>
   </html>

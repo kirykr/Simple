@@ -28,14 +28,6 @@ elixir(function(mix) {
     ], './public/css/libs.css')
 
     .scripts([
-    	'libs/jquery.min.js',
-        'libs/ripples.min.js',
-        'libs/jquery-ui.min.js',
-    	'libs/bootstrap.js',
-    	'libs/metisMenu.js',
-    	'libs/sb-admin-2.js',
-        'libs/sweetalert.min.js',
-    	'libs/script.js',
     ], './public/js/libs.js')
 
 });

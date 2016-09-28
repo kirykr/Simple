@@ -15,12 +15,9 @@ class CreateComputersTable extends Migration {
 		Schema::create('computers', function(Blueprint $table) {
             $table->string('id');
             $table->string('name');
-            $table->integer('qtyinstock');
-            $table->float('sellprice');
-            $table->integer('type_id')->default(0);
-            $table->integer('category_id')->default(0);
+            $table->integer('qtyinstock')->default(0);
+            $table->float('sellprice')->default(0);
             $table->integer('brand_id')->default(0);
-            $table->integer('model_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

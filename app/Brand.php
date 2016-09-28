@@ -12,7 +12,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description','type_id'];
+    protected $fillable = ['name','description'];
 
    /**
     * Brand has many Types.
@@ -22,6 +22,6 @@ class Brand extends Model
    public function types()
    {
        // hasMany(RelatedModel, foreignKeyOnRelatedModel = brand_id, localKey = id)
-       return $this->hasMany(Type::class);
+       return $this->hasMany('App\Type');
    }
 }

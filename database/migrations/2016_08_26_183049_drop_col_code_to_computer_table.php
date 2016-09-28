@@ -14,7 +14,7 @@ class DropColCodeToComputerTable extends Migration
     {
         Schema::table('computers', function (Blueprint $table) {
             //
-            $table->dropColumn('comcode');
+            // $table->dropColumn('comcode');
         });
     }
 

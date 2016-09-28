@@ -29,11 +29,8 @@ class AdminUserController extends Controller
 
     public function index()
     {
-        //
+       
         $users = User::orderBy('id', 'asc')->paginate(5);
-        // $users = User::with('roles')->orderBy('id','asc')->paginate(5);
-//        $users = ['Dara','nimol','chada'];
-//         dd($users);
 
         return view('admin.users.index', compact('users'));
     }
@@ -66,7 +63,7 @@ class AdminUserController extends Controller
 
         // $role = Role::where('id','=',$request->role_id)->first();
 
-        if(trim($request->password) == ''){
+        if($request->password == ''){
             $input = $request->except('password');
         }else{
             $input = $request->all();

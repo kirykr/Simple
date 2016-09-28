@@ -25,13 +25,12 @@ class ComputerRequest extends Request
     {
         return [
             //
-           'name'=>'required',
-           // 'qtyinstock'=>'required',
-           // 'sellprice'=>'required',
-           // 'type_id'=>'required',
-           // 'category_id'=>'required',
-           // 'brand_id'=>'required',
-           // 'model_id'=>'required',
+           'name' => 'required|max:30',
+           'sellprice' => 'required|numeric|min:1',
+           'ppprice' => 'required|numeric|min:1',
+           'provprice' => 'required|numeric|min:1',
+           'status' => 'required|numeric|min:1',
+           'brand_id' => 'required'
         ];
     }
 }

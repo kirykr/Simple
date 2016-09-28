@@ -35,8 +35,8 @@
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->category ? $post->category->name : 'Uncategoried' }}</td>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->body}}</td>
-                    <td class="text-right" style="width: 180px">
+                    <td>{{ str_limit($post->body, $limit = 30, $end = '...') }}</td>
+                    <td class="text-right text-nowrap" style="width: 180px">
                         <a class="btn btn-xs btn-primary" href="{{ route('admin.posts.show', $post->id) }}"><i class="fa fa-eye"></i> View</a>
                         <a class="btn btn-xs btn-warning" href="{{ route('admin.posts.edit', $post->id) }}"><i class="fa fa-edit"></i> Edit</a>
                         <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">

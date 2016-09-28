@@ -20,10 +20,11 @@ class Computer extends Model
                             'computer_id',
                             'color_id',
                             'name',
-                            'type_id',
-                            'category_id',
+                            'sellprice',
                             'brand_id',
-                            'model_id',
+                            'ppprice',
+                            'provprice',
+                            'status',
 
                         ];
 
@@ -55,12 +56,27 @@ class Computer extends Model
     {
         return $this->belongsToMany('App\Spec')->withPivot('description');
     }	
+
+    /**
+     * Computer belongs to Imports.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cimports()
+    {
+        // belongsTo(RelatedModel, foreignKey = imports_id, keyOnRelatedModel = id)
+        return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');
+    }
+
+    /**
+     * Computer belongs to Colors.
     /**
      * The computer or other belong to invoicedetail.
      */
     public function bcinvoicedetails(){
         return $this->morphMany('App\Bcinvoicedetail','pro');
     }
+    
     public function tmpdetails(){
         return $this->morphMany('App\Tmpdetail','pro');
     }
@@ -74,7 +90,6 @@ class Computer extends Model
      */
     public function colors()
     {
-        // belongsTo(RelatedModel, foreignKey = color_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
     }
   }

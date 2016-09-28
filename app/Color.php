@@ -32,7 +32,6 @@ class Color extends Model
      */
     public function others()
     {
-    	// belongsTo(RelatedModel, foreignKey = others_id, keyOnRelatedModel = id)
     	return $this->belongsToMany('App\Other');
     }
 }

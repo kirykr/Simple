@@ -16,10 +16,10 @@ class Other extends Model
     protected $fillable = [
     						'id',
     						'name',
-    						'type_id',
-    						'category_id',
-    						'brand_id',
-    						'model_id'
+    						'sellprice',
+    						'ppprice',
+    						'provprice',
+    						'brand_id'
 						];
 	/**
 	 * Other belongs to Photos.
@@ -29,7 +29,7 @@ class Other extends Model
 	public function photos()
 	{
 		// belongsTo(RelatedModel, foreignKey = photos_id, keyOnRelatedModel = id)
-		return $this->belongsToMany(Photo::class);
+		return $this->belongsToMany('App\Photo');
 	}
 
 	public function bcinvoicedetails(){
@@ -51,4 +51,11 @@ class Other extends Model
         // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Color');
     }
+      /**
+     * The roles that belong to the user.
+     */
+    public function specs()
+    {
+        return $this->belongsToMany('App\Spec')->withPivot('description');
+    }   
 }

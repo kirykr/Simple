@@ -14,7 +14,7 @@ class DropPhotoIdFromOtherTable extends Migration
     {
         Schema::table('others', function (Blueprint $table) {
             //
-            $table->dropColumn('photo_id');
+            // $table->dropColumn('photo_id');
         });
     }
 

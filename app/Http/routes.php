@@ -11,10 +11,10 @@
 |
 */
 use App\Computer;
+use App\Other;
 use App\Bcinvoice;
 use App\User;
 use App\Bcinvoicedetail;
-use App\Other;
 use App\Spec;
 use App\Tmpdetail;
 use App\Color;
@@ -46,9 +46,12 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(10);
+	$computers = Computer::orderBy('id', 'desc')->paginate(12);
+	// $others = Other::orderBy('id', 'desc')->paginate(12);
+	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
 		// return $computers->all();
 	return view('welcome', compact('computers'));
+	// return view('welcome')->with('computers', Computer::orderBy('id', 'desc')->paginate(12))->with('others', Other::orderBy('id', 'desc')->paginate(12));
     // return view('welcome');
 });
 // Route::get('/product/{id}', function ($id) {
@@ -90,6 +93,13 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/suppliers","SupplierController");
 	Route::resource('/admin/roles','RoleController');
 	Route::resource("/admin/cimports","CimportController");
+	Route::resource("/admin/colors","ColorController");
+	Route::resource("/admin/oimports","OimportController");
+	// Route::resource("/admin/computerspecs", "ComputerSpecsController");
+	Route::post('/admin/computerspecs/{id}', array('as' => 'admin.computerspecs.store', 'uses' => 'ComputerSpecsController@store'));
+
+	Route::resource("/admin/tempcomputersotck","TempcomputersotckController", ['only' => ['edit','store','update','destroy','show']]);
+	Route::resource("/admin/tempother","TempotherController", ['only' => ['edit','store','update','destroy']]);
 	Route::resource('/admin/invoices','BcinvoiceController');
 	Route::resource('/admin/tmpdetail',"TmpdetailController");
 	Route::get('/admin/invoices/computers/{id}',function($id){
@@ -152,6 +162,10 @@ Route::group(['middleware'=>'admin'], function(){
 
 				Route::resource('categories.modells', 'api\v1\ModellsController', ['only' => ['index']]);
 
+				Route::resource('computers', 'api\v1\ComputerController',['only' => ['show', 'update']]);
+
+				Route::resource('others', 'api\v1\OtherController',['only' => ['show', 'update']]);
+			
 				Route::resource('computers.colors', 'api\v1\ComputersController', ['only' => ['index']]);
 
 				Route::resource('colors.computers', 'api\v1\ColorsController', ['only' => ['index']]);

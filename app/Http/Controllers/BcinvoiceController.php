@@ -117,7 +117,7 @@ class BcinvoiceController extends Controller {
 			$tmpdetail->color_id=$request->input("color_id");
 			$tmpdetail->serial_id=$request->input("serial_id");
 			$tmpdetail->save();
-			for($i=0;$i<count($char);$i++)
+			for($i=0; $i < count($char);$i++)
 			{	
 				DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'unavailable']);
 			}

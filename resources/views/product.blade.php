@@ -19,7 +19,21 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-5">
-			<img class="img img-responsive" src=" {{ $computer->photos->first() ? $computer->photos->first()->path : '' }} " alt="">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<img id="zoom_03" class="img img-responsive" src="{{$computer->photos->first() ? $computer->photos->first()->path : '' }}" alt="" data-zoom-image="{{ $computer->photos->first() ? $computer->photos->first()->path : '' }}">
+				</div>
+			</div>
+			<hr>
+			<div class="row" id="gal1">
+			@foreach ($computer->photos as $photo)
+				<div class="col-md-3 col-sm-3 col-xs-hidden">
+				<a class="fancybox-thumbs" data-fancybox-group="thumb" href="{{$photo->path}}">
+					<img class="img img-responsive" src="{{ $photo->path }}" >
+				</a>
+				</div>
+			@endforeach
+			</div>
 		</div>
 		<div class="col-md-7">
 			<div class="row">
@@ -94,8 +108,25 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>PRODUCT DESCRIPTION</h3>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php $k = 0;  ?>
+				@foreach ($computer->specs as $spec)
+					<tr>
+						<td>{{$computer->specs[$k]->name}} :</td>
+						<td>{{$spec->pivot->description}}</td>
+					</tr>
+					 <?php $k++ ?>
+				@endforeach
+				</tbody>
+			</table>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum expedita tempore minus tenetur fugit excepturi modi placeat in odit corrupti totam nemo dolore, quisquam voluptates quae perspiciatis, asperiores, nisi sed!</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis ipsam iusto, animi voluptas quos delectus totam, error quasi laudantium magni porro nemo in similique est. Assumenda deleniti atque, praesentium eligendi!</p>
 		</div>
 		<div class="col-md-6">
 			<h3><span class="label label-pill label-danger">3</span> CUSTOMER REVIEWS</h3>

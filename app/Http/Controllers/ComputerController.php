@@ -8,6 +8,7 @@ use App\Photo;
 use App\Computer;
 use App\Brand;
 use App\Spec;
+use Illuminate\Support\Facades\Input;
 // use Illuminate\Http\Request;
 use Image;
 
@@ -33,11 +34,11 @@ class ComputerController extends Controller {
 	 */
 	public function create()
 	{
-
+    $computers = Computer::orderBy('id', 'desc')->paginate(10);
 		$brands = Brand::lists('name','id')->all();
 		$specs = Spec::all();
 
-		return view('admin.computers.create', compact('brands', 'specs'));
+		return view('admin.computers.create', compact('computers','brands', 'specs'));
 	}
 
 	/**
@@ -46,30 +47,30 @@ class ComputerController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function store(ComputerRequest $request)
+	public function  store(ComputerRequest $request)
 	{
+  
 		$input = $request->all();
 		$input['id'] = uniqid('c', false);
 		
-		// dd($input);
 		$computer = Computer::create($input);
-		$specs = Spec::all();
-		$arr = [];
-		foreach ($specs as $spec) {
-			$arr[] = $spec->name;
-		}
-		$spec_desc = array_combine($arr, $request->input('description'));
+		// $specs = Spec::all();
+		// $arr = [];
+		// foreach ($specs as $spec) {
+		// 	$arr[] = $spec->name;
+		// }
+		// $spec_desc = array_combine($arr, $request->input('description'));
 		// dd($spec_desc);
 		// dd($input);
-		if (is_array($request->input('description'))) {
-			foreach ($spec_desc as $key => $desc) {
-				if(!empty($desc)){
-					$spec = Spec::where('name','=',$key)->first();
-					// dd($spec);
-					$computer->specs()->save($spec, ['description'=> $desc]); 
-				}
-			}
-		}
+		// if (is_array($request->input('description'))) {
+		// 	foreach ($spec_desc as $key => $desc) {
+		// 		if(!empty($desc)){
+		// 			$spec = Spec::where('name','=',$key)->first();
+		// 			// dd($spec);
+		// 			$computer->specs()->save($spec, ['description'=> $desc]); 
+		// 		}
+		// 	}
+		// }
 		// dd($request->all());
 		 if($files = $request->file('photo_id'))
         {
@@ -95,9 +96,9 @@ class ComputerController extends Controller {
         }
         // Computer::create($input);
         // Session::flash('create_user','The user has been created!');
-        flash()->overlay('User has been created successfully','CREATE USER');
+        flash()->overlay('Computer has been created successfully','CREATE USER');
 
-        return redirect('/admin/computers');
+        return redirect()->back();
 
 		// return redirect()->route('computers.index')->with('message', 'Item created successfully.');
 	}
@@ -111,8 +112,9 @@ class ComputerController extends Controller {
 	public function show($id)
 	{
 		$computer = Computer::findOrFail($id);
+    $specs = Spec::lists('name','id')->all();
 
-		return view('admin.computers.show', compact('computer'));
+		return view('admin.computers.show', compact('computer','specs'));
 	}
 
 	/**
@@ -136,11 +138,11 @@ class ComputerController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function update(Request $request, $id)
+	public function update(ComputerRequest $request, $id)
 	{
 		$computer = Computer::findOrFail($id);
-		$input = $request->all();
-
+		$input = $request->except(['photo_id']);
+		// dd($input);
         // $computer->photo_id = $request->input("photo_id");
         // if($file = $request->file('photo_id')){
         //     $name = time() . $file->getClientOriginalName();

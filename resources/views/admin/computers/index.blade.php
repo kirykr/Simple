@@ -19,10 +19,10 @@
                         <th>NAME</th>
                         <th>QTY</th>
                         <th>PRICE</th>
-                        <th>TYPE</th>
-                        <th>CAT</th>
                         <th>BRAND</th>
-                        <th>MODEL</th>
+                        <th>PP PRICE</th>
+                        <th>PRO PRICE</th>
+                        <th>STATUS</th>
                             <th class="text-right">OPTIONS</th>
                         </tr>
                     </thead>
@@ -36,11 +36,11 @@
                                 <td>{{$computer->name}}</td>
                                 <td>{{$computer->qtyinstock}}</td>
                                 <td>{{$computer->sellprice}}</td>
-                                <td>{{$computer->type_id}}</td>
-                                <td>{{$computer->category_id}}</td>
                                 <td>{{$computer->brand_id}}</td>
-                                <td>{{$computer->model_id}}</td>
-                                <td class="text-right">
+                                <td>{{$computer->ppprice}}</td>
+                                <td>{{$computer->provprice}}</td>
+                                <td>{{$computer->status}}</td>
+                                <td class="text-right text-nowrap">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
                                     <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">

@@ -3,8 +3,14 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use DB;
 use App\Cimport;
+use App\Supplier;
+use App\Computer;
+use App\Tempcomputerstock;
+use App\Color;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CimportController extends Controller {
 
@@ -27,7 +33,12 @@ class CimportController extends Controller {
 	 */
 	public function create()
 	{
-		return view('admin.cimports.create');
+		$suppliers = Supplier::lists('name','id')->all();
+		$computers = Computer::lists('name','id')->all();
+		$colors = Color::lists('name','id')->all();
+		$tempcomputers = Tempcomputerstock::all();
+
+		return view('admin.cimports.create', compact('suppliers','computers','colors','tempcomputers'));
 	}
 
 	/**
@@ -38,18 +49,70 @@ class CimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$cimport = new Cimport();
 
-		$cimport->impdate = $request->input("impdate");
-        $cimport->impindate = $request->input("impindate");
-        $cimport->invoicenum = $request->input("invoicenum");
-        $cimport->totalamount = $request->input("totalamount");
-        $cimport->user_id = $request->input("user_id");
-        $cimport->supplier_id = $request->input("supplier_id");
+		// dd($request->all());
+		$input = $request->all();
+		
+		$cimport = null;
+		// if (Input::get('newsubmit') == 'newsubmit'){
+		// 	$input = $request->all();
+		// 	// $cimport = Cimport::create($input);
+		// }
+		if (Input::get('addsubmit') == 'addsubmit'){
+			 $this->validate($request, [
+			        'computer_id' => 'required|max:22',
+			        'qtyinstock' => 'required|numeric|min:1',
+			        'color_id' => 'required|numeric|min:1',
+			        'sellprice' => 'required|numeric|min:1',
+			        'cost' => 'required|numeric|min:1',
+			    ]);
 
-		$cimport->save();
+			$input = $request->except(['photo_id']);
+			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
+			$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
+			$input['qty'] = $request->input('qtyinstock');
+			$input['amount'] = $request->input('qtyinstock') * $request->input('cost');
+			$tempcomputer= Tempcomputerstock::create($input);
+			return redirect()->back();
+		}
 
-		return redirect()->route('admin.cimports.index')->with('message', 'Item created successfully.');
+		// Import Computers
+		if (Input::get('savesubmit') == 'savesubmit'){
+			 $this->validate($request, [
+			        'supplier_id' => 'required|max:22',
+			        'invoicenum' => 'required|max:22',
+			        'serialtemp' => 'required|min:7'
+			    ]);
+			$cimport = Cimport::create($input);
+
+			// $tempcomputers =  DB::table('tempcomputerstocks')->select('color_id', 'qty', 'cost', 'amount')->get();
+
+			$comptemps = Tempcomputerstock::all();
+			foreach($comptemps as $comptemp){
+				
+				$color = Color::find($comptemp->color_id);
+				
+				$computer = Computer::find($comptemp->computer_id);
+				$cimport->computerdetails()->save($computer,['color_id' => $comptemp->color_id, 'qty' => $comptemp->qty, 'cost' => $comptemp->cost, 'amount' => $comptemp->qty * $comptemp->cost]);
+				
+				foreach($comptemp->serialtemps as $serial){
+						$computer->colors()->save($color, ['serialnumber' => $serial->serialnumber, 'quantity' => 1, 'cost' => $comptemp->cost, 'status' => 'available']);
+				}
+
+			}
+
+			
+			DB::statement("SET foreign_key_checks=0");
+			DB::table('serial_temps')->truncate();
+			Tempcomputerstock::truncate();
+			DB::statement("SET foreign_key_checks=1");
+			
+			return redirect()->back();
+		}
+		// dd($input);
+		
+
+		return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');
 	}
 
 	/**

@@ -22,7 +22,7 @@
                   {!! $errors->first('comcode','<span class="help-block">:message</span>') !!}
                 </div> --}}
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                    {{-- for Computer Name --}}
                    {!! Form::label('name', 'Computer Name') !!}
                    <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
@@ -30,18 +30,32 @@
                     {!! $errors->first('name','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>
-                <div class="col-md-3">
-                  {!! Form::label('qtyinstock', 'Quantiy Instock') !!}
-                  <div class="form-group {{ $errors->has('qtyinstock') ? 'has-error' :'' }}">
-                    {!! Form::number('qtyinstock',null,['class'=>'form-control','placeholder'=>'Computer qtyinstock']) !!}
-                    {!! $errors->first('qtyinstock','<span class="help-block">:message</span>') !!}
-                  </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                   {!! Form::label('sellprice', 'Sell Price') !!}
                   <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
                     {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
                     {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('ppprice', 'PP Price') !!}
+                  <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
+                    {!! Form::number('ppprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
+                    {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('provprice', 'Province Price') !!}
+                  <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
+                    {!! Form::number('provprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
+                    {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  {!! Form::label('status', 'Status') !!}
+                  <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
+                    {!! Form::number('status',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
+                    {!! $errors->first('status','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>
               </div>
@@ -52,9 +66,16 @@
               </div>
               <div class="row">
                 <div class="col-md-3">
+                  {!! Form::label('brand_id', 'Computer Brand') !!}
+                  <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
+                    {!! Form::select('brand_id', $brands,null,['class'=>'form-control']) !!}
+                    {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
+                  </div>
+                </div>
+                <div class="col-md-3">
                   {!! Form::label('type_id', 'Computer Type') !!}
                   <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
-                    {!! Form::select('type_id',[''=>'Choose Options'] + $types,0,['class'=>'form-control', 'id' => 'computer_type']) !!}
+                    {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control', 'id' => 'computer_type']) !!}
                     {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>
@@ -63,13 +84,6 @@
                   <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
                     {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
                     {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  {!! Form::label('brand_id', 'Computer Brand') !!}
-                  <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-                    {!! Form::select('brand_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
-                    {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -96,30 +110,6 @@
         <script>
           $('.date-picker').datepicker({
           });
-          $(document).ready(function() {
-          $('#computer_type').on('change', function(e) {
-            var type = $(this).val();
-            if(type) 
-              getComputerCategories(type);
-          });
-
-          function getComputerCategories(typeId) {
-            $.ajax({
-              method: 'GET',
-              url: '/admin/api/v1/types/'+ typeId + '/categories',
-              success: function(response) {
-                $('#category_id').empty();
-                response.map(function(item) {
-
-                  var option = "<option value="+item.id+">"+ item.name +"</option>";
-                  $('#category_id').append(option);
-                });
-              },
-              error: function(error) {
-                console.log(error)
-              }
-            })
-          }
-        })
-</script>
-@endsection
+          
+        </script>
+        @endsection
