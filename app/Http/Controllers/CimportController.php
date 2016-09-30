@@ -23,7 +23,7 @@ class CimportController extends Controller {
 	 */
 	public function index()
 	{
-		$cimports = Cimport::orderBy('id', 'desc')->paginate(10);
+		$cimports = Cimport::orderBy('updated_at', 'desc')->paginate(10);
 
 		return view('admin.cimports.index', compact('cimports'));
 	}

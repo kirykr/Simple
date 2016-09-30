@@ -26,7 +26,7 @@
                     <th>CATEGORY_ID</th>
                     <th>BRAND_ID</th>
                     <th>MODEL_ID</th>
-                    <th class="text-right">OPTIONS</th>
+                    <th class="text-right text-nowrap">OPTIONS</th>
                 </tr>
             </thead>
 

@@ -21,7 +21,7 @@ class ComputerController extends Controller {
 	 */
 	public function index()
 	{
-		$computers = Computer::orderBy('id', 'desc')->paginate(10);
+		$computers = Computer::orderBy('updated_at', 'desc')->paginate(10);
 
 		// return $computers->all();
 		return view('admin.computers.index', compact('computers'));
@@ -34,7 +34,7 @@ class ComputerController extends Controller {
 	 */
 	public function create()
 	{
-    $computers = Computer::orderBy('id', 'desc')->paginate(10);
+    $computers = Computer::orderBy('updated_at', 'desc')->paginate(10);
 		$brands = Brand::lists('name','id')->all();
 		$specs = Spec::all();
 

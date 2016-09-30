@@ -46,7 +46,7 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('id', 'desc')->paginate(12);
+	$computers = Computer::orderBy('updated_at', 'desc')->paginate(12);
 	// $others = Other::orderBy('id', 'desc')->paginate(12);
 	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
 		// return $computers->all();
