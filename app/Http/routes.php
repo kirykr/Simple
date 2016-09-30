@@ -67,10 +67,10 @@ Route::auth();
 Route::get('/admin', function(){
 	
 	if(!Entrust::hasRole(['admin','owner','HR'])){
-		return redirect('/');
+		return view('/admin.index');
 	}
 
-	return view('admin.index');
+	return view('admin.index2');
 });
 // created Admin middleware and put all admin work inside
 //Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {

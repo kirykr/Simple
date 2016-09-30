@@ -26,7 +26,7 @@ class AdminUserController extends Controller
     {
         $this->middleware('admin');
     }
-
+   
     public function index()
     {
        

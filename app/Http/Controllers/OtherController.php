@@ -20,7 +20,7 @@ class OtherController extends Controller {
 	 */
 	public function index()
 	{
-		$others = Other::orderBy('id', 'desc')->paginate(10);
+		$others = Other::orderBy('updated_at', 'desc')->paginate(10);
 
 		return view('admin.others.index', compact('others'));
 	}
