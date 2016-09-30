@@ -1,17 +1,122 @@
 @extends('layouts.admin')
 @section('content')
 <div class="page-header">
-  <h1>Cimportdetails / Show </h1>
+  <h1>Computer Import Details </h1>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-   
+    <div class="panel panel-success">
+     <!-- Default panel contents -->
+     <div class="panel-heading"><h1>{{$computer->name}} <small>Instock: {{$computer->qtyinstock}}</small></h1></div>
+     <div class="panel-body">
+       <p><img width="150" src=" {{ $computer->photos ? $computer->photos->first()->path : '' }} " alt=""></p>
+     </div>
+
+     <!-- Table -->
+     <table class="table table-bordered">
+       <thead>
+         <tr>
+           <th style="text-align:center; vertical-align:middle;">Import Info</th>
+           <th>
+             <div class="table-responsive table-sm table-inverse">
+               <table class="table table-hover ">
+                <thead class="thead-inverse">
+                 <tr>
+                   <th  align="center" valign="middle" style="text-align:center; vertical-align:middle;">Import Number</th>
+                   <th style="text-align:center; vertical-align:middle;">Import Date</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                  <td>
+                    <ul class="list-group">
+                      @foreach($computer->cimports as $importdate)
+                      <li class="list-group-item">{{$importdate->invoicenum}}</li>
+                      @endforeach
+                    </ul>
+                  </td>
+                  <td>
+                   <ul class="list-group">
+                    @foreach($computer->cimports as $importdate)
+                    <li class="list-group-item">{{$importdate->impdate->format('l jS \\of F Y h:i:s A')}}</li>
+                    @endforeach
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </th>
+    </tr>
+    <tr>
+     <th style="text-align:center; vertical-align:middle;">Color</th>
+     <th>
+      <div class="table-responsive table-sm table-inverse">
+        <table class="table table-hover ">
+         <thead class="thead-inverse">
+          <tr>
+            <th  align="center" valign="middle" style="text-align:center; vertical-align:middle;">Computer Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+           <td>
+             <ul class="list-group">
+               @foreach($colors as $color)
+               <li class="list-group-item" style="background-color: {{$color->name}}; color: #fff; font-weight: bold;">{{strtolower($color->name)}}</li>
+               @endforeach
+             </ul>
+           </td>
+         </tr>
+       </tbody>
+     </table>
    </div>
- </div>
+ </th>
+
+</tr>
+<tr>
+ <th style="text-align:center; vertical-align:middle;">Serial Number</th>
+ <th>
+  <div class="table-responsive table-sm table-inverse">
+    <table class="table table-hover ">
+     <thead class="thead-inverse">
+      <tr>
+        <th  align="center" valign="middle" style="text-align:center; vertical-align:middle;">Computer Serial Numbers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <td>
+        <ul class="list-group">
+          @foreach($computer->colors as $importserial)
+          <li class="list-group-item">{{$importserial->pivot->serialnumber}}</li>
+          @endforeach
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</th>
+
+</tr>
+</thead>
+<tbody>
+ <tr>
+   <td></td>
+ </tr>
+ <tr>
+   <td></td>
+ </tr>
+</tbody>
+</table>
+</div> 
+</div>
+</div>
 <div class="row">
   <div class="col-md-3">
-    <a class="btn btn-link" href="{{ route('admin.cimports.index') }}"><i class="fa fa-backward"></i>  Back</a>
+    <a class="btn btn-link" href="{{ route('admin.cimportdetails.index') }}"><i class="fa fa-backward"></i>  Back</a>
   </div>
 </div>
 
@@ -19,5 +124,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
- 
+
 </script>

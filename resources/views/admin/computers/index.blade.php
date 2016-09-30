@@ -17,7 +17,7 @@
                         <th>ID</th>
                         <th>PHOTO</th>
                         <th>NAME</th>
-                        <th>QTY</th>
+                        <th>QTY Instock</th>
                         <th>PRICE</th>
                         <th>BRAND</th>
                         <th>PP PRICE</th>

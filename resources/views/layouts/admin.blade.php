@@ -9,10 +9,12 @@
 
   <title>eCommerce Admin page</title>
 
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" media="print" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
   <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
+  <link rel="stylesheet" media="print" href="{{asset('css/print.css')}}">
+
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> --}}
@@ -441,7 +443,7 @@
                         <a href="{{ route('admin.cimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
                       </li>
                        <li>
-                        <a href="{{ route('admin.cimports.index') }}"><i class="fa fa-th-list fa-fw"></i>Import Details</a>
+                        <a href="{{ route('admin.cimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
