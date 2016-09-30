@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Cimport extends Model
 {
@@ -12,10 +13,17 @@ class Cimport extends Model
      *
      * @var array
      */
+    protected $dates = ['impdate','impindate'];
+
+    public function getDates() {
+         return $this->dates;
+    }
+
     public function getCreatedAtAttribute($date)
     {
-        $date = new \Carbon\Carbon($date);
+        $date = Carbon::now();
         // Now modify and return the date
+        
     }
 
     protected $fillable = [

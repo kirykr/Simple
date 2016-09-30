@@ -4,7 +4,17 @@
   <h1>Add Serial Number</h1>
 
 </div>
-
+<div class="row">
+  <div class="col-md-12">
+    @if (Session::has('flash_message'))
+    <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Waring!</strong> 
+        <p>{{ Session::get('flash_message') }} </p>
+    </div>
+    @endif
+  </div>
+</div>
 <div class="row">
   <div class="col-md-12">
     {!! Form::open(['action'=>"TempcomputersotckController@store", 'method'=>"POST",'files'=>true, 'id' => 'serailvalidate', 'data-toggle'=>"validator"]) !!}
@@ -39,10 +49,10 @@
   @for($i = 0; $i < $tempcomputer->qty; $i++)
   <div class="col-md-3">
    {!! Form::label('qty', 'Serial number ' . ($i+1)) !!}
-   <div class="form-group {{ $errors->has('qty') ? 'has-error' :'' }}">
+   <div class="form-group {{ Session::has('flash_message') ? 'has-error' : '' }}">
     {!! Form::text('serialnumber[]',null,['class'=>'form-control unique  required', 'required'=>"required", 'data-minlength' => "7", 'data-unique' => "unique", 'onclick' => "checkTextBoxes()", 'placeholder' => 'Add Serialnumber here']) !!}
     <div class="help-block with-errors"></div>
-    {!! $errors->first('qty','<span class="help-block">:message</span>') !!}
+    {!! $errors->first('Serial number','<span class="help-block">:message</span>') !!}
   </div>
 </div>
 @endfor

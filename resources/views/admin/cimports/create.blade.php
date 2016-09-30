@@ -124,7 +124,12 @@
      <div class="col-md-7">
        {!! Form::label('sellprice', 'Computer Price') !!}
        <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+       <div class="input-group col-md-12">
         {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly"]) !!}
+        <span class="input-group-btn">
+        <button class="btn btn-success" type="button"><i class="fa fa-edit"></i></button>
+        </span>
+        </div>
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
       </div>
     </div>

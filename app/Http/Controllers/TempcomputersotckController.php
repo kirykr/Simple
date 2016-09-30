@@ -7,9 +7,23 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Tempcomputerstock;
 use App\SerialTemp;
-use Validator;
+use Validator, Redirect;
+use DB;
+use Session;
 
 use Illuminate\Support\Facades\Input;
+
+Validator::extend('serialnumber', function($attribute, $value, $parameters)
+{
+  $query = DB::select("SHOW COLUMNS FROM " . $parameters[0]);
+  $columns = [];
+  foreach ($query as $column) {
+    array_push($columns, $column->Field);
+  }
+  if(in_array($value, $columns)) return true;
+
+  return false;
+});
 
 class TempcomputersotckController extends Controller
 {
@@ -28,6 +42,7 @@ class TempcomputersotckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
     public function create()
     {
         //
@@ -44,23 +59,31 @@ class TempcomputersotckController extends Controller
       $input = $request->all();
           // dd($input);
       // dd($request->input('serialnumber')[0]);
+      
       if (Input::get('saveserail') == 'saveserail'){
+ 
+        // if ($validator->fails()) {
+        //     Session::flash('message', "Special message goes here");
+        //      return redirect()->back();//->withErrors(['msg', $validator])->withInput();
+        //  }
 
-        $rules = array(
-                'serialnumber' => 'required|unique_with:color_computer'
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if($validator->fails())
-        {
-            return Redirect::back()->withErrors($validator);
+        $query = DB::table('color_computer')->select('serialnumber')->get();
+       
+        $columns = [];
+        foreach ($query as $serial) {
+          foreach ($serial as $value) {
+          array_push($columns, $value);
+          }
         }
 
-        if ($validator->fails()) {
-             return redirect()->back()->withErrors($validator)->withInput();
-         }
+         // dd($request->input('serialnumber')[0]);
+        if(in_array($request->input('serialnumber')[0], $columns)){
+          // dd($columns);
+          // Session::flash('message', "Special message goes here");
+          return redirect()->back()->withFlashMessage('Duplicate Serial Number');
+        }
 
+        // dd($input);
         $tempcomputer = Tempcomputerstock::findOrFail($request->input('tempcomputer_id'));
 
         for($i = 0; $i < count($request->input('serialnumber')); $i++) {

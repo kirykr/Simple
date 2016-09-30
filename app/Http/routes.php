@@ -95,6 +95,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/cimports","CimportController");
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
+	Route::resource("/admin/cimportdetails", "CimportdetailsController", ['only' => ['index','show']]);
 	// Route::resource("/admin/computerspecs", "ComputerSpecsController");
 	Route::post('/admin/computerspecs/{id}', array('as' => 'admin.computerspecs.store', 'uses' => 'ComputerSpecsController@store'));
 
@@ -143,6 +144,14 @@ Route::group(['middleware'=>'admin'], function(){
 			$color= Color::find($id);
 			return response()->json($color);
 	});
+
+	// Route::get('/admin/cimports/computers/serials/{id}/', function($id){
+	// 	$computer = Computer::findOrFail($id);
+	// 	$details = $computer->colors;
+	// 	// dd($details);
+	// 	return response()->json($details);
+	// });
+
 	Route::resource('/admin/tmpinvoices','TmpinvoiceController');
 	Route::resource('/admin/tmpinvoices/detail','TmpdetailController');
 	Route::get('/admin/printinvoice/{id}',function($id){
@@ -173,9 +182,8 @@ Route::group(['middleware'=>'admin'], function(){
 				Route::resource('others.colors' , 'api\v1\OthersController' , 	['only'	=>	['index']]);
 
 				Route::resource('computers', 'api\v1\SellPricesController', ['only' => ['index']]);
-				});	
-
-
+				
+			});	
 		});
 	});	
 });
