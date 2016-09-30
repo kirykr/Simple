@@ -26,7 +26,7 @@
         @if($users->count())
 
         @foreach($users as $user)
-                 {{ Debugbar::info($user)}}
+                 {{-- {{ Debugbar::info($user)}} --}}
                  {{-- {{dd($user)}} --}}
             <tr>
                
