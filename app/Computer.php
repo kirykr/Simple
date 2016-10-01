@@ -90,6 +90,6 @@ class Computer extends Model
      */
     public function colors()
     {
-        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
+        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','sellprice','status');
     }
   }

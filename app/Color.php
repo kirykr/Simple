@@ -22,7 +22,7 @@ class Color extends Model
     public function computers()
     {
     	// belongsTo(RelatedModel, foreignKey = computers_id, keyOnRelatedModel = id)
-    	return $this->belongsToMany('App\Computer','color_computer')->withPivot('serialnumber','quantity', 'cost','status');
+    	return $this->belongsToMany('App\Computer','color_computer')->withPivot('serialnumber','quantity', 'cost','sellprice','status');
     }
 
     /**
@@ -32,6 +32,6 @@ class Color extends Model
      */
     public function others()
     {
-    	return $this->belongsToMany('App\Other');
+    	return $this->belongsToMany('App\Other')->withPivot('oimport_id','quantity', 'cost','sellprice','amount');
     }
 }

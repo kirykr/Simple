@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTempcomputerstocksTable extends Migration
+class AddedPivotTableOimportOther extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,16 @@ class CreateTempcomputerstocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tempcomputerstocks', function (Blueprint $table) {
+        Schema::create('oimport_other', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('computer_id');
-            $table->string('computer_name');
+            $table->integer('oimport_id')->unsigned();
+            $table->foreign('oimport_id')->references('id')->on('oimports')->onDelete('cascade');
+            $table->string('other_id');
+            $table->foreign('other_id')->references('id')->on('others')->onDelete('cascade');
             $table->integer('color_id')->unsigned();
-            $table->string('color_name');
             $table->integer('qty')->unsigned();
             $table->float('cost')->unsigned();
-            $table->float('sellprice')->unsigned();
+            $table->float('amount')->unsigned();
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class CreateTempcomputerstocksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tempcomputerstocks');
+        Schema::drop('oimport_other');
     }
 }

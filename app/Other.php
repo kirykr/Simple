@@ -41,6 +41,17 @@ class Other extends Model
     //  public function bcinvoicedetails(){
     //     return $this->hasMany('App\Bcinvoicedetail');
     // }
+
+    /**
+     * Other belongs to Oimports.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function oimports()
+    {
+        // belongsTo(RelatedModel, foreignKey = oimports_id, keyOnRelatedModel = id)
+        return $this->belongsToMany('App\Oimport')->withPivot('color_id','qty','cost','amount');
+    }
     /**
      * Other belongs to Colors.
      *
@@ -49,7 +60,7 @@ class Other extends Model
     public function colors()
     {
         // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
-        return $this->belongsToMany('App\Color');
+        return $this->belongsToMany('App\Color')->withPivot('oimport_id','qty', 'cost','sellprice','amount');
     }
       /**
      * The roles that belong to the user.

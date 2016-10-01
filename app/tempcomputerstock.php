@@ -13,12 +13,13 @@ class Tempcomputerstock extends Model
      * @var array
      */
     protected $fillable = [
-                            'computer_name',
     						'computer_id',
+                            'computer_name',
                             'color_id',
     						'color_name',
     						'qty',
     						'cost',
+                            'sellprice',
                             'amount'
     						];		
 

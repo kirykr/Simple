@@ -72,6 +72,15 @@ Route::get('/admin', function(){
 
 	return view('admin.index2');
 });
+
+Route::get('/about', function(){
+
+	return view('about');
+});
+Route::get('/contact', function(){
+
+	return view('contact');
+});
 // created Admin middleware and put all admin work inside
 //Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
 // Route::get('/admin/shipping', 'ShippingController@index');
@@ -96,6 +105,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
 	Route::resource("/admin/cimportdetails", "CimportdetailsController", ['only' => ['index','show']]);
+	Route::resource("/admin/oimportdetails", "OimportdetailsController", ['only' => ['index','show']]);
 	// Route::resource("/admin/computerspecs", "ComputerSpecsController");
 	Route::post('/admin/computerspecs/{id}', array('as' => 'admin.computerspecs.store', 'uses' => 'ComputerSpecsController@store'));
 

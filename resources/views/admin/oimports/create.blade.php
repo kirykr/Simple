@@ -52,11 +52,14 @@
      @endif
    </div>
  </div>
+ </div>
+ <div class="row">
  <div class="col-md-3">
      <div class="form-group @if($errors->has('user_id')) has-error @endif">
        <label for="user_id-field">User</label>
-       <input type="text" id="user_id-field" name="user_id" readonly="readonly" class="form-control" value="{{ Auth::user()->name }}"/> 
+       <input type="text" id="user_id-field" readonly="readonly" class="form-control" value="{{ Auth::user()->name }}"/> 
        {{-- //old("user_id") --}}
+        {!! Form::hidden('user_id', Auth::user()->id, []) !!}
        @if($errors->has("user_id"))
        <span class="help-block">{{ $errors->first("user_id") }}</span>
        @endif
@@ -106,7 +109,7 @@
      <div class="col-md-7">
        {!! Form::label('qtyinstock', 'Other Qty') !!}
        <div class="form-group {{ $errors->has('qtyinstock') ? 'has-error' :'' }}">
-        {!! Form::number('qtyinstock',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other qtyinstock']) !!}
+        {!! Form::number('qtyinstock',null,['class'=>'form-control','step'=>'any','placeholder'=>'Other qtyinstock']) !!}
         {!! $errors->first('qtyinstock','<span class="help-block">:message</span>') !!}
       </div>
     </div>
@@ -115,7 +118,12 @@
      <div class="col-md-7">
        {!! Form::label('sellprice', 'Other Price') !!}
        <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other sellprice']) !!}
+       <div class="input-group col-md-12">
+              {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly", 'autofocus' => false]) !!}
+              <span class="input-group-btn">
+              <button class="btn btn-success editsellprice" type="button"><i class="fa fa-edit"></i></button>
+              </span>
+              </div>
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
       </div>
     </div>
@@ -124,7 +132,7 @@
      <div class="col-md-7">
        {!! Form::label('cost', 'Other Cost') !!}
        <div class="form-group {{ $errors->has('cost') ? 'has-error' :'' }}">
-        {!! Form::number('cost',0,['class'=>'form-control','step'=>'any','placeholder'=>'Other Cost']) !!}
+        {!! Form::number('cost',null,['class'=>'form-control','step'=>'any','placeholder'=>'Other Cost']) !!}
         {!! $errors->first('cost','<span class="help-block">:message</span>') !!}
       </div>
     </div>
@@ -134,7 +142,7 @@
  <button type="submit" value="newsubmit" name="newsubmit" class="btn btn-success"><i class="fa fa-asterisk"></i> New Import</button>
   <button type="submit" value="addsubmit" name="addsubmit" class="btn btn-warning"><i class="fa fa-download"></i> Add Other</button>
   <a class="btn btn-link pull-right" href="{{ route('admin.cimports.index') }}"><i class="fa fa-backward"></i> Back</a>
-  <button type="submit" value="addsubmit" name="savesubmit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Save Import</button>
+  <button type="submit" value="savesubmit" name="savesubmit" class="btn btn-info pull-right"><i class="fa fa-save"></i> Save Import</button>
 </div>
 {!! Form::close() !!}
 {{-- </form> --}}
@@ -146,7 +154,7 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Computer Name</th>
+          <th>Other Name</th>
           <th>Color</th>
           <th>Qty</th>
           <th>Cost</th>
@@ -187,9 +195,16 @@
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
+
   $('.date-picker').datepicker({
   });
 
+  $('.editsellprice').on('click', function(e) {
+
+    $('#sellprice').removeAttr('readonly');
+    $('#sellprice').focus();  
+
+  });
 
   // Select2 Auto complete and search 
   $("#other_id").select2({

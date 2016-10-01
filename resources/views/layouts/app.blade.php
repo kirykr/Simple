@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="{{asset('css/rating.min.css')}}">
   <link rel="stylesheet" href="{{asset('css/my_star_rating.css')}}">
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox.css')}}">
-  <link rel="stylesheet" href="{{asset('css/jquery.fancybox-buttons.css')}}">
-  <link rel="stylesheet" href="{{asset('css/jquery.fancybox-thumbs.css')}}">
+  <link rel="stylesheet" href="{{asset('css/jquery.fancybox-buttons.css') }}">
+  <link rel="stylesheet" href="{{asset('css/jquery.fancybox-thumbs.css') }}">
+  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" media="screen" /> --}}
   {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
 
   <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -321,8 +322,8 @@
             </li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-info fa-fw"></i> About Us</a></li>
-        <li><a href="#"><i class="fa fa-phone-square fa-fw"></i> Contact Us</a></li>
+        <li><a href="{{ url('/about') }}"><i class="fa fa-info fa-fw"></i> About Us</a></li>
+        <li><a href="{{url('/contact')}}"><i class="fa fa-phone-square fa-fw"></i> Contact Us</a></li>
       </ul>
 
       <!-- Right Side Of Navbar -->
@@ -511,8 +512,13 @@
 // =====================================
 
 </script>
+
 <script src="{{asset('js/rating.min.js')}}"></script>
+
 @yield('scripts')
+
+
+
 <script type="text/javascript">
    // var $= jQuery.noConflict();
    $(document).ready(function() {

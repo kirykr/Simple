@@ -36,6 +36,22 @@
   </div>
 </div>
 <div class="row">
+    <div class="col-md-3">
+        {!! Form::label('cost', 'Computer Cost') !!}
+        <div class="form-group {{ $errors->has('cost') ? 'has-error' :'' }}">
+         {!! Form::number('cost',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer Cost']) !!}
+         {!! $errors->first('cost','<span class="help-block">:message</span>') !!}
+       </div>
+     </div>
+    <div class="col-md-3">
+         {!! Form::label('sellprice', 'Computer Price') !!}
+         <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+          {!! Form::number('sellprice',null,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+          </div>
+          {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
+      </div>
+</div>
+<div class="row">
   @foreach($tempcomputer->serialtemps as $serial)
   <div class="col-md-3">
    {!! Form::label('qty', 'Serial number ') !!}

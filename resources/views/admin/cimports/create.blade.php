@@ -64,7 +64,8 @@
    <div class="col-md-3">
      <div class="form-group @if($errors->has('user_id')) has-error @endif">
        <label for="user_id-field">User</label>
-       <input type="text" id="user_id-field" name="user_id" readonly="readonly" class="form-control" value="{{ Auth::user()->name }}"/> 
+       <input type="text" readonly="readonly" class="form-control" value="{{ Auth::user()->name }}"/> 
+        {!! Form::hidden('user_id', Auth::user()->id, []) !!}
        {{-- //old("user_id") --}}
        @if($errors->has("user_id"))
        <span class="help-block">{{ $errors->first("user_id") }}</span>
@@ -75,7 +76,7 @@
      {!! Form::label('supplier_id', 'Company Name') !!}
      <div class="form-group {{ $errors->has('supplier_id') ? 'has-error' :'' }}">
      <div class="input-group col-md-12">
-        {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,0,['class'=>'form-control']) !!}
+        {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,null,['class'=>'form-control']) !!}
         <span class="input-group-btn">
         <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
         </span>
@@ -90,7 +91,7 @@
        {!! Form::label('computer_id', 'Computer Name') !!}
        <div class="form-group {{ $errors->has('computer_id') ? 'has-error' :'' }}">
         <div class="input-group col-md-12">
-        {!! Form::select('computer_id',[''=>'Choose Computer'] + $computers,0,['class'=>'form-control']) !!}
+        {!! Form::select('computer_id',[''=>'Choose Computer'] + $computers,null,['class'=>'form-control']) !!}
         <span class="input-group-btn">
         <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
         </span>
@@ -102,7 +103,7 @@
      {!! Form::label('color_id', 'Color') !!}
      <div class="form-group {{ $errors->has('color_id') ? 'has-error' :'' }}">
      <div class="input-group col-md-12">
-      {!! Form::select('color_id',[''=>'Choose Color'] + $colors,0,['class'=>'form-control']) !!}
+      {!! Form::select('color_id',[''=>'Choose Color'] + $colors,null,['class'=>'form-control']) !!}
       <span class="input-group-btn">
       <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
       </span>
@@ -125,9 +126,9 @@
        {!! Form::label('sellprice', 'Computer Price') !!}
        <div class="form-group input-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
        <div class="input-group col-md-12">
-        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly"]) !!}
+        {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice', 'readonly'=>"readonly", 'autofocus' => false]) !!}
         <span class="input-group-btn">
-        <button class="btn btn-success" type="button"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-success editsellprice" type="button"><i class="fa fa-edit"></i></button>
         </span>
         </div>
         {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
@@ -173,6 +174,7 @@
           <th>Color</th>
           <th>Qty</th>
           <th>Cost</th>
+          <th>SellPrice</th>
           <th>Amount</th>
           <th class="text-right">Option</th>
         </tr>
@@ -186,6 +188,7 @@
           <td>{{ $tmpcomputerstock->color_name }}</td>
           <td class="qty">{{ $tmpcomputerstock->qty }}</td>
           <td>{{ $tmpcomputerstock->cost }}</td>
+          <td>{{ $tmpcomputerstock->sellprice }}</td>
           <td>{{ $tmpcomputerstock->amount }}</td>
           <td class="text-right">
              {{-- <a class="btn btn-xs btn-primary" href="{{ route('admin.tempcomputerstock.show', $category->id) }}"><i class="fa fa-eye"></i> View</a> --}}
@@ -288,12 +291,14 @@
     }
     // edit sellprice
     $('.editsellprice').on('click', function(e) {
-      var data = $(this).data('json');
-      var price = $('#sellprice').val();
-      if(price != data.sellprice) {
+      // var data = $(this).data('json');
+      // var price = $('#sellprice').val();
+      // if(price != data.sellprice) {
         
-      }
-      $('#sellprice').removeAttr('readonly'); 
+      // }
+
+      $('#sellprice').removeAttr('readonly');
+      $('#sellprice').focus();  
 
     });
     $("#color_id").select2({

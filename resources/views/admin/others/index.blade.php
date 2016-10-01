@@ -22,10 +22,7 @@
                     <th>NAME</th>
                     <th>QTY</th>
                     <th>PRICE</th>
-                    <th>TYPE_ID</th>
-                    <th>CATEGORY_ID</th>
-                    <th>BRAND_ID</th>
-                    <th>MODEL_ID</th>
+                    <th>Brand</th>
                     <th class="text-right text-nowrap">OPTIONS</th>
                 </tr>
             </thead>
@@ -38,10 +35,7 @@
                     <td>{{$other->name}}</td>
                     <td>{{$other->qtyinstock}}</td>
                     <td>{{$other->sellprice}}</td>
-                    <td>{{$other->type_id}}</td>
-                    <td>{{$other->category_id}}</td>
                     <td>{{$other->brand_id}}</td>
-                    <td>{{$other->model_id}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href="{{ route('admin.others.show', $other->id) }}"><i class="fa fa-eye"></i> View</a>
                         <a class="btn btn-xs btn-warning" href="{{ route('admin.others.edit', $other->id) }}"><i class="fa fa-edit"></i> Edit</a>

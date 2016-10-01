@@ -52,13 +52,16 @@ class CimportController extends Controller {
 	public function store(Request $request)
 	{
 
-		$input = $request->all();
-		
 		$cimport = null;
 		// if (Input::get('newsubmit') == 'newsubmit'){
 		// 	$input = $request->all();
 		// 	// $cimport = Cimport::create($input);
 		// }
+		// =================================
+
+		// $oldsellprice = DB::table('color_computer')->select('sellprice')->where([['computer_id','=', 'c57c50bca0207b'],['color_id','=',1]])->first();
+		// dd($oldsellprice->sellprice != $request->input('sellprice'));
+		// ----------------------------------------
 		if (Input::get('addsubmit') == 'addsubmit'){
 			 $this->validate($request, [
 			        'computer_id' => 'required|max:22',
@@ -68,12 +71,13 @@ class CimportController extends Controller {
 			        'cost' => 'required|numeric|min:1',
 			    ]);
 
-			// $input = $request->except(['photo_id']);
+			$input = $request->all();
 
 			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
 			$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
 			$input['qty'] = $request->input('qtyinstock');
 			$input['amount'] = $request->input('qtyinstock') * $request->input('cost');
+
 			$tempcomputer= Tempcomputerstock::create($input);
 			return redirect()->back();
 		}
@@ -91,7 +95,7 @@ class CimportController extends Controller {
 			        'serialtemp' => 'required|min:7',
 			        // 'invoicenum' => 'required|max:22|unique:cimports,invoicenum'
 			    ]);
-			// dd($request->all());
+			
 			// $cimport->impdate = $request->input("impdate");
    //    $cimport->impindate = $request->input("impindate");
 			$cimport->impdate = Carbon::now();
@@ -106,22 +110,30 @@ class CimportController extends Controller {
 			// $tempcomputers =  DB::table('tempcomputerstocks')->select('color_id', 'qty', 'cost', 'amount')->get();
 
 			$comptemps = Tempcomputerstock::all();
-
+			
 			foreach($comptemps as $comptemp){
 				$tempqty = 0;
 				$color = Color::find($comptemp->color_id);
 				
 				$computer = Computer::find($comptemp->computer_id);
 				$tempqty = $comptemp->qty + $computer->qtyinstock;	
+				if ($computer->sellprice != $comptemp->sellprice) {
+					$computer->sellprice = $comptemp->sellprice;
+				}
 				$computer->qtyinstock = $tempqty;
 				$computer->update();
-
+				
 				$cimport->computerdetails()->save($computer,['color_id' => $comptemp->color_id, 'qty' => $comptemp->qty, 'cost' => $comptemp->cost, 'amount' => $comptemp->qty * $comptemp->cost]);
 				
 				foreach($comptemp->serialtemps as $serial){
-						$computer->colors()->save($color, ['serialnumber' => $serial->serialnumber, 'quantity' => 1, 'cost' => $comptemp->cost, 'status' => 'available']);
+						$computer->colors()->save($color, ['serialnumber' => $serial->serialnumber, 'quantity' => 1, 'cost' => $comptemp->cost, 'sellprice' => $comptemp->sellprice, 'status' => 'available']);
 				}
 
+				// update computer->colors->pivot
+				$oldsellprice = DB::table('color_computer')->select('sellprice')->where([['computer_id','=', $computer->id],['color_id','=',$comptemp->color_id]])->first();
+				if($oldsellprice->sellprice != $comptemp->sellprice){
+					DB::table('color_computer')->where([['computer_id','=', $computer->id],['color_id','=',$comptemp->color_id]])->update(['sellprice' => $comptemp->sellprice]);
+				}
 			}
 
 			
@@ -129,7 +141,8 @@ class CimportController extends Controller {
 			DB::table('serial_temps')->truncate();
 			Tempcomputerstock::truncate();
 			DB::statement("SET foreign_key_checks=1");
-			
+			// dd($computer->colors[0]->pivot->sellprice);
+
 			return redirect()->back();
 		}
 		// dd($input);

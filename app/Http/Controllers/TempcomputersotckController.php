@@ -13,18 +13,6 @@ use Session;
 
 use Illuminate\Support\Facades\Input;
 
-Validator::extend('serialnumber', function($attribute, $value, $parameters)
-{
-  $query = DB::select("SHOW COLUMNS FROM " . $parameters[0]);
-  $columns = [];
-  foreach ($query as $column) {
-    array_push($columns, $column->Field);
-  }
-  if(in_array($value, $columns)) return true;
-
-  return false;
-});
-
 class TempcomputersotckController extends Controller
 {
     /**
@@ -56,17 +44,11 @@ class TempcomputersotckController extends Controller
      */
     public function store(Request $request)
     {
-      $input = $request->all();
           // dd($input);
       // dd($request->input('serialnumber')[0]);
       
       if (Input::get('saveserail') == 'saveserail'){
  
-        // if ($validator->fails()) {
-        //     Session::flash('message', "Special message goes here");
-        //      return redirect()->back();//->withErrors(['msg', $validator])->withInput();
-        //  }
-
         $query = DB::table('color_computer')->select('serialnumber')->get();
        
         $columns = [];
@@ -77,13 +59,14 @@ class TempcomputersotckController extends Controller
         }
 
          // dd($request->input('serialnumber')[0]);
-        if(in_array($request->input('serialnumber')[0], $columns)){
-          // dd($columns);
-          // Session::flash('message', "Special message goes here");
-          return redirect()->back()->withFlashMessage('Duplicate Serial Number');
+        for($i = 0; $i < count($request->input('serialnumber')); $i++){
+          if(in_array($request->input('serialnumber')[$i], $columns)){
+            // Session::flash('message', "Special message goes here");
+            return redirect()->back()->withFlashMessage('Duplicate Serial Number');
+          }
         }
 
-        // dd($input);
+        // dd($request->all());
         $tempcomputer = Tempcomputerstock::findOrFail($request->input('tempcomputer_id'));
 
         for($i = 0; $i < count($request->input('serialnumber')); $i++) {
@@ -132,6 +115,13 @@ class TempcomputersotckController extends Controller
     public function update(Request $request, $id)
     {
         //
+      // dd($request->all());
+      $tempcomputer = Tempcomputerstock::findOrFail($id);
+      // $input = $request->except(['photo_id']);
+        
+      $tempcomputer->update($request->all());
+
+       return view('admin.tempcomputersotck.edit', compact('tempcomputer'));
     }
 
     /**
