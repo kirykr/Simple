@@ -15,7 +15,7 @@ class CreateProductsView extends Migration
         //
         DB::statement("CREATE VIEW products AS
                         computers.id as ID,
-                        computers.name,
+                        computers.`name`,
                         computers.qtyinstock,
                         computers.sellprice,
                         computers.ppprice,
@@ -26,7 +26,7 @@ class CreateProductsView extends Migration
                         UNION
                         SELECT
                         others.id as ID,
-                        others.name,
+                        others.`name`,
                         others.qtyinstock,
                         others.sellprice,
                         others.ppprice,
