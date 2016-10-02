@@ -13,6 +13,7 @@
 use App\Computer;
 use App\Other;
 use App\Bcinvoice;
+use App\Cart;
 use App\User;
 use App\Bcinvoicedetail;
 use App\Spec;
@@ -47,10 +48,14 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
 	$computers = Computer::orderBy('id', 'desc')->paginate(12);
+	$computer = new Computer();
+	// $cart = count(Cart::where('customer_id','=',Auth::user()->id)->get());
+	// dd($cart);
 	// $others = Other::orderBy('id', 'desc')->paginate(12);
 	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
 		// return $computers->all();
-	return view('welcome', compact('computers'));
+	$cart = new Cart();
+	return view('welcome', compact('computers','cart','computer'));
 	// return view('welcome')->with('computers', Computer::orderBy('id', 'desc')->paginate(12))->with('others', Other::orderBy('id', 'desc')->paginate(12));
     // return view('welcome');
 });
@@ -67,7 +72,8 @@ Route::auth();
 Route::get('/admin', function(){
 	
 	if(!Entrust::hasRole(['admin','owner','HR'])){
-		return redirect('/');
+		$cart=count(Cart::where('customer_id','=','1')->get());
+		return redirect('/',compact('cart'));
 	}
 
 	return view('admin.index');
@@ -76,8 +82,10 @@ Route::get('/admin', function(){
 //Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
 // Route::get('/admin/shipping', 'ShippingController@index');
 // Route::get('/admin/shipping/create','ShippingController@create');
-	
-
+Route::resource("/checkout","CheckoutController");
+// Route::get("/get/getcartdetail",function(){
+// 	$carts = 
+// });
 Route::group(['middleware'=>'admin'], function(){
 
 	Route::resource('/admin/users', 'AdminUserController');
@@ -100,7 +108,10 @@ Route::group(['middleware'=>'admin'], function(){
 
 	Route::resource("/admin/tempcomputersotck","TempcomputersotckController", ['only' => ['edit','store','update','destroy','show']]);
 	Route::resource("/admin/tempother","TempotherController", ['only' => ['edit','store','update','destroy']]);
-	Route::resource('/admin/invoices','BcinvoiceController');
+	Route::resource("/admin/bcinvoices","BecinvoiceController");
+	// Route::resource('/admin/invoices','BcinvoiceController');
+	// Route::get("/admin/invoices/","BcinvoiceController@index");
+	// Route::get("/admin/invoicesasdf/{id}","BcinvoiceController@show2");
 	Route::resource('/admin/tmpdetail',"TmpdetailController");
 	Route::get('/admin/invoices/computers/{id}',function($id){
 			$computer =  Computer::find($id);
@@ -138,6 +149,11 @@ Route::group(['middleware'=>'admin'], function(){
 			$amount = Tmpdetail::all();
 			$am = $amount->sum('amount');
 			return response()->json($am);
+	});
+	Route::get("/admin/count/{cpid}/{clid}",function($cpid,$clid){
+			$computer = Computer::find($cpid);
+			$colors = $computer->colors()->where('color_id','=',$clid)->get();
+			return count($colors);
 	});
 	Route::get("/admin/color/getname/{id}",function($id){
 			$color= Color::find($id);

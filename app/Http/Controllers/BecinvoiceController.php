@@ -11,12 +11,13 @@ use App\Other;
 use App\Tmpdetail;
 use App\Tmpinvoice;
 use App\Color;
+use App\Cimport;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use Redirect;
+	
 
-class BcinvoiceController extends Controller {
+class BecinvoiceController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -26,9 +27,9 @@ class BcinvoiceController extends Controller {
 
 	public function index()
 	{
-		$bcinvoices = Bcinvoice::orderBy('id', 'desc')->paginate(10);
+		$invoices = Bcinvoice::orderBy('id', 'desc')->paginate(10);
 		$computers = Computer::lists('name','id')->all();
-		return view('admin.bcinvoices.index', compact('bcinvoices','computers'));
+		return view('admin.bcinvoices.index', compact('invoices','computers'));
 	}
 
 	/**
@@ -38,7 +39,7 @@ class BcinvoiceController extends Controller {
 	 */
 	public function create()
 	{	
-		$computers=Computer::lists('name','id')->all();
+		$computers = Computer::lists('name','id')->all();
 		$others = Other::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
 		$tmpdetails=Tmpdetail::all();
@@ -53,11 +54,10 @@ class BcinvoiceController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		// dd(Input::all());
 		if (Input::get('btn_adddetail'))
 		{	
 			$chars = $request->input("serial_id");
-			$char = str_split($chars);
+			$char = explode(",",$chars);
 			$tp = Tmpdetail::all();
 			 $this->validate($request, [
 			        'qty' => 'required',
@@ -66,7 +66,6 @@ class BcinvoiceController extends Controller {
 			    ]);
 			$tmpdetail = new Tmpdetail();
 			if($request->input("pro_type")=="App\\Computer"){
-
 				$this->validate($request,['computer_id' => 'required','serialnumber'=>'required']);
 				foreach($tp as $id){
 					if($id->pro_id==$request->input("computer_id")&& $id->color_id==$request->input("color_id")){
@@ -80,13 +79,15 @@ class BcinvoiceController extends Controller {
 						$id->qty=$oqty;
 						$id->description=$desc;
 						$id->amount=$amount;
-						$id->serial_id.=(string)$serialid;
+						$id->serial_id.=",".(string)$serialid;
+						// dd($id->serial_id);
 						$id->save();
+
 						for($i=0;$i<count($char);$i++)
 						{
 							DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'unavailable']);
 						}
-						return redirect()->route('admin.invoices.create')->with('message', 'Item Update successfully.');
+						return redirect()->route('admin.bcinvoices.create')->with('message', 'Item Update successfully.');
 					}
 				}
 				$tmpdetail->pro_id= $request->input("computer_id");
@@ -103,7 +104,7 @@ class BcinvoiceController extends Controller {
 						$id->qty=$oqty;
 						$id->amount=$amount;
 						$id->save();
-						return redirect()->route('admin.invoices.create')->with('message', 'Item Update successfully.');
+						return redirect()->route('admin.bcinvoices.create')->with('message', 'Item Update successfully.');
 					}
 				}
 				$tmpdetail->pro_id= $request->input("other_id");
@@ -121,7 +122,7 @@ class BcinvoiceController extends Controller {
 			{	
 				DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'unavailable']);
 			}
-			return redirect()->route('admin.invoices.create')->with('message', 'Item Add successfully.');
+			return redirect()->route('admin.bcinvoices.create')->with('message', 'Item Add successfully.');
 		}else if(Input::get('btn_pay')){
 
 			$bcinvoice = new Bcinvoice();
@@ -164,20 +165,20 @@ class BcinvoiceController extends Controller {
 			Tmpdetail::truncate();
 			return Redirect::to('/admin/printinvoice/'.$bcinvoice->id);
 		}else{
-			
-			if($request->input("radio")!=""){
+			$this->validate($request,['radio'=>'required']);
+			// if($request->input("radio")!=""){
 				$tmp = Tmpdetail::find($request->input("radio"));
 	            $chars=(string)$tmp->serial_id;
-	            $char=str_split($chars);
+	            $char = explode(",",$chars);
 	            for($i=0;$i<count($char);$i++)
 	            {
 	                DB::table('color_computer')->where('id',$char[$i])->update(['status'=>'available']);
 	            }
 	            $tmp->delete();
-	            return redirect()->route('admin.invoices.create')->with('message', 'Item deleted successfully.');
-			}else{
-				return redirect()->route('admin.invoices.create')->with('message', 'Please select row before delete.');
-			}
+	            return redirect()->route('admin.bcinvoices.create')->with('message', 'Item deleted successfully.');
+			// }else{
+			// 	return redirect()->back()->with('message', 'Please select row before delete.');
+			// }
 			
 		}
 
@@ -200,6 +201,7 @@ class BcinvoiceController extends Controller {
 		$bcinvoice = Bcinvoice::find($id); 
 		return view('admin.bcinvoices.show', compact('bcinvoice'));
 	}
+	
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -246,7 +248,7 @@ class BcinvoiceController extends Controller {
 	{
 			$bcinvoice = Bcinvoice::findOrFail($id);
 			$bcinvoice->delete();
-			return redirect()->route('admin.invoices.index')->with('message', 'Item deleted successfully.');
+			return redirect()->route('admin.bcinvoices.index')->with('message', 'Item deleted successfully.');
 	}
 
 }

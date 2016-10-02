@@ -12,14 +12,14 @@
   <div class="col-md-12">
             {{-- <form action="{{ route('admin.invoices.store') }}" method="POST">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-            {!! Form::open(['action'=>'BcinvoiceController@store','method'=>'POST','files'=>true]) !!}
+            {!! Form::open(['action'=>'BecinvoiceController@store','method'=>'POST','files'=>true]) !!}
             <div class="row">
-              <div class="col-md-2">
-                <div class="row ">C
+              <div class="col-md-3">
+                <div class="row ">
                   <div class="col-md-12">
                     <div class="form-group @if($errors->has('indate')) has-error @endif">
                      {!! Form::label('indate', 'Indate', []) !!}
-                     {!! Form::date('indate', \Carbon\Carbon::now(), ['class'=>'form-control','readonly' => 'readonly','style'=>'width:250px;']) !!}
+                     {!! Form::date('indate', \Carbon\Carbon::now(), ['class'=>'form-control','readonly' => 'readonly']) !!}
                      @if($errors->has("indate"))
                      <span class="help-block">{{ $errors->first("indate") }}</span>
                      @endif
@@ -27,6 +27,13 @@
                  </div>
                </div>
              </div>
+             <div class="col-md-3">
+                  <div class="row ">
+                    <div class="col-md-12">
+                      <a class="btn btn-link pull-right" href="{{ route('admin.bcinvoices.create') }}"><input type="button" class="btn btn-primary" value="Reload"></a>
+                    </div>
+                  </div>
+                </div>
            </div>
          </div>
        </div>
@@ -256,7 +263,7 @@
            @endif
          </div> --}}
           <div class="col-md-2">
-           {!! Form::hidden('serial_id','',['class'=>'form-control','placeholder'=>'0','id'=>'serial_id']) !!}
+           {!! Form::hidden('serial_id','0',['class'=>'form-control','placeholder'=>'0','id'=>'serial_id']) !!}
            @if($errors->has("serial_id"))
            <span class="help-block">{{ $errors->first("serial_id") }}</span>
            @endif
@@ -319,7 +326,7 @@
     <div class="col-md-12">
       <div class="container-fluid well-sm well">
           <div class="col-md-12">
-            <a class="btn btn-link pull-right" href="{{ route('admin.invoices.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
+            <a class="btn btn-link pull-right" href="{{ route('admin.bcinvoices.index') }}"><i class="glyphicon glyphicon-backward"></i> Back</a>
           </div>
         </div>
       </div>
@@ -390,12 +397,20 @@ function getserialnumber(id,cid){
       }
     });
  }
+ var loop=0;
 function getSerial_id(id){
     $.ajax({
       method:'GET',
       url:"/admin/computer/serialid/"+id,
       success:function(response){
-         $('#serial_id').val($('#serial_id').val()+response[0].id);
+        var symbol="";
+        if(loop>0){
+          symbol=",";
+        }
+          console.log(symbol);
+         $('#serial_id').val($('#serial_id').val()+symbol+response[0].id);
+         loop++;
+        
       },
       error:function(error){
         console.log(error);

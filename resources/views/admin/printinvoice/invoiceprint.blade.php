@@ -21,7 +21,9 @@
 <div class="container-fluid">
     <div class="print">
     <div class="page-header">
-        <h1>SL5 Computer Shop</h1>
+        <div class="" style="font-size: 20px;text-shadow: 0px 0px 5px rgba(150, 150, 150, 1); font-weight: 700">
+              <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
+        </div>
         <h1>Invoices #{{$bcinvoice->id}}</h1>
     </div>
     <div class="row">
@@ -92,12 +94,11 @@
     </div>
 </div>
     <br/>
-    
-    <div class="row">
-        <div class="col-md-12 well well-sm">
-            <a class="btn btn-link" href="{{ route('admin.invoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
-        </div>
     </div>
+        <div class="row">
+        <div class="col-md-12 well well-sm">
+            <a class="btn btn-link dontprint" href="{{ route('admin.bcinvoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+        </div>
     </div>
 </body>
 </html>

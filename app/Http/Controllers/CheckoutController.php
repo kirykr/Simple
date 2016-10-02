@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Cart;
 use App\Computer;
 use App\Other;
+use App\Color;
+use App\Location;
+use App\District;
+use App\Bus;
 
-class ProductsController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +23,13 @@ class ProductsController extends Controller
     public function index()
     {
         //
+        $cart = new Cart();
+        $computers = new Computer();
+        $colors = new Color();
+        $locations = Location::lists('locname','id')->all();
+        $khans = District::lists('disname','id')->all();
+        $buses = Bus::lists('bcname','id')->all();
+        return view('checkout',compact('cart','computers','colors','locations','khans','buses'));
     }
 
     /**
@@ -49,21 +61,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $computer=null;
-        $colors=null;
-      if(substr($id, 0, 1) == 'c')
-      {
-        $computer = Computer::findOrFail($id);
-        // $colors = $computer->colors()->list('name','id');
-        $colors=$computer->colors()->groupby('color_id')->distinct()->get();
-      }
-      else
-      {
-        $computer = Other::findOrFail($id);
-        $colors = $computer->colors()->groupby('color_id')->distinct()->get();
-      }
-        // return $computer->all();
-      return view('product', compact('computer','colors'));
+        //
     }
 
     /**
@@ -99,4 +97,4 @@ class ProductsController extends Controller
     {
         //
     }
-  }
+}

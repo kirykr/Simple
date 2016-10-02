@@ -1,19 +1,11 @@
 @extends('layouts.admin')
-@section('header')
-<div class="page-header">
-        <h1>Bcinvoices / Show #{{$bcinvoice->id}}</h1>
-        {{-- <form action="{{ route('admin.invoices.destroy', $bcinvoice->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.invoices.edit', $bcinvoice->id) }}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="glyphicon glyphicon-trash"></i></button>
-            </div>
-        </form> --}}
-    </div>
-@endsection
-
 @section('content')
+<div class="container-fluid">
+    <div class="print">
+    <div class="page-header">
+        <h1>SL5 Computer Shop</h1>
+        <h1>Invoices #{{$bcinvoice->id}}</h1>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
@@ -51,7 +43,6 @@
                              ?>
                          </tr>
                         @endforeach
-                        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                         <tr>
                             <td></td>
                             <td></td>
@@ -78,53 +69,17 @@
                         </tr>
                       </tbody>
                     </table>
-            </div>         
-       </div>
-    </div>
-
-    {{-- <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    {!! Form::label('subtotal','TOTAL:',[])!!}
-                </div>
-                <div class="col-md-2">
-                    {!! Form::open() !!}
-                    {!! Form::text('tamount','$'.$bcinvoice->tamount,['class'=>'form-control','style'=>'text-align:right;'])!!}
-                    {!! Form::close()!!}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    {!! Form::label('subtotal','DISCOUNT:',[])!!}
-                </div>
-                <div class="col-md-2">
-                    {!! Form::open() !!}
-                    {!! Form::text('discount',(100*$bcinvoice->discount).'%',['class'=>'form-control','style'=>'text-align:right;'])!!}
-                    {!! Form::close()!!}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8"></div>
-                <div class="col-md-2">
-                    {!! Form::label('subtotal','SUBTOTAL:',[])!!}
-                </div>
-                <div class="col-md-2">
-                    {!! Form::open() !!}
-                    {!! Form::text('subtotal','$'.$bcinvoice->subtotal,['class'=>'form-control','style'=>'text-align:right;'])!!}
-                    {!! Form::close()!!}
-                </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+</div>
     <br/>
-    <div class="container-fluid">
+    
     <div class="row">
         <div class="col-md-12 well well-sm">
-            <a class="btn btn-link" href="{{ route('admin.invoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
+            <a class="btn btn-link" href="{{ route('admin.bcinvoices.index') }}"><i class="glyphicon glyphicon-backward"></i>  Back</a>
         </div>
     </div>
     </div>
-@endsection
+
+@stop

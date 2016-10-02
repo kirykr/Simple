@@ -55,6 +55,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function bcinvoices(){
         return $this->hasMany('App\Bcinvoice');
     }
+    public function cinvoices(){
+        return $this->hasMany('App\Cinvoice');
+    }
 /**
      * Many-to-Many relations with Role.
      *

@@ -34,4 +34,8 @@ class Color extends Model
     {
     	return $this->belongsToMany('App\Other');
     }
+    public function carts()
+    {
+        return $this->hasMany('App\Cart');
+    }
 }
