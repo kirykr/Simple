@@ -82,7 +82,11 @@
                  $photo = \DB::table('photos')->join('other_photo', 'photos.id', '=', 'other_photo.photo_id')->where('other_photo.other_id','=', $computer->id)->first();
               }
              ?>
+             @if($photo->path != null)
               <img class="img img-responsive" src="images/computers/{{ $photo->path }}" alt="Product Image">
+              @else
+               <img class="img img-responsive" src="images/computers/no-image.jpg" alt="Product Image">
+              @endif
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
               <hr>
               <table  class='table table-condensed borderless'>
