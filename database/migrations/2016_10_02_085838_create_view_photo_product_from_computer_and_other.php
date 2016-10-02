@@ -14,11 +14,17 @@ class CreateViewPhotoProductFromComputerAndOther extends Migration
     {
         //
         DB::statement("CREATE VIEW photo_product AS
-                       SELECT computer_id as product_id, photo_id, created_at, updated_at
+                       SELECT computer_id as product_id,
+                       photo_id,
+                       created_at,
+                       updated_at
                        FROM
                        computer_photo
                        UNION
-                       SELECT other_id, photo_id, created_at, updated_at
+                       SELECT other_id, 
+                       photo_id, 
+                       created_at, 
+                       updated_at
                        FROM
                        other_photo 
                        ");
