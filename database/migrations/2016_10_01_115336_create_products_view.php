@@ -14,6 +14,7 @@ class CreateProductsView extends Migration
     {
         //
         DB::statement("CREATE VIEW products AS
+                        SELECT
                         computers.id as ID,
                         computers.`name`,
                         computers.qtyinstock,
