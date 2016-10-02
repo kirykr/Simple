@@ -83,9 +83,9 @@
               }
              ?>
              @if($photo->path != null)
-              <img class="img img-responsive" src="images/computers/{{ $photo->path }}" alt="Product Image">
+              <img class="img img-responsive" src="{{asset('/images/computers/' . $photo->path ) }}" alt="Product Image">
               @else
-               <img class="img img-responsive" src="images/computers/no-image.jpg" alt="Product Image">
+               <img class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="Product Image">
               @endif
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
               <hr>

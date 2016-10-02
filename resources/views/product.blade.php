@@ -21,11 +21,16 @@
 		<div class="col-md-5">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-					<img id="zoom_03" class="img img-responsive" src="{{$computer->photos->first() ? $computer->photos->first()->path : '' }}" alt="" data-zoom-image="{{ $computer->photos->first() ? $computer->photos->first()->path : '' }}">
+				@if(strlen($computer->photos->first()->path) > 18)
+					<img id="zoom_03" class="img img-responsive" src="{{$computer->photos->first()->path }}" alt="" data-zoom-image="{{ $computer->photos ? $computer->photos->first()->path : 'images/computers/no-image.jpg' }}">
+				@else
+					<img id="zoom_03" class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="" data-zoom-image="{{asset('/images/computers/no-image.jpg')}}">
+				@endif
 				</div>
 			</div>
 			<hr>
 			<div class="row" id="gal1">
+			@if(strlen($computer->photos->first()->path) > 18)
 			@foreach ($computer->photos as $photo)
 				<div class="col-md-3 col-sm-3 col-xs-hidden">
 				<a class="fancybox-thumbs" data-fancybox-group="thumb" href="{{$photo->path}}">
@@ -33,6 +38,7 @@
 				</a>
 				</div>
 			@endforeach
+			@endif
 			</div>
 		</div>
 		<div class="col-md-7">
