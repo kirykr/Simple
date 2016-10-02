@@ -50,7 +50,7 @@ Route::get('/', function () {
 	// $computers = Product::orderBy('updated_at', 'desc')->paginate(12);
 	 $table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at');
 	 $computers = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->union($table1)->get();
-
+	 
 	return view('welcome', compact('computers'));
 });
 // Route::get('/product/{id}', function ($id) {

@@ -75,7 +75,13 @@
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
               <a href="{{ route('products.show', $computer->id) }}">
               {{-- <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image"> --}}
-              <?php $photo = \DB::table('photos')->join('photo_product', 'photos.id', '=', 'photo_product.photo_id')->where('photo_product.product_id','=', $computer->id)->first(); ?>
+              <?php 
+              if(substr($computer->id, 0, 1) == 'c'){
+                $photo = \DB::table('photos')->join('computer_photo', 'photos.id', '=', 'computer_photo.photo_id')->where('computer_photo.computer_id','=', $computer->id)->first();
+              }else{
+                 $photo = \DB::table('photos')->join('other_photo', 'photos.id', '=', 'other_photo.photo_id')->where('other_photo.other_id','=', $computer->id)->first();
+              }
+             ?>
               <img class="img img-responsive" src="images/computers/{{ $photo->path }}" alt="Product Image">
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
               <hr>
