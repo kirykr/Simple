@@ -14,7 +14,7 @@ class CreateProductsView extends Migration
     {
         //
         DB::statement("CREATE VIEW products AS
-                        SELECT
+                        (SELECT
                         computers.id as ID,
                         computers.`name`,
                         computers.qtyinstock,
@@ -23,9 +23,9 @@ class CreateProductsView extends Migration
                         computers.provprice,                                                
                         computers.created_at,                                               
                         computers.updated_at
-                        FROM computers
-                        UNION
-                        SELECT
+                        FROM computers)
+                        UNION ALL
+                        (SELECT
                         others.id as ID,
                         others.`name`,
                         others.qtyinstock,
@@ -35,7 +35,8 @@ class CreateProductsView extends Migration
                         others.created_at,
                         others.updated_at
                         FROM
-                        others   ");
+                        others)   
+                        ");
     }
 
     /**
