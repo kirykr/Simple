@@ -34,7 +34,7 @@
       font-family: 'Lato', 'Sans', 'Arial';
     }
     body {
-      margin: 0;
+      margin-top: 20px;
       padding: 0;
     }
 
@@ -128,7 +128,7 @@
               </div>
             </div>
             {{-- end top bar --}}
-            <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0px !important;">
+            <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px !important;">
               <div class="container">
 
                 <div class="navbar-header">
