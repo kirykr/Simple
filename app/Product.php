@@ -25,8 +25,8 @@ class Product extends BaseModel
                       ];  
 
    protected $table = 'products';
-   protected $primaryKey = 'id';
-  // protected $guarded = ['photo_id', 'product_id'];
+   // protected $primaryKey = 'id';
+  protected $guarded = ['ID'];
 
   /**
    * Computer belongs to Photo.
@@ -36,7 +36,7 @@ class Product extends BaseModel
   public function photos()
   {
     // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
-    return $this->belongsToMany('App\Photo','photo_product','photo_id','computer_id');
+    return $this->belongsToMany('App\Photo','photo_product','product_id', 'photo_id','ID');
   }          
   
 

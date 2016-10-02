@@ -11,6 +11,7 @@
 |
 */
 use App\Computer;
+use App\Product;
 use App\Other;
 use App\Bcinvoice;
 use App\User;
@@ -46,13 +47,9 @@ use Illuminate\Http\Request;
 
 
 Route::get('/', function () {
-	$computers = Computer::orderBy('updated_at', 'desc')->paginate(12);
-	// $others = Other::orderBy('id', 'desc')->paginate(12);
-	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
-		// return $computers->all();
+	$computers = Product::orderBy('updated_at', 'desc')->paginate(12);
+
 	return view('welcome', compact('computers'));
-	// return view('welcome')->with('computers', Computer::orderBy('id', 'desc')->paginate(12))->with('others', Other::orderBy('id', 'desc')->paginate(12));
-    // return view('welcome');
 });
 // Route::get('/product/{id}', function ($id) {
 // 	$computer = Computer::findOrFail($id);

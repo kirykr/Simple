@@ -73,6 +73,6 @@ class Photo extends Model
     public function products()
     {
         // belongsTo(RelatedModel, foreignKey = others_id, keyOnRelatedModel = id)
-      return $this->belongsToMany('App\Product', 'photo_product', 'photo_id', 'computer_id');
+      return $this->belongsToMany('App\Product', 'photo_product', 'photo_id', 'product_id');
     }
   }

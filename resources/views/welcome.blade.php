@@ -73,8 +73,10 @@
           <div class="row">
             @endif
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-              <a href="{{ route('products.show', $computer->id) }}">
-              <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image">
+              <a href="{{ route('products.show', $computer->ID) }}">
+              {{-- <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image"> --}}
+              <?php $photo = \DB::table('photos')->join('photo_product', 'photos.id', '=', 'photo_product.photo_id')->where('photo_product.product_id','=', $computer->ID)->first(); ?>
+              <img class="img img-responsive" src="images/computers/{{ $photo->path }}" alt="Product Image">
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
               <hr>
               <table  class='table table-condensed borderless'>
@@ -85,18 +87,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                 @foreach ($computer->specs as $spec)
-                  <tr>
-                    <td class="text-right">{{str_limit($computer->specs[$k]->name, $limit = 9, $end = '')}}:</td>
-                    <td>{{str_limit($spec->pivot->description, $limit = 15, $end = '...')}}</td>
-                  </tr>
-                  <?php 
-                    if($k === 2)
-                      break;
-                    else
-                      $k++
-                  ?>
-                  @endforeach
+           
                 </tbody>
               </table>
             
@@ -110,7 +101,7 @@
                   <div class="input-group">
                     <div class="input-group-addon text-center addToCart">${{$computer->sellprice}}
                     </div>
-                    <a href="{{ route('products.show', $computer->id) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
+                    <a href="{{ route('products.show', $computer->ID) }}", class="btn btn-success form-control addToCart"> VIEW DETAILS</a>
                   </div>
                   {{-- {!! Form::close() !!} --}}
                 </div>

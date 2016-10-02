@@ -371,7 +371,7 @@
                         <a href="{{ route('admin.types.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Types</a>
                       </li>
                       <li>
-                        <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Types</a>
+                        <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Create Types</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -383,7 +383,7 @@
                         <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Categories</a>
                       </li>
                       <li>
-                        <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Category</a>
+                        <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Create Category</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -395,7 +395,7 @@
                         <a href="{{ route('admin.brands.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Brands</a>
                       </li>
                       <li>
-                        <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Brands</a>
+                        <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Create Brands</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
