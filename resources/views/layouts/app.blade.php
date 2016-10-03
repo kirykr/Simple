@@ -92,35 +92,36 @@
       left: 32px !important;
     }
 /*            .pop li:a:hover {
-                cursor: pointer;
-              }*/
-              .loginOut{
-                width: 210px !important;
-                left: -47px !important;
-              }
-              .menu-pic {
-                width: 900px !important;
-                left: -290px !important;
-              }
-              #InputAmount {
-                width: 400px;
-                height: 46px;
-              }
-              .addToCart {
-                font: 700 14px / 17px Arial !important;
-              }
-              .label-pill {
-                padding-left: .6em !important;
-                padding-right: .6em !important;
-                border-radius: 10rem !important;
-              }
-              .badge-notify{
-                position: relative;
-                top: -15px;
-                left: -10px;
-              }
-            </style>
-          </head>
+      cursor: pointer;
+    }*/
+    .loginOut{
+      width: 210px !important;
+      left: -47px !important;
+    }
+    .menu-pic {
+      width: 900px !important;
+      left: -290px !important;
+    }
+    #InputAmount {
+      width: 400px;
+      height: 46px;
+    }
+    .addToCart {
+      font: 700 14px / 17px Arial !important;
+    }
+    .label-pill {
+      padding-left: .6em !important;
+      padding-right: .6em !important;
+      border-radius: 10rem !important;
+    }
+    .badge-notify{
+      position: relative;
+      top: -15px;
+      left: -10px;
+    }
+   
+  </style>
+  </head>
           <body id="app-layout">
             <div class="row well" style="margin-bottom: 0px !important; padding: 10px 0px">
               <div class="container">
@@ -151,50 +152,50 @@
                   <!-- Left Side Of Navbar -->
                   <ul class="nav navbar-nav">
                     {{-- <li><a href="{{ url('/home') }}">Home</a></li> --}}
-                 <li class="dropdown">
-                       <a href="{{ url('/laptops') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-laptop fa-fw"></i> Laptop <span class="caret"></span></a>
+                    <li class="dropdown">
+                     <a href="{{ url('/laptops') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-laptop fa-fw"></i> Laptop <span class="caret"></span></a>
 
-                       <ul class="dropdown-menu menu-pic" role="menu" style="width: 700px">
-                         <li>
-                           <div class="row">
-                             <div class="col-md-1"></div>
-                             <div class="col-md-2">
-                               <a href="{{ url('/laptops') }}">
-                                 <img src="{{asset('/images/menupic/all_Laptops.jpg')}}" alt="" style="margin-left: 0px;">
-                                 <p class="text-center">All Laptops</p>
-                               </a>
-                             </div>
-                             <div class="col-md-2">
-                               <a href="#">
-                                 <img src="{{asset('/images/menupic/Laptops_traditional.jpg')}}" alt="">
-                                 <p class="text-center">Traditional Laptops</p>
-                               </a>
-                             </div>
-                             <div class="col-md-2">
-                               <a href="#">
-                                 <img src="{{asset('/images/menupic/Laptop_PC.jpg')}}" alt="">
-                                 <p class="text-center">Laptop PCs</p>
-                               </a>
-                             </div>
-                             <div class="col-md-2">
-                               <a href="#">
-                                 <img src="{{asset('/images/menupic/Laptops_2in1.jpg')}}" alt="">
-                                 <p class="text-center">Laptops 2-in-one</p>
-                               </a>
-                             </div>
-                             <div class="col-md-2">
-                               <a href="#">
-                                 <img src="{{asset('/images/menupic/Laptops_Mac book.jpg')}}" alt="">
-                                 <p class="text-center">Mac books</p>
-                               </a>
-                             </div> 
+                     <ul class="dropdown-menu menu-pic" role="menu" style="width: 700px">
+                       <li>
+                         <div class="row">
+                           <div class="col-md-1"></div>
+                           <div class="col-md-2">
+                             <a href="{{ url('/laptops') }}">
+                               <img src="{{asset('/images/menupic/all_Laptops.jpg')}}" alt="" style="margin-left: 0px;">
+                               <p class="text-center">All Laptops</p>
+                             </a>
                            </div>
+                           <div class="col-md-2">
+                             <a href="#">
+                               <img src="{{asset('/images/menupic/Laptops_traditional.jpg')}}" alt="">
+                               <p class="text-center">Traditional Laptops</p>
+                             </a>
+                           </div>
+                           <div class="col-md-2">
+                             <a href="#">
+                               <img src="{{asset('/images/menupic/Laptop_PC.jpg')}}" alt="">
+                               <p class="text-center">Laptop PCs</p>
+                             </a>
+                           </div>
+                           <div class="col-md-2">
+                             <a href="#">
+                               <img src="{{asset('/images/menupic/Laptops_2in1.jpg')}}" alt="">
+                               <p class="text-center">Laptops 2-in-one</p>
+                             </a>
+                           </div>
+                           <div class="col-md-2">
+                             <a href="#">
+                               <img src="{{asset('/images/menupic/Laptops_Mac book.jpg')}}" alt="">
+                               <p class="text-center">Mac books</p>
+                             </a>
+                           </div> 
+                         </div>
 
-                         </li>
-                       </ul>
-                  </li>
-                  
-                  <li class="dropdown">
+                       </li>
+                     </ul>
+                   </li>
+
+                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                       <i class="fa fa-desktop fa-fw"></i> Desktop <span class="caret"></span>
                     </a>
@@ -331,137 +332,137 @@
                 </ul>
 
 
-      <!-- Right Side Of Navbar -->
-      <ul class="nav navbar-nav navbar-right">
-        <!-- Authentication Links -->
-        @if (Auth::guest())
-        <li><a href="{{ url('/login') }}">Login</a></li>
-        <li><a href="{{ url('/register') }}">Register</a></li>
-        @else
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <i class="fa fa-user fa-fw"></i>hi,   {{ Auth::user()->name }}! <span class="caret"></span>
-          </a>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                  <!-- Authentication Links -->
+                  @if (Auth::guest())
+                  <li><a href="{{ url('/login') }}">Login</a></li>
+                  <li><a href="{{ url('/register') }}">Register</a></li>
+                  @else
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                      <i class="fa fa-user fa-fw"></i>hi,   {{ Auth::user()->name }}! <span class="caret"></span>
+                    </a>
 
-          <ul class="dropdown-menu loginOut" role="menu">
-            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-          </ul>
-        </li>
-        @endif
-      </ul>
-    </div>
-  </div>
-</nav>
-{{-- drop down for produt types --}}
-<div class="container">
-  <div class="row" style="padding: 10px 0px 10px 0px;">
-    <div class="col-md-1 col-sm-12 col-xs-12"></div>
-    <div class="row">
-      <div class="col-md-2 col-sm-12 col-xs-12" style="">
-       <div class="dropdown pull-right" style=" margin-top: 10px">
-        <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer; text-decoration: none;">
-          Shop by Product Types
-          <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </div>
-    </div>
-    
-    <div class="col-md-2 col-sm-12 col-xs-12" style="border-left: dotted 1px #333; border-right: dotted 1px #333;">
-      <div class="input-group">
-        <div class="input-group-addon" style="padding-left: 20px; margin-left: 20px;"><i class="fa fa-search"></i></div>
-        <input type="text" class="form-control" id="InputAmount" placeholder="Search...">
-        <span class="input-group-btn">
-          <button type="button" class="btn btn-lg btn-success dropdown-toggle" id="catDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">All Categories <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="catDropDown">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </span>
-      </div>
-    </div>
-    <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style=" margin-top: 5px; font-weight: 700; font-size: 20px; border-left: dotted 1px #333;">
-      <a href="{{ route('carts.index') }}"><i class="fa fa-shopping-cart fa-fw"></i>
-      {{-- Cart::instance(Auth::user()->id)->content()->count() --}}
-      {{-- $sum->sum('amount') --}}
-        <?php 
-             
-         ?>
-        <span class="label label-pill badge-notify label-danger">{{ Auth::check() ? count($cart->where('customer_id','=',Auth::user()->id)->get()) :  Cart::content()->count()}}</span> $ {{ Auth::check() ? $sum= $cart->where('customer_id','=',Auth::user()->id)->get()->sum('amount') : Cart::subtotal()  }}</a>
-      </div>
-    </div>
-  </div>
-</div>
-@yield('content')
+                    <ul class="dropdown-menu loginOut" role="menu">
+                      <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                    </ul>
+                  </li>
+                  @endif
+                </ul>
+              </div>
+            </div>
+          </nav>
+          {{-- drop down for produt types --}}
+          <div class="container">
+            <div class="row" style="padding: 10px 0px 10px 0px;">
+              <div class="col-md-1 col-sm-12 col-xs-12"></div>
+              <div class="row">
+                <div class="col-md-2 col-sm-12 col-xs-12" style="">
+                 <div class="dropdown pull-right" style=" margin-top: 10px">
+                  <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="cursor: pointer; text-decoration: none;">
+                    Shop by Product Types
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
 
+              <div class="col-md-2 col-sm-12 col-xs-12" style="border-left: dotted 1px #333; border-right: dotted 1px #333;">
+                <div class="input-group">
+                  <div class="input-group-addon" style="padding-left: 20px; margin-left: 20px;"><i class="fa fa-search"></i></div>
+                  <input type="text" class="form-control" id="InputAmount" placeholder="Search...">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-lg btn-success dropdown-toggle" id="catDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">All Categories <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="catDropDown">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12 col-xs-12 pull-right" style=" margin-top: 5px; font-weight: 700; font-size: 20px; border-left: dotted 1px #333;">
+                <a href="{{ route('carts.index') }}"><i class="fa fa-shopping-cart fa-fw"></i>
+                  {{-- Cart::instance(Auth::user()->id)->content()->count() --}}
+                  {{-- $sum->sum('amount') --}}
+                  <?php 
 
-@yield('footer')
-<hr>
-
-<div class="row well text-center">
-  <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 23 232 222</span></p></div>
-  <div class="col-md-12"><p class="thinFont">You cal also e-mail us: <a href="#">ecomm@shop.com</p></a></div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-md-2">
-      <div class="list-group list-special">
-        <a href="#" class="list-group-item borderless disabled">
-          <h5>MY ACCOUNT</h5>
-        </a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Log in</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Create New Account</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Wishlist</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Order histories</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Shopping Cart</a>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="list-group list-special">
-        <a href="#" class="list-group-item borderless disabled">
-          <h5>INFORMATION</h5>
-        </a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> About Us</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Contact US</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Site Map</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Others..</a>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="list-group list-special">
-        <a href="#" class="list-group-item borderless disabled">
-          <h5>EXTRAS</h5>
-        </a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Gift Voucher</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Privacy</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Term and Condition</a>
-        <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Return Home</a>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading"><h5>RECEIVE NEW PRODUCTS FROM US</h5></div>
-        <div class="panel-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ducimus sed id nulla adipisci natus ab hic sequi, et, excepturi sapiente voluptate eos magni, quas perspiciatis placeat? Magni quis, consectetur.</p>
-          <div class="row">
-            <div class="col-md-9"><input type="search" name="" id="input" class="form-control" value="" required="required" title=""></div>
-            <div class="col-md-3"><button type="button" class="btn btn-primary">SUBSCRIBE</button></div>
->>>>>>> 9eccf7c353eb8b909137836e883affc838749b13
+                  ?>
+                  <span class="label label-pill badge-notify label-danger">{{ Auth::check() ? count($cart->where('customer_id','=',Auth::user()->id)->get()) :  Cart::content()->count()}}</span> $ {{ Auth::check() ? $sum= $cart->where('customer_id','=',Auth::user()->id)->get()->sum('amount') : Cart::subtotal()  }}</a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
-      <!-- JavaScripts -->
+          @yield('content')
+
+
+          @yield('footer')
+          <hr>
+
+          <div class="row well text-center">
+            <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 23 232 222</span></p></div>
+            <div class="col-md-12"><p class="thinFont">You cal also e-mail us: <a href="#">ecomm@shop.com</p></a></div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-2">
+                <div class="list-group list-special">
+                  <a href="#" class="list-group-item borderless disabled">
+                    <h5>MY ACCOUNT</h5>
+                  </a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Log in</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Create New Account</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Wishlist</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Order histories</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Shopping Cart</a>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="list-group list-special">
+                  <a href="#" class="list-group-item borderless disabled">
+                    <h5>INFORMATION</h5>
+                  </a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> About Us</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Contact US</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Site Map</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Others..</a>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="list-group list-special">
+                  <a href="#" class="list-group-item borderless disabled">
+                    <h5>EXTRAS</h5>
+                  </a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Gift Voucher</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Privacy</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Term and Condition</a>
+                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Return Home</a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading"><h5>RECEIVE NEW PRODUCTS FROM US</h5></div>
+                  <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ducimus sed id nulla adipisci natus ab hic sequi, et, excepturi sapiente voluptate eos magni, quas perspiciatis placeat? Magni quis, consectetur.</p>
+                    <div class="row">
+                      <div class="col-md-9"><input type="search" name="" id="input" class="form-control" value="" required="required" title=""></div>
+                      <div class="col-md-3"><button type="button" class="btn btn-primary">SUBSCRIBE</button></div>
+                      >>>>>>> 9eccf7c353eb8b909137836e883affc838749b13
+                    </div>
+                  </div>
+                </div>
+                {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+                <!-- JavaScripts -->
    {{--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
