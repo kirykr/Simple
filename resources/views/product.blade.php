@@ -79,7 +79,7 @@
 						<div class="form-group">
 						{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
 							{!! Form::hidden('id', $computer->id, []) !!}
-							{!! Form::hidden('image', $computer->photos->first()->path, []) !!}
+							{!! Form::hidden('image',count($computer->photos) > 0 ? $computer->photos->first()->path : 'no-image', []) !!}
 							{!! Form::label('', 'Colors:', []) !!}
                     		{!! Form::select('color',[''=>'Choose Options', ''=>'Gold', ''=>'Silver', ''=>'Black'],0,['class'=>'form-control']) !!}
 							{!! Form::hidden('price', $computer->sellprice, []) !!}
