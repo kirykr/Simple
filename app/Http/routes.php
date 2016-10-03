@@ -72,8 +72,8 @@ Route::auth();
 Route::get('/admin', function(){
 	
 	if(!Entrust::hasRole(['admin','owner','HR'])){
-		$cart=count(Cart::where('customer_id','=','1')->get());
-		return redirect('/',compact('cart'));
+		// $cart=count(Cart::where('customer_id','=','1')->get());
+		return redirect('/');
 	}
 
 	return view('admin.index');

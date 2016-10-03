@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Computer;
 use App\Other;
+use App\Cart;
 
 class ProductsController extends Controller
 {
@@ -49,6 +50,13 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+        // $com = new Computer();
+        // $cart = count(Cart::where('customer_id','=',Auth::user()->id)->get());
+        // dd($cart);
+        // $others = Other::orderBy('id', 'desc')->paginate(12);
+        // $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
+            // return $computers->all();
+        $cart = new Cart();
         $computer=null;
         $colors=null;
       if(substr($id, 0, 1) == 'c')
@@ -63,7 +71,7 @@ class ProductsController extends Controller
         $colors = $computer->colors()->groupby('color_id')->distinct()->get();
       }
         // return $computer->all();
-      return view('product', compact('computer','colors'));
+      return view('product', compact('computer','colors','cart','computers'));
     }
 
     /**
