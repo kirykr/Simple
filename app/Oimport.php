@@ -30,6 +30,6 @@ class Oimport extends Model
     public function otherdetails()
     {
       // belongsTo(RelatedModel, foreignKey = other_id, keyOnRelatedModel = id)
-      return $this->belongsToMany('App\other')->withPivot('color_id','qty','cost','amount');
+      return $this->belongsToMany('App\Other')->withPivot('color_id','qty','cost','amount');
     }
 }
