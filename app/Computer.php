@@ -68,9 +68,16 @@ class Computer extends Model
         return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');
     }
 
+    public function cinvoicedetails(){
+        return $this->morphMany('App\Cinvoicedetail','pro');
+    }
+
+    public function carts(){
+        return $this->morphMany('App\Cart','pro');
+    }
     /**
      * Computer belongs to Colors.
-    /**
+    **
      * The computer or other belong to invoicedetail.
      */
     public function bcinvoicedetails(){

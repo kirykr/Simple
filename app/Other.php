@@ -31,6 +31,13 @@ class Other extends Model
 		// belongsTo(RelatedModel, foreignKey = photos_id, keyOnRelatedModel = id)
 		return $this->belongsToMany('App\Photo');
 	}
+    public function cinvoicedetails(){
+        return $this->morphMany('App\Cinvoicedetail','pro');
+    }
+
+    public function carts(){
+        return $this->morphMany('App\Cart','pro');
+    }
 
 	public function bcinvoicedetails(){
         return $this->morphMany('App\Bcinvoicedetail','pro');

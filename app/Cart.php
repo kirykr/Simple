@@ -13,9 +13,9 @@ class Cart extends Model
      * @var array
      */
     protected $fillable = [	
-    						'product_id',
-                            'image',
-,                           'name',
+                            'id',
+    						'pro_id',
+                            'name',
     						'qty',
     						'price',
     						'shipprice',
@@ -29,9 +29,14 @@ class Cart extends Model
     				 *
     				 * @return \Illuminate\Database\Eloquent\Relations\HasMany
     				 */
-    				public function computers()
-    				{
-    					// hasMany(RelatedModel, foreignKeyOnRelatedModel = cart_id, localKey = id)
-    					return $this->hasMany('App\Computer');
-    				}				
+    				public function pro()
+                        {
+                            return $this->morphTo();
+                        }	
+                    public function users(){
+                        $this->belongsTo('App\User');
+                    }
+                    public function colors(){
+                        $this->belongsTo('App\Color');
+                    }
 }

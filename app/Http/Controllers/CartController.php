@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use \Cart as Cart;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use App\Cart;
+use App\Color;
 use App\Computer;
 use App\Other;
 use Auth;
+use Redirect;
 
 class CartController extends Controller
 {
@@ -21,14 +25,17 @@ class CartController extends Controller
     function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     public function index()
     {
 
-        $content = Cart::instance(Auth::user()->id)->content();
-
-        return view('shoppingCart', compact('content'));
+        // $content = Cart::instance(Auth::user()->id)->content();
+        $cart = new Cart();
+        $computers = new Computer();
+        $colors = new Color();
+        return view('shoppingCart', compact('cart','computers','colors'));
     }
 
     /**
@@ -50,24 +57,49 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // return $request->all();
-        $items = $request->all();
-        // dd(substr($request->input('id'), 0, 1));
-        if(substr($items['id'], 0, 1) == 'c')
-          $computer = Computer::findOrFail($items['id']);
-        else
-          $computer = Other::findOrFail($items['id']);
+        if(Input::get('col_id')==null)
+        {
+            return Redirect::back()->withErrors(['Please Make sure you choose item color before add to cart!!', 'The Message']);
+        }
+        else{ 
+            $computer_id=$request->input('computer_id');
+            if($request->input('pro_type')=="App\Computer")
+            {
+                $cart = new Cart();
+                $color_id=$request->input('col_id');
+                $computer = Computer::find($computer_id);
+                $cart->pro_id=$computer_id;
+                $cart->qty=$request->input('quantity');
+                $cart->price = $request->input('price');
+                $cart->shipprice= 0;
+                $cart->discount=0;
+                $cart->amount = $cart->qty * $cart->price;
+                $cart->customer_id= Auth::user()->id;
+                $cart->color_id = $color_id;
+                $cart->pro_type=$request->input('pro_type');
+                $cart->save();
+                return Redirect::back();
+                // dd($request->all());
+                // dd($computer);
+            }
+            else{
 
-        $qty = $items['qty'];
-        $image = $request['image'];
-        // $options = $items['options'];
-        $options = [0 => 'Gold', 1 => 'Gray'];
-        
-        Cart::instance(Auth::user()->id)->add(['id' => $computer->id, 'image' =>  $image, 'name' => $computer->name, 'qty' => $qty, 'price' => $computer->sellprice, 'options' => $options ]);
-       // $carts = Cart::content(); 
-       // dd($carts);
-        return redirect()->back();
+                $cart = new Cart();
+                $color_id=$request->input('col_id');
+                $computer = Other::find($computer_id);
+                $cart->pro_id=$computer_id;
+                $cart->qty=$request->input('quantity');
+                $cart->price = $request->input('price');
+                $cart->shipprice= 0;
+                $cart->discount=0;
+                $cart->amount = $cart->qty * $cart->price;
+                $cart->customer_id= Auth::user()->id;
+                $cart->pro_type=$request->input('pro_type');
+                $cart->save();
+            }
+            
+           
+        }
     }
 
     /**
@@ -103,7 +135,11 @@ class CartController extends Controller
     {
         
         $qty = $request['qty'];
-        Cart::instance(Auth::user()->id)->update($rowId, $qty);
+        // Cart::instance(Auth::user()->id)->update($rowId, $qty);
+        $cart = Cart::find($rowId);
+        $cart->find($rowId);
+        $cart->qty = $qty;
+        $cart->save();
         return redirect('/carts');
     }
 

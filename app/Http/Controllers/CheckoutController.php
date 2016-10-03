@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Cart;
 use App\Computer;
 use App\Other;
-use App\Cart;
+use App\Color;
+use App\Location;
+use App\District;
+use App\Bus;
 
-class ProductsController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,6 +23,13 @@ class ProductsController extends Controller
     public function index()
     {
         //
+        $cart = new Cart();
+        $computers = new Computer();
+        $colors = new Color();
+        $locations = Location::lists('locname','id')->all();
+        $khans = District::lists('disname','id')->all();
+        $buses = Bus::lists('bcname','id')->all();
+        return view('checkout',compact('cart','computers','colors','locations','khans','buses'));
     }
 
     /**
@@ -50,28 +61,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        // $com = new Computer();
-        // $cart = count(Cart::where('customer_id','=',Auth::user()->id)->get());
-        // dd($cart);
-        // $others = Other::orderBy('id', 'desc')->paginate(12);
-        // $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
-            // return $computers->all();
-        $cart = new Cart();
-        $computer=null;
-        $colors=null;
-      if(substr($id, 0, 1) == 'c')
-      {
-        $computer = Computer::findOrFail($id);
-        // $colors = $computer->colors()->list('name','id');
-        $colors=$computer->colors()->groupby('color_id')->distinct()->get();
-      }
-      else
-      {
-        $computer = Other::findOrFail($id);
-        $colors = $computer->colors()->groupby('color_id')->distinct()->get();
-      }
-        // return $computer->all();
-      return view('product', compact('computer','colors','cart','computers'));
+        //
     }
 
     /**
@@ -107,4 +97,4 @@ class ProductsController extends Controller
     {
         //
     }
-  }
+}

@@ -67,11 +67,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-      <style type="text/css">
+      <style type="text/css" media="print">
       a {
         color: #333;
         font-size: 15px;
       }
+      .dontprint
+      { 
+        display: none;
+      }
+      .displayprint{
+        display: inline;
+      }
+      
       </style>
       </head>
 
@@ -416,10 +424,10 @@
                     <a href="#"><i class="fa fa-shopping-cart"></i> Invoice<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse" >
                       <li>
-                        <a href="{{ route('admin.invoices.index') }}"><i class="fa fa-list-alt fa-fw"></i> View Invoice</a>
+                        <a href="{{ route('admin.bcinvoices.index') }}"><i class="fa fa-list-alt fa-fw"></i> View Invoice</a>
                       </li>
                       <li>
-                        <a href="{{ route('admin.invoices.create') }}"><i class="fa fa-cog fa-fw"></i> New Invoice</a>
+                        <a href="{{ route('admin.bcinvoices.create') }}"><i class="fa fa-cog fa-fw"></i> New Invoice</a>
                       </li>
                     </ul>
                     <!-- /.nav-second-level -->
@@ -569,7 +577,7 @@
 
 
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 dontprint">
                 <h1 class="page-header">Administrator</h1>
                 @role('admin')
                 <p>This is visible to users with the admin role. Gets translated to 
