@@ -66,7 +66,17 @@ Route::get('/', function () {
 // 	return view('product', compact('computer'));
 //     // return view('welcome');
 // });
+Route::get('/laptops', function(){
+	$computers = Computer::orderBy('updated_at', 'desc')->paginate(12);
 
+	return view('welcome', compact('computers'));
+});
+
+Route::get('/accessories', function(){
+	$computers = Other::orderBy('updated_at', 'desc')->paginate(12);
+
+	return view('welcome', compact('computers'));
+});
 
 Route::auth();
 
