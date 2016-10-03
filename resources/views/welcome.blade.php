@@ -86,9 +86,9 @@
                    $photo = \DB::table('photos')->join('other_photo', 'photos.id', '=', 'other_photo.photo_id')->where('other_photo.other_id','=', $computer->id)->first();
               ?>
               @endif
-
-             @if($photo->path != null)
              {{-- {{dd($photo->path)}} --}}
+            
+             @if(isset($photo->path) && $photo->path != null)
               <img class="img img-responsive" src="{{asset('/images/computers/' . $photo->path ) }}" alt="Product Image">
               @else
                <img class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="Product Image">
