@@ -21,7 +21,7 @@
 		<div class="col-md-5">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
-				@if(strlen($computer->photos->first()->path) > 18)
+				@if(count($computer->photos) > 0)
 					<img id="zoom_03" class="img img-responsive" src="{{$computer->photos->first()->path }}" alt="" data-zoom-image="{{ $computer->photos ? $computer->photos->first()->path : 'images/computers/no-image.jpg' }}">
 				@else
 					<img id="zoom_03" class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="" data-zoom-image="{{asset('/images/computers/no-image.jpg')}}">
@@ -30,14 +30,14 @@
 			</div>
 			<hr>
 			<div class="row" id="gal1">
-			@if(strlen($computer->photos->first()->path) > 18)
-			@foreach ($computer->photos as $photo)
-				<div class="col-md-3 col-sm-3 col-xs-hidden">
-				<a class="fancybox-thumbs" data-fancybox-group="thumb" href="{{$photo->path}}">
-					<img class="img img-responsive" src="{{ $photo->path }}" >
-				</a>
-				</div>
-			@endforeach
+			@if(count($computer->photos) > 0)
+				@foreach ($computer->photos as $photo)
+					<div class="col-md-3 col-sm-3 col-xs-hidden">
+					<a class="fancybox-thumbs" data-fancybox-group="thumb" href="{{$photo->path}}">
+						<img class="img img-responsive" src="{{ $photo->path }}" >
+					</a>
+					</div>
+				@endforeach
 			@endif
 			</div>
 		</div>
