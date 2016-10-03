@@ -10,7 +10,13 @@
      <!-- Default panel contents -->
      <div class="panel-heading"><h1>{{$other->name}} <small>Instock: {{$other->qtyinstock}}</small></h1></div>
      <div class="panel-body">
-       <p><img width="150" src=" {{ $other->photos ? $other->photos->first()->path : '' }} " alt=""></p>
+       <p>
+         @if(count($other->photos) > 0)
+          <img id="zoom_03" class="img img-responsive" src="{{$other->photos->first()->path }}" alt="" data-zoom-image="{{ $other->photos ? $other->photos->first()->path : 'images/computers/no-image.jpg' }}">
+         @else
+          <img id="zoom_03" class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="" data-zoom-image="{{asset('/images/computers/no-image.jpg')}}">
+         @endif
+       </p>
      </div>
 
      <!-- Table -->

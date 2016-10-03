@@ -85,7 +85,13 @@
           {{-- @foreach($details as $product) --}}
           <tr>
             <td>{{ $product->id }}</td>
-            <td><img width="70" src=" {{ $product->photos ? $product->photos->first()->path : '' }} " alt=""></td>
+            <td>
+            @if(count($product->photos) > 0)
+                <img id="zoom_03" class="img img-responsive" src="{{$product->photos->first()->path }}" alt="" data-zoom-image="{{ $product->photos ? $product->photos->first()->path : 'images/computers/no-image.jpg' }}">
+              @else
+                <img id="zoom_03" class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="" data-zoom-image="{{asset('/images/computers/no-image.jpg')}}">
+              @endif
+            </td>
             <td>{{ $product->name }}</td>
             <td>{{ $product->sellprice }}</td>
             <td>{{ $product->ppprice }}</td>

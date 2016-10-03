@@ -403,7 +403,7 @@
           <hr>
 
           <div class="row well text-center">
-            <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 23 232 222</span></p></div>
+            <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 70 964 033</span></p></div>
             <div class="col-md-12"><p class="thinFont">You cal also e-mail us: <a href="#">ecomm@shop.com</p></a></div>
           </div>
           <div class="container">
