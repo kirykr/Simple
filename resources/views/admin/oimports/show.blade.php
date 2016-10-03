@@ -75,8 +75,8 @@
         <tr>
           <td>{{ $product->id }}</td>
           <td>
-            @if(count($computer->photos) > 0)
-              <img width="70" class="img img-responsive" src="{{$computer->photos->first()->path }}" alt="" data-zoom-image="{{ $computer->photos ? $computer->photos->first()->path : 'images/computers/no-image.jpg' }}">
+            @if(count($product->photos) > 0)
+              <img width="70" class="img img-responsive" src="{{$product->photos->first()->path }}" alt="" data-zoom-image="{{ $product->photos ? $product->photos->first()->path : 'images/computers/no-image.jpg' }}">
             @else
               <img class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="" data-zoom-image="{{asset('/images/computers/no-image.jpg')}}">
             @endif
