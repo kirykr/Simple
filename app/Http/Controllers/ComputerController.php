@@ -169,11 +169,14 @@ class ComputerController extends Controller {
 	{
 		$computer = Computer::findOrFail($id);
 		// $computer->delete();
-			foreach ($computer->photos as $filename) {
+
+		foreach ($computer->photos as $filename) {
+      // dd(strlen($filename->path));
+      if(strlen($filename->path) > 18){
       	unlink(public_path() . $filename->path);
     	  $filename->delete();
-			// }
 			}
+		}
 			// dd($arr);
 		// );
 		$computer->photos()->detach();
