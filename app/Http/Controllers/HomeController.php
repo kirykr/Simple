@@ -7,6 +7,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Computer;
+use App\Cart;
 use App\Other;
 use DB;
 use Input;
@@ -41,7 +42,8 @@ class HomeController extends Controller
         $itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
         $computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page); 
 
-        return view('welcome', compact('computers'));
+        $cart = new Cart();
+        return view('welcome', compact('computers','cart'));
         // return view('home');
     }
 

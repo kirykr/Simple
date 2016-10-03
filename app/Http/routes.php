@@ -72,13 +72,15 @@ Route::get('/', function () {
 Route::get('/laptops', function(){
 	$computers = Computer::orderBy('updated_at', 'desc')->paginate(12);
 
-	return view('welcome', compact('computers'));
+	$cart = new Cart();
+	return view('welcome', compact('computers','cart'));
 });
 
 Route::get('/accessories', function(){
 	$computers = Other::orderBy('updated_at', 'desc')->paginate(12);
 
-	return view('welcome', compact('computers'));
+	$cart = new Cart();
+	return view('welcome', compact('computers','cart'));
 });
 
 Route::auth();
