@@ -4,7 +4,7 @@
         <title>Be right back.</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <style>
             html, body {
                 height: 100%;
@@ -41,9 +41,10 @@
         <div class="container">
             <div class="content">
                 <div class="title">Will Be right back.</div>
-                 <div><a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;font-weight: 700">
+                <div><a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;font-weight: 700">
                     <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
                   </a></div>
+                <div class="title">404 pages</div>
             </div>
         </div>
     </body>
