@@ -48,9 +48,16 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
 	// $computers = Product::orderBy('updated_at', 'desc')->paginate(12);
+	$page = Input::get('page', 1);
+	$paginate = 12;
+
 	 $table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at');
-	 $computers = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->paginate(12);
+	 $afterunion = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->union($table1)->get();
 	 
+	$offSet = ($page * $paginate) - $paginate;
+	$itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
+	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page); 
+
 	return view('welcome', compact('computers'));
 });
 // Route::get('/product/{id}', function ($id) {
