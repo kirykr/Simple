@@ -60,7 +60,7 @@
       <a href="#"><i class="fa fa-th-list"></i></a> 
     </div>
     <div class="col-md-4 col-sm-4 col-xs-12 pull-right text-right">
-          {{-- {!! $computers->render() !!} --}}
+          {!! $computers->render() !!}
         </div>
       </div>
       <hr>
@@ -91,7 +91,7 @@
              @if(isset($photo->path) && $photo->path != null)
               <img class="img img-responsive" src="{{asset('/images/computers/' . $photo->path ) }}" alt="Product Image">
               @else
-               <img class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="Product Image">
+               <img  width="225" src="{{asset('/images/computers/no-image.jpg')}}" alt="Product Image">
               @endif
               <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4>
               </a>

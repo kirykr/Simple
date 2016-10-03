@@ -174,8 +174,8 @@ class ComputerController extends Controller {
       // dd(strlen($filename->path));
       if(strlen($filename->path) > 18){
       	unlink(public_path() . $filename->path);
-    	  $filename->delete();
-			}
+      }
+  	  $filename->delete();
 		}
 			// dd($arr);
 		// );
