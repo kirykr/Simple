@@ -73,21 +73,10 @@
           <div class="row">
             @endif
             <div class="col-md-3 col-sm-3 col-xs-12 text-center">
-              <a href="{{ route('products.show', $computer->id) }}">
-              {{-- <img class="img img-responsive" src="{{ $computer->photos ? $computer->photos->first()->path : '' }}" alt="Product Image"> --}}
-              <?php 
-              if(substr($computer->id, 0, 1) == 'c'){
-                $photo = \DB::table('photos')->join('computer_photo', 'photos.id', '=', 'computer_photo.photo_id')->where('computer_photo.computer_id','=', $computer->id)->first();
-              }else{
-                 $photo = \DB::table('photos')->join('other_photo', 'photos.id', '=', 'other_photo.photo_id')->where('other_photo.other_id','=', $computer->id)->first();
-              }
-             ?>
-             @if($photo->path != null)
-              <img class="img img-responsive" src="{{asset('/images/computers/' . $photo->path ) }}" alt="Product Image">
-              @else
-               <img class="img img-responsive" src="{{asset('/images/computers/no-image.jpg')}}" alt="Product Image">
-              @endif
-              <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4></a>
+            <a href="{{ route('products.show', $computer->id) }}" >
+         
+              <h4>{{ str_limit($computer->name, $limit = 25, $end = '...')}}</h4>
+              </a>
               <hr>
               <table  class='table table-condensed borderless'>
                 <thead>

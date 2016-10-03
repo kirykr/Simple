@@ -8,6 +8,8 @@ use App\Photo;
 use App\Computer;
 use App\Brand;
 use App\Spec;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 // use Illuminate\Http\Request;
 use Image;
@@ -47,31 +49,25 @@ class ComputerController extends Controller {
 	 * @param Request $request
 	 * @return Response
 	 */
-	public function  store(ComputerRequest $request)
+	public function  store(Request $request)
 	{
-  
+
+    $this->validate($request, [
+           'name' => 'required|max:22',
+           'sellprice' => 'required|numeric|min:1',
+           'ppprice' => 'required|numeric|min:1',
+           'provprice' => 'required|numeric|min:1',
+           'photo_id' => 'required',
+           'brand_id' => 'required|numeric|min:1'
+
+    ]);
+
 		$input = $request->all();
+    dd($input);
 		$input['id'] = uniqid('c', false);
 		
 		$computer = Computer::create($input);
-		// $specs = Spec::all();
-		// $arr = [];
-		// foreach ($specs as $spec) {
-		// 	$arr[] = $spec->name;
-		// }
-		// $spec_desc = array_combine($arr, $request->input('description'));
-		// dd($spec_desc);
-		// dd($input);
-		// if (is_array($request->input('description'))) {
-		// 	foreach ($spec_desc as $key => $desc) {
-		// 		if(!empty($desc)){
-		// 			$spec = Spec::where('name','=',$key)->first();
-		// 			// dd($spec);
-		// 			$computer->specs()->save($spec, ['description'=> $desc]); 
-		// 		}
-		// 	}
-		// }
-		// dd($request->all());
+	
 		 if($files = $request->file('photo_id'))
         {
           foreach($files as $file) {
@@ -140,6 +136,13 @@ class ComputerController extends Controller {
 	 */
 	public function update(ComputerRequest $request, $id)
 	{
+    $this->validate($request, [
+           'name' => 'required|max:22',
+           'sellprice' => 'required|numeric|min:1',
+           'ppprice' => 'required|numeric|min:1',
+           'provprice' => 'required|numeric|min:1',
+           'brand_id' => 'required|numeric|min:1'
+    ]);
 		$computer = Computer::findOrFail($id);
 		$input = $request->except(['photo_id']);
 		// dd($input);
