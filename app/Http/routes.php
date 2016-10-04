@@ -134,11 +134,13 @@ Route::get('/admin', function(){
 
 Route::get('/about', function(){
 
-	return view('about');
+	$cart = new Cart();
+	return view('about', compact('cart'));
 });
 Route::get('/contact', function(){
 
-	return view('contact');
+	$cart = new Cart();
+	return view('contact', compact('cart'));
 });
 // created Admin middleware and put all admin work inside
 //Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
