@@ -40,6 +40,10 @@ class BrandController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		 $this->validate($request, [
+           'name' => 'required|max:22',
+
+    ]);
 		$brand = new Brand();
 
 		$brand->name = $request->input("name");

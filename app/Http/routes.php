@@ -104,6 +104,7 @@ Route::get('/productbrands/{id}', function($id){
 
 Route::get('/user/profile', function(){
 
+	
 	$cart = new Cart();
 	return view('/user.index', compact('cart'));
 });

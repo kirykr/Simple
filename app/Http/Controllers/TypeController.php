@@ -41,6 +41,11 @@ class TypeController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$this->validate($request, [
+		       'name' => 'required|max:22',
+		       'brand_id' => 'required|numeric|min:1'
+
+		]);
 		$type = new Type();
 
 		$type->name = $request->input("name");
