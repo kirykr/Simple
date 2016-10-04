@@ -63,7 +63,7 @@ class ComputerController extends Controller {
     ]);
 
 		$input = $request->all();
-    dd($input);
+    // dd($input);
 		$input['id'] = uniqid('c', false);
 		
 		$computer = Computer::create($input);
