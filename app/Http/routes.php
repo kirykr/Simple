@@ -20,6 +20,8 @@ use App\Bcinvoicedetail;
 use App\Spec;
 use App\Tmpdetail;
 use App\Color;
+use App\Brand;
+
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +85,42 @@ Route::get('/accessories', function(){
 	return view('welcome', compact('computers','cart'));
 });
 
+
+Route::get('/productbrands/{id}', function($id){
+	$page = Input::get('page', 1);
+	$paginate = 12;
+
+	$table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','brand_id')->where('brand_id','=', $id);
+
+	$afterunion = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','brand_id')->where('brand_id','=', $id)->union($table1)->get();
+
+	$offSet = ($page * $paginate) - $paginate;
+	$itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
+	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page); 
+	
+	$cart = new Cart();
+	return view('welcome', compact('computers','cart'));
+});
+
+
+
+// public static function pluralize($quantity, $singular, $plural=null) {
+//     if($quantity==1 || !strlen($singular)) return $singular;
+//     if($plural!==null) return $plural;
+
+//     $last_letter = strtolower($singular[strlen($singular)-1]);
+//     switch($last_letter) {
+//         case 'y':
+//             return substr($singular,0,-1).'ies';
+//         case 's':
+//             return $singular.'es';
+//         default:
+//             return $singular.'s';
+//     }
+// }
+
+
+// ================================== backend ===============================
 Route::auth();
 
 Route::get('/admin', function(){

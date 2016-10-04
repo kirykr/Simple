@@ -8,15 +8,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
+                                    <i class="fa fa-hdd-o fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
+                                    <div class="huge">{{DB::table('others')->sum('qtyinstock')}}</div>
+                                    <div>Others Prodcut!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('admin.oimportdetails.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -33,12 +33,12 @@
                                     <i class="fa fa-laptop fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">120</div>
-                                    <div>Products!</div>
+                                    <div class="huge">{{DB::table('computers')->sum('qtyinstock') }}</div>
+                                    <div>Computer Products!</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
+                        <a href="{{ route('admin.cimportdetails.index') }}">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -74,11 +74,11 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <i class="fa fa-plane fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Support Tickets!</div>
+                                    <div class="huge">{{DB::table('carts')->sum('qty')}}</div>
+                                    <div>Online Sale!</div>
                                 </div>
                             </div>
                         </div>

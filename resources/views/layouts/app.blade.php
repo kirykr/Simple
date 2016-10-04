@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox.css')}}">
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox-buttons.css') }}">
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox-thumbs.css') }}">
-  {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" media="screen" /> --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" media="screen" />
   {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
 
   <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -27,7 +27,8 @@
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-media.js')}}"></script>
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-thumbs.js')}}"></script>
 
-  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
+  <script src="{{asset('js/jquery.elevateZoom-3.0.8.min.js')}}"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script> --}}
   <!-- Bootstrap Core CSS -->
   <style>
     html {
@@ -378,15 +379,21 @@
                 <div class="input-group">
                   <div class="input-group-addon" style="padding-left: 20px; margin-left: 20px;"><i class="fa fa-search"></i></div>
                   <input type="text" class="form-control" id="InputAmount" placeholder="Search...">
+                  <?php 
+                    $brands = DB::table('brands')->select('id','name')->get();
+                  ?>
                   <span class="input-group-btn">
-                    <button type="button" class="btn btn-lg btn-success dropdown-toggle" id="catDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">All Categories <span class="caret"></span>
+                    <button type="button" class="btn btn-lg btn-success dropdown-toggle" id="catDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">All Brands <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="catDropDown">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
+                    @foreach($brands as $brand)
+                      <li><a href="{{ url('/productbrands/')}}/{{$brand->id}}"><i class="fa fa-btc fa-fw"></i> {{ ucfirst($brand->name) }} brand</a></li>
+                    @endforeach
+                     {{--  <li><a href="#"><i class="fa fa-btc fa-fw"></i> Dell brands</a></li>
+                      <li><a href="#"><i class="fa fa-btc fa-fw"></i> Acer brands</a></li>
+                      <li><a href="#"><i class="fa fa-btc fa-fw"></i> Asus brands</a></li> --}}
                       <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
+                      <li><a href="{{ url('/productbrands/0') }}"><i class="fa fa-btc fa-fw"></i> Other brands..</a></li>
                     </ul>
                   </span>
                 </div>
@@ -410,57 +417,91 @@
           <hr>
 
           <div class="row well text-center">
-            <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 23 232 222</span></p></div>
-            <div class="col-md-12"><p class="thinFont">You cal also e-mail us: <a href="#">ecomm@shop.com</p></a></div>
+              <div class="col-md-12"><p class="thinFont ">For phone orders please call: <span style="font-family: 'Arial'; font-weight: bold;">+(855) 23 232 222</span></p></div>
+              <div class="col-md-12"><p class="thinFont">You cal also e-mail us: <a href="#">ecomm@shop.com</p></a></div>
           </div>
           <div class="container">
-            <div class="row">
+          <div class="row">
               <div class="col-md-2">
-                <div class="list-group list-special">
-                  <a href="#" class="list-group-item borderless disabled">
-                    <h5>MY ACCOUNT</h5>
-                  </a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Log in</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Create New Account</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Wishlist</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Order histories</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Shopping Cart</a>
-                </div>
+                  <div class="list-group list-special">
+                    <a href="#" class="list-group-item borderless disabled">
+                      <h5>MY ACCOUNT</h5>
+                    </a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Log in</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Create New Account</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Wishlist</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Order histories</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Shopping Cart</a>
+                  </div>
               </div>
               <div class="col-md-2">
-                <div class="list-group list-special">
-                  <a href="#" class="list-group-item borderless disabled">
-                    <h5>INFORMATION</h5>
-                  </a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> About Us</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Contact US</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Site Map</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Others..</a>
-                </div>
+                  <div class="list-group list-special">
+                    <a href="#" class="list-group-item borderless disabled">
+                      <h5>INFORMATION</h5>
+                    </a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> About Us</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Contact US</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Site Map</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Others..</a>
+                  </div>
               </div>
               <div class="col-md-2">
-                <div class="list-group list-special">
-                  <a href="#" class="list-group-item borderless disabled">
-                    <h5>EXTRAS</h5>
-                  </a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Gift Voucher</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Privacy</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Term and Condition</a>
-                  <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Return Home</a>
-                </div>
+                  <div class="list-group list-special">
+                    <a href="#" class="list-group-item borderless disabled">
+                      <h5>EXTRAS</h5>
+                    </a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Gift Voucher</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Privacy</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Term and Condition</a>
+                    <a href="#" class="list-group-item borderless"><i class="fa fa-angle-right fa-fw"></i> Return Home</a>
+                  </div>
               </div>
               <div class="col-md-6">
-                <div class="panel panel-default">
-                  <div class="panel-heading"><h5>RECEIVE NEW PRODUCTS FROM US</h5></div>
-                  <div class="panel-body">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><h5>RECEIVE NEW PRODUCTS FROM US</h5></div>
+                    <div class="panel-body">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam ducimus sed id nulla adipisci natus ab hic sequi, et, excepturi sapiente voluptate eos magni, quas perspiciatis placeat? Magni quis, consectetur.</p>
                     <div class="row">
-                      <div class="col-md-9"><input type="search" name="" id="input" class="form-control" value="" required="required" title=""></div>
-                      <div class="col-md-3"><button type="button" class="btn btn-primary">SUBSCRIBE</button></div>
-                      >>>>>>> 9eccf7c353eb8b909137836e883affc838749b13
+                        <div class="col-md-9"><input type="search" name="" id="input" class="form-control" value="" required="required" title=""></div>
+                        <div class="col-md-3"><button type="button" class="btn btn-primary">SUBSCRIBE</button></div>
+                    </div>
                     </div>
                   </div>
-                </div>
+              </div>
+          </div>
+          </div>
+          <hr>
+          <div class="container">
+          <div class="row" style="margin-bottom: 100px">
+              <div class="col-md-6">
+                  <div class="container">
+                  <div class="row">
+                      <div class="col-md-12"><a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;text-shadow: 0px 0px 5px rgba(150, 150, 150, 1); font-weight: 700">
+                              <i class="fa fa-home"></i><span style="color: #5daad0"> e</span><span style="color: #333">Commerce sl5</span>
+                      </a>
+                      </div>
+                      <div class="com-md-12" style="padding-right: 25px; font-family: 'Arial'; font-size: 13px; color: #777">
+                          <p style="color: #999">&copy; CopyRight 2016 All Right Reserve  by Group SL5. </p>
+                           <p>We are students from group SL5 promotion 12. We have built the eCoommerce web site just for fun!</p>
+                      </div>
+                  </div>
+                   </div>
+                 
+              </div>
+              <div class="col-md-2 ">
+                  <h5>CONNECT WITH US</h5>
+                  <ul class="list-group">
+                  <li class="list-group-item"><a href="#"><i class="fa fa-facebook-square fa-fw"></i>facebook</a></li>
+                    <li class="list-group-item"><a href="#"><i class="fa fa-twitter-square fa-fw"></i>Tweeter</a></li>
+                  </ul>
+                  
+              </div>
+              <div class="col-md-4 ">
+                  <h5>SUPPORT PAYMENT METHOD</h5>
+                  <img src="/images/payment-methods.gif" alt="">
+              </div>
+          </div>
+          </div>
                 {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
                 <!-- JavaScripts -->
    {{--   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

@@ -306,7 +306,7 @@
        maximumSelectionSize: 2
     });
     $("#supplier_id").select2({
-      placeholder: "Select a Color",
+      placeholder: "Select a supplier",
        maximumSelectionSize: 2
     }); 
 
