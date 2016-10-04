@@ -102,7 +102,11 @@ Route::get('/productbrands/{id}', function($id){
 	return view('welcome', compact('computers','cart'));
 });
 
+Route::get('/user/profile', function(){
 
+	$cart = new Cart();
+	return view('/user.index', compact('cart'));
+});
 
 // public static function pluralize($quantity, $singular, $plural=null) {
 //     if($quantity==1 || !strlen($singular)) return $singular;

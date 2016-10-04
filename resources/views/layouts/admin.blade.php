@@ -298,13 +298,12 @@
                       <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
+                    <li> <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
+                    </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-
-                        <img width="30" src="{{Auth::user()->photo? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
                         
                         hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
-
 
                       </a>
                       <ul class="dropdown-menu dropdown-user">

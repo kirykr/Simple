@@ -346,6 +346,10 @@
                     </a>
 
                     <ul class="dropdown-menu loginOut" role="menu">
+                      <li><a href="#"><i class="fa fa-heart-o fa-fw"></i> My Profile</a></li>
+                      <li><a href="{{url('/carts')}}"><i class="fa fa-shopping-cart fa-fw"></i> My Carts</a></li>
+                      <li><a href="#"><i class="fa fa-history fa-fw"></i> My Order Histories</a></li>
+                      <li role="separator" class="divider"></li>
                       <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                     </ul>
                   </li>
@@ -390,7 +394,6 @@
                       <li><a href="{{ url('/productbrands/')}}/{{$brand->id}}"><i class="fa fa-btc fa-fw"></i> {{ ucfirst($brand->name) }} brand</a></li>
                     @endforeach
                      {{--  <li><a href="#"><i class="fa fa-btc fa-fw"></i> Dell brands</a></li>
-                      <li><a href="#"><i class="fa fa-btc fa-fw"></i> Acer brands</a></li>
                       <li><a href="#"><i class="fa fa-btc fa-fw"></i> Asus brands</a></li> --}}
                       <li role="separator" class="divider"></li>
                       <li><a href="{{ url('/productbrands/0') }}"><i class="fa fa-btc fa-fw"></i> Other brands..</a></li>
