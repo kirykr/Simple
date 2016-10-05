@@ -18,7 +18,8 @@
         "nwidart/laravel-modules": "^1.13",
         "felixkiss/uniquewith-validator": "2.*",
         "nesbot/carbon": "^1.21",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "kartik-v/bootstrap-star-rating": "@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

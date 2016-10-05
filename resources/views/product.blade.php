@@ -1,5 +1,10 @@
 @extends('layouts.app')
 <style>
+.fa-heart:before {
+    /*content: "\f004";*/
+    color: orange;
+    /*font-size: 12px*/
+}
 
 </style>
 @section('content')
@@ -50,11 +55,7 @@
 					<h2>{{ucfirst($computer->name)}}</h2>
 				</div>
 				<div class="col-md-12">
-					Rating: <i class="fa fa-star-o"></i>
-	                <i class="fa fa-star-o"></i>
-	                <i class="fa fa-star-o"></i>
-	                <i class="fa fa-star-o"></i>
-	                <i class="fa fa-star-o"></i>
+					Rating:  <input type="text" class="kv-fa-heart" value="" data-size="xs" title="">
 	        		| <a href="#"><span class="label label-pill label-danger">3</span><span class="badge alert-success">Reviews:</span>  <i class="fa fa-comments"></i></a>
 
 				</div>
@@ -197,6 +198,19 @@
 	// $(document).ready( function(e){
 	// });
 	//method
+   $('.kv-fa-heart').rating({
+          showClear: false, 
+          showCaption: false,
+          // defaultCaption: '{rating} hearts',
+          // starCaptions: function (rating) {
+          //     return rating == 1 ? 'One heart' : rating + ' hearts';
+          // },
+          theme: 'krajee-fa',
+          filledStar: '<i class="fa fa-heart"></i>',
+          emptyStar: '<i class="fa fa-heart-o"></i>'
+      });
+
+
 	function getRelatedElements(element, endpoint) {
     $.ajax({
       method: 'GET',

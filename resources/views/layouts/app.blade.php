@@ -26,6 +26,14 @@
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-buttons.js')}}"></script>
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-media.js')}}"></script>
   <script src="{{asset('js/fancyboxsource/helpers/jquery.fancybox-thumbs.js')}}"></script>
+  <link rel="stylesheet" href="{{asset('css/star-rating.min.css') }}">
+  <link rel="stylesheet" href="{{asset('css/theme.min.css') }}"> 
+
+  <script src="{{asset('js/star-rating.min.js')}}"></script>
+  {{-- <script src="{{asset('js/themes/fa/theme.js')}}"></script> --}}
+  <script src="{{asset('js/themes/fa/theme.js')}}"></script>
+
+  <script src="{{asset('js/locales/<lange>.js')}}"></script>
 
   <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" ></script>
   <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" ></script>

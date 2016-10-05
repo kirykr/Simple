@@ -1,10 +1,15 @@
 @extends('layouts.app')
+
 <style>
+
 .borderless td, .borderless th {
     border: none !important;
     font-size: 14px;
 }
-
+.fa-heart:before {
+    /*content: "\f004";*/
+    color: orange;
+}
 </style>
 @section('content')
 <div id="carousel-id" class="carousel slide hidden-xs" data-ride="carousel">
@@ -108,11 +113,13 @@
            
                 </tbody>
               </table>
-            
-              <p class="text-center">Availability: </p>
+
+              <p class="text-center">Availability: @if($computer->qtyinstock > 0) <span class="label label-pill label-success">Yes</span> @else <span class="label label-pill label-default">Not yet</span> @endif</p>
 
               {{-- @include('includes/star_rating_with_javascript') --}}
-              @include('includes/star_rating')
+              {{-- @include('includes/star_rating') --}}
+               <input type="text" class="kv-fa-heart" value="" data-size="xs" title="">
+              
 
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -142,6 +149,18 @@
     @section('scripts');
     <script type="text/javascript">
     // // target element
+    $('.kv-fa-heart').rating({
+          showClear: false, 
+          showCaption: false,
+          // defaultCaption: '{rating} hearts',
+          // starCaptions: function (rating) {
+          //     return rating == 1 ? 'One heart' : rating + ' hearts';
+          // },
+          theme: 'krajee-fa',
+          filledStar: '<i class="fa fa-heart"></i>',
+          emptyStar: '<i class="fa fa-heart-o"></i>'
+      });
+
     var el = document.querySelector('#el');
 
     // current rating, or initial rating
