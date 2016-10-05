@@ -67,14 +67,14 @@
     </div>
     <div class="row">
       <div class="col-md-3">
-        {!! Form::label('brand_id', 'Computer Brand') !!}
+        {!! Form::label('brand_id', 'Other Brand') !!}
         <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
         {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control', 'id'=>'computer_brand']) !!}
           {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
       <div class="col-md-3">
-        {!! Form::label('type_id', 'Computer Type') !!}
+        {!! Form::label('type_id', 'Other Type') !!}
         <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
           {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
           {!! Form::hidden('type_name','', ['id'=>'type_name']) !!}
@@ -82,7 +82,7 @@
         </div>
       </div>
       <div class="col-md-3">
-        {!! Form::label('category_id', 'Computer Categories') !!}
+        {!! Form::label('category_id', 'Other Categories') !!}
         <div class="form-group {{ $errors->has('category_id') ? 'has-error' :'' }}">
           {!! Form::select('category_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
           {!! $errors->first('category_id','<span class="help-block">:message</span>') !!}
@@ -90,7 +90,7 @@
       </div>
 
       <div class="col-md-3">
-        {!! Form::label('model_id', 'Computer Model') !!}
+        {!! Form::label('model_id', 'Other Model') !!}
         <div class="form-group {{ $errors->has('model_id') ? 'has-error' :'' }}">
           {!! Form::select('model_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
           {!! $errors->first('model_id','<span class="help-block">:message</span>') !!}
