@@ -13,9 +13,6 @@
     <li>
       <a href="{{route('admin.permissions.index')}}"><i  class="fa fa-cogs"></i> Permissions</a>
     </li>
-    <li>
-      <a href="{{route('admin.rol.index')}}"><i  class="fa fa-cogs"></i> Rol</a>
-    </li>
 
   </ul>
   <!-- /.nav-second-level -->

@@ -39,7 +39,7 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
-  
+
   <script src="{{asset('js/validator.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/lodash/4.16.1/lodash.min.js"></script>
 
@@ -299,16 +299,16 @@
                       <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
-                    <li> <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
+                    <li>
+                      <!-- <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt=""> -->
+                      @if(Auth::user()->avatar)
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/{{Auth::user()->avatar}}" class="img-responsive img-circle" alt="">
+                      @else
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/default-no-image.png" class="img-responsive img-circle">
+                      @endif
                     </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        @if(Auth::user()->avatar)
-                          <img width="30" src="/uploads/avatars/{{Auth::user()->avatar}}" class="img-responsive img-circle" alt="">
-                        @else
-                          <img width="50" src="/uploads/avatars/default-no-image.png" class="img-responsive img-circle">
-                        @endif
-
 
                         hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
 

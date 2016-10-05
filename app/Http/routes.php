@@ -160,7 +160,7 @@ Route::auth();
 							 foreach ($collection1 as $item) {
 									 //echo $item['module'];
 								}
-							return view('admin.index', compact('collection1'));
+							return view('admin.index2', compact('collection1'));
 
 						}
 					}

@@ -15,7 +15,7 @@
         "zizaco/entrust": "5.2.x-dev",
         "barryvdh/laravel-ide-helper": "^2.2",
         "intervention/image": "^2.3",
-        "nwidart/laravel-modules": "^1.13"
+        "nwidart/laravel-modules": "^1.13",
         "felixkiss/uniquewith-validator": "2.*",
         "nesbot/carbon": "^1.21",
         "doctrine/dbal": "^2.5"
