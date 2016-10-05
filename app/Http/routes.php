@@ -56,13 +56,13 @@ Route::get('/', function () {
 
 	 $table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at');
 	 $afterunion = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->union($table1)->get();
-	 
+
 	$offSet = ($page * $paginate) - $paginate;
 	$itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
-	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page); 
+	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page);
 
 	$cart = new Cart();
-	
+
 	return view('welcome', compact('computers','cart'));
 });
 // Route::get('/product/{id}', function ($id) {
@@ -96,15 +96,15 @@ Route::get('/productbrands/{id}', function($id){
 
 	$offSet = ($page * $paginate) - $paginate;
 	$itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
-	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page); 
-	
+	$computers = new \Illuminate\Pagination\LengthAwarePaginator($itemsForCurrentPage, count($afterunion), $paginate, $page);
+
 	$cart = new Cart();
 	return view('welcome', compact('computers','cart'));
 });
 
 Route::get('/user/profile', function(){
 
-	
+
 	$cart = new Cart();
 	return view('/user.index', compact('cart'));
 });
@@ -128,14 +128,51 @@ Route::get('/user/profile', function(){
 // ================================== backend ===============================
 Route::auth();
 
-Route::get('/admin', function(){
-	
+/*Route::get('/admin', function(){
+
 	if(!Entrust::hasRole(['admin','owner','HR'])){
 		return redirect('/admin');
 	}
 
-	return view('admin.index2');
-});
+<<<<<<< HEAD
+	return view('admin.index');
+});*/
+
+		Route::get('/admin', function(){
+			if (Auth::check()){
+				if(Auth::user()->is_active ==1){
+					foreach(Auth::user()->roles as $rname){
+						//if($rname->name){
+						if(Entrust::hasRole([$rname->name])){
+							$array = [];
+							$arr = [];
+							 foreach(Auth::user()->roles as $rname ){
+									 foreach($rname->modules as $mo){
+										 $test= $mo->nav;
+										 $array[]=array_add(['name' => 'ko'], 'module',$test);
+									 }
+							 }
+							 //$result = array_unique($array);
+							 //echo $rol;
+
+							 $collection = collect($array);
+							 $collection1 = $collection->unique('module');
+							 foreach ($collection1 as $item) {
+									 //echo $item['module'];
+								}
+							return view('admin.index2', compact('collection1'));
+
+						}
+					}
+
+				}
+			}
+			return redirect('/');
+		});
+
+// Route::get('/admin', 'AdminPageController@index');
+	// return view('admin.index2');
+// });
 
 Route::get('/about', function(){
 
@@ -153,11 +190,18 @@ Route::get('/contact', function(){
 // Route::get('/admin/shipping/create','ShippingController@create');
 Route::resource("/checkout","CheckoutController");
 // Route::get("/get/getcartdetail",function(){
-// 	$carts = 
+// 	$carts =
 // });
 Route::group(['middleware'=>'admin'], function(){
+	//Route::resource('/admin/users', 'AdminUserController');
 
-	Route::resource('/admin/users', 'AdminUserController');
+	//Route::get('/admin', 'AdminPageController@index');
+
+
+	Route::get('image/{filename}','UserController@getImagePro')->name('admin.users.image');
+	Route::get('imagedef','UserController@getImageDef')->name('admin.users.imagedef');
+
+	Route::resource('/admin/users', 'UserController');
 	Route::resource('/admin/posts','PostController');
 	Route::resource('/admin/categories', 'CategoryController');
 	Route::resource('/admin/computers','ComputerController');
@@ -166,7 +210,11 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('/admin/types','TypeController');
 	Route::resource('/admin/brands','BrandController');
 	Route::resource('/admin/modells','ModellController');
-	Route::resource('/admin/permissions','PermissionController'); 
+	Route::resource('/admin/permissions','PermissionController');
+
+	Route::resource('/admin/rol','ModulesController');
+	Route::resource('/admin/modules','ModulesRoleController');
+
 	Route::resource("/admin/suppliers","SupplierController");
 	Route::resource('/admin/roles','RoleController');
 	Route::resource("/admin/cimports","CimportController");
@@ -246,13 +294,13 @@ Route::group(['middleware'=>'admin'], function(){
 		$bcinvoice = Bcinvoice::find($id);
 		return view('admin/printinvoice/invoiceprint',compact('bcinvoice'));
 	});
-	
+
 	//Route::resource("/admin/shipping","ShippingController");
-	
+
 	Route::group(array('prefix' => 'admin'), function(){
 		Route::group(array('prefix' => 'api'), function(){
 			Route::group(array('prefix' => 'v1'), function(){
-				
+
 				Route::resource('brands.types', 'api\v1\TypesController', ['only' => ['index']]);
 
 				Route::resource('types.categories', 'api\v1\CategoriesController', ['only' => ['index']]);
@@ -262,7 +310,7 @@ Route::group(['middleware'=>'admin'], function(){
 				Route::resource('computers', 'api\v1\ComputerController',['only' => ['show', 'update']]);
 
 				Route::resource('others', 'api\v1\OtherController',['only' => ['show', 'update']]);
-			
+
 				Route::resource('computers.colors', 'api\v1\ComputersController', ['only' => ['index']]);
 
 				Route::resource('colors.computers', 'api\v1\ColorsController', ['only' => ['index']]);
@@ -270,14 +318,12 @@ Route::group(['middleware'=>'admin'], function(){
 				Route::resource('others.colors' , 'api\v1\OthersController' , 	['only'	=>	['index']]);
 
 				Route::resource('computers', 'api\v1\SellPricesController', ['only' => ['index']]);
-				
-			});	
+
+			});
 		});
-	});	
+	});
 });
 
 Route::resource('products', 'ProductsController');
 Route::resource('/home', 'HomeController@index');
 Route::resource('/carts', 'CartController');
-// Route::resource("bcinvoices","BcinvoiceController");
-

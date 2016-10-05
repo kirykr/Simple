@@ -13,6 +13,8 @@ class PermissionController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	 
 	public function index()
 	{
 		$permissions = Permission::orderBy('id', 'desc')->paginate(10);

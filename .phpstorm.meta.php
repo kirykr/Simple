@@ -3,6 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
+    * Generated on 2016-10-02.
     * Generated on 2016-10-03.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
@@ -46,6 +47,8 @@ namespace PHPSTORM_META {
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
@@ -166,6 +169,8 @@ namespace PHPSTORM_META {
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
@@ -286,6 +291,8 @@ namespace PHPSTORM_META {
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,
@@ -406,6 +413,8 @@ namespace PHPSTORM_META {
             'command.entrust.migration' instanceof \Zizaco\Entrust\MigrationCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'translation.loader' instanceof \Illuminate\Translation\FileLoader,
             'translator' instanceof \Illuminate\Translation\Translator,

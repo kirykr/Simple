@@ -164,6 +164,7 @@ return [
         "Laralib\L5scaffold\GeneratorsServiceProvider",
         Intervention\Image\ImageServiceProvider::class,
 
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
     ],
 
     /*
@@ -215,7 +216,8 @@ return [
         'flash' => Laracasts\flash\flash::class,
         'Cart'  => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-        'Image'     => Intervention\Image\Facades\Image::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Module' => Nwidart\Modules\Facades\Module::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
         'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,

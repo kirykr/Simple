@@ -45,27 +45,18 @@
               </div>
                 <div class="row">
 
-                  {{Form::label('modules','Modules:')}}
-                    <select class="form-control select2-multi" name="modules[]" multiple="multiple">
-                        @foreach($modules as $mo)
-                          <option value='{{$mo->id}}'>{{$mo->name}}</option>
-                        @endforeach
-                    </select>
+                  @foreach ($modules as $per)
+                  <div class="col-md-2">
+                    <h5><strong>{{$per->name}}</strong></h5>
+                    <input class="categories_list" type="checkbox" name="mod" value="{{$per->id}}">
+
+                  </div>
+                @endforeach
                 </div>
-      {{--
-                 <div class="col-md-8">
-                   {!! Form::label('brand_id', 'Computer Brand') !!}
-                   <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-                     {!! Form::select('permissions[]', $permissions,0,['class'=>'form-control selectpicker','id'=>'permission_id', 'multiple'=>"multiple"]) !!}
-                     {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
-                   </div>
-                 </div>
-                 </div>
-                 --}}
                 <hr><br><br>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('admin.roles.index') }}"><i class="fa fa-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('admin.rol.index') }}"><i class="fa fa-backward"></i> Back</a>
                 </div>
             {!! Form::close() !!}
             {{-- </form> --}}
@@ -75,21 +66,16 @@
 @endsection
 @section('scripts')
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
-  <script type="text/javascript">
+  <script>
     $('.date-picker').datepicker({
     });
-    $('.select2-multi').select2();
 
-    // $("#permission_id").select2({
-    //   placeholder: "Select more module",
-    //   allowClear: true
-    // });
 // check all uncheck all
     // $("#checkAll").change(function () {
     // $("input:checkbox").prop('checked', $(this).prop("checked"));
     // });
 
-    $(function() {
+/*    $(function() {
     $("input[type=checkbox]").change(function() {
         var count_checkbox_all = $("input[type=checkbox]").not(".select_all").length;
         var count_checkbox_checked = $("input[type=checkbox]:checked").not(".select_all").length;
@@ -111,7 +97,7 @@
         }
 
     });
-});
+});*/
     //// get checked checkbox value
     // $('input').on('click', function(){
     // var selected = [];

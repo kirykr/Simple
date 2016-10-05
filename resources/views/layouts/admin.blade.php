@@ -30,7 +30,7 @@
   <script src="{{asset('js/sb-admin-2.js')}}"></script>
   <script src="{{asset('js/sweetalert.min.js')}}"></script>
   <script src="{{asset('js/script.js')}}"></script>
-  
+
   <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
   <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
   <script src="{{asset('js/plugins/purify.min.js')}}"></script>
@@ -39,10 +39,11 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
+
   <script src="{{asset('js/validator.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/lodash/4.16.1/lodash.min.js"></script>
-  
- 
+
+
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
   <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -74,7 +75,7 @@
           font-size: 15px;
         }
         .dontprint
-        { 
+        {
           display: none;
         }
         .displayprint{
@@ -102,7 +103,7 @@
                     <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
                   </a>
                 </div>
-              </div> 
+              </div>
               <!-- /.navbar-header -->
               <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="row">
@@ -298,11 +299,17 @@
                       <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
-                    <li> <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
+                    <li>
+                      <!-- <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt=""> -->
+                      @if(Auth::user()->avatar)
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/{{Auth::user()->avatar}}" class="img-responsive img-circle" alt="">
+                      @else
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/default-no-image.png" class="img-responsive img-circle">
+                      @endif
                     </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        
+
                         hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
 
                       </a>
@@ -341,162 +348,13 @@
                   <li>
                     <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                   </li>
-                  {{-- @role('admin') --}}
-                  <li>
-                    <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{route('admin.users.index')}}">All Users</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.roles.index')}}"><i  class="fa fa-cogs"></i> User Roles</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.permissions.index')}}"><i  class="fa fa-cogs"></i> Permissions</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  {{-- @endrole --}}
-                  <li>
-                    <a href="#"><i class="fa fa-building fa-fw"></i> Suppliers<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-truck"></i> All Supplers</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.suppliers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Supplier</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-sort-alpha-asc"></i> Product Tyeps<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.types.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Types</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Create Types</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-folder-open"></i> Categories<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Categories</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Create Category</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-share-alt"></i> Product Brands<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.brands.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Brands</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Create Brands</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-apple"></i> Product Models<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.modells.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Models</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.modells.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Models</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li class="">
-                    <a href="#"><i class="fa fa-shopping-cart"></i> Invoice<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse" >
-                      <li>
-                        <a href="{{ route('admin.bcinvoices.index') }}"><i class="fa fa-list-alt fa-fw"></i> View Invoice</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.bcinvoices.create') }}"><i class="fa fa-cog fa-fw"></i> New Invoice</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-desktop"></i></i> Manage Computers<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.computers.index') }}"> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.specs.create') }}"><i class="fa fa-gear fa-fw"></i> Add Specs</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.cimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
-                      </li>
-                       <li>
-                        <a href="{{ route('admin.cimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Manage Other Products<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.others.index') }}"><i class="fa fa-hdd-o fa-fw"></i> All Other Products</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.others.create') }}"><i class="fa fa-gear fa-fw"></i> Create Other Products</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.oimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Others</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.oimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
-                      </li>
-                       <li>
-                        <a href="{{ route('admin.oimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                
-                </ul>
-              </div>
-              <!-- /.sidebar-collapse -->
-            </div>
 
-            <!-- /.navbar-static-side -->
+                  @foreach ($collection1 as $memu)
+                         @include($memu['module'])
+                  @endforeach
+
+ <div class="form-group">
+
           </nav>
 
           {{-- ==================end nav ================================= --}}
@@ -509,10 +367,6 @@
             <div class="row">
               <div class="col-lg-12 dontprint">
                 <h1 class="page-header">Administrator</h1>
-                @role('admin')
-                {{-- <p>This is visible to users with the admin role. Gets translated to  --}}
-                  {{-- \Entrust::role('admin')</p> --}}
-                  @endrole
                 </div>
                 <!-- /.col-lg-12 -->
               </div>
@@ -523,16 +377,21 @@
 
 
             </div>
-            <!-- /#page-wrapper -->   
+            <!-- /#page-wrapper -->
           </div>
           <!-- /#wrapper -->
 
           <!-- jQuery -->
-{{-- 
+{{--
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
  --}}
 
+  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" ></script>
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" ></script>
+
+
+  <link href='https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css' rel='stylesheet' type='text/css'>
 
   {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
@@ -543,11 +402,11 @@
     @if(Session::has('delete_user'))
     <script>
             // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
-            $('#flash-overlay-modal-danger').modal();    
+            $('#flash-overlay-modal-danger').modal();
           </script>
           @elseif(Session::has('create_user'))
           <script>
-            $('#flash-overlay-modal').modal();    
+            $('#flash-overlay-modal').modal();
           </script>
       @endif
 
@@ -556,7 +415,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     // Select2
-   
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",
@@ -568,10 +426,10 @@
           initialPreviewFileType: 'image', // image is the default and can be overridden in config below
           // initialPreviewConfig: [
           //     {caption: "Desert.jpg", size: 827000, width: "120px", url: "/file-upload-batch/2", key: 1},
-          //     {caption: "Lighthouse.jpg", size: 549000, width: "120px", url: "/file-upload-batch/2", key: 2}, 
-          //     {type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 3}, 
+          //     {caption: "Lighthouse.jpg", size: 549000, width: "120px", url: "/file-upload-batch/2", key: 2},
+          //     {type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 3},
           //     {type: "pdf", size: 8000, caption: "About.pdf", url: "/file-upload-batch/2", key: 4},
-          //     {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/file-upload-batch/2", key: 5}, 
+          //     {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/file-upload-batch/2", key: 5},
           //     {type: "html", size: 3550, caption: "LoremIpsum.html", url: "/file-upload-batch/2", key: 6}
           // ],
           purifyHtml: true, // this by default purifies HTML data for preview
@@ -587,7 +445,7 @@
      });
       //======================== API ====================================
 
-       
+
     </script>
     @include('includes/brand_type_model')
   </body>
