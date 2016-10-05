@@ -12,7 +12,7 @@
 <div class="row">
   <div class="col-md-12">
     @if($modules->count())
-    <table class="table table-condensed table-striped">
+    <table id="moduletable" class="table table-condensed table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -51,4 +51,13 @@
   </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#moduletable').dataTable( {
+      "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
+
+      ] } );
+  } );
+</script>
 @endsection
