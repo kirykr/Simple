@@ -29,23 +29,23 @@
       </div>
     </div>
     <div class="item">
-      <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="{{asset('/images/promo.png')}}">
+      <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="{{asset('/images/pcapple21.jpg')}}">
       {{-- http://placehold.it/1310x370 --}}
       <div class="container">
         <div class="carousel-caption right-caption text-right">
           <h1>Another example headline.</h1>
           <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+          <p><a class="btn btn-md btn-primary" href="#" role="button">Check more..</a></p>
         </div>
       </div>
     </div>
     <div class="item active">
-      <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide" src="{{asset('/images/promo.png')}}">
+      <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide" src="{{asset('/images/pcapple.jpg')}}">
       <div class="container">
         <div class="carousel-caption right-caption text-right">
           <h1>One more for good measure.</h1>
           <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+          <p><a class="btn btn-md btn-primary" href="#" role="button">Browse gallery</a></p>
         </div>
       </div>
     </div>

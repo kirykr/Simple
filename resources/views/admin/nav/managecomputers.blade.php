@@ -8,7 +8,16 @@
       <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
     </li>
     <li>
+      <a href="{{ route('admin.specs.create') }}"><i class="fa fa-gear fa-fw"></i> Add Specs</a>
+    </li>
+    <li>
       <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.cimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.cimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
     </li>
   </ul>
   <!-- /.nav-second-level -->

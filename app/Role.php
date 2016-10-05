@@ -18,6 +18,7 @@ class Role extends EntrustRole
        'display_name',
        'description'
    ];
+   
    public function modules()
    {
        return $this->belongsToMany('App\Module');

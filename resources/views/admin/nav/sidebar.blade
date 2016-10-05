@@ -1,0 +1,157 @@
+<<<<<<< HEAD
+{{-- @role('admin') --}}
+<li>
+  <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{route('admin.users.index')}}">All Users</a>
+    </li>
+    <li>
+      <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
+    </li>
+    <li>
+      <a href="{{route('admin.roles.index')}}"><i  class="fa fa-cogs"></i> User Roles</a>
+    </li>
+    <li>
+      <a href="{{route('admin.permissions.index')}}"><i  class="fa fa-cogs"></i> Permissions</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+{{-- @endrole --}}
+<li>
+  <a href="#"><i class="fa fa-building fa-fw"></i> Suppliers<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-truck"></i> All Supplers</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.suppliers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Supplier</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-sort-alpha-asc"></i> Product Tyeps<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.types.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Types</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Create Types</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-folder-open"></i> Categories<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Categories</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Create Category</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-share-alt"></i> Product Brands<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.brands.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Brands</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Create Brands</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-apple"></i> Product Models<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.modells.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Models</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.modells.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Models</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li class="">
+  <a href="#"><i class="fa fa-shopping-cart"></i> Invoice<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level collapse" >
+    <li>
+      <a href="{{ route('admin.bcinvoices.index') }}"><i class="fa fa-list-alt fa-fw"></i> View Invoice</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.bcinvoices.create') }}"><i class="fa fa-cog fa-fw"></i> New Invoice</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-desktop"></i></i> Manage Computers<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.computers.index') }}"> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.specs.create') }}"><i class="fa fa-gear fa-fw"></i> Add Specs</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.cimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.cimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Manage Other Products<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.others.index') }}"><i class="fa fa-hdd-o fa-fw"></i> All Other Products</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.others.create') }}"><i class="fa fa-gear fa-fw"></i> Create Other Products</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.oimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Others</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.oimports.index') }}"><i class="fa  fa-table fa-fw"></i> View Import</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.oimportdetails.index') }}"><i class="fa fa-th-list fa-fw"></i> View Reports</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+<li>
+  <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
+  <ul class="nav nav-second-level">
+    <li>
+      <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
+    </li>
+    <li>
+      <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
+    </li>
+  </ul>
+  <!-- /.nav-second-level -->
+</li>
+
+</ul>
+</div>
+<!-- /.sidebar-collapse -->
+</div>
+=======
+>>>>>>> 4495acaac91428b2db20755479c6b34d352dc1f6

@@ -23,6 +23,7 @@
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/jquery-ui.min.js')}}"></script>
   <script src="{{asset('js/bootstrap.js')}}"></script>
+  
   <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
   {{-- <script src="{{asset('js/jqueryElevateZoom.js')}}"></script> --}}
   <script src="{{asset('js/ripples.min.js')}}"></script>

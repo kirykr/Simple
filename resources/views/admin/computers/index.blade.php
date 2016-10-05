@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             @if($computers->count())
-                <table class="table table-condensed table-striped">
+                <table id="tablecomputers" class="table table-condensed table-striped">
                     <thead>
                         <tr>
                         <th>ID</th>
@@ -60,5 +60,13 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#tablecomputers').dataTable( {
+          "aoColumnDefs": [
+          { "bSortable": false, "aTargets": [ 3 ] }
 
+          ] } );
+      } );
+    </script>
 @endsection

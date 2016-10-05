@@ -11,7 +11,7 @@
 <div class="row">
   <div class="col-md-12">
     @if($oimports->count())
-    <table class="table table-condensed table-striped">
+    <table id="oimporttable" class="table table-condensed table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -35,7 +35,7 @@
           <td>{{$oimport->user_id}}</td>
           <td>{{$oimport->supplier_id}}</td>
           <td>{{$oimport->totalamount}}</td>
-          <td class="text-right">
+          <td class="text-nowrap text-right">
           <a class="btn btn-xs btn-primary" href="{{ route('admin.oimports.show', $oimport->id) }}"><i class="fa fa-external-link fa-fw"></i> View Details</a>
             <a class="btn btn-xs btn-warning" href="{{ route('admin.oimports.edit', $oimport->id) }}"><i class="fa fa-edit"></i> Edit</a>
             <form action="{{ route('admin.oimports.destroy', $oimport->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
@@ -55,5 +55,13 @@
 
   </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#oimporttable').dataTable( {
+      "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
 
+      ] } );
+  } );
+</script>
 @endsection

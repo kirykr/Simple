@@ -150,7 +150,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <table class="table table-hover">
+    <table id="temptable" class="table table-hover">
       <thead>
         <tr>
           <th>#</th>
@@ -191,11 +191,20 @@
     </table>
   </div>
 </div>
+
+
 @endsection
 @section('scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
 
+  $(document).ready(function() {
+  $('#temptable').dataTable( {
+    "aoColumnDefs": [
+    { "bSortable": false, "aTargets": [ 3 ] }
+
+    ] } );
+  } );
   $('.date-picker').datepicker({
   });
 

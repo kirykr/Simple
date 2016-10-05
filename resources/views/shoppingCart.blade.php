@@ -24,7 +24,7 @@
 		<strong>Cart info!</strong> <p>Wow You have {{ count($cart->where('customer_id','=',Auth::user()->id)->get()) }} {{str_plural('item', Cart::content()->count()) }} in your cart</p>
 	</div>
 	
-	<table class="table table-striped table-hover">
+	<table id="shoppingtable" class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -46,7 +46,7 @@
                    <?php $computer = $computers->find($row->pro_id);
                    // dd($computer->photos[0]->path)?>
                 <td><p><img width="70" src=" {{ $computer->photos[0]->path  }} " alt=""></p></td>
-                <td><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
+                <td class="text-wrap"><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
 				<?php $color = $colors->find($row->color_id); ?>
 				{{",". $color->name }} </strong></p></td>
                 
@@ -139,4 +139,13 @@
 @stop
 @section('scripts')
 
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#shoppingtable').dataTable( {
+      "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
+
+      ] } );
+  } );
+</script>
 @endsection

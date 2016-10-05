@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-12">
         @if($cimports->count())
-        <table class="table table-condensed table-striped">
+        <table id="cimporttable" class="table table-condensed table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -36,7 +36,7 @@
                     <td>{{$cimport->totalamount}}</td>
                     <td>{{$cimport->user_id}}</td>
                     <td>{{$cimport->supplier_id}}</td>
-                    <td class="text-right">
+                    <td class="text-nowrap text-right">
                     <a class="btn btn-xs btn-primary" href="{{ route('admin.cimports.show', $cimport->id) }}"><i class="fa fa-external-link fa-fw"></i> View Details</a>
                         <a class="btn btn-xs btn-warning" href="{{ route('admin.cimports.edit', $cimport->id) }}"><i class="fa fa-edit"></i> Edit</a>
                         <form action="{{ route('admin.cimports.destroy', $cimport->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
@@ -56,5 +56,13 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#cimporttable').dataTable( {
+        "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 3 ] }
 
+        ] } );
+    } );
+</script>
 @endsection
