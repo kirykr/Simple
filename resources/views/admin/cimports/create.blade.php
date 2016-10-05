@@ -85,7 +85,7 @@
      <div class="input-group col-md-12">
       {!! Form::select('supplier_id',[''=>'Choose Company'] + $suppliers,null,['class'=>'form-control']) !!}
       <span class="input-group-btn">
-        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-success" data-toggle="modal" data-target="#suppler" type="button"><i class="fa fa-plus"></i></button>
       </span>
     </div>
     {!! $errors->first('supplier_id','<span class="help-block">:message</span>') !!}
@@ -100,7 +100,7 @@
       <div class="input-group col-md-12">
         {!! Form::select('computer_id',[''=>'Choose Computer'] + $computers,null,['class'=>'form-control']) !!}
         <span class="input-group-btn">
-          <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+          <button class="btn btn-success" id="computerModal" data-toggle="modal" data-target="#computer" type="button"><i class="fa fa-plus"></i></button>
         </span>
       </div>
       {!! $errors->first('computer_id','<span class="help-block">:message</span>') !!}
@@ -112,7 +112,7 @@
      <div class="input-group col-md-12">
       {!! Form::select('color_id',[''=>'Choose Color'] + $colors,null,['class'=>'form-control']) !!}
       <span class="input-group-btn">
-        <button class="btn btn-success" type="button"><i class="fa fa-plus"></i></button>
+        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#color"><i class="fa fa-plus"></i></button>
       </span>
     </div>
     {!! $errors->first('color_id','<span class="help-block">:message</span>') !!}
@@ -222,8 +222,10 @@
 
 {{-- model computer --}}
 
-<a class="btn btn-primary" data-toggle="modal" href='#computer'>Trigger modal</a>
-@include('includes/computer_model');
+{{-- <a class="btn btn-primary" data-toggle="modal" href='#computer'>Trigger modal</a> --}}
+@include('includes/computer_modal');
+@include('includes/color_modal');
+@include('includes/supplier_modal');
 
 
 @endsection
@@ -308,10 +310,12 @@
 
   });
   // Unique validation
-  $('#modal-id').on('hidden.bs.modal', function () {
-   $(this).find("input").val('').end();
-   $("div#append").empty();
- });
+ // $('#computerModal').on('click', function(){
+ //  $('#computer').on('shown.bs.modal', function () {
+ //    $('#myInput').focus()
+ //  })
+ // });
+
 </script>
 
 @endsection

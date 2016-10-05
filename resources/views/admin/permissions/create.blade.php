@@ -23,11 +23,11 @@
                         <span class="help-block">{{ $errors->first("name") }}</span>
                        @endif
                     </div>
-                    <div class="form-group @if($errors->has('display_name')) has-error @endif">
-                       <label for="display_name-field">Display_name</label>
-                    <input type="text" id="display_name-field" name="display_name" class="form-control" value="{{ old("display_name") }}"/>
-                       @if($errors->has("display_name"))
-                        <span class="help-block">{{ $errors->first("display_name") }}</span>
+                    <div class="form-group @if($errors->has('module')) has-error @endif">
+                       <label for="module-field">Module</label>
+                    <input type="text" id="module-field" name="module" class="form-control" value="{{ old("module") }}"/>
+                       @if($errors->has("module"))
+                        <span class="help-block">{{ $errors->first("module") }}</span>
                        @endif
                     </div>
                     <div class="form-group @if($errors->has('discription')) has-error @endif">

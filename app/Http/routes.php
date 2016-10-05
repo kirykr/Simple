@@ -131,7 +131,7 @@ Route::auth();
 Route::get('/admin', function(){
 	
 	if(!Entrust::hasRole(['admin','owner','HR'])){
-		return redirect('/');
+		return redirect('/admin');
 	}
 
 	return view('admin.index2');
@@ -172,6 +172,8 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource("/admin/cimports","CimportController");
 	Route::resource("/admin/colors","ColorController");
 	Route::resource("/admin/oimports","OimportController");
+	Route::resource("admin/modules","ModuleController");
+
 	Route::resource("/admin/cimportdetails", "CimportdetailsController", ['only' => ['index','show']]);
 	Route::resource("/admin/oimportdetails", "OimportdetailsController", ['only' => ['index','show']]);
 	// Route::resource("/admin/computerspecs", "ComputerSpecsController");

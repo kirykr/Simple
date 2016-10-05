@@ -41,7 +41,7 @@ class PermissionController extends Controller {
 		$permission = new Permission();
 
 		$permission->name = $request->input("name");
-        $permission->display_name = $request->input("display_name");
+        $permission->module = $request->input("module");
         $permission->description = $request->input("description");
 
 		$permission->save();
@@ -87,7 +87,7 @@ class PermissionController extends Controller {
 		$permission = Permission::findOrFail($id);
 
 		$permission->name = $request->input("name");
-        $permission->display_name = $request->input("display_name");
+        $permission->module = $request->input("module");
         $permission->description = $request->input("description");
 
 		$permission->save();

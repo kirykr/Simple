@@ -7,6 +7,7 @@ use DB;
 use App\Cimport;
 use App\Supplier;
 use App\Computer;
+use App\Brand;
 use App\Tempcomputerstock;
 use App\Color;
 use Carbon\Carbon;
@@ -38,9 +39,10 @@ class CimportController extends Controller {
 		$suppliers = Supplier::lists('name','id')->all();
 		$computers = Computer::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
+		$brands = Brand::lists('name','id')->all();
 		$tempcomputers = Tempcomputerstock::all();
-	
-		return view('admin.cimports.create', compact('suppliers','computers','colors','tempcomputers'));
+
+		return view('admin.cimports.create', compact('suppliers','computers','colors','brands','tempcomputers'));
 	}
 
 	/**
