@@ -67,6 +67,9 @@ class OtherController extends Controller {
 			case '5':
 				$input['id'] = uniqid('p', false);
 				break;
+			default:
+				$input['id'] = uniqid('o', false);
+				break;
 		}
 		$other = Other::create($input);
 		// dd($request->all());
