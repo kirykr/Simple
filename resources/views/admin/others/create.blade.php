@@ -77,6 +77,7 @@
         {!! Form::label('type_id', 'Computer Type') !!}
         <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
           {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+          {!! Form::hidden('type_name','', ['id'=>'type_name']) !!}
           {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
@@ -125,6 +126,9 @@
 
     $('#type_id').on('change', function(e) {
       var id = $(this).val();
+      var text = $(this).text();
+      $('#type_name').val(text);
+      // console.log(text);
       if(id) 
         var element = $('#category_id');
       var endpoint = '/admin/api/v1/types/'+ id + '/categories'

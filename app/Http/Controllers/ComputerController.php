@@ -57,7 +57,7 @@ class ComputerController extends Controller {
            'sellprice' => 'required|numeric|min:1',
            'ppprice' => 'required|numeric|min:1',
            'provprice' => 'required|numeric|min:1',
-           'photo_id' => 'required',
+           'photo_id.*' => 'required',
            'brand_id' => 'required|numeric|min:1'
 
     ]);

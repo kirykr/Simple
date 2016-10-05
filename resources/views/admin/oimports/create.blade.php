@@ -214,6 +214,7 @@
     var value = e.target.value;
     getOther(value);
   }); 
+  
   function getOther(id){
    $.ajax({
            method: 'GET',

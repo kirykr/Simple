@@ -46,25 +46,28 @@ class OtherController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
 		$this->validate($request, [
 			        'name' => 'required|max:30',
 			        'sellprice' => 'required|numeric|min:1',
 			        'ppprice' => 'required|numeric|min:1',
 			        'provprice' => 'required|numeric|min:1',
 			        'brand_id' => 'required',
-			        'type_id' => 'required'
+			        'type_id' => 'required',
+			        'photo_id.*' => 'required'
 			    ]);
 		$input = $request->all();
 		
+		$input['type_name'] = substr(trim($request->input("type_name")), 14,1);
 		// dd($input);
-		switch ($request->input("type_id")) {
-			case '3':
+		switch (strtolower($input['type_name'])) {
+			case 'a':
 				$input['id'] = uniqid('a', false);
 				break;
-			case '4':
+			case 's':
 				$input['id'] = uniqid('s', false);
 				break;
-			case '5':
+			case 'p':
 				$input['id'] = uniqid('p', false);
 				break;
 			default:
