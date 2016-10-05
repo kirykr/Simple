@@ -52,6 +52,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         // belongsTo(RelatedModel, foreignKey = photo_id, keyOnRelatedModel = id)
         return $this->belongsTo('App\Photo');
     }
+    public function bcinvoices(){
+        return $this->hasMany('App\Bcinvoice');
+    }
+    public function cinvoices(){
+        return $this->hasMany('App\Cinvoice');
+    }
 /**
      * Many-to-Many relations with Role.
      *

@@ -40,11 +40,14 @@ class BrandController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		 $this->validate($request, [
+           'name' => 'required|max:22',
+
+    ]);
 		$brand = new Brand();
 
 		$brand->name = $request->input("name");
-        $brand->description = $request->input("description");
-        $brand->category_id = $request->input("category_id");
+    $brand->description = $request->input("description");
 
 		$brand->save();
 
@@ -89,8 +92,7 @@ class BrandController extends Controller {
 		$brand = Brand::findOrFail($id);
 
 		$brand->name = $request->input("name");
-        $brand->description = $request->input("description");
-        $brand->category_id = $request->input("category_id");
+    $brand->description = $request->input("description");
 
 		$brand->save();
 

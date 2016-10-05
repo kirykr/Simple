@@ -19,7 +19,7 @@ class Tempother extends Model
     						'color_name',
     						'qty',
     						'cost',
-    						'sellprice',
+                            'sellprice'
 	];
     								
 }

@@ -25,6 +25,7 @@ class Authenticate
             }
         }
 
+        // return view('/admin');
         return $next($request);
     }
 }

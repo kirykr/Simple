@@ -9,13 +9,28 @@
 
   <title>eCommerce Admin page</title>
 
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  <link rel="stylesheet" media="print" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
   <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
+  <link rel="stylesheet" media="print" href="{{asset('css/print.css')}}">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
-  <script src="{{asset('js/libs.js')}}"></script>
+ {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> --}}
+  {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
+  {{-- <script src="{{asset('js/jqueryElevateZoom.js')}}"></script> --}}
+  <script src="{{asset('js/ripples.min.js')}}"></script>
+  <script src="{{asset('js/metisMenu.js')}}"></script>
+  <script src="{{asset('js/sb-admin-2.js')}}"></script>
+  <script src="{{asset('js/sweetalert.min.js')}}"></script>
+  <script src="{{asset('js/script.js')}}"></script>
+
   <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
   <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
   <script src="{{asset('js/plugins/purify.min.js')}}"></script>
@@ -24,9 +39,9 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
-
-
-
+  
+  <script src="{{asset('js/validator.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.16.1/lodash.min.js"></script>
 
 
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
@@ -54,7 +69,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+      <style type="text/css" media="print">
+        a {
+          color: #333;
+          font-size: 15px;
+        }
+        .dontprint
+        {
+          display: none;
+        }
+        .displayprint{
+          display: inline;
+        }
+      </style>
       </head>
 
       <body>
@@ -272,6 +299,8 @@
                       <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
+                    <li> <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
+                    </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         @if(Auth::user()->avatar)
@@ -282,7 +311,6 @@
 
 
                         hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
-
 
                       </a>
                       <ul class="dropdown-menu dropdown-user">
@@ -337,12 +365,8 @@
 
 
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 dontprint">
                 <h1 class="page-header">Administrator</h1>
-                @role('admin')
-                <p>This is visible to users with the admin role. Gets translated to
-                  \Entrust::role('admin')</p>
-                  @endrole
                 </div>
                 <!-- /.col-lg-12 -->
               </div>
@@ -358,10 +382,10 @@
           <!-- /#wrapper -->
 
           <!-- jQuery -->
-
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
-
+{{--
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ --}}
 
   <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" ></script>
   <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" ></script>
@@ -391,7 +415,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     // Select2
-
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",

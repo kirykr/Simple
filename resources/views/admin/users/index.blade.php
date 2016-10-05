@@ -24,7 +24,6 @@
 
 
         @foreach($users as $user)
-
             <tr>
 
                 <td>{{$user->id}}</td>
@@ -75,7 +74,7 @@
 
 			</tbody>
 		</table>
-  
+
 	</div>
 @endsection
 

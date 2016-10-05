@@ -16,11 +16,11 @@ class CreateTempcomputerstocksTable extends Migration
             $table->increments('id');
             $table->string('computer_id');
             $table->string('computer_name');
-            $table->string('color_id');
+            $table->integer('color_id')->unsigned();
             $table->string('color_name');
-            $table->string('qty');
-            $table->string('cost');
-            $table->string('sellprice');
+            $table->integer('qty')->unsigned();
+            $table->float('cost')->unsigned();
+            $table->float('sellprice')->unsigned();
             $table->timestamps();
         });
     }

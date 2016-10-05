@@ -9,6 +9,8 @@ use App\Supplier;
 use App\Computer;
 use App\Tempcomputerstock;
 use App\Color;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -21,7 +23,7 @@ class CimportController extends Controller {
 	 */
 	public function index()
 	{
-		$cimports = Cimport::orderBy('id', 'desc')->paginate(10);
+		$cimports = Cimport::orderBy('updated_at', 'desc')->paginate(10);
 
 		return view('admin.cimports.index', compact('cimports'));
 	}
@@ -37,7 +39,7 @@ class CimportController extends Controller {
 		$computers = Computer::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
 		$tempcomputers = Tempcomputerstock::all();
-
+	
 		return view('admin.cimports.create', compact('suppliers','computers','colors','tempcomputers'));
 	}
 
@@ -49,14 +51,18 @@ class CimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$input = $request->all();
-		
+
 		$cimport = null;
-		if (Input::get('newsubmit')){
-			$input = $request->all();
-			// $cimport = Cimport::create($input);
-		}
-		if (Input::get('addsubmit')){
+		// if (Input::get('newsubmit') == 'newsubmit'){
+		// 	$input = $request->all();
+		// 	// $cimport = Cimport::create($input);
+		// }
+		// =================================
+
+		// $oldsellprice = DB::table('color_computer')->select('sellprice')->where([['computer_id','=', 'c57c50bca0207b'],['color_id','=',1]])->first();
+		// dd($oldsellprice->sellprice != $request->input('sellprice'));
+		// ----------------------------------------
+		if (Input::get('addsubmit') == 'addsubmit'){
 			 $this->validate($request, [
 			        'computer_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
@@ -64,30 +70,82 @@ class CimportController extends Controller {
 			        'sellprice' => 'required|numeric|min:1',
 			        'cost' => 'required|numeric|min:1',
 			    ]);
-			 // dd($input);
-			$input = $request->except(['photo_id']);
-			
+
+			$input = $request->all();
+
 			$input['color_name'] =  DB::table('colors')->where('id', $request->input('color_id'))->value('name');
 			$input['computer_name'] =  DB::table('computers')->where('id', $request->input('computer_id'))->value('name');
 			$input['qty'] = $request->input('qtyinstock');
+			$input['amount'] = $request->input('qtyinstock') * $request->input('cost');
 
 			$tempcomputer= Tempcomputerstock::create($input);
 			return redirect()->back();
 		}
+
 		// Import Computers
-		if (Input::get('savesubmit')){
+		// $input = $request->except(['computer_id', 'color_id','qtyinstock','sellprice','cost']);
+		$cimport = new Cimport();
+		/*$cimport	$input['impdate'] = Carbon::now();
+		$input['impindate'] = Carbon::now();*/
+		
+		if (Input::get('savesubmit') == 'savesubmit'){
 			 $this->validate($request, [
 			        'supplier_id' => 'required|max:22',
 			        'invoicenum' => 'required|max:22',
+			        'serialtemp' => 'required|min:7',
+			        // 'invoicenum' => 'required|max:22|unique:cimports,invoicenum'
 			    ]);
-			$cimport = Cimport::create($input);
-			$tempcomputers = Tempcomputerstock::all();
-			$cimport->computers()->saveMany($tempcomputers);
-			// $tempcomputers->delete();
+			
+			// $cimport->impdate = $request->input("impdate");
+   //    $cimport->impindate = $request->input("impindate");
+			$cimport->impdate = Carbon::now();
+      $cimport->impindate = Carbon::now();
+      $cimport->invoicenum = $request->input("invoicenum");
+      $cimport->totalamount = $request->input("totalamount");
+      $cimport->user_id = $request->input("user_id");
+      $cimport->supplier_id = $request->input("supplier_id");
+
+			$cimport->save();
+
+			// $tempcomputers =  DB::table('tempcomputerstocks')->select('color_id', 'qty', 'cost', 'amount')->get();
+
+			$comptemps = Tempcomputerstock::all();
+			
+			foreach($comptemps as $comptemp){
+				$tempqty = 0;
+				$color = Color::find($comptemp->color_id);
+				
+				$computer = Computer::find($comptemp->computer_id);
+				$tempqty = $comptemp->qty + $computer->qtyinstock;	
+				if ($computer->sellprice != $comptemp->sellprice) {
+					$computer->sellprice = $comptemp->sellprice;
+				}
+				$computer->qtyinstock = $tempqty;
+				$computer->update();
+				
+				$cimport->computerdetails()->save($computer,['color_id' => $comptemp->color_id, 'qty' => $comptemp->qty, 'cost' => $comptemp->cost, 'amount' => $comptemp->qty * $comptemp->cost]);
+				
+				foreach($comptemp->serialtemps as $serial){
+						$computer->colors()->save($color, ['serialnumber' => $serial->serialnumber, 'quantity' => 1, 'cost' => $comptemp->cost, 'sellprice' => $comptemp->sellprice, 'status' => 'available']);
+				}
+
+				// update computer->colors->pivot
+				$oldsellprice = DB::table('color_computer')->select('sellprice')->where([['computer_id','=', $computer->id],['color_id','=',$comptemp->color_id]])->first();
+				if($oldsellprice->sellprice != $comptemp->sellprice){
+					DB::table('color_computer')->where([['computer_id','=', $computer->id],['color_id','=',$comptemp->color_id]])->update(['sellprice' => $comptemp->sellprice]);
+				}
+			}
+
+			
+			DB::statement("SET foreign_key_checks=0");
+			DB::table('serial_temps')->truncate();
 			Tempcomputerstock::truncate();
+			DB::statement("SET foreign_key_checks=1");
+			// dd($computer->colors[0]->pivot->sellprice);
+
 			return redirect()->back();
 		}
-		dd($input);
+		// dd($input);
 		
 
 		return redirect()->route('admin.cimports.create')->with('message', 'Item created successfully.');
@@ -102,7 +160,7 @@ class CimportController extends Controller {
 	public function show($id)
 	{
 		$cimport = Cimport::findOrFail($id);
-
+	
 		return view('admin.cimports.show', compact('cimport'));
 	}
 
@@ -128,9 +186,9 @@ class CimportController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
-		$cimport = Cimport::findOrFail($id);
+				$cimport = Cimport::findOrFail($id);
 
-		$cimport->impdate = $request->input("impdate");
+				$cimport->impdate = $request->input("impdate");
         $cimport->impindate = $request->input("impindate");
         $cimport->invoicenum = $request->input("invoicenum");
         $cimport->totalamount = $request->input("totalamount");

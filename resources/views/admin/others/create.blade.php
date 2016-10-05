@@ -30,39 +30,33 @@
           {!! $errors->first('name','<span class="help-block">:message</span>') !!}
         </div>
       </div>
-       <div class="col-md-2">
-          {!! Form::label('sellprice', 'Sell Price') !!}
-          <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
-            {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
-            {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
-          </div>
+      <div class="col-md-2">
+        {!! Form::label('sellprice', 'Sell Price') !!}
+        <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
+          {!! Form::number('sellprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer sellprice']) !!}
+          {!! $errors->first('sellprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('ppprice', 'PP Price') !!}
-          <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
-            {!! Form::number('ppprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
-            {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('ppprice', 'PP Price') !!}
+        <div class="form-group {{ $errors->has('ppprice') ? 'has-error' :'' }}">
+          {!! Form::number('ppprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer ppprice']) !!}
+          {!! $errors->first('ppprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('provprice', 'Province Price') !!}
-          <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
-            {!! Form::number('provprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
-            {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('provprice', 'Province Price') !!}
+        <div class="form-group {{ $errors->has('provprice') ? 'has-error' :'' }}">
+          {!! Form::number('provprice',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer provprice']) !!}
+          {!! $errors->first('provprice','<span class="help-block">:message</span>') !!}
         </div>
-        <div class="col-md-2">
-          {!! Form::label('status', 'Status') !!}
-          <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
-            {!! Form::number('status',0,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
-            {!! $errors->first('status','<span class="help-block">:message</span>') !!}
-          </div>
+      </div>
+      <div class="col-md-2">
+        {!! Form::label('status', 'Status') !!}
+        <div class="form-group {{ $errors->has('status') ? 'has-error' :'' }}">
+          {!! Form::number('status',1,['class'=>'form-control','step'=>'any','placeholder'=>'Computer status']) !!}
+          {!! $errors->first('status','<span class="help-block">:message</span>') !!}
         </div>
-      <div class="col-md-3">
-          {!! Form::label('name', 'Computer Specs') !!}
-          <div class="form-group">
-            <a class="btn btn-block btn-success" data-toggle="modal" href='#modal-id'>Add Specs</a>
-          </div>
       </div>
     </div>
     {!! Form::label('photo_id', 'Other product Picture') !!}
@@ -71,11 +65,11 @@
       {!! Form::file('photo_id[]', ['multiple'=>'true', 'class'=>'file-loading', 'id'=>'input-pd']) !!}
       {!! $errors->first('photo_id','<span class="help-block">:message</span>') !!}
     </div>
-     <div class="row">
+    <div class="row">
       <div class="col-md-3">
         {!! Form::label('brand_id', 'Computer Brand') !!}
         <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-          {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control','id'=>'computer_brand']) !!}
+        {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control', 'id'=>'computer_brand']) !!}
           {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
@@ -83,6 +77,7 @@
         {!! Form::label('type_id', 'Computer Type') !!}
         <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
           {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
+          {!! Form::hidden('type_name','', ['id'=>'type_name']) !!}
           {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
@@ -101,7 +96,7 @@
           {!! $errors->first('model_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
-  </div>
+    </div>
 
     <div class="well well-sm">
       <button type="submit" class="btn btn-primary">Create</button>
@@ -115,8 +110,60 @@
 @endsection
 @section('scripts')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
-<script>
+<script type="text/javascript">
+
     // $('.date-picker').datepicker({
     // });
+
+
+    $('#computer_brand').on('change', function(e) {
+      var id = $(this).val();
+      if(id) 
+        var element = $('#type_id');
+      var endpoint = '/admin/api/v1/brands/'+ id + '/types'
+      getComputerCategories(element, endpoint);
+    });
+
+    $('#type_id').on('change', function(e) {
+      var id = $(this).val();
+      var text = $(this).text();
+      $('#type_name').val(text);
+      // console.log(text);
+      if(id) 
+        var element = $('#category_id');
+      var endpoint = '/admin/api/v1/types/'+ id + '/categories'
+      getComputerCategories(element, endpoint);
+    });
+
+    $('#category_id').on('change', function(e) {
+      var id = $(this).val();
+      if(id) 
+        var element = $('#model_id');
+      var endpoint = '/admin/api/v1/categories/'+ id + '/modells'
+      getComputerCategories(element, endpoint);
+    });
+
+    function getComputerCategories(element, endpoint) {
+      $.ajax({
+        method: 'GET',
+        url: endpoint,
+        success: function(response) {
+          if(Array.isArray(response)) {
+            element.empty();
+            var option = "<option value=''>Choose Options</option>";
+            element.append(option);
+            response.map(function(item) {
+
+              var option = "<option value="+item.id+">"+ item.name +"</option>";
+              element.append(option);
+            });
+          }
+        },
+        error: function(error) {
+          console.log(error)
+        }
+      })
+    }
+
   </script>
   @endsection

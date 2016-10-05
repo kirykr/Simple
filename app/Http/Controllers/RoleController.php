@@ -35,6 +35,9 @@ class RoleController extends Controller {
 		$permissions = Permission::all();
 		$modules=Module::all();
 		return view('admin.roles.create', compact('permissions','modules'));
+		// $permissions = Permission::lists('name','id')->all();
+
+		// return view('admin.roles.create', compact('permissions'));
 	}
 
 	/**
@@ -45,25 +48,7 @@ class RoleController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		// testing
-		// dd($request->input('permissions'));
-
-		//	dd(Input::get('mod'));
-	/*	$input['name'] = $request->input("name");
-		$input['display_name'] = $request->input("display_name");
-		$input['description'] = $request->input("description");
-
-
-		$role = Role::create($input)->id;
-
-
-
-		$mod=new Module_role;
-		$mod->mod_id=Input::get('mod');
-		$mod->role_id=$role;
-    $mod->save();*/
-		//$role->attachPermission([$request->input('modules')]);
-		//dd($request);
+	
 		$role=new Role;
 		$role->name=$request->name;
 		$role->display_name=$request->display_name;

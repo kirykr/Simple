@@ -17,6 +17,8 @@ class Computer extends Model
     public $incrementing = false;
     protected $fillable = [
                             'id',
+                            'computer_id',
+                            'color_id',
                             'name',
                             'sellprice',
                             'brand_id',
@@ -60,20 +62,41 @@ class Computer extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function imports()
+    public function cimports()
     {
         // belongsTo(RelatedModel, foreignKey = imports_id, keyOnRelatedModel = id)
         return $this->belongsToMany('App\Cimport')->withPivot('color_id','qty','cost','amount');
     }
 
+    public function cinvoicedetails(){
+        return $this->morphMany('App\Cinvoicedetail','pro');
+    }
+
+    public function carts(){
+        return $this->morphMany('App\Cart','pro');
+    }
     /**
      * Computer belongs to Colors.
+    **
+     * The computer or other belong to invoicedetail.
+     */
+    public function bcinvoicedetails(){
+        return $this->morphMany('App\Bcinvoicedetail','pro');
+    }
+    
+    public function tmpdetails(){
+        return $this->morphMany('App\Tmpdetail','pro');
+    }
+    // public function bcinvoicedetails(){
+    //     return $this->hasMany('App\Bcinvoicedetail');
+    // }
+    /**
+     * Computer belongs to Color.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function colors()
     {
-        // belongsTo(RelatedModel, foreignKey = colors_id, keyOnRelatedModel = id)
-        return $this->belongsToMany(Colors::class)->withPivot('serialnumber','qty','cost');
+        return $this->belongsToMany('App\Color','color_computer')->withPivot('serialnumber','quantity', 'cost','sellprice','status');
     }
   }

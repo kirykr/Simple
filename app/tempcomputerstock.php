@@ -14,12 +14,13 @@ class Tempcomputerstock extends Model
      */
     protected $fillable = [
     						'computer_id',
-    						'computer_name',
-    						'color_id',
+                            'computer_name',
+                            'color_id',
     						'color_name',
     						'qty',
     						'cost',
-    						'sellprice',
+                            'sellprice',
+                            'amount'
     						];		
 
     /**
@@ -27,9 +28,9 @@ class Tempcomputerstock extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comstocks()
+    public function serialtemps()
     {
         // hasMany(RelatedModel, foreignKeyOnRelatedModel = tempcomputerstock_id, localKey = id)
-        return $this->hasMany('App\Comstock');
+        return $this->hasMany('App\SerialTemp');
     }                            
 }
