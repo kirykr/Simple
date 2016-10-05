@@ -33,9 +33,9 @@ class OtherController extends Controller {
 	public function create()
 	{
 		$brands = Brand::lists('name','id')->all();
-		$types = Type::lists('name','id')->all();
+		// $types = Type::lists('name','id')->all();
 
-		return view('admin.others.create', compact('brands','types'));
+		return view('admin.others.create', compact('brands'));
 	}
 
 	/**

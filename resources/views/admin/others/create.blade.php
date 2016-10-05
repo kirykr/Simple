@@ -28,8 +28,8 @@
          <div class="form-group {{ $errors->has('name') ? 'has-error' :'' }}">
           {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Other product Name']) !!}
           {!! $errors->first('name','<span class="help-block">:message</span>') !!}
-          </div>
         </div>
+      </div>
       <div class="col-md-2">
         {!! Form::label('sellprice', 'Sell Price') !!}
         <div class="form-group {{ $errors->has('sellprice') ? 'has-error' :'' }}">
@@ -69,14 +69,14 @@
       <div class="col-md-3">
         {!! Form::label('brand_id', 'Computer Brand') !!}
         <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
-          {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control']) !!}
+        {!! Form::select('brand_id',[''=>'Choose Options']+ $brands,0,['class'=>'form-control', 'id'=>'computer_brand']) !!}
           {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
       <div class="col-md-3">
         {!! Form::label('type_id', 'Computer Type') !!}
         <div class="form-group {{ $errors->has('type_id') ? 'has-error' :'' }}">
-          {!! Form::select('type_id',[''=>'Choose Options'] + $types,0,['class'=>'form-control']) !!}
+          {!! Form::select('type_id',[''=>'Choose Options'],0,['class'=>'form-control']) !!}
           {!! $errors->first('type_id','<span class="help-block">:message</span>') !!}
         </div>
       </div>
@@ -109,8 +109,57 @@
 @endsection
 @section('scripts')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
-<script>
+<script type="text/javascript">
+
     // $('.date-picker').datepicker({
     // });
+
+
+    $('#computer_brand').on('change', function(e) {
+      var id = $(this).val();
+      if(id) 
+        var element = $('#type_id');
+      var endpoint = '/admin/api/v1/brands/'+ id + '/types'
+      getComputerCategories(element, endpoint);
+    });
+
+    $('#type_id').on('change', function(e) {
+      var id = $(this).val();
+      if(id) 
+        var element = $('#category_id');
+      var endpoint = '/admin/api/v1/types/'+ id + '/categories'
+      getComputerCategories(element, endpoint);
+    });
+
+    $('#category_id').on('change', function(e) {
+      var id = $(this).val();
+      if(id) 
+        var element = $('#model_id');
+      var endpoint = '/admin/api/v1/categories/'+ id + '/modells'
+      getComputerCategories(element, endpoint);
+    });
+
+    function getComputerCategories(element, endpoint) {
+      $.ajax({
+        method: 'GET',
+        url: endpoint,
+        success: function(response) {
+          if(Array.isArray(response)) {
+            element.empty();
+            var option = "<option value=''>Choose Options</option>";
+            element.append(option);
+            response.map(function(item) {
+
+              var option = "<option value="+item.id+">"+ item.name +"</option>";
+              element.append(option);
+            });
+          }
+        },
+        error: function(error) {
+          console.log(error)
+        }
+      })
+    }
+
   </script>
   @endsection
