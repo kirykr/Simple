@@ -24,12 +24,13 @@ class AdminUserController extends Controller
 
     function __construct()
     {
-        $this->middleware('admin');
+
+          $this->middleware('auth');
     }
 
     public function index()
     {
-       
+
         $users = User::orderBy('id', 'asc')->paginate(5);
 
         return view('admin.users.index', compact('users'));
@@ -50,25 +51,50 @@ class AdminUserController extends Controller
         return view('admin.users.create', compact('roles'));
     }
 
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:35|unique:users,name',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
+        ]);
         // check if the password is empt
 
         // $role = Role::where('id','=',$request->role_id)->first();
 
+        $user= New User();
+
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->is_active=$request->is_active;
+
+        $user->save();
+
+        if(isset($request->role)){
+    			$user->roles()->sync($request->roles,false);
+    		}else{
+
+    			//Session::flash('message', 'This is so dangerous!');
+    			//Session::flash('alert', 'alert-danger');
+    			//return redirect()->route('admin.roles.edit',$id);
+    			$user->roles()->sync(array());
+    		}
+        /*
         if($request->password == ''){
             $input = $request->except('password');
         }else{
             $input = $request->all();
         }
-        
+
         if($file = $request->file('photo_id'))
         {
             $name = time() . $file->getClientOriginalName();
@@ -82,10 +108,10 @@ class AdminUserController extends Controller
         $userId = User::create($input)->id;
         $user = User::findOrFail($userId);
         $user->roles()->attach($request->role_id);
-        
+
         Session::flash('create_user','The user has been created!');
         flash()->overlay('User has been created successfully','CREATE USER');
-
+        */
         return redirect('/admin/users');
         // return $request->all();
     }
@@ -118,7 +144,7 @@ class AdminUserController extends Controller
         // Find roles and put in the form
         $roles = Role::lists('name','id')->all();
 
-        
+
         return view('admin.users.edit', compact('user','roles'));
     }
 
@@ -131,6 +157,7 @@ class AdminUserController extends Controller
      */
     public function update(UsersEditRequest $request, $id)
     {
+        // validate user
 
         // return $request->all();
         // check if the password is empty
@@ -144,7 +171,7 @@ class AdminUserController extends Controller
         }else{
             $input = $request->all();
         }
-        
+
         if($file = $request->file('photo_id')){
             $name = time() . $file->getClientOriginalName();
             $file->move('images',$name);
@@ -177,7 +204,7 @@ class AdminUserController extends Controller
         $name = $user->name;
         if($user->photo->path !== '')
             unlink(public_path() . $user->photo->path);
-        
+
         // $user->roles()->sync([$roleId]);
         $user->delete();
         $user->roles()->sync([]);

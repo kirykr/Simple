@@ -5,8 +5,11 @@ use App\Http\Controllers\Controller;
 
 use App\Role;
 use App\Permission;
+use App\Module;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 class RoleController extends Controller {
 
 	/**
@@ -16,10 +19,10 @@ class RoleController extends Controller {
 	 */
 	public function index()
 	{
-		$roles = Role::orderBy('id', 'desc')->paginate(10);
+		$roles = Role::all();
 		$permissions = Permission::all();
-
-		return view('admin.roles.index', compact('roles','permissions'));
+		$modules=Module::all();
+		return view('admin.roles.index', compact('roles','permissions','modules'));
 	}
 
 	/**
@@ -28,10 +31,10 @@ class RoleController extends Controller {
 	 * @return Response
 	 */
 	public function create()
-	{	
+	{
 		$permissions = Permission::all();
-
-		return view('admin.roles.create', compact('permissions'));
+		$modules=Module::all();
+		return view('admin.roles.create', compact('permissions','modules'));
 	}
 
 	/**
@@ -44,14 +47,47 @@ class RoleController extends Controller {
 	{
 		// testing
 		// dd($request->input('permissions'));
-		$input['name'] = $request->input("name");
+
+		//	dd(Input::get('mod'));
+	/*	$input['name'] = $request->input("name");
 		$input['display_name'] = $request->input("display_name");
 		$input['description'] = $request->input("description");
 
-		$role = Role::create($input)->id;
-		$role->attachPermission([$request->input('permissions')]);
 
+		$role = Role::create($input)->id;
+
+
+
+		$mod=new Module_role;
+		$mod->mod_id=Input::get('mod');
+		$mod->role_id=$role;
+    $mod->save();*/
+		//$role->attachPermission([$request->input('modules')]);
+		//dd($request);
+		$role=new Role;
+		$role->name=$request->name;
+		$role->display_name=$request->display_name;
+		$role->description=$request->description;
+
+		$role->save();
+		if(isset($request->modules)){
+			$role->modules()->sync($request->modules,false);
+		}else{
+
+			//Session::flash('message', 'This is so dangerous!');
+			//Session::flash('alert', 'alert-danger');
+			//return redirect()->route('admin.roles.edit',$id);
+			$role->modules()->sync(array());
+		}
+		//$role->modules()->sync($request->modules,false);
 		return redirect()->route('admin.roles.index')->with('message', 'Item created successfully.');
+
+
+
+
+
+
+
 	}
 
 	/**
@@ -77,8 +113,12 @@ class RoleController extends Controller {
 	{
 		$role = Role::findOrFail($id);
 		$permissions = Permission::all();
-
-		return view('admin.roles.edit', compact('role','permissions'));
+		$modules=Module::all();
+		$moduleA=array();
+		foreach($modules as $module){
+				$moduleA[$module->id]=$module->name;
+		}
+		return view('admin.roles.edit', compact('role','permissions','moduleA'));
 	}
 
 	/**
@@ -90,7 +130,7 @@ class RoleController extends Controller {
 	 */
 	public function update(Request $request, $id)
 	{
-		$input = $request->all();
+		/*$input = $request->all();
 
 		$role = Role::findOrFail($id);
 
@@ -100,6 +140,23 @@ class RoleController extends Controller {
 
 		$role->update($input);
         $role->permissions()->sync($request->input('permission_id'));
+			*/
+			$role=Role::find($id);
+			$role->name=$request->name;
+			$role->display_name=$request->display_name;
+			$role->description=$request->description;
+
+			$role->save();
+			if(isset($request->modules)){
+				$role->modules()->sync($request->modules);
+			}else{
+
+				//Session::flash('message', 'This is so dangerous!');
+				//Session::flash('alert', 'alert-danger');
+				//return redirect()->route('admin.roles.edit',$id);
+				$role->modules()->sync(array());
+			}
+
 
 		return redirect()->route('admin.roles.index')->with('message', 'Item updated successfully.');
 	}

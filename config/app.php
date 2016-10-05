@@ -164,6 +164,7 @@ return [
         "Laralib\L5scaffold\GeneratorsServiceProvider",
         Intervention\Image\ImageServiceProvider::class,
 
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
     ],
 
     /*
@@ -216,9 +217,11 @@ return [
         'Cart'  => \Gloudemans\Shoppingcart\Facades\Cart::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Image'     => Intervention\Image\Facades\Image::class,
+        'Image' => Intervention\Image\Facades\Image::class,
         'Input' => Illuminate\Support\Facades\Input::class,
 
+
+        'Module' => Nwidart\Modules\Facades\Module::class,
     ],
 
 ];

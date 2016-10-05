@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2016-09-01.
+    * Generated on 2016-10-02.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -48,6 +48,8 @@ namespace PHPSTORM_META {
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -170,6 +172,8 @@ namespace PHPSTORM_META {
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -292,6 +296,8 @@ namespace PHPSTORM_META {
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,
@@ -414,6 +420,8 @@ namespace PHPSTORM_META {
             'command.debugbar.clear' instanceof \Barryvdh\Debugbar\Console\ClearCommand,
             'command.larascaf.scaffold' instanceof \Laralib\L5scaffold\Commands\ScaffoldMakeCommand,
             'image' instanceof \Intervention\Image\ImageManager,
+            'modules' instanceof \Nwidart\Modules\Repository,
+            'Nwidart\Modules\Contracts\RepositoryInterface' instanceof \Nwidart\Modules\Repository,
             'blade.compiler' instanceof \Illuminate\View\Compilers\BladeCompiler,
             'Illuminate\Broadcasting\BroadcastManager' instanceof \Illuminate\Broadcasting\BroadcastManager,
             'Illuminate\Bus\Dispatcher' instanceof \Illuminate\Bus\Dispatcher,

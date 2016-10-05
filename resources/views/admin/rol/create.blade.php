@@ -45,17 +45,18 @@
               </div>
                 <div class="row">
 
-                  {{Form::label('modules','Modules:')}}
-                    <select class="form-control select2-multi" name="modules[]" multiple="multiple">
-                        @foreach($modules as $mo)
-                          <option value='{{$mo->id}}'>{{$mo->name}}</option>
-                        @endforeach
-                    </select>
+                  @foreach ($modules as $per)
+                  <div class="col-md-2">
+                    <h5><strong>{{$per->name}}</strong></h5>
+                    <input class="categories_list" type="checkbox" name="mod" value="{{$per->id}}">
+
+                  </div>
+                @endforeach
                 </div>
                 <hr><br><br>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
-                    <a class="btn btn-link pull-right" href="{{ route('admin.roles.index') }}"><i class="fa fa-backward"></i> Back</a>
+                    <a class="btn btn-link pull-right" href="{{ route('admin.rol.index') }}"><i class="fa fa-backward"></i> Back</a>
                 </div>
             {!! Form::close() !!}
             {{-- </form> --}}
@@ -68,13 +69,13 @@
   <script>
     $('.date-picker').datepicker({
     });
-    $('.select2-multi').select2();
+
 // check all uncheck all
     // $("#checkAll").change(function () {
     // $("input:checkbox").prop('checked', $(this).prop("checked"));
     // });
 
-    $(function() {
+/*    $(function() {
     $("input[type=checkbox]").change(function() {
         var count_checkbox_all = $("input[type=checkbox]").not(".select_all").length;
         var count_checkbox_checked = $("input[type=checkbox]:checked").not(".select_all").length;
@@ -96,7 +97,7 @@
         }
 
     });
-});
+});*/
     //// get checked checkbox value
     // $('input').on('click', function(){
     // var selected = [];

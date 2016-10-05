@@ -1,37 +1,61 @@
 @extends('layouts.admin')
-@section('content')
-{{-- @section('header') --}}
-<div class="page-header">
-        <h1>Roles / Show #{{$role->id}}</h1>
-        <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
-            <input type="hidden" name="_method" value="DELETE">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="btn-group pull-right" role="group" aria-label="...">
-                <a class="btn btn-warning btn-group" role="group" href="{{ route('admin.roles.edit', $role->id) }}"><i class="fa fa-edit"></i> Edit</a>
-                <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-            </div>
-        </form>
+@section('header')
+    <div class="page-header">
+        <h1><i class="fa fa-plus"></i> Roles / Create </h1>
     </div>
-{{-- @endsection --}}
+@endsection
 
+@section('content')
+    @include('error')
 
     <div class="row">
-        <div class="col-md-12">
+      <div class="row">
+          <div class="col-md-12">
 
-            <form action="#">
-                <div class="form-group">
-                    <label for="nome">ID</label>
-                    <p class="form-control-static"></p>
-                </div>
-                <div class="form-group">
-                     <label for="name">NAME</label>
-                     <p class="form-control-static">{{$role->name}}</p>
-                </div>
-            </form>
+              <form action="#">
+                  <div class="form-group">
+                      <h3>Role Name: {{$role->name}}</h3>
 
-            <a class="btn btn-link" href="{{ route('admin.roles.index') }}"><i class="fa fa-backward"></i>  Back</a>
+                  </div>
+                  <div class="tags">
+                    <h4>Modules:</h3>
 
-        </div>
+                        
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NAME</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach($role->modules as $mo)
+                                    <tr>
+                                        <td>{{$mo->id}}</td>
+                                        <td>{{$mo->name}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                  </div>
+
+              </form>
+
+
+              <a class="btn btn-link" href="{{ route('admin.roles.index') }}"><i class="fa fa-backward"></i>  Back</a>
+
+          </div>
+      </div>
+
     </div>
+@endsection
+@section('scripts')
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
+  <script>
+    $('.date-picker').datepicker({
+    });
+    $('.select2-multi').select2();
 
+  </script>
 @endsection

@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
 
-        {{-- <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">  --}}   
+        {{-- <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">  --}}
             {!! Form::model($role,['action' => ['RoleController@update', $role->id], 'method' => 'PATCH', 'files'=>true]) !!}
             {{--
                 <input type="hidden" name="_method" value="PUT">
@@ -51,19 +51,9 @@
                     </div>
                 </div>
                 </div>
-                  <div class="row ">
-                  <div class="col-md-2 wel">
-                    <h5><strong>All</strong></h5>
-                    <input type="checkbox" id="checkAll" value="">
-                  </div>
-                  {{-- loops for check box --}}
-                  @foreach ($permissions as $permission)
-                  <div class="col-md-2">
-                    <h5><strong>{{ucfirst($permission->name)}}</strong></h5>
-                    {{-- <input type="checkbox" name="permission[]" value="{{$permission->id}}"> --}}
-                    {!! Form::checkbox('permission_id[]', $permission->id,  $role->hasPermission($permission->name), ['class'=>'form-control']) !!}
-                  </div>
-                @endforeach
+                <div class="row ">
+                  {{Form::label('modules','Modules',['class'=>'form-spacing-top'])}}
+                  {{Form::select('modules[]',$moduleA,null,['class'=>'form-control select2-multi','multiple'=>'multiple'])}}
                 </div>
                 <hr>
                 <br><br>
@@ -84,6 +74,8 @@
     $('.date-picker').datepicker({
     });
 
+    $('.select2-multi').select2();
+    $('.select2-multi').select2().val({!! json_encode($role->modules()->getRelatedIds())!!}).trigger('change');
     // check all uncheck all
     $("#checkAll").change(function () {
     $("input:checkbox").prop('checked', $(this).prop("checked"));
