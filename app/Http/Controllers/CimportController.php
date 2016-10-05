@@ -39,7 +39,7 @@ class CimportController extends Controller {
 		$computers = Computer::lists('name','id')->all();
 		$colors = Color::lists('name','id')->all();
 		$tempcomputers = Tempcomputerstock::all();
-
+	
 		return view('admin.cimports.create', compact('suppliers','computers','colors','tempcomputers'));
 	}
 

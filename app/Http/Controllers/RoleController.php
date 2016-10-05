@@ -29,7 +29,7 @@ class RoleController extends Controller {
 	 */
 	public function create()
 	{	
-		$permissions = Permission::all();
+		$permissions = Permission::lists('name','id')->all();
 
 		return view('admin.roles.create', compact('permissions'));
 	}
@@ -43,13 +43,19 @@ class RoleController extends Controller {
 	public function store(Request $request)
 	{
 		// testing
-		// dd($request->input('permissions'));
+		// dd(($request->input('permissions'));
+		$this->validate($request, [
+		       'name' => 'required|max:22',
+		       'permissions.*' => 'required|numeric|min:1'
+
+		]);
+
 		$input['name'] = $request->input("name");
 		$input['display_name'] = $request->input("display_name");
 		$input['description'] = $request->input("description");
 
 		$role = Role::create($input)->id;
-		$role->attachPermission([$request->input('permissions')]);
+		$role->attachPermission(get_object_vars($request->input('permissions')));
 
 		return redirect()->route('admin.roles.index')->with('message', 'Item created successfully.');
 	}

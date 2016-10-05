@@ -131,7 +131,7 @@ Route::auth();
 Route::get('/admin', function(){
 	
 	if(!Entrust::hasRole(['admin','owner','HR'])){
-		return view('/admin.index');
+		return redirect('/');
 	}
 
 	return view('admin.index2');

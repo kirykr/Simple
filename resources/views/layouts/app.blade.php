@@ -346,7 +346,7 @@
                     </a>
 
                     <ul class="dropdown-menu loginOut" role="menu">
-                      <li><a href="#"><i class="fa fa-heart-o fa-fw"></i> My Profile</a></li>
+                      <li><a href="{{url('/user/profile')}}"><i class="fa fa-heart-o fa-fw"></i> My Profile</a></li>
                       <li><a href="{{url('/carts')}}"><i class="fa fa-shopping-cart fa-fw"></i> My Carts</a></li>
                       <li><a href="#"><i class="fa fa-history fa-fw"></i> My Order Histories</a></li>
                       <li role="separator" class="divider"></li>

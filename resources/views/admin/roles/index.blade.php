@@ -4,7 +4,7 @@
 {{-- @section('header') --}}
     <div class="page-header clearfix">
         <h1>
-            <i class="fa fa-align-justify"></i> Roles & Permissions
+            <i class="fa fa-align-justify"></i> Roles & Its Module
             <a class="btn btn-success pull-right" href="{{ route('admin.roles.create') }}"><i class="fa fa-plus"></i> Create</a>
         </h1>
 

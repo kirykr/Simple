@@ -341,6 +341,7 @@
                   <li>
                     <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                   </li>
+                  @role('admin')
                   <li>
                     <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -359,6 +360,7 @@
                     </ul>
                     <!-- /.nav-second-level -->
                   </li>
+                  @endrole
                   <li>
                     <a href="#"><i class="fa fa-building fa-fw"></i> Suppliers<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">

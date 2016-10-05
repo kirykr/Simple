@@ -44,17 +44,14 @@
                 </div>
               </div>
                 <div class="row">
-                  <div class="col-md-2 wel">
-                    <h5><strong>All</strong></h5>
-                    <input type="checkbox"  class="select_all" value="">
-                  </div>
-                  @foreach ($permissions as $permission)
-                  <div class="col-md-2">
-                    <h5><strong>{{ucfirst($permission->name)}}</strong></h5>
-                    <input class="categories_list" type="checkbox" name="permission_id[]" value="{{$permission->id}}">
-                  </div>
-                @endforeach
-                </div>
+                 <div class="col-md-8">
+                   {!! Form::label('brand_id', 'Computer Brand') !!}
+                   <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
+                     {!! Form::select('permissions[]', $permissions,0,['class'=>'form-control selectpicker','id'=>'permission_id', 'multiple'=>"multiple"]) !!}
+                     {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
+                   </div>
+                 </div>
+                 </div>
                 <hr><br><br>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
@@ -68,10 +65,14 @@
 @endsection
 @section('scripts')
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
-  <script>
+  <script type="text/javascript">
     $('.date-picker').datepicker({
     });
 
+    $("#permission_id").select2({
+      placeholder: "Select more module",
+      allowClear: true
+    });
 // check all uncheck all
     // $("#checkAll").change(function () {
     // $("input:checkbox").prop('checked', $(this).prop("checked"));
