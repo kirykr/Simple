@@ -195,7 +195,6 @@ return redirect()->route('admin.users.index')->with('message', 'Item created suc
           }
           )->resizeCanvas(200, 200, 'center', false, array(255, 255, 255, 0))->save($path);
 
-        $img->destroy();  
       }else{
         $fileName='';
       }
@@ -228,7 +227,7 @@ return redirect()->route('admin.users.index')->with('message', 'Item created suc
       $user = User::findOrFail($id);
       $img=$user->avatar;
       //File::Delete('public/uploads/avatars/'.$img);
-      $image_path = public_path('/uploads/avatars/'.$img);
+      $image_path = public_path('uploads/avatars/'.$img);
       if (File::exists($image_path)) {
         //File::delete($image_path);
         unlink($image_path);
