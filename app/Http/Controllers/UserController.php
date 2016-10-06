@@ -27,16 +27,16 @@ class UserController extends Controller
 
 
 
-     public function index()
-     {
+    public function index()
+    {
 
-         $users = User::all();
-
-
+     $users = User::all();
 
 
-         return view('admin.users.index', compact('users'));
-     }
+
+
+     return view('admin.users.index', compact('users'));
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -59,40 +59,48 @@ class UserController extends Controller
      */
     public function store(Request $request){
       $this->validate($request, [
-          'name' => 'required|max:35|unique:users,name',
-          'email' => 'required|email|unique:users,email',
-          'password' => 'required'
-      ]);
+        'name' => 'required|max:35|unique:users,name',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required'
+        ]);
 
 
-       if($request->hasFile('avatar')){
-          $avatar=$request->file('avatar');
-          $fileName=time() . '.' . $avatar->getClientOriginalExtension();
-          Image::make($avatar)->resize(200,200)->save(public_path('/uploads/avatars/' . $fileName));
+      if($avatar=$request->file('avatar')){
 
+        $fileName = time() . '.' . $avatar->getClientOriginalExtension();
+        $path = public_path('/uploads/avatars/' . $fileName);
+        Image::make($avatar)->resize(200,200)->save($path);
+        $img = Image::make($avatar)->resize(200, 200, 
+          function ($c) {
+            $c->aspectRatio();
+            $c->upsize();
+          }
+          )->resizeCanvas(200, 200, 'center', false, array(255, 255, 255, 0))->save($path);
 
-    }else{
-          $fileName='';
-    }
-        $user= New User();
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->is_active=$request->is_active;
-        $user->avatar=$fileName;
-        $user->save();
+        $img->destroy();  
+      }else{
+        $fileName='';
+      }
 
-        if(isset($request->roles)){
-          $user->roles()->sync($request->roles,false);
-        }else{
+      $user= New User();
+      $user->name=$request->name;
+      $user->email=$request->email;
+      $user->password=Hash::make($request->password);
+      $user->is_active=$request->is_active;
+      $user->avatar=$fileName;
+      $user->save();
 
-          //Session::flash('message', 'This is so dangerous!');
-          //Session::flash('alert', 'alert-danger');
-          //return redirect()->route('admin.roles.edit',$id);
-          $user->roles()->sync(array());
-        }
+      if(isset($request->roles)){
+        $user->roles()->sync($request->roles,false);
+      }else{
 
-        return redirect()->route('admin.users.index')->with('message', 'Item created successfully.');
+                //Session::flash('message', 'This is so dangerous!');
+                //Session::flash('alert', 'alert-danger');
+                //return redirect()->route('admin.roles.edit',$id);
+        $user->roles()->sync(array());
+      }
+
+return redirect()->route('admin.users.index')->with('message', 'Item created successfully.');
 /*
         $user= New User();
 
@@ -120,7 +128,7 @@ class UserController extends Controller
         }
        return redirect()->route('admin.users.index')->with('message', 'Item created successfully.');
        */
-    }
+     }
 
     /**
      * Display the specified resource.
@@ -147,9 +155,9 @@ class UserController extends Controller
       $roles=Role::all();
       $roleA=array();
       foreach($roles as $role){
-          $roleA[$role->id]=$role->name;
+        $roleA[$role->id]=$role->name;
       }
-    return view('admin.users.edit', compact('user','roleA'));
+      return view('admin.users.edit', compact('user','roleA'));
     }
 
     /**
@@ -163,10 +171,10 @@ class UserController extends Controller
     {
 
       $this->validate($request, [
-          'name' => "required|max:35|unique:users,name,$id",
-          'email' => "required|email|unique:users,email,$id",
-          'password' => 'required'
-      ]);
+        'name' => "required|max:35|unique:users,name,$id",
+        'email' => "required|email|unique:users,email,$id",
+        'password' => 'required'
+        ]);
 
       $user=User::find($id);
       $user->name=$request->name;
@@ -174,32 +182,39 @@ class UserController extends Controller
       $user->password=Hash::make($request->password);
       $user->is_active=$request->is_active;
 
-      if($request->hasFile('avatar')){
-         $avatar=$request->file('avatar');
-         $fileName=time() . '.' . $avatar->getClientOriginalExtension();
-         Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars/' . $fileName));
+      if($avatar=$request->file('avatar')){
 
+        $fileName = time() . '.' . $avatar->getClientOriginalExtension();
+        $path = public_path('/uploads/avatars/' . $fileName);
+        Image::make($avatar)->resize(200,200)->save($path);
+        $img = Image::make($avatar)->resize(200, 200, 
+          function ($c) {
+            $c->aspectRatio();
+            $c->upsize();
+          }
+          )->resizeCanvas(200, 200, 'center', false, array(255, 255, 255, 0))->save($path);
+
+        $img->destroy();  
       }else{
         $fileName='';
       }
 
+    $user->avatar = $fileName;
+    $user->save();
 
-      $user->avatar=$fileName;
-      $user->save();
-
-      if(isset($request->roles)){
-        $user->roles()->sync($request->roles,false);
-      }else{
+    if(isset($request->roles)){
+      $user->roles()->sync($request->roles,false);
+    }else{
 
         //Session::flash('message', 'This is so dangerous!');
         //Session::flash('alert', 'alert-danger');
         //return redirect()->route('admin.roles.edit',$id);
-        $user->roles()->sync(array());
-      }
+      $user->roles()->sync(array());
+    }
 
 
     return redirect()->route('admin.users.index')->with('message', 'User updated successfully.');
-    }
+  }
 
     /**
      * Remove the specified resource from storage.
@@ -231,4 +246,4 @@ class UserController extends Controller
       $file=Storage::get('product/default-no-image.png');
       return new Response($file,200);
     }
-}
+  }
