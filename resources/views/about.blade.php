@@ -12,7 +12,7 @@
 
 <div class="row well">
   <section class="main">
-    <h2 class="text-center panel-success" style="color:#787474;"> LEATURE SA </h2>
+    <h2 class="text-center panel-success" style="color:#787474;"> LECTURER SA </h2>
     <ul class="ch-grid">
       <li>
 						<div class="ch-item">

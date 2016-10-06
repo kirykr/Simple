@@ -176,6 +176,7 @@ Route::get('/about', function(){
 	$cart = new Cart();
 	return view('about', compact('cart'));
 });
+
 Route::get('/contact', function(){
 
 	$cart = new Cart();
