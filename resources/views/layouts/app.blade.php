@@ -15,8 +15,14 @@
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox.css')}}">
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox-buttons.css') }}">
   <link rel="stylesheet" href="{{asset('css/jquery.fancybox-thumbs.css') }}">
+
   {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" media="screen" /> --}}
   {{-- <script src="{{asset('js/libs.js')}}"></script> --}}
+
+  <link href="{{url('css/common.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('css/style7.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('css/style5.css')}}" rel="stylesheet" type="text/css" />
+  <link href="{{url('css/ihover.min.css')}}" rel="stylesheet" type="text/css" />
 
   <script src="{{asset('js/jquery.min.js')}}"></script>
   <script src="{{asset('js/jquery-ui.min.js')}}"></script>
@@ -68,7 +74,7 @@
 
     .thinFont {
       font-family: 'Lato', 'Sans', 'Arial';
-      font-size: 40px; 
+      font-size: 40px;
       font-weight: 700;
     }
     ul.nav li a {
@@ -134,7 +140,7 @@
       top: -15px;
       left: -10px;
     }
-   
+
   </style>
   </head>
           <body id="app-layout">
@@ -203,7 +209,7 @@
                                <img src="{{asset('/images/menupic/Laptops_Mac book.jpg')}}" alt="">
                                <p class="text-center">Mac books</p>
                              </a>
-                           </div> 
+                           </div>
                          </div>
 
                        </li>
@@ -397,7 +403,7 @@
                 <div class="input-group">
                   <div class="input-group-addon" style="padding-left: 20px; margin-left: 20px;"><i class="fa fa-search"></i></div>
                   <input type="text" class="form-control" id="InputAmount" placeholder="Search...">
-                  <?php 
+                  <?php
                     $brands = DB::table('brands')->select('id','name')->get();
                   ?>
                   <span class="input-group-btn">
@@ -419,7 +425,7 @@
                 <a href="{{ route('carts.index') }}"><i class="fa fa-shopping-cart fa-fw"></i>
                   {{-- Cart::instance(Auth::user()->id)->content()->count() --}}
                   {{-- $sum->sum('amount') --}}
-                  <?php 
+                  <?php
 
                   ?>
                   <span class="label label-pill badge-notify label-danger">{{ Auth::check() ? count($cart->where('customer_id','=',Auth::user()->id)->get()) :  Cart::content()->count()}}</span> $ {{ Auth::check() ? $sum= $cart->where('customer_id','=',Auth::user()->id)->get()->sum('amount') : Cart::subtotal()  }}</a>
@@ -503,7 +509,7 @@
                       </div>
                   </div>
                    </div>
-                 
+
               </div>
               <div class="col-md-2 ">
                   <h5>CONNECT WITH US</h5>
@@ -511,7 +517,7 @@
                   <li class="list-group-item"><a href="#"><i class="fa fa-facebook-square fa-fw"></i>facebook</a></li>
                     <li class="list-group-item"><a href="#"><i class="fa fa-twitter-square fa-fw"></i>Tweeter</a></li>
                   </ul>
-                  
+
               </div>
               <div class="col-md-4 ">
                   <h5>SUPPORT PAYMENT METHOD</h5>
@@ -578,19 +584,22 @@
         });
 
          $('#zoom_03').elevateZoom({
-          gallery:'gallery_01', 
-          cursor: 'pointer', 
-          galleryActiveClass: 'active', 
-          imageCrossfade: true, 
+          gallery:'gallery_01',
+          cursor: 'pointer',
+          galleryActiveClass: 'active',
+          imageCrossfade: true,
         });
 
-         $("#zoom_03").bind("click", function(e) {  
-          var ez =   $('#zoom_03').data('elevateZoom'); 
+         $("#zoom_03").bind("click", function(e) {
+          var ez =   $('#zoom_03').data('elevateZoom');
           $.fancybox(ez.getGalleryList());
           return false;
         });
 
        });
+
      </script>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Load jQuery -->
+     <script src="{{url('js/modernizr.custom.79639.js')}}" type="text/javascript"></script>
    </body>
    </html>
