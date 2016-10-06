@@ -80,8 +80,8 @@ Route::resource("/checkout","CheckoutController");
 // Route::get("/get/getcartdetail",function(){
 // 	$carts = 
 // });
-Route::get("/checkaccount/{acid}/{cvb}/{pass}",function($acid,$cvb,$pass){
-	$account=Account::where('account_id','=',$acid)->where('cvb_code','=',$cvb)->where('security_code','=',$pass)->get();
+Route::get("/checkaccount/{acid}/{cvb}/{pass}/{expm}/{expy}",function($acid,$cvb,$pass,$expm,$expy){
+	$account=Account::where('account_id','=',$acid)->where('cvb_code','=',$cvb)->where('security_code','=',$pass)->where('expmonth','=',$expm)->where('expyear','=',$expy)->get();
 	return response()->json($account);
 });
 Route::get("/count/{cpid}/{clid}",function($cpid,$clid){

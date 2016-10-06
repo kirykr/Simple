@@ -126,9 +126,9 @@
 						{!! Form::hidden('total_amount',$cart->where('customer_id','=',Auth::user()->id)->get()->sum('amount'),['class'=>'form-control','style'=>'width:300px','id'=>'total_amount']) !!}
 						{!! Form::hidden('total','',['class'=>'form-control','style'=>'width:300px','id'=>'total']) !!}
 						{!! Form::hidden('grand_total','',['class'=>'form-control','style'=>'width:300px','id'=>'g_total']) !!}
-						{!! Form::hidden('khan','',['class'=>'form-control','style'=>'width:300px','id'=>'khan_id']) !!}
+						{!! Form::hidden('khan_id','',['class'=>'form-control','style'=>'width:300px','id'=>'khan_id']) !!}
 						{!! Form::hidden('bus_id','',['class'=>'form-control','style'=>'width:300px','id'=>'bus_id']) !!}
-						{!! Form::text('shipamount','',['class'=>'form-control','style'=>'width:300px','id'=>'shipamount']) !!}
+						{!! Form::hidden('shipamount','',['class'=>'form-control','style'=>'width:300px','id'=>'shipamount']) !!}
 
 						<br/>
 					</div>
@@ -299,7 +299,7 @@
 											<div class="col-md-8">
 												{!! Form::label('totals','Total* ',['style'=>'text-align:right']) !!} 
 												{!! Form::text('total_pay','',['class'=>'form-control','placeholder'=>'','id'=>'total_pay','readonly'=>'readonly'])!!}
-												{!! Form::text('afterpaybalance','',['class'=>'form-control','id'=>'afterpaybalance']) !!}
+												{!! Form::hidden('afterpaybalance','',['class'=>'form-control','id'=>'afterpaybalance']) !!}
 											</div>
 											<div class="col-md-4"></div>
 										</div>
@@ -443,6 +443,9 @@ $('#btn_pay').on('click',function(){
 	}
 	$(this).prop('type','submit');
 });
+$('#khan').on('change',function(){
+$('#khan_id').val($(this).val());
+});
 $('#locations').on("change",function(){
 	var result = $(this).val();
 		// console.log(result);
@@ -467,6 +470,8 @@ $('#locations').on("change",function(){
 			$('#grand_total').html("<B>"+grand_total+"</B>");
 			$('#total').val(grand_total);
 			$('#shipamount').val(delivery);
+			$("#shm_type").val("App\\Bus");
+			$("#bus_id").val(3);
 			loc=1;
 		}
 		else if(result==0)
@@ -504,8 +509,14 @@ $('#locations').on("change",function(){
 		$('#total_pay').val(grand_total);
 	});
 $('#security_code').on('change',function(){
-	checkAccount($('#account_id').val(),$('#cvb_Code').val(),$('#security_code').val(),$('#total_pay').val());
+	var month = $('#month').val();
+	var year = $('#year').val();
+	// alert("month"+month+",year"+year);
+	checkAccount($('#account_id').val(),$('#cvb_Code').val(),$('#security_code').val(),$('#total_pay').val(),month,$('#year').val());
 })
+$('#month').on('change',function(){
+	console.log($(this).val());
+});
 $('#account_id').on('change',function(){
 	$('#security_code').val("");
 	$('#cvb_Code').val("");
@@ -632,10 +643,10 @@ function checkLength(control){
 		return true;
 	}
 }
-function checkAccount(acid,cvb,pass,totalpay){
+function checkAccount(acid,cvb,pass,totalpay,expm,expy){
 	$.ajax({
 		method:'GET',
-		url:"/checkaccount/"+acid+"/"+cvb+"/"+pass,
+		url:"/checkaccount/"+acid+"/"+cvb+"/"+pass+"/"+expm+"/"+expy,
 		success:function(respone){
 			if(respone.length>0){
 				respone.map(function(item){

@@ -38,4 +38,8 @@ class Color extends Model
     {
         return $this->hasMany('App\Cart');
     }
+    public function cinvoicedetails()
+    {
+        return $this->hasMany('App\Cinvoicedetail');
+    }
 }

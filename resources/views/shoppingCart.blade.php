@@ -48,7 +48,7 @@
                 <td><p><strong>{{ $row->id }}</strong></p></td>
                    <?php $computer = $computers->find($row->pro_id);
                    // dd($computer->photos[0]->path)?>
-                <td><p><img width="70" src=" {{ $computer->photos[0]->path  }} " alt=""></p></td>
+                <td><p><img width="70" src=" {{ $computer->photos[0]->path ? $computer->photos[0]->path : '' }} " alt=""></p></td>
                 <td><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
 				<?php $color = $colors->find($row->color_id); ?>{{",". $color->name }} </strong></p></td>
                 
