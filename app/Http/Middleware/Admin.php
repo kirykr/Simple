@@ -17,11 +17,12 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-      foreach(Auth::user()->roles as $rname){
-        if(Entrust::hasRole([$rname->name])   && Auth::user()->is_active ==1){
-            return $next($request);
+      if (Auth::check()){
+        foreach(Auth::user()->roles as $rname){
+          if(Entrust::hasRole([$rname->name])   && Auth::user()->is_active ==1){
+              return $next($request);
+          }
         }
-
       }
 
 
