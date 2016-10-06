@@ -69,8 +69,8 @@ class UserController extends Controller
 
         $fileName = time() . '.' . $avatar->getClientOriginalExtension();
         $path = public_path('/uploads/avatars/' . $fileName);
-        Image::make($avatar)->resize(200,200)->save($path);
-        $img = Image::make($avatar)->resize(200, 200, 
+        // Image::make($avatar)->resize(200,200)->save($path);
+        $img = Image::make($avatar->getRealPath())->resize(200, 200, 
           function ($c) {
             $c->aspectRatio();
             $c->upsize();
@@ -185,9 +185,9 @@ return redirect()->route('admin.users.index')->with('message', 'Item created suc
       if($avatar=$request->file('avatar')){
 
         $fileName = time() . '.' . $avatar->getClientOriginalExtension();
-        $path = public_path('/uploads/avatars/' . $fileName);
-        Image::make($avatar)->resize(200,200)->save($path);
-        $img = Image::make($avatar)->resize(200, 200, 
+        $path = public_path('uploads/avatars/' . $fileName);
+        // Image::make($avatar)->resize(200,200)->save($path);
+        $img = Image::make($avatar->getRealPath())->resize(200, 200, 
           function ($c) {
             $c->aspectRatio();
             $c->upsize();
