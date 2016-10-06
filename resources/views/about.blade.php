@@ -19,7 +19,7 @@
 							<div class="ch-info">
 								<div class="ch-info-front ch-img-1"></div>
 								<div class="ch-info-back">
-									<h3>Ruy Demo</h3>
+									<h3>Ruy Nemo</h3>
 									<p>====== Lecture ======  System Analysis (SA) </p>
 								</div>
 							</div>
