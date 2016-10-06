@@ -23,6 +23,7 @@ use App\Color;
 use App\Brand;
 
 use Illuminate\Http\Request;
+use App\Account;
 /*
 |--------------------------------------------------------------------------
 | test Eloquent Relationship
@@ -65,12 +66,8 @@ Route::get('/', function () {
 
 	return view('welcome', compact('computers','cart'));
 });
-// Route::get('/product/{id}', function ($id) {
-// 	$computer = Computer::findOrFail($id);
-// 		// return $computer->all();
-// 	return view('product', compact('computer'));
-//     // return view('welcome');
-// });
+
+
 Route::get('/laptops', function(){
 	$computers = Computer::orderBy('updated_at', 'desc')->paginate(12);
 
@@ -192,6 +189,25 @@ Route::resource("/checkout","CheckoutController");
 // Route::get("/get/getcartdetail",function(){
 // 	$carts =
 // });
+Route::get("/checkaccount/{acid}/{cvb}/{pass}/{expm}/{expy}",function($acid,$cvb,$pass,$expm,$expy){
+	$account=Account::where('account_id','=',$acid)->where('cvb_code','=',$cvb)->where('security_code','=',$pass)->where('expmonth','=',$expm)->where('expyear','=',$expy)->get();
+	return response()->json($account);
+});
+Route::get("/count/{cpid}/{clid}",function($cpid,$clid){
+	$computer=null;
+	$colors=null;
+	if(substr($cpid, 0, 1) == 'c')
+      {
+			$computer = Computer::find($cpid);
+			$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	  }
+	else
+	  {
+			$computer = Other::find($cpid);
+			$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	  }
+	  return count($colors);
+	});
 Route::group(['middleware'=>'admin'], function(){
 	//Route::resource('/admin/users', 'AdminUserController');
 
@@ -270,11 +286,6 @@ Route::group(['middleware'=>'admin'], function(){
 			$amount = Tmpdetail::all();
 			$am = $amount->sum('amount');
 			return response()->json($am);
-	});
-	Route::get("/admin/count/{cpid}/{clid}",function($cpid,$clid){
-			$computer = Computer::find($cpid);
-			$colors = $computer->colors()->where('color_id','=',$clid)->get();
-			return count($colors);
 	});
 	Route::get("/admin/color/getname/{id}",function($id){
 			$color= Color::find($id);

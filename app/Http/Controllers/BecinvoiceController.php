@@ -152,7 +152,7 @@ class BecinvoiceController extends Controller {
 					$other->qtyinstock=$newqty;
 					$other->save();
 				}
-				$bcinvdetail->bcinvoice_id=$bcinvoice->id;
+				$bcinvdetail->bcinvoicee_id=$bcinvoice->id;
 				$bcinvdetail->pro_id=$tmpinv->pro_id;
 				$bcinvdetail->description= $tmpinv->description;
 				$bcinvdetail->qty=$tmpinv->qty;

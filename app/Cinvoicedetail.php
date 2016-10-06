@@ -13,7 +13,8 @@ class Cinvoicedetail extends Model
     						'qty',
     						'price',
     						'amount',
-                            'created_at'
+                            'created_at',
+                            'color_id'
     ];		
     //
     /**
@@ -29,5 +30,8 @@ class Cinvoicedetail extends Model
     public function pro()
     {
     	return $this->morphTo();
+    }
+    public function color(){
+        return $this->belongsTo('App\Color');
     }
 }
