@@ -64,10 +64,10 @@ class UserController extends Controller
         'password' => 'required'
         ]);
 
-
+      $fileName = null;
       if($avatar=$request->file('avatar')){
 
-        $fileName = time() . '.' . $avatar->getClientOriginalExtension();
+        $fileName =  date('Y-m-d-h-i-s'). '.' . $avatar->getClientOriginalExtension();
         $path = public_path('/uploads/avatars/' . $fileName);
         // Image::make($avatar)->resize(200,200)->save($path);
         $img = Image::make($avatar->getRealPath())->resize(200, 200, 
@@ -182,9 +182,10 @@ return redirect()->route('admin.users.index')->with('message', 'Item created suc
       $user->password=Hash::make($request->password);
       $user->is_active=$request->is_active;
 
+      $fileName = null;
       if($avatar=$request->file('avatar')){
 
-        $fileName = time() . '.' . $avatar->getClientOriginalExtension();
+        $fileName = date('Y-m-d-h-i-s'). '.' . $avatar->getClientOriginalExtension();
         $path = public_path('uploads/avatars/' . $fileName);
         // Image::make($avatar)->resize(200,200)->save($path);
         $img = Image::make($avatar->getRealPath())->resize(200, 200, 

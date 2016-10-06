@@ -84,6 +84,7 @@ class ComputerController extends Controller {
 					    $c->upsize();
 					}
             	)->resizeCanvas(600, 319, 'center', false, array(255, 255, 255, 0))->save($path);
+            
             $img->destroy();	
             $photo->path = $filename;
             $photo->save();
