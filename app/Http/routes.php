@@ -51,7 +51,7 @@ use App\Account;
 
 
 Route::get('/', function () {
-	// $computers = Product::orderBy('updated_at', 'desc')->paginate(12);
+
 	$page = Input::get('page', 1);
 	$paginate = 12;
 

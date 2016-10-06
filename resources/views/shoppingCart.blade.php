@@ -46,18 +46,11 @@
 			
             <tr>
                 <td><p><strong>{{ $row->id }}</strong></p></td>
-                   <?php $computer = $computers->find($row->pro_id);
-                   // dd($computer->photos[0]->path)?>
-{{-- <<<<<<< HEAD
-                <td><p><img width="70" src=" {{ $computer->photos[0]->path  }} " alt=""></p></td>
-                <td class="text-wrap"><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
-				<?php $color = $colors->find($row->color_id); ?>
-				{{",". $color->name }} </strong></p></td>
-======= --}}
+                   <?php $computer = $computers->find($row->pro_id); ?>
+
                 <td><p><img width="70" src=" {{ $computer->photos[0]->path ? $computer->photos[0]->path : '' }} " alt=""></p></td>
                 <td><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
 				<?php $color = $colors->find($row->color_id); ?>{{",". $color->name }} </strong></p></td>
-{{-- >>>>>>> 1bb3d5479211830c55cd7da83fed4715d79d234a --}}
                 
                 <td>
                 <div class="row" style="width:100px !important">
@@ -66,12 +59,10 @@
 					  	<div class="row">
 					  		<div class="col-md-8">
 					  			<div class="input-group">
-							     {{--  <input type="text" class="form-control text-left" id="exampleInputAmount" value="{{ $row->qty }}"> --}}
 							     <?php 	$product_id= $row->pro_id;
 							     		$color_id = $row->color_id;
 							     		$qty=$computer->colors()->where("color_id","=",$color_id)->get();
 							     		$qty= $qty->count('quantity');
-							     		// $qtyincart=count($computer->colors()->where('color_id','=',$request->input('col_id'))->get());
 							       ?>
 							     {!! Form::hidden('colid',$color->id,['id'=>'colid']) !!}
 							     {!! Form::hidden('proid',$computer->id,['id'=>'proid']) !!}

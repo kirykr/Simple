@@ -14,7 +14,7 @@ class DropColumnDistrictid extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             //
-            $table->dropColumn('districtid');
+            // $table->dropColumn('districtid');
         });
     }
 
@@ -27,7 +27,7 @@ class DropColumnDistrictid extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             //
-            $table->string('districtid');
+            // $table->string('districtid');
         });
     }
 }
