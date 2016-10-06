@@ -20,6 +20,7 @@ use App\Spec;
 use App\Tmpdetail;
 use App\Color;
 use Illuminate\Http\Request;
+use App\Account;
 /*
 |--------------------------------------------------------------------------
 | test Eloquent Relationship
@@ -48,16 +49,9 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
 	$computers = Computer::orderBy('id', 'desc')->paginate(12);
-	$computer = new Computer();
-	// $cart = count(Cart::where('customer_id','=',Auth::user()->id)->get());
-	// dd($cart);
-	// $others = Other::orderBy('id', 'desc')->paginate(12);
-	// $products = DB::table('products')->join('categories', 'products.category_id', '=', 'categories.id')->get();
-		// return $computers->all();
+	// $computer = new Computer();
 	$cart = new Cart();
-	return view('welcome', compact('computers','cart','computer'));
-	// return view('welcome')->with('computers', Computer::orderBy('id', 'desc')->paginate(12))->with('others', Other::orderBy('id', 'desc')->paginate(12));
-    // return view('welcome');
+	return view('welcome', compact('computers','cart'));
 });
 // Route::get('/product/{id}', function ($id) {
 // 	$computer = Computer::findOrFail($id);
@@ -86,6 +80,25 @@ Route::resource("/checkout","CheckoutController");
 // Route::get("/get/getcartdetail",function(){
 // 	$carts = 
 // });
+Route::get("/checkaccount/{acid}/{cvb}/{pass}",function($acid,$cvb,$pass){
+	$account=Account::where('account_id','=',$acid)->where('cvb_code','=',$cvb)->where('security_code','=',$pass)->get();
+	return response()->json($account);
+});
+Route::get("/count/{cpid}/{clid}",function($cpid,$clid){
+	$computer=null;
+	$colors=null;
+	if(substr($cpid, 0, 1) == 'c')
+      {
+			$computer = Computer::find($cpid);
+			$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	  }
+	else
+	  {
+			$computer = Other::find($cpid);
+			$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	  }
+	  return count($colors);
+	});
 Route::group(['middleware'=>'admin'], function(){
 
 	Route::resource('/admin/users', 'AdminUserController');
@@ -149,11 +162,6 @@ Route::group(['middleware'=>'admin'], function(){
 			$amount = Tmpdetail::all();
 			$am = $amount->sum('amount');
 			return response()->json($am);
-	});
-	Route::get("/admin/count/{cpid}/{clid}",function($cpid,$clid){
-			$computer = Computer::find($cpid);
-			$colors = $computer->colors()->where('color_id','=',$clid)->get();
-			return count($colors);
 	});
 	Route::get("/admin/color/getname/{id}",function($id){
 			$color= Color::find($id);

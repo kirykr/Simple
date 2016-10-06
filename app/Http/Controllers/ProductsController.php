@@ -71,7 +71,7 @@ class ProductsController extends Controller
         $colors = $computer->colors()->groupby('color_id')->distinct()->get();
       }
         // return $computer->all();
-      return view('product', compact('computer','colors','cart','computers'));
+      return view('product', compact('computer','colors','cart'));
     }
 
     /**

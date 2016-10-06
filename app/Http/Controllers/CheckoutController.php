@@ -12,6 +12,14 @@ use App\Color;
 use App\Location;
 use App\District;
 use App\Bus;
+use App\Account;
+use App\Taxi;
+use Carbon\Carbon;
+use App\Cinvoice;
+use App\Cinvoicedetail;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class CheckoutController extends Controller
 {
@@ -51,6 +59,45 @@ class CheckoutController extends Controller
     public function store(Request $request)
     {
         //
+        dd(Input::all());
+        $taxi = new Taxi();
+        $cinv = new Cinvoice();
+        $indate = Carbon::now();
+        $khan = new District();
+        $cinv->indate=$indate;
+        $cinv->tamount = $request->input('total_amount');
+        $cinv->discount=0;
+        $cinv->shipamount=$request->input('shipamount');
+        $cinv->subtoal=$request->input('grand_total');
+        $cinv->tel=$request->input('telephone');
+        if($request->input('locations')==1){
+          $cinv->location_id=$request->input('locations');
+          $cinv->address;
+          $khan->find($request->input('khan'));
+        }
+        else{
+
+        }
+        
+        $cinv->pm_id=1;
+        $cinv->customer_id=Auth::useer()->id;
+        $cinv->statuspaid=1;
+        $cinv->statusship=0;
+
+        if($request->input('shm_type')=="App\\Taxi")
+        {
+          $cinv->shm_type=$request->input('shm_type');
+          $taxi->taxiname=$request->input('taxiname');
+          $taxi->tel=$request->input('taxinum');
+          $taxi->save();
+          $cinv->shm_id=$taxi->id;
+        }
+        else
+        {
+          $cinv->shm_type=$request->input('shm_type');
+          $cinv->shm_id=$request->input('bus_id');
+        }
+        // dd($indate);
     }
 
     /**

@@ -17,6 +17,9 @@
 		<div class="col-md-12">
 			
 <h3 class="text-success"><i class="fa fa-shopping-cart fa-fw"></i>Shopping Cart</h3>
+ @if($errors->any())
+				<h4 style="color:red;">**{{$errors->first()}}**</h4>
+ @endif
 @if(sizeof($cart->where('customer_id','=',Auth::user()->id)->get()) > 0)
 	<div class="alert alert-info">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -40,15 +43,14 @@
 		</thead>
 		<tbody>
 			 @foreach($cart->where('customer_id','=',Auth::user()->id)->get() as $row)
-
+			
             <tr>
                 <td><p><strong>{{ $row->id }}</strong></p></td>
                    <?php $computer = $computers->find($row->pro_id);
                    // dd($computer->photos[0]->path)?>
                 <td><p><img width="70" src=" {{ $computer->photos[0]->path  }} " alt=""></p></td>
                 <td><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
-				<?php $color = $colors->find($row->color_id); ?>
-				{{",". $color->name }} </strong></p></td>
+				<?php $color = $colors->find($row->color_id); ?>{{",". $color->name }} </strong></p></td>
                 
                 <td>
                 <div class="row" style="width:100px !important">
@@ -61,9 +63,12 @@
 							     <?php 	$product_id= $row->pro_id;
 							     		$color_id = $row->color_id;
 							     		$qty=$computer->colors()->where("color_id","=",$color_id)->get();
-
+							     		$qty= $qty->count('quantity');
+							     		// $qtyincart=count($computer->colors()->where('color_id','=',$request->input('col_id'))->get());
 							       ?>
-							     {!! Form::number('qty', $row->qty , ['class'=>'form-control','id'=>$row->id,'min'=>'1','max'=>$qty->count("quantity")]) !!}
+							     {!! Form::hidden('colid',$color->id,['id'=>'colid']) !!}
+							     {!! Form::hidden('proid',$computer->id,['id'=>'proid']) !!}
+							     {!! Form::number('qty', $row->qty , ['class'=>'form-control','id'=>$row->id,'min'=>'1','max'=>$qty]) !!}
 							    </div>
 							   
 							   </div>

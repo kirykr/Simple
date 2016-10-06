@@ -21,6 +21,7 @@
 {{-- ============================ main============================== --}}
 <div class="container">
 	<div class="row">
+	{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
 		<div class="col-md-5">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
@@ -78,7 +79,7 @@
 			<div class="row">
 					<div class="col-md-2">
 						<div class="form-group">
-						{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
+						
 							{!! Form::hidden('computer_id', $computer->id, ['id'=>'computer_id']) !!}
 							{!! Form::hidden('col_id','', ['id'=>'col_id']) !!}
 							{!! Form::hidden('pro_type','', ['id'=>'pro_type']) !!}
@@ -188,8 +189,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/jquery.min.js"></script> --}}
 <script type="text/javascript">
-	// $(document).ready( function(e){
-	// });
+	$(document).ready( function(e){
+		console.log($('#computer_id').val());
+	});
 	//method
 	function getRelatedElements(element, endpoint) {
     $.ajax({
@@ -235,8 +237,9 @@
   		// console.log(computer_id);
   		$.ajax({
   			method:'GET',
-  			url:"/admin/count/"+computer_id+"/"+color_id,
+  			url:"/count/"+computer_id+"/"+color_id,
   			success:function(response){
+  				console.log(response);
   				$('#qtycolorinstock').val(response);
   				$('#quantity').val(1);
   				if(color_id!="Choose Options"){

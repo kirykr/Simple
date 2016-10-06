@@ -25,7 +25,7 @@ class CartController extends Controller
     function __construct()
     {
         $this->middleware('auth');
-        
+
     }
 
     public function index()
@@ -63,8 +63,31 @@ class CartController extends Controller
         }
         else{ 
             $computer_id=$request->input('computer_id');
-            if($request->input('pro_type')=="App\Computer")
+            $carts = Cart::where('customer_id','=',Auth::user()->id)->where('pro_id','=',$computer_id)->where('color_id','=',$request->input('col_id'))->get();
+            $checkqtycart =Cart::where('pro_id','=',$computer_id)->where('color_id','=',$request->input('col_id'))->get();
+            $computer = Computer::find($computer_id);
+            $colors = count($computer->colors()->where('color_id','=',$request->input('col_id'))->get());
+            if($checkqtycart->sum('qty')<$colors)
             {
+            if(count($carts)>0)
+              {   
+                // dd($checkqtycart[0]->qty);
+                // if($carts[0]->qty<$request->input('qtycolorinstock'))
+                $old_qty=$carts[0]->qty;
+                $old_qty+=$request->input('quantity');
+                $carts[0]->qty=$old_qty;
+                $carts[0]->amount=$old_qty * $request->input('price');
+                $carts[0]->save();
+                // else{
+                //     $qis=$request->input('qtycolorinstock');
+                //     return Redirect::back()->withErrors(["Quantiy in stock is $qis, Please Check Your Cart!!", 'The Message']);
+                // }
+                
+              }
+            else
+              {
+              if($request->input('pro_type')=="App\Computer")
+              {
                 $cart = new Cart();
                 $color_id=$request->input('col_id');
                 $computer = Computer::find($computer_id);
@@ -78,12 +101,10 @@ class CartController extends Controller
                 $cart->color_id = $color_id;
                 $cart->pro_type=$request->input('pro_type');
                 $cart->save();
-                return Redirect::back();
-                // dd($request->all());
-                // dd($computer);
-            }
-            else{
-
+                
+              }
+              else
+              {
                 $cart = new Cart();
                 $color_id=$request->input('col_id');
                 $computer = Other::find($computer_id);
@@ -96,9 +117,14 @@ class CartController extends Controller
                 $cart->customer_id= Auth::user()->id;
                 $cart->pro_type=$request->input('pro_type');
                 $cart->save();
+              }
             }
-            
-           
+          }
+          else
+          {
+                return Redirect::back()->withErrors(["This Color of Product is OUT OF STOCK (Meaning YOU OR SOMEONE already has the last remain item in your/their CART.)!!", 'The Message']);
+          }
+        return Redirect::back();
         }
     }
 
@@ -133,14 +159,24 @@ class CartController extends Controller
      */
     public function update(Request $request, $rowId)
     {
+        // Cart::instance(Auth::user()->id)->update($rowId, $qty);     
+        // dd(Input::all());
+        $computer_id=$request->input('proid');
+        $checkqtycart =Cart::where('pro_id','=',$computer_id)->where('color_id','=',$request->input('colid'))->get();
+        $computer = Computer::find($computer_id);
+        $colors = count($computer->colors()->where('color_id','=',$request->input('colid'))->get());
+        if($checkqtycart->sum('qty')<$colors){
+          $qty = $request['qty'];
+          $cart = Cart::find($rowId);
+          $cart->find($rowId);
+          $cart->qty = $qty;
+          $cart->save();
+          return redirect('/carts');
+        }else{
+          return Redirect::back()->withErrors(["This Color of Product is OUT OF STOCK (Meaning YOU OR SOMEONE already has the last remain item in your/their CART.)!!", 'The Message']);
+        }
         
-        $qty = $request['qty'];
-        // Cart::instance(Auth::user()->id)->update($rowId, $qty);
-        $cart = Cart::find($rowId);
-        $cart->find($rowId);
-        $cart->qty = $qty;
-        $cart->save();
-        return redirect('/carts');
+        
     }
 
     /**
