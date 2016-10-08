@@ -26,7 +26,7 @@
 {{-- ============================ main============================== --}}
 <div class="container">
 	<div class="row">
-	{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
+	{{-- {!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!} --}}
 		<div class="col-md-5">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
@@ -86,19 +86,12 @@
 			<div class="row">
 					<div class="col-md-2">
 						<div class="form-group">
-{{-- <<<<<<< HEAD --}}
 						{!! Form::open(['action'=>"CartController@store", 'method'=>"POST"]) !!}
-             {{--  {!! Form::hidden('computer_id', $computer->id, ['id'=>'computer_id']) !!}
-              {!! Form::hidden('col_id','', ['id'=>'col_id']) !!}
-              {!! Form::hidden('pro_type','', ['id'=>'pro_type']) !!}
-							{!! Form::hidden('image',count($computer->photos) > 0 ? $computer->photos->first()->path : 'no-image', []) !!}
-======= --}}
 						
 							{!! Form::hidden('computer_id', $computer->id, ['id'=>'computer_id']) !!}
 							{!! Form::hidden('col_id','', ['id'=>'col_id']) !!}
 							{!! Form::hidden('pro_type','', ['id'=>'pro_type']) !!}
 							{!! Form::hidden('image', $computer->photos->first()->path, []) !!}
-{{-- >>>>>>> 1bb3d5479211830c55cd7da83fed4715d79d234a --}}
 							{!! Form::label('', 'Colors:', []) !!}
                     		<select class="form-control" style="width:180px" id="color_id">
                     			<option>Choose Options</option>
@@ -106,11 +99,8 @@
                     			<option value="{{ $color->id }}"> {{ $color->name }} </option>
                     			@endforeach
                     		</select>
-                    		{{-- {!! Form::select('color',[''=>'Choose Options'],0,['class'=>'form-control', 'style'=>'width:180px']) !!} --}}
 							{!! Form::hidden('price', $computer->sellprice, []) !!}
 							{!! Form::label('', 'QTY:', []) !!}
-							{{-- {!! Form::selectRange('number', 1, 110) !!} --}}
-							{{-- {!! Form::number('qty',1,['class'=>'form-control','id'=>'qty']) !!} --}}
 							{!! Form::number('quantity','1',['class'=>'form-control','id'=>'quantity']) !!}
 						</div>
 						

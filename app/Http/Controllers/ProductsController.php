@@ -19,9 +19,6 @@ class ProductsController extends Controller
     public function index()
     {
         //
-        $cart = new Cart();
-
-    return view('product', compact('cart'));
     }
 
     /**
