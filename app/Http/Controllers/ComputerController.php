@@ -23,7 +23,7 @@ class ComputerController extends Controller {
 	 */
 	public function index()
 	{
-		$computers = Computer::orderBy('updated_at', 'desc')->paginate(10);
+		$computers = Computer::orderBy('updated_at', 'desc')->paginate(20);
 
 		// return $computers->all();
 		return view('admin.computers.index', compact('computers'));

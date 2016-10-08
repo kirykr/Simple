@@ -15,6 +15,7 @@ use App\Cimport;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Redirect;
 	
 
 class BecinvoiceController extends Controller {
@@ -54,6 +55,7 @@ class BecinvoiceController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		// dd(Input::all());
 		if (Input::get('btn_adddetail'))
 		{	
 			$chars = $request->input("serial_id");
@@ -139,7 +141,9 @@ class BecinvoiceController extends Controller {
 				$bcinvdetail = new Bcinvoicedetail();
 				if($tmpinv->pro_type=="App\\Computer"){
 					$computer = Computer::find($tmpinv->pro_id);
+					// dd($tmpinv->color_id);
 					$serialnumbers = $computer->colors()->where([['color_id','=',$tmpinv->color_id],['status','=','unavailable']])->get();
+					// dd($serialnumbers[0]->pivot->serialnumber);
 					$serialnumber = $serialnumbers[0]->pivot->serialnumber;
 					DB::table('color_computer')->where('serialnumber','=',$serialnumber)->delete();
 					$computer = Computer::find($tmpinv->pro_id);
@@ -152,7 +156,7 @@ class BecinvoiceController extends Controller {
 					$other->qtyinstock=$newqty;
 					$other->save();
 				}
-				$bcinvdetail->bcinvoicee_id=$bcinvoice->id;
+				$bcinvdetail->bcinvoice_id=$bcinvoice->id;
 				$bcinvdetail->pro_id=$tmpinv->pro_id;
 				$bcinvdetail->description= $tmpinv->description;
 				$bcinvdetail->qty=$tmpinv->qty;

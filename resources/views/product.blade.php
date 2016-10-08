@@ -118,9 +118,6 @@
 							<div class="coll-md-6 pull-left">
 							  <button type="summit" class="btn btn-primary form-control addToCart"><i class="fa fa-shopping-cart"></i> ADD TO CART</button>
 							</div>
-							<div class="coll-md-6 pull-left">
-							   <button type="summit" class="btn btn-warning form-control addToCart"><i class="fa fa-money"></i> Buy Now</button>
-							</div>
 						</div>
 					{{-- </div> --}}
 						{!! Form::close() !!}  

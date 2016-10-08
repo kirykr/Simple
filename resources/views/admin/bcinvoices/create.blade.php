@@ -45,7 +45,7 @@
                 <div class="col-md-12">
                   <div class="form-group @if($errors->has('computer_id')) has-error @endif">
                     {!! Form::label('computer_id', 'Computer_Name', []) !!}
-                    {!! Form::select('computer_id',[''=>'Choose Options']+ $computers,0,['class'=>'form-control','id'=>'bcinvicecomputer']) !!}
+                    {!! Form::select('computer_id',[''=>'Choose Options']+ $computers,0,['class'=>'form-control']) !!}
                     @if($errors->has("computer_id"))
                     <span class="help-block">{{ $errors->first("computer_id") }}</span>
                     @endif
@@ -58,7 +58,7 @@
                 <div class="col-md-12">
                   <div class="form-group @if($errors->has('other_id')) has-error @endif">
                     {!! Form::label('other_id', 'Other_Name', []) !!}
-                    {!! Form::select('other_id',[''=>'Choose Options']+ $others,0,['class'=>'form-control', 'id'=>'bcinviceother']) !!}
+                    {!! Form::select('other_id',[''=>'Choose Options']+ $others,0,['class'=>'form-control']) !!}
                     @if($errors->has("other_id"))
                     <span class="help-block">{{ $errors->first("other_id") }}</span>
                     @endif
@@ -348,15 +348,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript">
 
-   $("#bcinvicecomputer").select2({
-      placeholder: "Select a Computer",
-      maximumSelectionSize: 2
-    });
+   // $("#computer_id").select2({
+   //    placeholder: "Select a Computer",
+   //    maximumSelectionSize: 2
+   //  });
 
-   $("#bcinviceother").select2({
-      placeholder: "Select a Computer",
-      maximumSelectionSize: 2
-    });
+   // $("#other").select2({
+   //    placeholder: "Select a Computer",
+   //    maximumSelectionSize: 2
+   //  });
 
   $('.date-picker').datepicker({
   });
@@ -499,6 +499,7 @@ var qis=0;
         $("#qty").prop('disabled', false);
       }
       var id = $(this).val();
+      console.log(id);
       if(id){
         var element = $('#color_id');
         var endpoint = '/admin/api/v1/computers/' + id + '/colors'
@@ -662,6 +663,7 @@ var qis=0;
           var options = "<option value=''>Choose Options</option>"; 
           element.append(options);
           response.map(function(item) {
+            console.log("In");
             var options = "<option value=" + item.id + ">" + item.name + "</option>"; 
             element.append(options);
           });

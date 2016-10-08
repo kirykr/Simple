@@ -55,8 +55,8 @@ Route::get('/', function () {
 	$page = Input::get('page', 1);
 	$paginate = 12;
 
-	 $table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at');
-	 $afterunion = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->union($table1)->get();
+	$table1 = DB::table('computers')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at');
+	$afterunion = DB::table('others')->select('id','name','qtyinstock','sellprice','ppprice','provprice','created_at','updated_at')->union($table1)->get();
 
 	$offSet = ($page * $paginate) - $paginate;
 	$itemsForCurrentPage = array_slice($afterunion, $offSet, $paginate, true);
@@ -125,47 +125,37 @@ Route::get('/user/profile', function(){
 // ================================== backend ===============================
 Route::auth();
 
-/*Route::get('/admin', function(){
-
-	if(!Entrust::hasRole(['admin','owner','HR'])){
-		return redirect('/admin');
-	}
-
-<<<<<<< HEAD
-	return view('admin.index');
-});*/
-
-		Route::get('/admin', function(){
-			if (Auth::check()){
-				if(Auth::user()->is_active ==1){
-					foreach(Auth::user()->roles as $rname){
+Route::get('/admin', function(){
+	if (Auth::check()){
+		if(Auth::user()->is_active ==1){
+			foreach(Auth::user()->roles as $rname){
 						//if($rname->name){
-						if(Entrust::hasRole([$rname->name])){
-							$array = [];
-							$arr = [];
-							 foreach(Auth::user()->roles as $rname ){
-									 foreach($rname->modules as $mo){
-										 $test= $mo->nav;
-										 $array[]=array_add(['name' => 'ko'], 'module',$test);
-									 }
-							 }
+				if(Entrust::hasRole([$rname->name])){
+					$array = [];
+					$arr = [];
+					foreach(Auth::user()->roles as $rname ){
+						foreach($rname->modules as $mo){
+							$test= $mo->nav;
+							$array[]=array_add(['name' => 'ko'], 'module',$test);
+						}
+					}
 							 //$result = array_unique($array);
 							 //echo $rol;
 
-							 $collection = collect($array);
-							 $collection1 = $collection->unique('module');
-							 foreach ($collection1 as $item) {
+					$collection = collect($array);
+					$collection1 = $collection->unique('module');
+					foreach ($collection1 as $item) {
 									 //echo $item['module'];
-								}
-							return view('admin.index2', compact('collection1'));
-
-						}
 					}
+					return view('admin.index2', compact('collection1'));
 
 				}
 			}
-			return redirect('/');
-		});
+
+		}
+	}
+	return redirect('/');
+});
 
 // Route::get('/admin', 'AdminPageController@index');
 	// return view('admin.index2');
@@ -194,21 +184,7 @@ Route::get("/checkaccount/{acid}/{cvb}/{pass}/{expm}/{expy}",function($acid,$cvb
 	$account=Account::where('account_id','=',$acid)->where('cvb_code','=',$cvb)->where('security_code','=',$pass)->where('expmonth','=',$expm)->where('expyear','=',$expy)->get();
 	return response()->json($account);
 });
-Route::get("/count/{cpid}/{clid}",function($cpid,$clid){
-	$computer=null;
-	$colors=null;
-	if(substr($cpid, 0, 1) == 'c')
-      {
-			$computer = Computer::find($cpid);
-			$colors = $computer->colors()->where('color_id','=',$clid)->get();
-	  }
-	else
-	  {
-			$computer = Other::find($cpid);
-			$colors = $computer->colors()->where('color_id','=',$clid)->get();
-	  }
-	  return count($colors);
-	});
+
 Route::group(['middleware'=>'admin'], function(){
 	//Route::resource('/admin/users', 'AdminUserController');
 
@@ -252,45 +228,45 @@ Route::group(['middleware'=>'admin'], function(){
 	// Route::get("/admin/invoicesasdf/{id}","BcinvoiceController@show2");
 	Route::resource('/admin/tmpdetail',"TmpdetailController");
 	Route::get('/admin/invoices/computers/{id}',function($id){
-			$computer =  Computer::find($id);
-			return response()->json($computer);
-			});
+		$computer =  Computer::find($id);
+		return response()->json($computer);
+	});
 	Route::get('/admin/invoices/others/{id}',function($id){
-			$other =  Other::find($id);
-			return response()->json($other);
-			});
+		$other =  Other::find($id);
+		return response()->json($other);
+	});
 	Route::get("/admin/computers/descriptions/{id}",function($id){
-			$computer = Computer::find($id);
-			$descs = $computer->specs;
-			return response()->json($descs);
+		$computer = Computer::find($id);
+		$descs = $computer->specs;
+		return response()->json($descs);
 	});
 	Route::get("/admin/other/name/{id}",function($id){
-			$other = Other::find($id);
-			return response()->json($other);
+		$other = Other::find($id);
+		return response()->json($other);
 	});
 	Route::get("/admin/computers/serialnumbers/{id}/{cid}",function(Request $request,$id,$cid){
-			$computer = Computer::find($id);
-			$serialnumbers = $computer->colors()->where('color_id','=',$cid)->get();
-			return response()->json($serialnumbers);
+		$computer = Computer::find($id);
+		$serialnumbers = $computer->colors()->where('color_id','=',$cid)->get();
+		return response()->json($serialnumbers);
 	});
 	Route::get("/admin/computer/updatestatus/{id}",function(Request $request,$id){
-			$computer = Computer::findOrFail($id);
-			$status = $computer->colors()->where("serialnumber","=","$id");
-			$status->status="unavailable";
-			$status->save();
+		$computer = Computer::findOrFail($id);
+		$status = $computer->colors()->where("serialnumber","=","$id");
+		$status->status="unavailable";
+		$status->save();
 	});
 	Route::get("/admin/computer/serialid/{id}",function(Request $request,$id){
-			$serial_id = DB::table('color_computer')->select('id')->where('serialnumber','=', $id)->get();
-			return response()->json($serial_id);
+		$serial_id = DB::table('color_computer')->select('id')->where('serialnumber','=', $id)->get();
+		return response()->json($serial_id);
 	});
 	Route::get("/admin/computerinv/getamount",function(){
-			$amount = Tmpdetail::all();
-			$am = $amount->sum('amount');
-			return response()->json($am);
+		$amount = Tmpdetail::all();
+		$am = $amount->sum('amount');
+		return response()->json($am);
 	});
 	Route::get("/admin/color/getname/{id}",function($id){
-			$color= Color::find($id);
-			return response()->json($color);
+		$color= Color::find($id);
+		return response()->json($color);
 	});
 
 	// Route::get('/admin/cimports/computers/serials/{id}/', function($id){
@@ -337,5 +313,20 @@ Route::group(['middleware'=>'admin'], function(){
 });
 
 Route::resource('products', 'ProductsController');
+Route::get("/count/{cpid}/{clid}",function($cpid,$clid){
+	$computer=null;
+	$colors=null;
+	if(substr($cpid, 0, 1) == 'c')
+	{
+		$computer = Computer::find($cpid);
+		$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	}
+	else
+	{
+		$computer = Other::find($cpid);
+		$colors = $computer->colors()->where('color_id','=',$clid)->get();
+	}
+	return count($colors);
+});
 Route::resource('/home', 'HomeController@index');
 Route::resource('/carts', 'CartController');

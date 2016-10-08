@@ -35,7 +35,8 @@ class CartController extends Controller
         $cart = new Cart();
         $computers = new Computer();
         $colors = new Color();
-        return view('shoppingCart', compact('cart','computers','colors'));
+        $others = new Other();
+        return view('shoppingCart', compact('cart','computers','others','colors'));
     }
 
     /**
@@ -63,9 +64,15 @@ class CartController extends Controller
         }
         else{ 
             $computer_id=$request->input('computer_id');
+            $computer=null;
             $carts = Cart::where('customer_id','=',Auth::user()->id)->where('pro_id','=',$computer_id)->where('color_id','=',$request->input('col_id'))->get();
             $checkqtycart =Cart::where('pro_id','=',$computer_id)->where('color_id','=',$request->input('col_id'))->get();
-            $computer = Computer::find($computer_id);
+            if(substr($computer_id, 0, 1) == 'c')
+            {
+                $computer = Computer::findOrFail($computer_id);
+            }else{
+                 $computer = Other::findOrFail($computer_id);
+            }
             $colors = count($computer->colors()->where('color_id','=',$request->input('col_id'))->get());
             if($checkqtycart->sum('qty')<$colors)
             {
@@ -114,8 +121,10 @@ class CartController extends Controller
                 $cart->shipprice= 0;
                 $cart->discount=0;
                 $cart->amount = $cart->qty * $cart->price;
+                $cart->color_id = $color_id;
                 $cart->customer_id= Auth::user()->id;
                 $cart->pro_type=$request->input('pro_type');
+                // dd($cart);
                 $cart->save();
               }
             }
@@ -187,8 +196,9 @@ class CartController extends Controller
      */
     public function destroy($rowId)
     {
-        
-        Cart::instance(Auth::user()->id)->remove($rowId);
+        // dd($rowId);
+        $cart = Cart::find($rowId);
+        $cart->delete();
         return redirect('carts');
     }
 }

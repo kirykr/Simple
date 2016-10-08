@@ -46,10 +46,19 @@
 			
             <tr>
                 <td><p><strong>{{ $row->id }}</strong></p></td>
-                   <?php $computer = $computers->find($row->pro_id); ?>
+                   <?php 
+                   		$computer =null;
+                   		if(substr($row->pro_id, 0, 1) == 'c'){ $computer = $computers->find($row->pro_id); }
+                   		else{ $computer = $others->find($row->pro_id); }
+                   		
+
+                   ?>
 
                 <td><p><img width="70" src=" {{ $computer->photos[0]->path ? $computer->photos[0]->path : '' }} " alt=""></p></td>
-                <td><p><strong>{{ $computer->name }} @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
+                <td><p><strong>{{ $computer->name }}
+                <?php if(count($computer->specs) >0) {?>
+                 @foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
+                <?php }else{ $computer->name; } ?>
 				<?php $color = $colors->find($row->color_id); ?>{{",". $color->name }} </strong></p></td>
                 
                 <td>
@@ -86,7 +95,7 @@
                 <td>{{ $row->discount }}%</td>
                 <td>${{ $row->amount}}</td>
                 <td>
-                	 <form action="{{ route('carts.destroy', $row->rowId) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
+                	 <form action="{{ route('carts.destroy', $row->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="submit" class="btn btn-xs btn-danger pull-right"><i class="fa fa-trash"></i> Delete</button>

@@ -35,10 +35,11 @@ class CheckoutController extends Controller
         $cart = new Cart();
         $computers = new Computer();
         $colors = new Color();
+        $others= new Other();
         $locations = Location::lists('locname','id')->all();
         $khans = District::lists('disname','id')->all();
         $buses = Bus::whereNotIn('id',[3])->lists('bcname','id')->all();
-        return view('checkout',compact('cart','computers','colors','locations','khans','buses'));
+        return view('checkout',compact('cart','computers','others','colors','locations','khans','buses'));
     }
 
     /**
@@ -116,15 +117,23 @@ class CheckoutController extends Controller
                 if($cart->pro_type=="App\\Computer"){
                     $computer = Computer::find($cart->pro_id);
                     $serialnumbers = $computer->colors()->where([['color_id','=',$cart->color_id],['status','=','available']])->get();
-                    // dd($serialnumbers->pivot->serialnumber);
-                    $serialnumber = $serialnumbers[0]->pivot->serialnumber;
-                    DB::table('color_computer')->where('serialnumber','=',$serialnumber)->delete();
+                    for($i=0;$i<$cart->qty;$i++){
+                        $serialnumber = $serialnumbers[$i]->pivot->serialnumber;
+                        DB::table('color_computer')->where('serialnumber','=',$serialnumber)->delete();
+                    }
+                    
                     $computer = Computer::find($cart->pro_id);
                     $newqty = $computer->qtyinstock-$cart->qty;
                     $computer->qtyinstock=$newqty;
                     $computer->save();
                 }else{
                     $other = Other::find($cart->pro_id);
+                    $os = $other->colors()->where('other_id','=',$cart->pro_id)->where('color_id','=',$cart->color_id)->get();
+                    for($i=0;$i<$cart->qty;$i++){
+                        $o = $os[$i]->pivot->id;
+                        DB::table('color_other')->where('id','=',$o)->delete();
+                    }
+                    $stock_id = $other->where('color');
                     $newqty = $other->qtyinstock-$cart->qty;
                     $other->qtyinstock=$newqty;
                     $other->save();

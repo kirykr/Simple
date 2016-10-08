@@ -202,9 +202,14 @@
 						</thead>
 						<tbody>
 							@foreach($cart->where('customer_id','=',Auth::user()->id)->get() as $row)
-							<?php $computer = $computers->find($row->pro_id); ?>
+							<?php 	$computer=null;
+									if(substr($row->pro_id, 0, 1) == 'c'){ $computer = $computers->find($row->pro_id); }
+                   					else{ $computer = $others->find($row->pro_id); } ?>
 							<tr>
-								<td><p><strong>{{ $computer->name }}@foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
+								<td><p><strong>{{ $computer->name }}
+								<?php if(count($computer->specs) >0) {?>
+								@foreach($computer->specs as $desc) {{",". $desc->pivot->description}} @endforeach
+								<?php }else{ $computer->name; } ?>
 									<?php $color = $colors->find($row->color_id); ?>{{",". $color->name }} </strong></p>
 								</td>
 								<td>&nbsp;x{{ $row->qty }}</td>
