@@ -599,7 +599,7 @@
        });
 
      </script>
-     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> <!-- Load jQuery -->
+    {{--  // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>  --}}
      <script src="{{url('js/modernizr.custom.79639.js')}}" type="text/javascript"></script>
    </body>
    </html>
