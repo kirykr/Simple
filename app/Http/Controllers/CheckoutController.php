@@ -127,10 +127,13 @@ class CheckoutController extends Controller
                     $computer->qtyinstock=$newqty;
                     $computer->save();
                 }else{
+                    // dd("In");
                     $other = Other::find($cart->pro_id);
+                    
                     $os = $other->colors()->where('other_id','=',$cart->pro_id)->where('color_id','=',$cart->color_id)->get();
+                    // dd($os[0]->id);
                     for($i=0;$i<$cart->qty;$i++){
-                        $o = $os[$i]->pivot->id;
+                        $o = $os[$i]->id;
                         DB::table('color_other')->where('id','=',$o)->delete();
                     }
                     $stock_id = $other->where('color');

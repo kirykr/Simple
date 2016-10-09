@@ -228,22 +228,31 @@
       }
     });
   }
-  function checkProduct(id){
-  	$.ajax({
-  		method:'GET',
-  		url:"/admin/computers/descriptions/"+id,
-  		success:function(response){
-  			$('#pro_type').val("App\\Computer");
-  		},
-  		error:function(){
-  			$('#pro_type').val("App\\Other");
-  		}
-  	});
-  }
+  // function checkProduct(id){
+  // 	$.ajax({
+  // 		method:'GET',
+  // 		url:"/computers/descriptions/"+id,
+  // 		success:function(response){
+  // 			$('#pro_type').val("App\\Computer");
+  // 		},
+  // 		error:function(){
+  // 			$('#pro_type').val("App\\Other");
+  // 		}
+  // 	});
+  // }
   //handler
   $(document).ready( function(){
   	var id = $('#computer_id').val();
-  	checkProduct(id);
+  	// checkProduct(id);
+    if(id.substr(0, 1) == 'c')
+    {
+      $('#pro_type').val("App\\Computer");
+    }
+    else{
+
+      $('#pro_type').val("App\\Other");
+    }
+            
   });
 
   $('#color_id').on('change',function(e){

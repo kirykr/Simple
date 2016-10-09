@@ -235,11 +235,11 @@ Route::group(['middleware'=>'admin'], function(){
 		$other =  Other::find($id);
 		return response()->json($other);
 	});
-	Route::get("/admin/computers/descriptions/{id}",function($id){
-		$computer = Computer::find($id);
-		$descs = $computer->specs;
-		return response()->json($descs);
-	});
+	// Route::get("/computers/descriptions/{id}",function($id){
+	// 	$computer = Computer::find($id);
+	// 	$descs = $computer->specs;
+	// 	return response()->json($descs);
+	// });
 	Route::get("/admin/other/name/{id}",function($id){
 		$other = Other::find($id);
 		return response()->json($other);
