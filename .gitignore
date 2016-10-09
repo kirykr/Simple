@@ -1,8 +1,9 @@
 /vendor
 /node_modules
 /public/storage
-/public/images
+/public/images/computers
 /public/img
+/public/uploads/
 Homestead.yaml
 Homestead.json
 .env

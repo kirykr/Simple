@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-md-12">
         @if($others->count())
-        <table class="table table-condensed table-striped">
+        <table id="othertable" class="table table-condensed table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -22,11 +22,8 @@
                     <th>NAME</th>
                     <th>QTY</th>
                     <th>PRICE</th>
-                    <th>TYPE_ID</th>
-                    <th>CATEGORY_ID</th>
-                    <th>BRAND_ID</th>
-                    <th>MODEL_ID</th>
-                    <th class="text-right">OPTIONS</th>
+                    <th>Brand</th>
+                    <th class="text-right text-nowrap">OPTIONS</th>
                 </tr>
             </thead>
 
@@ -38,10 +35,7 @@
                     <td>{{$other->name}}</td>
                     <td>{{$other->qtyinstock}}</td>
                     <td>{{$other->sellprice}}</td>
-                    <td>{{$other->type_id}}</td>
-                    <td>{{$other->category_id}}</td>
                     <td>{{$other->brand_id}}</td>
-                    <td>{{$other->model_id}}</td>
                     <td class="text-right">
                         <a class="btn btn-xs btn-primary" href="{{ route('admin.others.show', $other->id) }}"><i class="fa fa-eye"></i> View</a>
                         <a class="btn btn-xs btn-warning" href="{{ route('admin.others.edit', $other->id) }}"><i class="fa fa-edit"></i> Edit</a>
@@ -62,5 +56,13 @@
 
     </div>
 </div>
+<script type="text/javascript">
+      $(document).ready(function() {
+    $('#othertable').dataTable( {
+      "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
 
+      ] } );
+  } );
+</script>
 @endsection

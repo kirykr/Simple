@@ -8,14 +8,30 @@
   <meta name="author" content="">
 
   <title>eCommerce Admin page</title>
-
-  <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  
+  <link rel="stylesheet" media="print" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
   <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
+  <link rel="stylesheet" media="print" href="{{asset('css/print.css')}}">
+  <link rel="stylesheet" href="{{asset('css/style.css')}}">
+  <link rel="icon" href="{{asset('favicon.png')}}">
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="{{asset('js/libs.js')}}"></script>
+  {{-- <script src="{{asset('js/jquery.min.js')}}"></script> --}}
+  <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+  <script src="{{asset('js/bootstrap.js')}}"></script>
+  
+  <script src="https://cdn.jsdelivr.net/elevatezoom/3.0.8/jqueryElevateZoom.js"></script>
+  {{-- <script src="{{asset('js/jqueryElevateZoom.js')}}"></script> --}}
+  <script src="{{asset('js/ripples.min.js')}}"></script>
+  <script src="{{asset('js/metisMenu.js')}}"></script>
+  <script src="{{asset('js/sb-admin-2.js')}}"></script>
+  <script src="{{asset('js/sweetalert.min.js')}}"></script>
+  <script src="{{asset('js/script.js')}}"></script>
+
   <script src="{{asset('js/plugins/canvas-to-blob.min.js')}}"></script>
   <script src="{{asset('js/plugins/sortable.min.js')}}"></script>
   <script src="{{asset('js/plugins/purify.min.js')}}"></script>
@@ -24,7 +40,11 @@
   <script src="{{asset('js/locales/LANG.js')}}"></script>
   <script src="{{asset('js/select2.full.min.js')}}"></script>
   <script src="{{asset('js/i18n/en.js')}}"></script>
- 
+
+  <script src="{{asset('js/validator.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.16.1/lodash.min.js"></script>
+
+
   {{-- <script src="{{asset('js/dropzone.js')}}"></script> --}}
   <!-- Bootstrap Core CSS -->
   <!-- <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -50,7 +70,19 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+      <style type="text/css" media="print">
+        a {
+          color: #333;
+          font-size: 15px;
+        }
+        .dontprint
+        {
+          display: none;
+        }
+        .displayprint{
+          display: inline;
+        }
+      </style>
       </head>
 
       <body>
@@ -72,7 +104,7 @@
                     <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
                   </a>
                 </div>
-              </div> 
+              </div>
               <!-- /.navbar-header -->
               <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <div class="row">
@@ -268,13 +300,18 @@
                       <!-- /.dropdown-alerts -->
                     </li>
                     <!-- /.dropdown -->
+                    <li>
+                      <!-- <img style="position: relative; margin-bottom: -15px" width="30" src="{{Auth::user()->photo ? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt=""> -->
+                      @if(Auth::user()->avatar)
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/{{Auth::user()->avatar}}" class="img-responsive img-circle" alt="">
+                      @else
+                        <img style="position: relative; margin-bottom: -10px" width="40" src="/uploads/avatars/default-no-image.png" class="img-responsive img-circle">
+                      @endif
+                    </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 
-                        <img width="30" src="{{Auth::user()->photo? Auth::user()->photo->path : 'http://placehold.it/400x400'}}" class="img-responsive img-circle" alt="">
-                        
                         hi,  {{ Auth::user()->name }}!  <i class="fa fa-caret-down"></i>
-
 
                       </a>
                       <ul class="dropdown-menu dropdown-user">
@@ -312,204 +349,13 @@
                   <li>
                     <a href="{{url('/admin')}}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa fa-users"></i> Users<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{route('admin.users.index')}}">All Users</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.users.create')}}"><i  class="fa fa-cogs"></i> Create Users</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.roles.index')}}"><i  class="fa fa-cogs"></i> User Roles</a>
-                      </li>
-                      <li>
-                        <a href="{{route('admin.permissions.index')}}"><i  class="fa fa-cogs"></i> Permissions</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-building fa-fw"></i> Suppliers<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.suppliers.index') }}"><i class="fa fa-truck"></i> All Supplers</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.suppliers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Supplier</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-sort-alpha-asc"></i> Product Tyeps<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.types.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Types</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.types.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Types</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-folder-open"></i> Categories<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.categories.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Categories</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.categories.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Category</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-share-alt"></i> Product Brands<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.brands.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Brands</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.brands.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Brands</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-apple"></i> Product Models<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.modells.index') }}"><i class="fa fa-list-alt fa-fw"></i> All Models</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.modells.create') }}"><i class="fa fa-cog fa-fw"></i> Creat Models</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-desktop"></i></i> Manage Computers<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.computers.index') }}"> <i class="fa fa-laptop fa-fw"></i> All Computers</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.computers.create') }}"><i class="fa fa-gear fa-fw"></i> Create Computer</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.cimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Computer</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-hdd-o fa-fw"></i> Manage Other Products<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.others.index') }}"><i class="fa fa-keyboard-o"></i> All Other Products</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.others.create') }}"><i class="fa fa-hdd-o fa-fw"></i> Create Other Products</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.oimports.create') }}"><i class="fa fa-download fa-fw"></i> Import Others</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-heart"></i> Posts<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="{{ route('admin.posts.index') }}"><i class="fa fa-heartbeat"></i> All Posts</a>
-                      </li>
-                      <li>
-                        <a href="{{ route('admin.posts.create') }}"><i class="fa fa-cog"></i> Create Post</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                  </li>
-                  <li>
-                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="panels-wells.html">Panels and Wells</a>
-                      </li>
-                      <li>
-                        <a href="buttons.html">Buttons</a>
-                      </li>
-                      <li>
-                        <a href="notifications.html">Notifications</a>
-                      </li>
-                      <li>
-                        <a href="typography.html">Typography</a>
-                      </li>
-                      <li>
-                        <a href="icons.html"> Icons</a>
-                      </li>
-                      <li>
-                        <a href="grid.html">Grid</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="#">Second Level Item</a>
-                      </li>
-                      <li>
-                        <a href="#">Second Level Item</a>
-                      </li>
-                      <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                          <li>
-                            <a href="#">Third Level Item</a>
-                          </li>
-                          <li>
-                            <a href="#">Third Level Item</a>
-                          </li>
-                          <li>
-                            <a href="#">Third Level Item</a>
-                          </li>
-                          <li>
-                            <a href="#">Third Level Item</a>
-                          </li>
-                        </ul>
-                        <!-- /.nav-third-level -->
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                        <a href="blank.html">Blank Page</a>
-                      </li>
-                      <li>
-                        <a href="login.html">Login Page</a>
-                      </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                  </li>
-                </ul>
-              </div>
-              <!-- /.sidebar-collapse -->
-            </div>
 
-            <!-- /.navbar-static-side -->
+                  @foreach ($collection1 as $memu)
+                         @include($memu['module'])
+                  @endforeach
+
+ <div class="form-group">
+
           </nav>
 
           {{-- ==================end nav ================================= --}}
@@ -520,12 +366,8 @@
 
 
             <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 dontprint">
                 <h1 class="page-header">Administrator</h1>
-                @role('admin')
-                <p>This is visible to users with the admin role. Gets translated to 
-                  \Entrust::role('admin')</p>
-                  @endrole
                 </div>
                 <!-- /.col-lg-12 -->
               </div>
@@ -536,16 +378,21 @@
 
 
             </div>
-            <!-- /#page-wrapper -->   
+            <!-- /#page-wrapper -->
           </div>
           <!-- /#wrapper -->
 
           <!-- jQuery -->
+{{--
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+ --}}
 
-{{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> --}}
+  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" ></script>
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" ></script>
 
 
+  <link href='https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css' rel='stylesheet' type='text/css'>
 
   {{--    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic' rel='stylesheet' type='text/css'> --}}
@@ -556,11 +403,11 @@
     @if(Session::has('delete_user'))
     <script>
             // $('div.alert').no('.alert-important').delay(3000).fadeOut(350);
-            $('#flash-overlay-modal-danger').modal();    
+            $('#flash-overlay-modal-danger').modal();
           </script>
           @elseif(Session::has('create_user'))
           <script>
-            $('#flash-overlay-modal').modal();    
+            $('#flash-overlay-modal').modal();
           </script>
       @endif
 
@@ -569,7 +416,6 @@
 <script type="text/javascript">
   $(document).ready(function() {
     // Select2
-    
     // image loader
     $("#input-pd").fileinput({
       uploadUrl: "/file-upload-batch/1",
@@ -581,10 +427,10 @@
           initialPreviewFileType: 'image', // image is the default and can be overridden in config below
           // initialPreviewConfig: [
           //     {caption: "Desert.jpg", size: 827000, width: "120px", url: "/file-upload-batch/2", key: 1},
-          //     {caption: "Lighthouse.jpg", size: 549000, width: "120px", url: "/file-upload-batch/2", key: 2}, 
-          //     {type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 3}, 
+          //     {caption: "Lighthouse.jpg", size: 549000, width: "120px", url: "/file-upload-batch/2", key: 2},
+          //     {type: "video", size: 375000, filetype: "video/mp4", caption: "KrajeeSample.mp4", url: "/file-upload-batch/2", key: 3},
           //     {type: "pdf", size: 8000, caption: "About.pdf", url: "/file-upload-batch/2", key: 4},
-          //     {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/file-upload-batch/2", key: 5}, 
+          //     {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/file-upload-batch/2", key: 5},
           //     {type: "html", size: 3550, caption: "LoremIpsum.html", url: "/file-upload-batch/2", key: 6}
           // ],
           purifyHtml: true, // this by default purifies HTML data for preview
@@ -600,7 +446,7 @@
      });
       //======================== API ====================================
 
-       
+
     </script>
     @include('includes/brand_type_model')
   </body>

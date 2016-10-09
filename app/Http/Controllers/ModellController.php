@@ -40,6 +40,11 @@ class ModellController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$this->validate($request, [
+		       'name' => 'required|max:22',
+		       'category_id' => 'required|numeric|min:1'
+
+		]);
 		$modell = new Modell();
 
 		$modell->name = $request->input("name");

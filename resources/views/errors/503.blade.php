@@ -40,7 +40,10 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">Will Be right back.</div>
+                 <div><a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px;font-weight: 700">
+                    <i class="fa fa-home fa-fw"></i><span style="color: #5daad0">e</span>Commerce sl5
+                  </a></div>
             </div>
         </div>
     </body>

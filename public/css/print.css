@@ -1,0 +1,6 @@
+@media print {
+    /* Your styles here */
+    .no-print {
+      display:none;
+    }
+}

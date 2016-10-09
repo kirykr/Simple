@@ -13,6 +13,8 @@ class PermissionController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	 
 	public function index()
 	{
 		$permissions = Permission::orderBy('id', 'desc')->paginate(10);
@@ -41,7 +43,7 @@ class PermissionController extends Controller {
 		$permission = new Permission();
 
 		$permission->name = $request->input("name");
-        $permission->display_name = $request->input("display_name");
+        $permission->module = $request->input("module");
         $permission->description = $request->input("description");
 
 		$permission->save();
@@ -87,7 +89,7 @@ class PermissionController extends Controller {
 		$permission = Permission::findOrFail($id);
 
 		$permission->name = $request->input("name");
-        $permission->display_name = $request->input("display_name");
+        $permission->module = $request->input("module");
         $permission->description = $request->input("description");
 
 		$permission->save();

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App;
 
@@ -12,7 +12,7 @@ class Color extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description'];
+    protected $fillable = ['id','name','description'];
 
     /**
      * Color belongs to Computers.
@@ -22,7 +22,7 @@ class Color extends Model
     public function computers()
     {
     	// belongsTo(RelatedModel, foreignKey = computers_id, keyOnRelatedModel = id)
-    	return $this->belongsToMany(Computers::class)->withPivot('serialnumber','qty','cost');
+    	return $this->belongsToMany('App\Computer','color_computer')->withPivot('serialnumber','quantity', 'cost','sellprice','status');
     }
 
     /**
@@ -32,7 +32,14 @@ class Color extends Model
      */
     public function others()
     {
-        // belongsTo(RelatedModel, foreignKey = others_id, keyOnRelatedModel = id)
-        return $this->belongsToMany(Others::class);
+    	return $this->belongsToMany('App\Other')->withPivot('oimport_id','quantity', 'cost','sellprice','amount');
+    }
+    public function carts()
+    {
+        return $this->hasMany('App\Cart');
+    }
+    public function cinvoicedetails()
+    {
+        return $this->hasMany('App\Cinvoicedetail');
     }
 }

@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col-md-12">
     @if($brands->count())
-    <table class="table table-condensed table-striped">
+    <table id="brandtable" class="table table-condensed table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -52,5 +52,13 @@
 
   </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#brandtable').dataTable( {
+      "aoColumnDefs": [
+      { "bSortable": false, "aTargets": [ 3 ] }
 
+      ] } );
+  } );
+</script>
 @endsection

@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-md-12">
 
-        {{-- <form action="{{ route('admin.rolesController.store') }}" method="POST"> --}}    
+        {{-- <form action="{{ route('admin.rolesController.store') }}" method="POST"> --}}
             {!! Form::open(['action'=>"RoleController@store", 'method'=>"POST",'files'=>true]) !!}
-            {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}   
+            {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
               <div class="row">
               <div class="col-md-4">
                     <div class="form-group @if($errors->has('name')) has-error @endif">
@@ -44,17 +44,24 @@
                 </div>
               </div>
                 <div class="row">
-                  <div class="col-md-2 wel">
-                    <h5><strong>All</strong></h5>
-                    <input type="checkbox"  class="select_all" value="">
-                  </div>
-                  @foreach ($permissions as $permission)
-                  <div class="col-md-2">
-                    <h5><strong>{{ucfirst($permission->name)}}</strong></h5>
-                    <input class="categories_list" type="checkbox" name="permission_id[]" value="{{$permission->id}}">
-                  </div>
-                @endforeach
+
+                  {{Form::label('modules','Modules:')}}
+                    <select class="form-control select2-multi" name="modules[]" multiple="multiple">
+                        @foreach($modules as $mo)
+                          <option value='{{$mo->id}}'>{{$mo->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
+      {{--
+                 <div class="col-md-8">
+                   {!! Form::label('brand_id', 'Computer Brand') !!}
+                   <div class="form-group {{ $errors->has('brand_id') ? 'has-error' :'' }}">
+                     {!! Form::select('permissions[]', $permissions,0,['class'=>'form-control selectpicker','id'=>'permission_id', 'multiple'=>"multiple"]) !!}
+                     {!! $errors->first('brand_id','<span class="help-block">:message</span>') !!}
+                   </div>
+                 </div>
+                 </div>
+                 --}}
                 <hr><br><br>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary">Create</button>
@@ -68,10 +75,15 @@
 @endsection
 @section('scripts')
   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> --}}
-  <script>
+  <script type="text/javascript">
     $('.date-picker').datepicker({
     });
+    $('.select2-multi').select2();
 
+    // $("#permission_id").select2({
+    //   placeholder: "Select more module",
+    //   allowClear: true
+    // });
 // check all uncheck all
     // $("#checkAll").change(function () {
     // $("input:checkbox").prop('checked', $(this).prop("checked"));
@@ -82,23 +94,23 @@
         var count_checkbox_all = $("input[type=checkbox]").not(".select_all").length;
         var count_checkbox_checked = $("input[type=checkbox]:checked").not(".select_all").length;
 
-        if ($(this).hasClass("select_all")) { 
+        if ($(this).hasClass("select_all")) {
             //if we clicked on "Select All"
             var is_checked = $(".select_all").is(":checked");
             //check/uncheck everything and disable/enable the rest of the tickboxes based on the state of this one
             $(".categories_list").prop("checked", is_checked).attr("disabled",  is_checked);
-            
+
             //also update the count of checked items
             count_checkbox_checked = $("input[type=checkbox]:checked").not(".select_all").length;
         }
-        
+
         if (count_checkbox_checked == count_checkbox_all) { //if all have been checked
             //make sure they are disabled and that "Select All" is checked as well
             $(".categories_list").attr("disabled",  true);
             $(".select_all").prop("checked", true);
         }
-        
-    });   
+
+    });
 });
     //// get checked checkbox value
     // $('input').on('click', function(){

@@ -11,13 +11,13 @@
     <div class="row">
         <div class="col-md-12">
             @if($computers->count())
-                <table class="table table-condensed table-striped">
+                <table id="tablecomputers" class="table table-condensed table-striped">
                     <thead>
                         <tr>
                         <th>ID</th>
                         <th>PHOTO</th>
                         <th>NAME</th>
-                        <th>QTY</th>
+                        <th>QTY Instock</th>
                         <th>PRICE</th>
                         <th>BRAND</th>
                         <th>PP PRICE</th>
@@ -40,7 +40,7 @@
                                 <td>{{$computer->ppprice}}</td>
                                 <td>{{$computer->provprice}}</td>
                                 <td>{{$computer->status}}</td>
-                                <td class="text-right">
+                                <td class="text-right text-nowrap">
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.computers.show', $computer->id) }}"><i class="fa fa-eye"></i> View</a>
                                     <a class="btn btn-xs btn-warning" href="{{ route('admin.computers.edit', $computer->id) }}"><i class="fa fa-edit"></i> Edit</a>
                                     <form action="{{ route('admin.computers.destroy', $computer->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
@@ -60,5 +60,13 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#tablecomputers').dataTable( {
+          "aoColumnDefs": [
+          { "bSortable": false, "aTargets": [ 3 ] }
 
+          ] } );
+      } );
+    </script>
 @endsection

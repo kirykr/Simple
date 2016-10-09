@@ -1,10 +1,8 @@
 @extends('layouts.admin')
-
-@section('header')
 @section('content')
 
 <div class="page-header">
-        <h1>Modells / Show #{{$modell->id}}</h1>
+        <h1>Modells / Show #{{$modell->id}}
         <form action="{{ route('admin.modells.destroy', $modell->id) }}" method="POST" style="display: inline;" onsubmit="if(confirm('Delete? Are you sure?')) { return true } else {return false };">
             <input type="hidden" name="_method" value="DELETE">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -13,8 +11,8 @@
                 <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
             </div>
         </form>
+        </h1>
     </div>
-@endsection
 
     <div class="row">
         <div class="col-md-12">

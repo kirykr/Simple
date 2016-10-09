@@ -20,7 +20,7 @@ class OtherController extends Controller {
 	 */
 	public function index()
 	{
-		$others = Other::orderBy('id', 'desc')->paginate(10);
+		$others = Other::orderBy('updated_at', 'desc')->paginate(20);
 
 		return view('admin.others.index', compact('others'));
 	}
@@ -33,6 +33,7 @@ class OtherController extends Controller {
 	public function create()
 	{
 		$brands = Brand::lists('name','id')->all();
+		// $types = Type::lists('name','id')->all();
 
 		return view('admin.others.create', compact('brands'));
 	}
@@ -45,18 +46,32 @@ class OtherController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
+		$this->validate($request, [
+			        'name' => 'required|max:30',
+			        'sellprice' => 'required|numeric|min:1',
+			        'ppprice' => 'required|numeric|min:1',
+			        'provprice' => 'required|numeric|min:1',
+			        'brand_id' => 'required',
+			        'type_id' => 'required',
+			        'photo_id.*' => 'required'
+			    ]);
 		$input = $request->all();
 		
+		$input['type_name'] = substr(trim($request->input("type_name")), 14,1);
 		// dd($input);
-		switch ($request->input("type_id")) {
-			case '3':
+		switch (strtolower($input['type_name'])) {
+			case 'a':
 				$input['id'] = uniqid('a', false);
 				break;
-			case '4':
+			case 's':
 				$input['id'] = uniqid('s', false);
 				break;
-			case '5':
+			case 'p':
 				$input['id'] = uniqid('p', false);
+				break;
+			default:
+				$input['id'] = uniqid('o', false);
 				break;
 		}
 		$other = Other::create($input);
@@ -78,6 +93,7 @@ class OtherController extends Controller {
 					}
             	)->resizeCanvas(600, 319, 'center', false, array(255, 255, 255, 0))->save($path);
             $img->destroy();	
+
             $photo->path = $filename;
             $photo->save();
             $other->photos()->attach($photo->id);
@@ -110,8 +126,9 @@ class OtherController extends Controller {
 	{
 		$other = Other::findOrFail($id);
 		$types = Type::lists('name','id')->all();
+		$brands = Brand::lists('name','id')->all();
 
-		return view('admin.others.edit', compact('other', 'types'));
+		return view('admin.others.edit', compact('other', 'types','brands'));
 	}
 
 	/**
@@ -125,15 +142,17 @@ class OtherController extends Controller {
 	{
 		$other = Other::findOrFail($id);
 
-		$other->name = $request->input("name");
-        $other->qtyinstock = $request->input("qtyinstock");
-        $other->sellprice = $request->input("sellprice");
-        $other->type_id = $request->input("type_id");
-        $other->category_id = $request->input("category_id");
-        $other->brand_id = $request->input("brand_id");
-        $other->model_id = $request->input("model_id");
-
-		$other->save();
+		$input = $request->except(['photo_id']);
+				// dd($input);
+		        // $other->photo_id = $request->input("photo_id");
+		        // if($file = $request->file('photo_id')){
+		        //     $name = time() . $file->getClientOriginalName();
+		        //     $file->move('images',$name);
+		        //     $photo = Photo::create(['path'=>$name]);
+		        //     $input['photo_id'] = $photo->id;
+		        // }
+		        
+		$other->update($input);
 
 		return redirect()->route('admin.others.index')->with('message', 'Item updated successfully.');
 	}

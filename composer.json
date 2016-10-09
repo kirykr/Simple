@@ -13,9 +13,13 @@
         "laracasts/flash": "^2.0",
         "gloudemans/shoppingcart": "^2.1",
         "zizaco/entrust": "5.2.x-dev",
-        "barryvdh/laravel-debugbar": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.2",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "nwidart/laravel-modules": "^1.13",
+        "felixkiss/uniquewith-validator": "2.*",
+        "nesbot/carbon": "^1.21",
+        "doctrine/dbal": "^2.5",
+        "kartik-v/bootstrap-star-rating": "@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -55,10 +59,10 @@
             "php artisan ide-helper:generate",
             "php artisan ide-helper:meta"
         ]
-        
+
     },
     "config": {
         "preferred-install": "dist"
     }
-    
+
 }

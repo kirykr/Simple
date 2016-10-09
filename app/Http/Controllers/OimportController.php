@@ -9,6 +9,8 @@ use App\Other;
 use App\Color;
 use App\Supplier;
 use App\Tempother;
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -48,6 +50,7 @@ class OimportController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+
 		$input = $request->all();
 		
 		$oimport = null;
@@ -55,11 +58,11 @@ class OimportController extends Controller {
 			$input = $request->all();
 			// $oimport = Oimport::create($input);
 		}
-		if (Input::get('addsubmit')){
+		if (Input::get('addsubmit') == 'addsubmit'){
 			 $this->validate($request, [
 			        'other_id' => 'required|max:22',
 			        'qtyinstock' => 'required|numeric|min:1',
-			        // 'color_id' => 'required|numeric|min:1',
+			        'color_id' => 'required|numeric|min:1',
 			        'sellprice' => 'required|numeric|min:1',
 			        'cost' => 'required|numeric|min:1',
 			    ]);
@@ -73,20 +76,57 @@ class OimportController extends Controller {
 			return redirect()->back();
 		}
 		// Import others
-		if (Input::get('savesubmit')){
+		if (Input::get('savesubmit') == 'savesubmit'){
+
 			 $this->validate($request, [
 			        'supplier_id' => 'required|max:22',
-			        'supplier_id' => 'required|max:22',
+			        'invoicenumber' => 'required|max:22',
 			    ]);
-			$input = $request->except(['photo_id']);
-			$oimport = Oimport::create($input);
-			$tempothers = Tempcomputerstock::all();
-			$oimport->others()->saveMany($tempothers);
-			// $tempothers->delete();
-			Tempcomputerstock::truncate();
-			return redirect()->back();
+			 // dd($request->all());
+			$oimport = new Oimport();
+
+			$oimport->impdate = Carbon::now();
+      $oimport->impindate = Carbon::now();
+      $oimport->invoicenumber = $request->input("invoicenumber");
+      $oimport->totalamount = $request->input("totalamount");
+      $oimport->user_id = $request->input("user_id");
+      $oimport->supplier_id = $request->input("supplier_id");
+
+			$oimport->save();
+
+			$tempothers = Tempother::all();
+			// dd($tempothers);
+
+			foreach($tempothers as $tempother){
+				$tempqty = 0;
+
+				$color = Color::find($tempother->color_id);
+				$other = Other::find($tempother->other_id);
+				
+				$tempqty = $tempother->qty + $other->qtyinstock;	
+				if ($other->sellprice != $tempother->sellprice) {
+					$other->sellprice = $tempother->sellprice;
+				}
+				$other->qtyinstock = $tempqty;
+				$other->update();
+
+				$oimport->otherdetails()->save($other,['color_id' => $tempother->color_id, 'qty' => $tempother->qty, 'cost' => $tempother->cost, 'amount' => $tempother->qty * $tempother->cost]);
+				
+				// foreach($tempother->serialtemps as $serial){
+				$other->colors()->save($color, ['oimport_id' => $oimport->id, 'qty' => 1, 'cost' => $tempother->cost, 'amount' => $tempother->qty * $tempother->cost]);
+				// }
+				$oldsellprice = DB::table('color_other')->select('sellprice')->where([['other_id','=', $other->id],['color_id','=',$tempother->color_id]])->first();
+				if($oldsellprice->sellprice != $tempother->sellprice){
+					DB::table('color_other')->where([['other_id','=', $other->id],['color_id','=',$tempother->color_id]])->update(['sellprice' => $tempother->sellprice]);
+				}
+			}
+
+			DB::statement("SET foreign_key_checks=0");
+			Tempother::truncate();
+			DB::statement("SET foreign_key_checks=1");
+			return redirect()->back()->with('message', 'Item imported successfully.');
 		}
-		dd($input);
+		// dd($input);
 		return redirect()->route('admin.oimports.index')->with('message', 'Item created successfully.');
 	}
 

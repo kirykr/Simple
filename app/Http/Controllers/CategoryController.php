@@ -40,6 +40,11 @@ class CategoryController extends Controller {
 	 */
 	public function store(Request $request)
 	{
+		$this->validate($request, [
+		       'name' => 'required|max:22',
+		       'type_id' => 'required|numeric|min:1'
+
+		]);
 		$input = $request->all();
 
 		Category::create($input);
