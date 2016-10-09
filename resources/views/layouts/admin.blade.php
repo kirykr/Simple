@@ -8,14 +8,14 @@
   <meta name="author" content="">
 
   <title>eCommerce Admin page</title>
-
+  
   <link rel="stylesheet" media="print" href="{{asset('css/app.css')}}">
   <link rel="stylesheet" href="{{asset('css/libs.css')}}">
   <link rel="stylesheet" href="{{asset('css/fileinput.min.css')}}">
   <link rel="stylesheet" href="{{asset('css/select2.min.css')}}">
   <link rel="stylesheet" media="print" href="{{asset('css/print.css')}}">
   <link rel="stylesheet" href="{{asset('css/style.css')}}">
-
+  <link rel="icon" href="{{asset('favicon.png')}}">
 
   {{-- <link rel="stylesheet" href="{{asset('css/dropzone.css')}}"> --}}
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
